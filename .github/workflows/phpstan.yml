@@ -21,7 +21,7 @@ jobs:
                   php-version: ${{ matrix.php }}
 
             - name: Install dependencies
-              run: composer install --prefer-stable --prefer-dist --no-progress --no-interaction
+              run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
 
             - name: Run PHPStan
               run: vendor/bin/phpstan analyse
