@@ -1,0 +1,51 @@
+{
+    "name": "jrmajor/fluent",
+    "description": "PHP parser for Fluent",
+    "keywords": [
+        "localization",
+        "l10n",
+        "internationalization",
+        "i18n",
+        "ftl",
+        "plural",
+        "gender",
+        "locale",
+        "language",
+        "formatting",
+        "translate",
+        "translation",
+        "format",
+        "ast",
+        "serializer",
+        "parser"
+    ],
+    "homepage": "https://github.com/jrmajor/fluent-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jrmajor",
+            "email": "jrh.mjr@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "ext-json": "*",
+        "phpstan/phpstan": "^0.12.64",
+        "pestphp/pest": "^0.3.19",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Major\\Fluent\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Major\\Fluent\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
