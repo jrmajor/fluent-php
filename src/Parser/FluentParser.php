@@ -3,6 +3,7 @@
 namespace Major\Fluent\Parser;
 
 use Major\Fluent\Exceptions\ParserException;
+use Major\Fluent\Exceptions\ShouldNotHappen;
 use Major\Fluent\Node\Syntax\Annotation;
 use Major\Fluent\Node\Syntax\Attribute;
 use Major\Fluent\Node\Syntax\CallArguments;
@@ -205,6 +206,7 @@ class FluentParser
             0 => new Comment($content),
             1 => new GroupComment($content),
             2 => new ResourceComment($content),
+            default => throw new ShouldNotHappen(),
         })->addSpan($spanStart, $cursor->index());
     }
 
@@ -535,8 +537,7 @@ class FluentParser
                 // Join adjacent TextElements by replacing them with their sum.
                 /** @phpstan-ignore-next-line */
                 $sum = (new TextElement($prev->value.$element->value))
-                    ->addSpan($prev->span->start, $element->span->end);
-                /** @phpstan-ignore-line */
+                    ->addSpan($prev->span->start, $element->span->end); /** @phpstan-ignore-line */
 
                 $trimmed[count($trimmed) - 1] = $sum;
 
@@ -718,7 +719,7 @@ class FluentParser
 
             if ($cursor->currentPeek() === '(') {
                 // It's a Function. Ensure it's all upper-case.
-                if (!preg_match('/^[A-Z][A-Z0-9_-]*$/', $id->name)) {
+                if (! preg_match('/^[A-Z][A-Z0-9_-]*$/', $id->name)) {
                     throw new ParserException('E0008');
                 }
 
@@ -809,6 +810,10 @@ class FluentParser
         $cursor->skipBlank();
 
         if ($cursor->currentChar() !== ':') {
+            if ($expression instanceof Placeable) {
+                throw new ShouldNotHappen();
+            }
+
             return $expression;
         }
 
