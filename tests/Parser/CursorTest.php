@@ -335,6 +335,65 @@ it('can skip blank', function () {
     expect($cursor->peekOffset())->toBe(0);
 });
 
+it('advances when encounters expected character', function () {
+    $cursor = new Cursor("a🦓\r\nb");
+
+    $cursor->expectChar('a');
+    expect($cursor->index())->toBe(1);
+
+    $cursor->expectChar('🦓');
+    expect($cursor->index())->toBe(2);
+
+    $cursor->expectChar("\n");
+    expect($cursor->index())->toBe(4);
+
+    $cursor->expectChar("b");
+    expect($cursor->index())->toBe(5);
+});
+
+it('throws an error when does not encounter expected character', function () {
+    $cursor = new Cursor('a&b');
+
+    $cursor->next();
+
+    try {
+        $cursor->expectChar('=');
+    } catch (Throwable $throwable) {
+        expect($cursor->index())->toBe(1);
+
+        throw $throwable;
+    }
+})->throws(ParserException::class, 'Expected token: "="');
+
+it('advances when encounters expected line end', function () {
+    $cursor = new Cursor("\na\r\nb");
+
+    $cursor->expectLineEnd();
+    expect($cursor->index())->toBe(1);
+
+    $cursor->next();
+
+    $cursor->expectLineEnd();
+    expect($cursor->index())->toBe(4);
+
+    $cursor->next();
+
+    $cursor->expectLineEnd();
+    expect($cursor->index())->toBe(5);
+});
+
+it('throws an error when does not encounter expected line end', function () {
+    $cursor = new Cursor('a ');
+
+    try {
+        $cursor->expectLineEnd();
+    } catch (Throwable $throwable) {
+        expect($cursor->index())->toBe(0);
+
+        throw $throwable;
+    }
+})->throws(ParserException::class, 'Expected token: "␤"');
+
 it('can take character described by closure', function () {
     $cursor = new Cursor('ac');
 

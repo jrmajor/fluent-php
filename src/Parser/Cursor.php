@@ -3,6 +3,7 @@
 namespace Major\Fluent\Parser;
 
 use Closure;
+use Major\Fluent\Exceptions\ParserException;
 
 class Cursor
 {
@@ -158,6 +159,32 @@ class Cursor
         $this->peekBlank();
 
         $this->skipToPeek();
+    }
+
+    public function expectChar(string $char): void
+    {
+        if ($this->currentChar() === $char) {
+            $this->next();
+
+            return;
+        }
+
+        throw new ParserException('E0003', ['token' => $char]);
+    }
+
+    public function expectLineEnd(): void
+    {
+        if ($this->currentChar() === null) {
+            return;
+        }
+
+        if ($this->currentChar() === "\n") {
+            $this->next();
+
+            return;
+        }
+
+        throw new ParserException('E0003', ['token' => '␤']);
     }
 
     public function takeChar(Closure $callback): ?string
