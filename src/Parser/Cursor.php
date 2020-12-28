@@ -2,6 +2,8 @@
 
 namespace Major\Fluent\Parser;
 
+use Closure;
+
 class Cursor
 {
     protected int $index = 0;
@@ -83,6 +85,96 @@ class Cursor
     public function slice(int $start, int $end): string
     {
         return mb_substr($this->string, $start, $end - $start);
+    }
+
+    public function peekBlankInline(): string
+    {
+        $start = $this->index + $this->peekOffset;
+
+        while ($this->currentPeek() === ' ') {
+            $this->peek();
+        }
+
+        return mb_substr(
+            $this->string, $start,
+            $this->index + $this->peekOffset - $start,
+        );
+    }
+
+    public function skipBlankInline(): string
+    {
+        $blank = $this->peekBlankInline();
+
+        $this->skipToPeek();
+
+        return $blank;
+    }
+
+    public function peekBlankBlock(): string
+    {
+        $blank = '';
+
+        while (true) {
+            $lineStart = $this->peekOffset;
+
+            $this->peekBlankInline();
+
+            if ($this->currentPeek() === null) {
+                return $blank;
+            }
+
+            if ($this->currentPeek() === "\n") {
+                $blank .= "\n";
+
+                $this->peek();
+
+                continue;
+            }
+
+            $this->resetPeek($lineStart);
+
+            return $blank;
+        }
+    }
+
+    public function skipBlankBlock(): string
+    {
+        $blank = $this->peekBlankBlock();
+
+        $this->skipToPeek();
+
+        return $blank;
+    }
+
+    public function peekBlank(): void
+    {
+        while ($this->currentPeek() === ' ' || $this->currentPeek() === "\n") {
+            $this->peek();
+        }
+    }
+
+    public function skipBlank(): void
+    {
+        $this->peekBlank();
+
+        $this->skipToPeek();
+    }
+
+    public function takeChar(Closure $callback): ?string
+    {
+        $char = $this->currentChar();
+
+        if ($char === null) {
+            return null;
+        }
+
+        if ($callback($char)) {
+            $this->next();
+
+            return $char;
+        }
+
+        return null;
     }
 
     protected function charAtOffsetIsCrLf(int $offset): bool

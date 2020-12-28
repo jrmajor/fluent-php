@@ -1,5 +1,6 @@
 <?php
 
+use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Parser\Cursor;
 
 test('next, currentChar and index methods work', function () {
@@ -184,4 +185,169 @@ test('slice method works', function () {
     $cursor = new Cursor('🐙ab🐙cd');
 
     expect($cursor->slice(2, 5))->toBe('b🐙c');
+});
+
+it('can peek blank inline', function () {
+    $cursor = new Cursor("a   b     \r\n    \n");
+
+    $cursor->next();
+
+    expect($cursor->peekBlankInline())->toBe('   ');
+    expect($cursor->index())->toBe(1);
+    expect($cursor->peekOffset())->toBe(3);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    expect($cursor->peekBlankInline())->toBe('     ');
+    expect($cursor->index())->toBe(5);
+    expect($cursor->peekOffset())->toBe(5);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    expect($cursor->peekBlankInline())->toBe('    ');
+    expect($cursor->index())->toBe(12);
+    expect($cursor->peekOffset())->toBe(4);
+});
+
+it('can skip blank inline', function () {
+    $cursor = new Cursor("a   b     \r\n    \n");
+
+    $cursor->next();
+
+    expect($cursor->skipBlankInline())->toBe('   ');
+    expect($cursor->index())->toBe(4);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    expect($cursor->skipBlankInline())->toBe('     ');
+    expect($cursor->index())->toBe(10);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    expect($cursor->skipBlankInline())->toBe('    ');
+    expect($cursor->index())->toBe(16);
+    expect($cursor->peekOffset())->toBe(0);
+});
+
+it('can peek blank block', function () {
+    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+
+    $cursor->next();
+
+    expect($cursor->peekBlankBlock())->toBe('');
+    expect($cursor->index())->toBe(1);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->next();
+    $cursor->next();
+
+    expect($cursor->peekBlankBlock())->toBe("\n\n");
+    expect($cursor->index())->toBe(3);
+    expect($cursor->peekOffset())->toBe(12);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+    $cursor->next();
+    $cursor->next();
+
+    expect($cursor->peekBlankBlock())->toBe("\n");
+    expect($cursor->index())->toBe(18);
+    expect($cursor->peekOffset())->toBe(3);
+});
+
+it('can skip blank block', function () {
+    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+
+    $cursor->next();
+
+    expect($cursor->skipBlankBlock())->toBe('');
+    expect($cursor->index())->toBe(1);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->next();
+    $cursor->next();
+
+    expect($cursor->skipBlankBlock())->toBe("\n\n");
+    expect($cursor->index())->toBe(15);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+    $cursor->next();
+    $cursor->next();
+
+    expect($cursor->skipBlankBlock())->toBe("\n");
+    expect($cursor->index())->toBe(21);
+    expect($cursor->peekOffset())->toBe(0);
+});
+
+it('can peek blank', function () {
+    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+
+    $cursor->next();
+
+    $cursor->peekBlank();
+    expect($cursor->index())->toBe(1);
+    expect($cursor->peekOffset())->toBe(1);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    $cursor->peekBlank();
+    expect($cursor->index())->toBe(3);
+    expect($cursor->peekOffset())->toBe(14);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    $cursor->peekBlank();
+    expect($cursor->index())->toBe(18);
+    expect($cursor->peekOffset())->toBe(3);
+});
+
+it('can skip blank', function () {
+    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+
+    $cursor->next();
+
+    $cursor->skipBlank();
+    expect($cursor->index())->toBe(2);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    $cursor->skipBlank();
+    expect($cursor->index())->toBe(17);
+    expect($cursor->peekOffset())->toBe(0);
+
+    $cursor->skipToPeek();
+    $cursor->next();
+
+    $cursor->skipBlank();
+    expect($cursor->index())->toBe(21);
+    expect($cursor->peekOffset())->toBe(0);
+});
+
+it('can take character described by closure', function () {
+    $cursor = new Cursor('ac');
+
+    $callback = fn ($char) => $char === 'a' || $char === 'b';
+
+    expect($cursor->takeChar($callback))->toBe('a');
+    expect($cursor->index())->toBe(1);
+
+    expect($cursor->takeChar($callback))->toBeNull();
+    expect($cursor->index())->toBe(1);
+
+    $cursor->next();
+
+    expect($cursor->takeChar($callback))->toBeNull();
+    expect($cursor->index())->toBe(2);
 });
