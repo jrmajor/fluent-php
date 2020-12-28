@@ -10,4 +10,10 @@ final class Annotation extends SyntaxNode
         /** @var array<string, mixed> */
         public array $arguments = [],
     ) { }
+
+    /** @return string[] */
+    public function getArguments(): array
+    {
+        return array_values($this->arguments);
+    }
 }

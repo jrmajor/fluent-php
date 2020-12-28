@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests;
 
 use InvalidArgumentException;
 use Major\Fluent\Node\BaseNode;
+use Major\Fluent\Node\Syntax\Annotation;
 
 /**
  * @mixin \PHPUnit\Framework\TestCase
@@ -78,6 +79,18 @@ trait TestCase
             }
 
             self::compareArrayOfNodes($expected[$array], $node->$array, "{$trace}::\${$array}");
+        }
+
+        if ($node instanceof Annotation) {
+            if (! array_key_exists('arguments', $expected)) {
+                throw new InvalidArgumentException("Expected node {$trace} should contain array \$arguments.");
+            }
+
+            if (! is_array($expected['arguments'])) {
+                throw new InvalidArgumentException("Expected property {$trace}::\$arguments should be array.");
+            }
+
+            self::assertSame($expected['arguments'], $node->getArguments());
         }
     }
 
