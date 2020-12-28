@@ -11,8 +11,10 @@ final class Junk extends SyntaxNode
         public string $content,
     ) { }
 
-    public function addAnnotation(Annotation $annotation): void
+    public function addAnnotation(Annotation $annotation): static
     {
         $this->annotations[] = $annotation;
+
+        return $this;
     }
 }
