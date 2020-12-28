@@ -31,6 +31,10 @@ trait TestCase
             throw new InvalidArgumentException('Expected root node should have specified type.');
         }
 
+        if ($expected['type'] === 'Resource') {
+            $expected['type'] = 'FluentResource';
+        }
+
         self::assertEquals($expected['type'], $node->getType(), 'Root node type does not match.');
 
         self::compareNodeData($expected, $node, $node->getType());
@@ -146,7 +150,7 @@ trait TestCase
             'Identifier' => ['name'],
             'Junk' => ['content'],
             'NamedArgument' => [],
-            'Resource' => [],
+            'FluentResource' => [],
             'Variant' => ['default'],
             // Syntax/Entries
             'Message' => [],
@@ -186,7 +190,7 @@ trait TestCase
             'Identifier' => [],
             'Junk' => [],
             'NamedArgument' => ['name', 'value'],
-            'Resource' => [],
+            'FluentResource' => [],
             'Variant' => ['key', 'value'],
             // Syntax/Entries
             'Message' => ['id', 'value', 'comment'],
@@ -232,7 +236,7 @@ trait TestCase
             'Identifier' => [],
             'Junk' => self::$annotations ? ['annotations'] : [],
             'NamedArgument' => [],
-            'Resource' => ['body'],
+            'FluentResource' => ['body'],
             'Variant' => [],
             // Syntax/Entries
             'Message' => ['attributes'],
