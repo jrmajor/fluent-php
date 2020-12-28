@@ -4,49 +4,49 @@ use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Parser\Cursor;
 
 test('next, currentChar and index methods work', function () {
-    $cursor = new Cursor('ab🐠d');
+    $cursor = new Cursor('abc🐠d');
 
     expect($cursor->currentChar())->toBe('a');
     expect($cursor->index())->toBe(0);
 
-    expect($cursor->next())->toBe('b');
-    expect($cursor->currentChar())->toBe('b');
-    expect($cursor->index())->toBe(1);
+    expect($cursor->next(2))->toBe('c');
+    expect($cursor->currentChar())->toBe('c');
+    expect($cursor->index())->toBe(2);
 
     expect($cursor->next())->toBe('🐠');
     expect($cursor->currentChar())->toBe('🐠');
-    expect($cursor->index())->toBe(2);
+    expect($cursor->index())->toBe(3);
 
     expect($cursor->next())->toBe('d');
     expect($cursor->currentChar())->toBe('d');
-    expect($cursor->index())->toBe(3);
+    expect($cursor->index())->toBe(4);
 
     expect($cursor->next())->toBeNull();
     expect($cursor->currentChar())->toBeNull();
-    expect($cursor->index())->toBe(4);
+    expect($cursor->index())->toBe(5);
 });
 
 test('peek, currentPeek and peekOffset methods work', function () {
-    $cursor = new Cursor('a🐬cd');
+    $cursor = new Cursor('abc🐬d');
 
     expect($cursor->currentPeek())->toBe('a');
     expect($cursor->peekOffset())->toBe(0);
 
-    expect($cursor->peek())->toBe('🐬');
-    expect($cursor->currentPeek())->toBe('🐬');
-    expect($cursor->peekOffset())->toBe(1);
-
-    expect($cursor->peek())->toBe('c');
+    expect($cursor->peek(2))->toBe('c');
     expect($cursor->currentPeek())->toBe('c');
     expect($cursor->peekOffset())->toBe(2);
 
+    expect($cursor->peek())->toBe('🐬');
+    expect($cursor->currentPeek())->toBe('🐬');
+    expect($cursor->peekOffset())->toBe(3);
+
     expect($cursor->peek())->toBe('d');
     expect($cursor->currentPeek())->toBe('d');
-    expect($cursor->peekOffset())->toBe(3);
+    expect($cursor->peekOffset())->toBe(4);
 
     expect($cursor->peek())->toBeNull();
     expect($cursor->currentPeek())->toBeNull();
-    expect($cursor->peekOffset())->toBe(4);
+    expect($cursor->peekOffset())->toBe(5);
   });
 
 test('peek and next methods work', function () {
@@ -98,8 +98,7 @@ test('peek and next methods work', function () {
 test('skipToPeek method works', function () {
     $cursor = new Cursor('ab🦑d');
 
-    $cursor->peek();
-    $cursor->peek();
+    $cursor->peek(2);
 
     $cursor->skipToPeek();
 
@@ -127,8 +126,7 @@ test('resetPeek method works', function () {
     $cursor = new Cursor('abcd');
 
     $cursor->next();
-    $cursor->peek();
-    $cursor->peek();
+    $cursor->peek(2);
     $cursor->resetPeek();
 
     expect($cursor->currentChar())->toBe('b');
@@ -143,9 +141,7 @@ test('resetPeek method works', function () {
     expect($cursor->peekOffset())->toBe(1);
     expect($cursor->index())->toBe(1);
 
-    $cursor->peek();
-    $cursor->peek();
-    $cursor->peek();
+    $cursor->peek(3);
     $cursor->resetPeek();
 
     expect($cursor->currentChar())->toBe('b');
@@ -171,8 +167,7 @@ it('treats crlf as a single character', function () {
     expect($cursor->next())->toBe("\n");
     expect($cursor->currentChar())->toBe("\n");
 
-    $cursor->peek();
-    $cursor->peek();
+    $cursor->peek(2);
 
     expect($cursor->currentPeek())->toBe("\n");
 
@@ -244,17 +239,14 @@ it('can peek blank block', function () {
     expect($cursor->index())->toBe(1);
     expect($cursor->peekOffset())->toBe(0);
 
-    $cursor->next();
-    $cursor->next();
+    $cursor->next(2);
 
     expect($cursor->peekBlankBlock())->toBe("\n\n");
     expect($cursor->index())->toBe(3);
     expect($cursor->peekOffset())->toBe(12);
 
     $cursor->skipToPeek();
-    $cursor->next();
-    $cursor->next();
-    $cursor->next();
+    $cursor->next(3);
 
     expect($cursor->peekBlankBlock())->toBe("\n");
     expect($cursor->index())->toBe(18);
@@ -270,17 +262,14 @@ it('can skip blank block', function () {
     expect($cursor->index())->toBe(1);
     expect($cursor->peekOffset())->toBe(0);
 
-    $cursor->next();
-    $cursor->next();
+    $cursor->next(2);
 
     expect($cursor->skipBlankBlock())->toBe("\n\n");
     expect($cursor->index())->toBe(15);
     expect($cursor->peekOffset())->toBe(0);
 
     $cursor->skipToPeek();
-    $cursor->next();
-    $cursor->next();
-    $cursor->next();
+    $cursor->next(3);
 
     expect($cursor->skipBlankBlock())->toBe("\n");
     expect($cursor->index())->toBe(21);

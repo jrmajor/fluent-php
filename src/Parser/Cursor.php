@@ -47,26 +47,30 @@ class Cursor
         return $this->charAt($this->index + $this->peekOffset);
     }
 
-    public function next(): ?string
+    public function next(int $chars = 1): ?string
     {
         $this->peekOffset = 0;
 
-        if ($this->charAtOffsetIsCrLf($this->index)) {
+        for ($i = 0; $i < $chars; $i++) {
+            if ($this->charAtOffsetIsCrLf($this->index)) {
+                $this->index++;
+            }
+
             $this->index++;
         }
-
-        $this->index++;
 
         return $this->currentChar();
     }
 
-    public function peek(): ?string
+    public function peek(int $chars = 1): ?string
     {
-        if ($this->charAtOffsetIsCrLf($this->index + $this->peekOffset)) {
+        for ($i = 0; $i < $chars; $i++) {
+            if ($this->charAtOffsetIsCrLf($this->index + $this->peekOffset)) {
+                $this->peekOffset++;
+            }
+
             $this->peekOffset++;
         }
-
-        $this->peekOffset++;
 
         return $this->currentPeek();
     }
