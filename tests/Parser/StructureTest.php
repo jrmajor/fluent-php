@@ -8,6 +8,8 @@ beforeEach(function () use ($skips) {
     if(in_array($test, $skips, strict: true)) {
         $this->markTestSkipped();
     }
+
+    $this->parser = new Major\Fluent\Parser\FluentParser();
 });
 
 test('structure test', function (string $test) {
@@ -19,9 +21,7 @@ test('structure test', function (string $test) {
         flags: JSON_THROW_ON_ERROR,
     );
 
-    $parser = new Major\Fluent\Parser\FluentParser();
-
-    $resource = $parser->parse($source);
+    $resource = $this->parser->parse($source);
 
     $this->assertNodeEquals(
         $expectedAst, $resource,

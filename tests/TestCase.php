@@ -21,8 +21,8 @@ trait TestCase
     public function assertNodeEquals(
         array $expected,
         BaseNode $node,
-        bool $spans,
-        bool $annotations,
+        bool $spans = false,
+        bool $annotations = false,
     ): void {
         self::$spans = $spans;
 
