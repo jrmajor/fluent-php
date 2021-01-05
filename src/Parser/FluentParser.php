@@ -776,7 +776,7 @@ class FluentParser
                 $named[] = $argument;
 
                 $argumentNames[] = $argument->name->name;
-            } else if (count($argumentNames) > 0) {
+            } elseif (count($argumentNames) > 0) {
                 throw new ParserException('E0021');
             } else {
                 $positional[] = $argument;
