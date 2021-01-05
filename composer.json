@@ -48,5 +48,10 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "generate-plurals": [
+            "php generate_plurals.php"
+        ]
+    }
 }
