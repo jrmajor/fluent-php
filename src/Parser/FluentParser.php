@@ -635,11 +635,11 @@ class FluentParser
                 } else {
                     throw new ParserException('E0018');
                 }
-            } else if ($selector instanceof TermReference) {
+            } elseif ($selector instanceof TermReference) {
                 if ($selector->attribute === null) {
                     throw new ParserException('E0017');
                 }
-            } else if ($selector instanceof Placeable) {
+            } elseif ($selector instanceof Placeable) {
                 throw new ParserException('E0029');
             }
 
