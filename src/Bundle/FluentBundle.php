@@ -21,6 +21,7 @@ class FluentBundle
 
     public function __construct(
         protected string $locale,
+        protected bool $strict = false,
         protected bool $allowOverrides = false,
     ) { }
 
