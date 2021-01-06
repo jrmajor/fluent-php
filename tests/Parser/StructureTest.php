@@ -5,7 +5,7 @@ $skips = [];
 beforeEach(function () use ($skips) {
     $test = $this->getProvidedData()[0];
 
-    if(in_array($test, $skips, strict: true)) {
+    if (in_array($test, $skips, strict: true)) {
         $this->markTestSkipped();
     }
 
