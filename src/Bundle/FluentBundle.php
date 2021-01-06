@@ -72,4 +72,14 @@ class FluentBundle
 
         return $this;
     }
+
+    public function hasMessage(string $id): bool
+    {
+        return array_key_exists($id, $this->messages);
+    }
+
+    public function hasTerm(string $id): bool
+    {
+        return array_key_exists($id, $this->terms);
+    }
 }
