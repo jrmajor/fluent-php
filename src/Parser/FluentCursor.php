@@ -4,6 +4,9 @@ namespace Major\Fluent\Parser;
 
 use Major\Fluent\Exceptions\ParserException;
 
+/**
+ * @internal
+ */
 class FluentCursor extends Cursor
 {
     public function isIdentifierStart(): bool

@@ -4,7 +4,10 @@ namespace Major\Fluent\Parser;
 
 use Major\Fluent\Node\Span;
 
-class Indent
+/**
+ * @internal
+ */
+final class Indent
 {
     public Span $span;
 

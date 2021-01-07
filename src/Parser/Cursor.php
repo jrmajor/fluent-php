@@ -5,6 +5,9 @@ namespace Major\Fluent\Parser;
 use Closure;
 use Major\Fluent\Exceptions\ParserException;
 
+/**
+ * @internal
+ */
 class Cursor
 {
     protected int $index = 0;
