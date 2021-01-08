@@ -346,9 +346,9 @@ class FluentBundle
                 return $resolved;
             }
 
-            $this->reportError(new ReferenceException("Unknown attribute: {$attribute}."));
+            $this->reportError(new ReferenceException("Unknown attribute: {$attributeName}."));
 
-            return new FluentNone("-{$id}.{$attribute}");
+            return new FluentNone("-{$id}.{$attributeName}");
         }
 
         $scope->parameters = $reference->arguments?->named ?? [];
