@@ -27,7 +27,7 @@ it('adds message when allowOverrides is true by default', function () {
         ->addRaw('key = Foo')
         ->addRaw('key = Bar');
 
-    // todo expect($bundle->message('key'))->toBe('Bar');
+    expect($bundle->message('key'))->toBe('Bar');
 });
 
 it('adds message when allowOverrides is true', function () {
@@ -35,7 +35,7 @@ it('adds message when allowOverrides is true', function () {
         ->addRaw('key = Foo')
         ->addRaw('key = Bar', allowOverrides: true);
 
-    // todo expect($bundle->message('key'))->toBe('Bar');
+    expect($bundle->message('key'))->toBe('Bar');
 });
 
 it('throws an error when allowOverrides is false by default (term)', function () {
@@ -62,7 +62,7 @@ it('adds term when allowOverrides is true by default', function () {
         ->addRaw('-key = Foo')
         ->addRaw('-key = Bar');
 
-    // todo expect($bundle->message('foo'))->toBe('Bar');
+    expect($bundle->message('foo'))->toBe('Bar');
 });
 
 it('adds term when allowOverrides is true', function () {
@@ -71,5 +71,5 @@ it('adds term when allowOverrides is true', function () {
         ->addRaw('-key = Foo')
         ->addRaw('-key = Bar', allowOverrides: true);
 
-    // todo expect($bundle->message('foo'))->toBe('Bar');
+    expect($bundle->message('foo'))->toBe('Bar');
 });
