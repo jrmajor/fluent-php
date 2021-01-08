@@ -370,7 +370,7 @@ class FluentBundle
     private function resolveSelectExpression(
         SelectExpression $expression,
         ResolutionScope $scope,
-    ): string|FluentType {
+    ): string {
         $selector = $this->resolveExpression($expression->selector, $scope);
 
         $variants = $expression->variants;
@@ -398,7 +398,7 @@ class FluentBundle
     private function getDefaultVariant(
         array $variants,
         ResolutionScope $scope,
-    ): string|FluentType {
+    ): string {
         foreach ($variants as $variant) {
             if ($variant->default) {
                 return $this->resolvePattern($variant->value, $scope);
