@@ -56,7 +56,8 @@ class FluentParser
             // immediately by them. However they should parse as standalone when
             // they're followed by Junk. Consequently, we only attach Comments once
             // we know that the Message or the Term parsed successfully.
-            if ($entry instanceof Comment
+            if (
+                $entry instanceof Comment
                 && mb_strlen($blankLines) === 0
                 && $cursor->currentChar() !== null
             ) {
