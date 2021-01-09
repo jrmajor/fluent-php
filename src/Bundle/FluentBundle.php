@@ -300,7 +300,7 @@ class FluentBundle
                 return $this->resolvePattern($attribute->value, $scope);
             }
 
-            $this->reportError(new ReferenceException("Unknown attribute: {$attributeName}."));
+            $this->reportError(new ReferenceException("Unknown attribute: {$id}.{$attributeName}."));
 
             return new FluentNone("{$id}.{$attributeName}");
         }
@@ -346,7 +346,7 @@ class FluentBundle
                 return $resolved;
             }
 
-            $this->reportError(new ReferenceException("Unknown attribute: {$attributeName}."));
+            $this->reportError(new ReferenceException("Unknown attribute: -{$id}.{$attributeName}."));
 
             return new FluentNone("-{$id}.{$attributeName}");
         }

@@ -81,7 +81,7 @@ it('can reference attributes')
     ->and($bundle->message('ref11'))->toBe('B5')
     ->and($bundle->message('ref12'))->toBe('{key5.c}')
     ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown attribute: c.',
+        ReferenceException::class, 'Unknown attribute: key5.c.',
     );
 
 test('missing message reference')

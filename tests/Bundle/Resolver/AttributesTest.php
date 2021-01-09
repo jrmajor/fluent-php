@@ -21,25 +21,25 @@ $bundle = (new FluentBundle('en-US', useIsolating: false))
 it('falls back to id.attribute for entities with string values and no attributes')
     ->expect($bundle->message('ref-foo'))->toBe('{foo.missing}')
     ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown attribute: missing.',
+        ReferenceException::class, 'Unknown attribute: foo.missing.',
     );
 
 it('falls back to id.attribute for entities with string values and other attributes')
     ->expect($bundle->message('ref-bar'))->toBe('{bar.missing}')
     ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown attribute: missing.',
+        ReferenceException::class, 'Unknown attribute: bar.missing.',
     );
 
 it('falls back to id.attribute for entities with pattern values and no attributes')
     ->expect($bundle->message('ref-baz'))->toBe('{baz.missing}')
     ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown attribute: missing.',
+        ReferenceException::class, 'Unknown attribute: baz.missing.',
     );
 
 it('falls back to id.attribute for entities with pattern values and other attributes')
     ->expect($bundle->message('ref-qux'))->toBe('{qux.missing}')
     ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown attribute: missing.',
+        ReferenceException::class, 'Unknown attribute: qux.missing.',
     );
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
