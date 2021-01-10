@@ -113,7 +113,7 @@ final class PluralRules
             't' => $this->visibleFractionDigits($number),
             // compact decimal exponent value: exponent of the power of 10 used in compact decimal formatting
             'c', 'e' => 0,
-            default => throw new ShouldNotHappen(),
+            default => throw new ShouldNotHappen(), // @codeCoverageIgnore
         };
     }
 

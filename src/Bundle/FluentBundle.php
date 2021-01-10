@@ -411,7 +411,7 @@ class FluentBundle
             }
         }
 
-        throw new ShouldNotHappen();
+        throw new ShouldNotHappen(); // @codeCoverageIgnore
     }
 
     private function matchVariant(

@@ -207,7 +207,7 @@ class FluentParser
             0 => new Comment($content),
             1 => new GroupComment($content),
             2 => new ResourceComment($content),
-            default => throw new ShouldNotHappen(),
+            default => throw new ShouldNotHappen(), // @codeCoverageIgnore
         })->addSpan($spanStart, $cursor->index());
     }
 
@@ -812,7 +812,7 @@ class FluentParser
 
         if ($cursor->currentChar() !== ':') {
             if ($expression instanceof Placeable) {
-                throw new ShouldNotHappen();
+                throw new ShouldNotHappen(); // @codeCoverageIgnore
             }
 
             return $expression;
