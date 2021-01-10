@@ -271,7 +271,6 @@ class FluentBundle
             return (new FluentNumber($argument))
                 ->setFluentLocale($this->locale);
         }
-        }
 
         $this->reportError(new TypeException($id, gettype($argument)));
 
