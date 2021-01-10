@@ -13,5 +13,8 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <file>src/Exceptions/ShouldNotHappen.php</file>
+        </exclude>
     </coverage>
 </phpunit>
