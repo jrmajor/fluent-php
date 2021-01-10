@@ -18,7 +18,7 @@ final class FluentNumber extends FluentType
         return $this->minimumFractionDigits ?? 0;
     }
 
-    public function setLocale(string $locale): static
+    public function setFluentLocale(string $locale): static
     {
         $this->locale = $locale;
 

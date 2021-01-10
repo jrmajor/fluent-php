@@ -231,7 +231,8 @@ class FluentBundle
     ): FluentNumber {
         $parsed = $literal->parse();
 
-        return new FluentNumber($parsed->value, $parsed->precision);
+        return (new FluentNumber($parsed->value, $parsed->precision))
+            ->setFluentLocale($this->locale);
     }
 
     private function resolveVariableReference(
@@ -267,7 +268,9 @@ class FluentBundle
         }
 
         if (is_numeric($argument)) {
-            return new FluentNumber($argument);
+            return (new FluentNumber($argument))
+                ->setFluentLocale($this->locale);
+        }
         }
 
         $this->reportError(new TypeException($id, gettype($argument)));
