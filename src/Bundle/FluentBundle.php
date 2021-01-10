@@ -5,7 +5,6 @@ namespace Major\Fluent\Bundle;
 use Exception;
 use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
-use Major\Fluent\Bundle\Types\FluentType;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
 use Major\Fluent\Exceptions\Bundle\TermExistsException;
 use Major\Fluent\Exceptions\ParserException;
@@ -34,6 +33,7 @@ use Major\Fluent\Node\Syntax\Patterns\TextElement;
 use Major\Fluent\Node\Syntax\Variant;
 use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\PluralRules\PluralRules;
+use Stringable;
 
 class FluentBundle
 {
@@ -207,7 +207,7 @@ class FluentBundle
     private function resolvePlaceable(
         Placeable $element,
         ResolutionScope $scope,
-    ): FluentType|string {
+    ): string|Stringable {
         return $element->expression instanceof Placeable
             ? $this->resolvePlaceable($element->expression, $scope)
             : $this->resolveExpression($element->expression, $scope);
@@ -216,7 +216,7 @@ class FluentBundle
     private function resolveExpression(
         Expression $expression,
         ResolutionScope $scope,
-    ): FluentType|string {
+    ): string|Stringable {
         $method = 'resolve'.$expression->getType();
 
         return $this->{$method}($expression, $scope);
@@ -242,7 +242,7 @@ class FluentBundle
     private function resolveVariableReference(
         VariableReference $reference,
         ResolutionScope $scope,
-    ): string|FluentType {
+    ): string|Stringable {
         $id = $reference->id->name;
 
         if (! is_null($scope->parameters)) {
@@ -266,8 +266,8 @@ class FluentBundle
             return new FluentNone("\${$id}");
         }
 
-        // Return early if the argument already is an instance of FluentType.
-        if ($argument instanceof FluentType || is_string($argument)) {
+        // Return early if the argument already is an instance of Stringable.
+        if (is_string($argument) || $argument instanceof Stringable) {
             return $argument;
         }
 
@@ -284,7 +284,7 @@ class FluentBundle
     private function resolveMessageReference(
         MessageReference $reference,
         ResolutionScope $scope,
-    ): FluentType|string {
+    ): string|Stringable {
         $id = $reference->id->name;
 
         $message = $this->messages[$id] ?? null;
@@ -323,7 +323,7 @@ class FluentBundle
     private function resolveTermReference(
         TermReference $reference,
         ResolutionScope $scope,
-    ): FluentType|string {
+    ): string|Stringable {
         $id = $reference->id->name;
 
         $term = $this->terms[$id] ?? null;
@@ -369,7 +369,7 @@ class FluentBundle
     private function resolveFunctionReference(
         FunctionReference $reference,
         ResolutionScope $scope,
-    ): string|FluentType {
+    ): string|Stringable {
         throw new Exception('Functions are not implemented yet.');
     }
 
@@ -415,8 +415,8 @@ class FluentBundle
     }
 
     private function matchVariant(
-        string|FluentType $selector,
-        string|FluentType $key,
+        string|Stringable|FluentNumber $selector,
+        string|Stringable|FluentNumber $key,
     ): bool {
         if ($key === $selector) {
             return true;

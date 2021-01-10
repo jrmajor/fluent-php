@@ -2,7 +2,9 @@
 
 namespace Major\Fluent\Bundle\Types;
 
-class FluentNone extends FluentType
+use Stringable;
+
+class FluentNone implements Stringable
 {
     public function __construct(
         protected string $value = '???',

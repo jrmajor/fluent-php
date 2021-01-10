@@ -3,8 +3,9 @@
 namespace Major\Fluent\Bundle\Types;
 
 use NumberFormatter;
+use Stringable;
 
-final class FluentNumber extends FluentType
+final class FluentNumber implements Stringable
 {
     protected string $locale = 'en';
 
@@ -13,12 +14,17 @@ final class FluentNumber extends FluentType
         protected ?int $minimumFractionDigits = null,
     ) { }
 
+    public function value(): int|float
+    {
+        return $this->value;
+    }
+
     public function minimumFractionDigits(): int
     {
         return $this->minimumFractionDigits ?? 0;
     }
 
-    public function setFluentLocale(string $locale): static
+    public function setFluentLocale(string $locale): self
     {
         $this->locale = $locale;
 
