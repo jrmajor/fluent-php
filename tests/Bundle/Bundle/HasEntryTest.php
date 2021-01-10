@@ -32,32 +32,26 @@ $bundle = (new FluentBundle('en-US'))
         .attr2 = {}
     ftl);
 
-it('returns true for existing messages', function () use ($bundle) {
-    expect($bundle->hasMessage('foo'))->toBeTrue();
-});
+it('returns true for existing messages')
+    ->expect($bundle->hasMessage('foo'))->toBeTrue();
 
-it('returns true for existing terms', function () use ($bundle) {
-    expect($bundle->hasTerm('bar'))->toBeTrue();
-});
+it('returns true for existing terms')
+    ->expect($bundle->hasTerm('bar'))->toBeTrue();
 
-it('returns false for missing messages', function () use ($bundle) {
-    expect($bundle->hasMessage('bar'))->toBeFalse();
-});
+it('returns false for missing messages')
+    ->expect($bundle->hasMessage('bar'))->toBeFalse();
 
-it('returns false for missing terms', function () use ($bundle) {
-    expect($bundle->hasTerm('foo'))->toBeFalse();
-});
+it('returns false for missing terms')
+    ->expect($bundle->hasTerm('foo'))->toBeFalse();
 
-it('returns false for broken messages', function () use ($bundle) {
-    expect($bundle->hasMessage('err1'))->toBeFalse();
-    expect($bundle->hasMessage('err2'))->toBeFalse();
-    expect($bundle->hasMessage('err3'))->toBeFalse();
-    expect($bundle->hasMessage('err4'))->toBeFalse();
-});
+it('returns false for broken messages')
+    ->expect($bundle->hasMessage('err1'))->toBeFalse()
+    ->and($bundle->hasMessage('err2'))->toBeFalse()
+    ->and($bundle->hasMessage('err3'))->toBeFalse()
+    ->and($bundle->hasMessage('err4'))->toBeFalse();
 
-it('returns false for broken terms', function () use ($bundle) {
-    expect($bundle->hasTerm('err5'))->toBeFalse();
-    expect($bundle->hasTerm('err6'))->toBeFalse();
-    expect($bundle->hasTerm('err7'))->toBeFalse();
-    expect($bundle->hasTerm('err8'))->toBeFalse();
-});
+it('returns false for broken terms')
+    ->expect($bundle->hasTerm('err5'))->toBeFalse()
+    ->and($bundle->hasTerm('err6'))->toBeFalse()
+    ->and($bundle->hasTerm('err7'))->toBeFalse()
+    ->and($bundle->hasTerm('err8'))->toBeFalse();
