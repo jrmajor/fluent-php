@@ -10,6 +10,7 @@ class ParserException extends Exception
         protected string $fluentErrorCode = 'E0001',
         /** @var array<string, string> */
         protected array $arguments = [],
+        ?string $source = null,
     ) {
         $message = match ($fluentErrorCode) {
             'E0001' => 'Generic error',
@@ -42,6 +43,10 @@ class ParserException extends Exception
             'E0029' => 'Expected simple expression as selector',
             default => throw new ShouldNotHappen(),
         };
+
+        if (isset($source)) {
+            $message .= " somewhere in \"$source\"";
+        }
 
         parent::__construct($message);
     }

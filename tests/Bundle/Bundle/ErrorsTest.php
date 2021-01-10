@@ -10,7 +10,7 @@ it('ignores syntax errors by default', function () {
 
 it('throws syntax errors in strict mode', function () {
     (new FluentBundle('en-US', strict: true))->addRaw('syntax error');
-})->throws(ParserException::class, 'Expected token: "="');
+})->throws(ParserException::class, 'Expected token: "=" somewhere in "syntax error"');
 
 test('errors are ignored by default and can be obtained by popErrors method', function () {
     $bundle = (new FluentBundle('en-US', useIsolating: false))

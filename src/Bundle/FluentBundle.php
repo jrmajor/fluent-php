@@ -71,7 +71,11 @@ class FluentBundle
             ) {
                 $annotation = $entry->annotations[0];
 
-                throw new ParserException($annotation->code, $annotation->arguments);
+                throw new ParserException(
+                    $annotation->code,
+                    $annotation->arguments,
+                    $entry->content,
+                );
             }
 
             if ($entry instanceof Message) {
