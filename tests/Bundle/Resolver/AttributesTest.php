@@ -4,7 +4,7 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
     bar = Bar
         .attr = Bar Attribute
@@ -43,7 +43,7 @@ it('falls back to id.attribute for entities with pattern values and other attrib
     );
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
         .attr = Foo Attribute
     bar = { foo } Bar
@@ -66,7 +66,7 @@ test('attributes with string values can be formatted directly for entities with 
     ->expect($bundle->message('bar.attr'))->toBe('Bar Attribute');
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
     bar = Bar
         .attr = { foo } Attribute
@@ -99,7 +99,7 @@ it('can be formatted directly when it uses a self-reference')
     ->expect($bundle->message('qux.attr'))->toBe('Qux Attribute');
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
         .attr = { "a" ->
             [a] A

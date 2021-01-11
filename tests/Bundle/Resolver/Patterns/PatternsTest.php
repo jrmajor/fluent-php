@@ -5,7 +5,7 @@ use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
     ftl);
 
@@ -13,7 +13,7 @@ it('returns the simple string value')
     ->expect($bundle->message('foo'))->toBe('Foo');
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
     -bar = Bar
 
@@ -47,7 +47,7 @@ it('returns the id if the referenced term is missing')
     );
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     msg-no-val =
         .attr = Foo Attr
     ref = { msg-no-val } Bar

@@ -3,7 +3,7 @@
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US'))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = Foo
     -bar = Term
 

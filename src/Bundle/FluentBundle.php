@@ -98,7 +98,7 @@ class FluentBundle
         return $this;
     }
 
-    public function addRaw(string $ftl, bool $allowOverrides = null): static
+    public function addFtl(string $ftl, bool $allowOverrides = null): static
     {
         $parser = new FluentParser();
 

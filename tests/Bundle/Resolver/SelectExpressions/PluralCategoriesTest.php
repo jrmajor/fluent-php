@@ -3,7 +3,7 @@
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     matching = { $selector ->
         [one] A
        *[other] B
@@ -28,7 +28,7 @@ it('falls back to default variant for non-matching string selector')
     ->expect($bundle->message('non-matching', selector: 'other'))->toBe('D');
 
 $bundle = (new FluentBundle('en-EN', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     msg = { $arg ->
         [one] example
        *[other] examples
@@ -43,7 +43,7 @@ test('plural categories in english')
     ->and($bundle->message('msg', arg: 2.5))->toBe('examples');
 
 $bundle = (new FluentBundle('pl-PL', strict: true, useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     msg = { $arg ->
         [one] przykład
         [few] przykłady

@@ -3,7 +3,7 @@
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('ru', strict: true))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     simple-string = { "Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?" }
 
     double-backslash = { "abc\\def" }

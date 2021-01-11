@@ -5,16 +5,16 @@ use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 it('ignores syntax errors by default', function () {
-    (new FluentBundle('en-US'))->addRaw('syntax error');
+    (new FluentBundle('en-US'))->addFtl('syntax error');
 })->expect((bool) 'error has not been thrown')->toBeTrue();
 
 it('throws syntax errors in strict mode', function () {
-    (new FluentBundle('en-US', strict: true))->addRaw('syntax error');
+    (new FluentBundle('en-US', strict: true))->addFtl('syntax error');
 })->throws(ParserException::class, 'Expected token: "=" somewhere in "syntax error"');
 
 test('errors are ignored by default and can be obtained by popErrors method', function () {
     $bundle = (new FluentBundle('en-US', useIsolating: false))
-        ->addRaw(<<<'ftl'
+        ->addFtl(<<<'ftl'
         foo = { $one } and { $two }
         ftl);
 
@@ -33,6 +33,6 @@ test('errors are ignored by default and can be obtained by popErrors method', fu
 
 test('errors are thrown in strict mode', function () {
     (new FluentBundle('en-US', strict: true))
-        ->addRaw('foo = { $one } and { $two }')
+        ->addFtl('foo = { $one } and { $two }')
         ->message('foo');
 })->throws(ReferenceException::class, 'Unknown variable: $one.');

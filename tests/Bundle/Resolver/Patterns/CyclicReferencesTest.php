@@ -4,7 +4,7 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo = { bar }
     bar = { foo }
 
@@ -24,7 +24,7 @@ test('returns {???} for cyclic self-reference')
     );
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     foo =
         { $sel ->
            *[a] { foo }
@@ -44,7 +44,7 @@ it('returns the other member if requested')
     ->and($bundle->popErrors())->toBeEmpty();
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     -foo =
         { -bar.attr ->
            *[a] Foo

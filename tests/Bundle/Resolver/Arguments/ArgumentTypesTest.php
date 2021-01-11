@@ -5,7 +5,7 @@ use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 
 $bundle = (new FluentBundle('en-US'))
-    ->addRaw('foo = { $arg }');
+    ->addFtl('foo = { $arg }');
 
 it('can not be an array')
     ->expect($bundle->message('foo', arg: [1, 2, 'key' => 3]))->toBe('{$arg}')

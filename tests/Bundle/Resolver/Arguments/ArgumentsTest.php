@@ -4,7 +4,7 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     missing = { $arg }
     msg = Foo { $num }
     ref = { msg }

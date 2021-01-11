@@ -3,13 +3,13 @@
 use Major\Fluent\Bundle\FluentBundle;
 
 $en = (new FluentBundle('en-US', strict: true))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     num-in-placeable = { 332035625.33203 }
     num-in-var = { $number }
     ftl);
 
 $pl = (new FluentBundle('pl', strict: true))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     num-in-placeable = { 37824787.37824 }
     num-in-var = { $number }
     ftl);

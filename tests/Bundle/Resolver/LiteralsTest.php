@@ -3,7 +3,7 @@
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, allowOverrides: true))
-    ->addRaw(<<<'ftl'
+    ->addFtl(<<<'ftl'
     matching-string = { "a" ->
         [a] A
        *[b] B
