@@ -7,7 +7,6 @@ use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
 use Major\Fluent\Exceptions\Bundle\TermExistsException;
-use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
@@ -26,7 +25,6 @@ use Major\Fluent\Node\Syntax\Expressions\TermReference;
 use Major\Fluent\Node\Syntax\Expressions\VariableReference;
 use Major\Fluent\Node\Syntax\FluentResource;
 use Major\Fluent\Node\Syntax\Identifier;
-use Major\Fluent\Node\Syntax\Junk;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
@@ -64,20 +62,6 @@ class FluentBundle
         $allowOverrides ??= $this->allowOverrides;
 
         foreach ($resource->body as $entry) {
-            if (
-                $entry instanceof Junk
-                && ! empty($entry->annotations)
-                && $this->strict
-            ) {
-                $annotation = $entry->annotations[0];
-
-                throw new ParserException(
-                    $annotation->code,
-                    $annotation->arguments,
-                    $entry->content,
-                );
-            }
-
             if ($entry instanceof Message) {
                 if (! $allowOverrides && $this->hasMessage($entry->id->name)) {
                     throw new MessageExistsException($entry->id->name);
@@ -100,7 +84,7 @@ class FluentBundle
 
     public function addFtl(string $ftl, bool $allowOverrides = null): static
     {
-        $parser = new FluentParser();
+        $parser = new FluentParser($this->strict);
 
         $this->addResource(
             $parser->parse($ftl),

@@ -35,6 +35,10 @@ use Major\Fluent\Node\Syntax\Variant;
 
 class FluentParser
 {
+    public function __construct(
+        private bool $strict = false,
+    ) { }
+
     public function parse(string $source): FluentResource
     {
         $cursor = new FluentCursor($source);
@@ -51,6 +55,18 @@ class FluentParser
             $entry = $this->getEntryOrJunk($cursor);
 
             $blankLines = $cursor->skipBlankBlock();
+
+            if (
+                $entry instanceof Junk
+                && ! empty($entry->annotations)
+                && $this->strict
+            ) {
+                throw new ParserException(
+                    $entry->annotations[0]->code,
+                    $entry->annotations[0]->arguments,
+                    $entry->content,
+                );
+            }
 
             // Comments may be attached to Messages or Terms if they are followed
             // immediately by them. However they should parse as standalone when
