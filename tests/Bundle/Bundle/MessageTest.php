@@ -24,8 +24,11 @@ it('returns null for terms')
 test('message attributes can be accessed using "dot" notation')
     ->expect($bundle->message('welcome.guest'))->toBe('Welcome, Guest');
 
-it('accepts message attributes as named arguments')
+it('returns null for missing attributes')
+    ->expect($bundle->message('welcome.guest'))->toBe('Welcome, Guest');
+
+it('accepts message arguments as named arguments')
     ->expect($bundle->message('welcome.user', userName: 'John'))->toBe('Welcome, John');
 
-it('accepts message attributes as an associative array')
+it('accepts message arguments as an associative array')
     ->expect($bundle->message('welcome.user', ['userName' => 'John']))->toBe('Welcome, John');
