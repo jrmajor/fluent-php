@@ -120,17 +120,21 @@ class FluentBundle
         return $errors;
     }
 
-    public function message(string $id, mixed ...$arguments): ?string
+    public function message(string $messageId, mixed ...$arguments): ?string
     {
-        $id = explode('.', $id, limit: 2);
+        if (array_key_exists(0, $arguments) && is_array($arguments[0])) {
+            $arguments = $arguments[0];
+        }
 
-        $message = $this->messages[$id[0]] ?? null;
+        $messageId = explode('.', $messageId, limit: 2);
+
+        $message = $this->messages[$messageId[0]] ?? null;
 
         if (! $message) {
             return null;
         }
 
-        $attributeId = $id[1] ?? null;
+        $attributeId = $messageId[1] ?? null;
 
         if (is_null($attributeId)) {
             return $this->resolvePattern($message->value, new ResolutionScope($arguments));
