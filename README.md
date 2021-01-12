@@ -10,6 +10,20 @@ A PHP implementation of [Project Fluent](https:/projectfluent.org), a localizati
 
 You can install it via composer: `composer require jrmajor/fluent`. It requires PHP 8.0 or higher.
 
+## Usage
+
+### Parsing
+
+```php
+use Major\Fluent\Parser\FluentParser;
+
+$parser = new FluentParser(strict: true);
+
+$resource = $parser->parse('hello-user = Hello, { $userName }!');
+```
+
+`$strict` constructor argument defaults to `false`. In strict mode syntax errors will result in a `ParserException`. Otherwise they are ignored and represented in AST by `Junk`.
+
 ## Testing
 
 ```shell
