@@ -86,10 +86,7 @@ class FluentBundle
     {
         $parser = new FluentParser($this->strict);
 
-        $this->addResource(
-            $parser->parse($ftl),
-            $allowOverrides,
-        );
+        $this->addResource($parser->parse($ftl), $allowOverrides);
 
         return $this;
     }
