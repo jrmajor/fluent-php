@@ -5,7 +5,7 @@ namespace Major\Fluent\Bundle\Types;
 use NumberFormatter;
 use Stringable;
 
-final class FluentNumber implements Stringable
+class FluentNumber implements Stringable
 {
     protected string $locale = 'en';
 

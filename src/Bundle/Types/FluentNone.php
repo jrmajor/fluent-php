@@ -4,7 +4,7 @@ namespace Major\Fluent\Bundle\Types;
 
 use Stringable;
 
-class FluentNone implements Stringable
+final class FluentNone implements Stringable
 {
     public function __construct(
         protected string $value = '???',
