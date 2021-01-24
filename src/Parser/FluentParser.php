@@ -241,7 +241,7 @@ class FluentParser
 
         $attributes = $this->getAttributes($cursor);
 
-        if ($value === null && count($attributes) === 0) {
+        if (! $value && count($attributes) === 0) {
             throw new ParserException('E0005', ['id' => $id->name]);
         }
 
@@ -263,7 +263,7 @@ class FluentParser
 
         $value = $this->maybeGetPattern($cursor);
 
-        if ($value === null) {
+        if (! $value) {
             throw new ParserException('E0006', ['id' => $id->name]);
         }
 
@@ -322,7 +322,7 @@ class FluentParser
 
         $value = $this->maybeGetPattern($cursor);
 
-        if ($value === null) {
+        if (! $value) {
             throw new ParserException('E0012');
         }
 
@@ -395,7 +395,7 @@ class FluentParser
 
         $value = $this->maybeGetPattern($cursor);
 
-        if ($value === null) {
+        if (! $value) {
             throw new ParserException('E0012');
         }
 
@@ -647,13 +647,13 @@ class FluentParser
             // Validate selector expression according to
             // abstract.js in the Fluent specification
             if ($selector instanceof MessageReference) {
-                if ($selector->attribute === null) {
+                if (! $selector->attribute) {
                     throw new ParserException('E0016');
                 } else {
                     throw new ParserException('E0018');
                 }
             } elseif ($selector instanceof TermReference) {
-                if ($selector->attribute === null) {
+                if (! $selector->attribute) {
                     throw new ParserException('E0017');
                 }
             } elseif ($selector instanceof Placeable) {
@@ -672,7 +672,7 @@ class FluentParser
                 ->addSpan($spanStart, $cursor->index());
         }
 
-        if ($selector instanceof TermReference && $selector->attribute !== null) {
+        if ($selector instanceof TermReference && $selector->attribute) {
             throw new ParserException('E0019');
         }
 
@@ -834,7 +834,7 @@ class FluentParser
             return $expression;
         }
 
-        if ($expression instanceof MessageReference && $expression->attribute === null) {
+        if ($expression instanceof MessageReference && ! $expression->attribute) {
             $cursor->next();
 
             $cursor->skipBlank();

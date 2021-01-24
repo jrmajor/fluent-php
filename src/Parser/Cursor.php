@@ -36,8 +36,7 @@ class Cursor
 
         $char = mb_substr($this->string, $offset, 1);
 
-        return mb_strlen($char) === 0
-            ? null : $char;
+        return mb_strlen($char) ? $char : null;
     }
 
     public function currentChar(): ?string
