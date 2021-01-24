@@ -74,7 +74,7 @@ class FluentParser
             // we know that the Message or the Term parsed successfully.
             if (
                 $entry instanceof Comment
-                && mb_strlen($blankLines) === 0
+                && ! mb_strlen($blankLines)
                 && $cursor->currentChar() !== null
             ) {
                 // Stash the comment and decide what to do with it in the next pass.
@@ -159,7 +159,7 @@ class FluentParser
             ))->addSpan($errorIndex, $errorIndex);
 
             $junk = new Junk(
-                $cursor->slice($entryStartPosition, $nextEntryStart)
+                $cursor->slice($entryStartPosition, $nextEntryStart),
             );
 
             return $junk
@@ -241,7 +241,7 @@ class FluentParser
 
         $attributes = $this->getAttributes($cursor);
 
-        if (! $value && count($attributes) === 0) {
+        if (! $value && ! count($attributes)) {
             throw new ParserException('E0005', ['id' => $id->name]);
         }
 
@@ -355,7 +355,7 @@ class FluentParser
             $cursor->skipBlank();
         }
 
-        if (count($variants) === 0) {
+        if (! count($variants)) {
             throw new ParserException('E0011');
         }
 
@@ -546,7 +546,7 @@ class FluentParser
             if ($element instanceof Indent) {
                 $element->stripCommonIndent($commonIndent);
 
-                if (mb_strlen($element->value) === 0) {
+                if (! mb_strlen($element->value)) {
                     continue;
                 }
             }
@@ -582,7 +582,7 @@ class FluentParser
         if ($lastElement instanceof TextElement) {
             $lastElement->value = rtrim($lastElement->value);
 
-            if (mb_strlen($lastElement->value) === 0) {
+            if (! mb_strlen($lastElement->value)) {
                 array_pop($trimmed);
             }
         }
@@ -796,7 +796,7 @@ class FluentParser
                 $named[] = $argument;
 
                 $argumentNames[] = $argument->name->name;
-            } elseif (count($argumentNames) > 0) {
+            } elseif (count($argumentNames)) {
                 throw new ParserException('E0021');
             } else {
                 $positional[] = $argument;
@@ -900,7 +900,7 @@ class FluentParser
             $number .= $char;
         }
 
-        if (mb_strlen($number) === 0) {
+        if (! mb_strlen($number)) {
             throw new ParserException('E0004', ['range' => '0-9']);
         }
 
