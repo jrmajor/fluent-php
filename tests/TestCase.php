@@ -185,7 +185,7 @@ trait TestCase
             'Pattern' => [],
             'Placeable' => [],
             'TextElement' => ['value'],
-            default => throw new InvalidArgumentException,
+            default => throw new InvalidArgumentException(),
         };
     }
 
@@ -225,7 +225,7 @@ trait TestCase
             'Pattern' => [],
             'Placeable' => ['expression'],
             'TextElement' => [],
-            default => throw new InvalidArgumentException,
+            default => throw new InvalidArgumentException(),
         };
 
         if (self::$spans && $node->getType() !== 'Span') {
@@ -271,7 +271,7 @@ trait TestCase
             'Pattern' => ['elements'],
             'Placeable' => [],
             'TextElement' => [],
-            default => throw new InvalidArgumentException,
+            default => throw new InvalidArgumentException(),
         };
     }
 }

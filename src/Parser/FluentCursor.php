@@ -41,7 +41,6 @@ class FluentCursor extends Cursor
         }
 
         if ($this->peekOffset - $column1 === 0) {
-
             return false;
         }
 

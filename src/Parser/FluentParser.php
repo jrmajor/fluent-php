@@ -205,7 +205,7 @@ class FluentParser
             if ($cursor->currentChar() !== "\n") {
                 $cursor->expectChar(' ');
 
-                while (($char = $cursor->takeChar(fn($x) => $x !== "\n")) !== null) {
+                while (($char = $cursor->takeChar(fn ($x) => $x !== "\n")) !== null) {
                     $content .= $char;
                 }
             }
@@ -359,7 +359,7 @@ class FluentParser
             throw new ParserException('E0011');
         }
 
-        if (!$hasDefault) {
+        if (! $hasDefault) {
             throw new ParserException('E0010');
         }
 
@@ -413,7 +413,10 @@ class FluentParser
 
         $cc = mb_ord($char);
 
-        if (($cc >= 48 && $cc <= 57) || $cc === 45) { // 0-9, -
+        if (
+            ($cc >= 48 && $cc <= 57) // 0-9
+            || $cc === 45 // -
+        ) {
             return $this->getNumber($cursor);
         }
 
@@ -480,8 +483,8 @@ class FluentParser
 
                     $indent = $cursor->skipBlankInline();
 
-                    $commonIndentLength = !is_null($commonIndentLength)
-                        ? (int)min($commonIndentLength, mb_strlen($indent))
+                    $commonIndentLength = ! is_null($commonIndentLength)
+                        ? (int) min($commonIndentLength, mb_strlen($indent))
                         : mb_strlen($indent);
 
                     $elements[] = $this->getIndent($cursor, $blankLines.$indent, $blankStart);
@@ -912,7 +915,7 @@ class FluentParser
 
         $value = '';
 
-        while (($char = $cursor->takeChar(fn($x) => $x !== '"' && $x !== "\n")) !== null) {
+        while (($char = $cursor->takeChar(fn ($x) => $x !== '"' && $x !== "\n")) !== null) {
             if ($char === '\\') {
                 $value .= $this->getEscapeSequence($cursor);
             } else {
