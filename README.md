@@ -6,7 +6,7 @@
 <a href="https://packagist.org/packages/jrmajor/fluent"><img src="https://img.shields.io/packagist/v/jrmajor/fluent.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/jrmajor/fluent"><img src="https://img.shields.io/packagist/php-v/jrmajor/fluent.svg" alt="Required PHP Version"></a>
 
-A PHP implementation of [Project Fluent](https:/projectfluent.org), a localization system by Mozilla.
+A PHP implementation of [Project Fluent](https://projectfluent.org), a localization system by Mozilla.
 
 You can install it via composer: `composer require jrmajor/fluent`. It requires PHP 8.0 or higher.
 
