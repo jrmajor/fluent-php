@@ -33,8 +33,8 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "phpstan/phpstan": "^0.12.64",
-        "pestphp/pest": "^1.0.0",
+        "phpstan/phpstan": "^0.12.83",
+        "pestphp/pest": "^1.0",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
