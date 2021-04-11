@@ -496,15 +496,19 @@ class FluentParser
                 $cursor->resetPeek();
 
                 break;
-            } elseif ($char === '{') {
+            }
+
+            if ($char === '{') {
                 $elements[] = $this->getPlaceable($cursor);
 
                 continue;
-            } elseif ($char === '}') {
-                throw new ParserException('E0027');
-            } else {
-                $elements[] = $this->getTextElement($cursor);
             }
+
+            if ($char === '}') {
+                throw new ParserException('E0027');
+            }
+
+            $elements[] = $this->getTextElement($cursor);
         }
 
         $dedented = $this->dedent($elements, $commonIndentLength);
@@ -649,11 +653,10 @@ class FluentParser
             // Validate selector expression according to
             // abstract.js in the Fluent specification
             if ($selector instanceof MessageReference) {
-                if (! $selector->attribute) {
-                    throw new ParserException('E0016');
-                } else {
-                    throw new ParserException('E0018');
-                }
+                match ($selector->attribute) {
+                    null => throw new ParserException('E0016'),
+                    default => throw new ParserException('E0018'),
+                };
             } elseif ($selector instanceof TermReference) {
                 if (! $selector->attribute) {
                     throw new ParserException('E0017');

@@ -11,7 +11,9 @@ final class Annotation extends SyntaxNode
         public array $arguments = [],
     ) { }
 
-    /** @return string[] */
+    /**
+     * @return string[]
+     */
     public function getArguments(): array
     {
         return array_values($this->arguments);

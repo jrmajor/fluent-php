@@ -133,11 +133,7 @@ class FluentCursor extends Cursor
 
         $this->resetPeek();
 
-        if ($charAfterHashes === ' ' || $charAfterHashes === "\n") {
-            return true;
-        }
-
-        return false;
+        return $charAfterHashes === ' ' || $charAfterHashes === "\n";
     }
 
     public function skipToNextEntryStart(int $junkStart): void

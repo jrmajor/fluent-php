@@ -56,7 +56,9 @@ class ParserException extends Exception
         return $this->fluentErrorCode;
     }
 
-    /** @return array<string, string> */
+    /**
+     * @return array<string, string>
+     */
     public function getArguments(): array
     {
         return $this->arguments;
