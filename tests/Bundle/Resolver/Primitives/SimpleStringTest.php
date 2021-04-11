@@ -4,27 +4,27 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
+        foo = Foo
 
-    placeable-literal = { "Foo" } Bar
-    placeable-message = { foo } Bar
+        placeable-literal = { "Foo" } Bar
+        placeable-message = { foo } Bar
 
-    selector-literal = { "Foo" ->
-       *[Foo] Member 1
-    }
+        selector-literal = { "Foo" ->
+           *[Foo] Member 1
+        }
 
-    bar =
-        .attr = Bar Attribute
+        bar =
+            .attr = Bar Attribute
 
-    placeable-attr = { bar.attr }
+        placeable-attr = { bar.attr }
 
-    -baz = Baz
-        .attr = BazAttribute
+        -baz = Baz
+            .attr = BazAttribute
 
-    selector-attr = { -baz.attr ->
-       *[BazAttribute] Member 3
-    }
-    ftl);
+        selector-attr = { -baz.attr ->
+           *[BazAttribute] Member 3
+        }
+        ftl);
 
 it('can be used as a value')
     ->expect($bundle->message('foo'))->toBe('Foo');

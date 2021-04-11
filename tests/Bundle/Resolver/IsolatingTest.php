@@ -10,14 +10,14 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    bar = { foo } Bar
-    baz = { $arg } Baz
-    qux = { bar } { baz }
+        foo = Foo
+        bar = { foo } Bar
+        baz = { $arg } Baz
+        qux = { bar } { baz }
 
-    -brand-short-name = Amaya
-    skip-isolation = { -brand-short-name }
-    ftl);
+        -brand-short-name = Amaya
+        skip-isolation = { -brand-short-name }
+        ftl);
 
 it('isolates interpolated message references')
     ->expect($bundle->message('bar'))->toBe("\u{2068}Foo\u{2069} Bar");

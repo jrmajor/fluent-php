@@ -6,25 +6,25 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    ftl);
+        foo = Foo
+        ftl);
 
 it('returns the simple string value')
     ->expect($bundle->message('foo'))->toBe('Foo');
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    -bar = Bar
+        foo = Foo
+        -bar = Bar
 
-    ref-message = { foo }
-    ref-term = { -bar }
+        ref-message = { foo }
+        ref-term = { -bar }
 
-    ref-missing-message = { missing }
-    ref-missing-term = { -missing }
+        ref-missing-message = { missing }
+        ref-missing-term = { -missing }
 
-    ref-malformed = { malformed
-    ftl);
+        ref-malformed = { malformed
+        ftl);
 
 it('resolves the reference to a message')
     ->expect($bundle->message('ref-message'))->toBe('Foo')
@@ -48,10 +48,10 @@ it('returns the id if the referenced term is missing')
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    msg-no-val =
-        .attr = Foo Attr
-    ref = { msg-no-val } Bar
-    ftl);
+        msg-no-val =
+            .attr = Foo Attr
+        ref = { msg-no-val } Bar
+        ftl);
 
 it('returns {???} when trying to format a message with null value')
     ->expect($bundle->message('msg-no-val'))->toBe('{???}')

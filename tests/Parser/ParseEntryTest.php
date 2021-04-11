@@ -32,22 +32,22 @@ it('can parse simple message', function () {
 
 it('ignores attached comment', function () {
     $expected = [
-         'type' => 'Message',
-         'id' => [
-             'type' => 'Identifier',
-             'name' => 'foo',
-         ],
-         'value' => [
-             'type' => 'Pattern',
-             'elements' => [
-                 [
-                     'type' => 'TextElement',
-                     'value' => 'Foo',
-                 ],
-             ],
-         ],
-         'attributes' => [],
-         'comment' => null,
+        'type' => 'Message',
+        'id' => [
+            'type' => 'Identifier',
+            'name' => 'foo',
+        ],
+        'value' => [
+            'type' => 'Pattern',
+            'elements' => [
+                [
+                    'type' => 'TextElement',
+                    'value' => 'Foo',
+                ],
+            ],
+        ],
+        'attributes' => [],
+        'comment' => null,
     ];
 
     $message = $this->parser
@@ -78,11 +78,11 @@ it('returns junk', function () {
 
 it('ignores all valid comments', function () {
     $input = <<<'ftl'
-    # Attached Comment
-    ## Group Comment
-    ### Resource Comment
-    foo = Foo
-    ftl;
+        # Attached Comment
+        ## Group Comment
+        ### Resource Comment
+        foo = Foo
+        ftl;
 
     $expected = [
         'type' => 'Message',

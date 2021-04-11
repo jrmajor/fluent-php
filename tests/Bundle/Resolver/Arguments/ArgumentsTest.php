@@ -5,18 +5,18 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    missing = { $arg }
-    msg = Foo { $num }
-    ref = { msg }
-    baz =
-        .attr = Baz Attribute { $num }
-    select-val = { "a" ->
-        *[a] Baz Variant A { $num }
-    }
-    selector = { $num ->
-       *[3] Foo
-    }
-    ftl);
+        missing = { $arg }
+        msg = Foo { $num }
+        ref = { msg }
+        baz =
+            .attr = Baz Attribute { $num }
+        select-val = { "a" ->
+            *[a] Baz Variant A { $num }
+        }
+        selector = { $num ->
+           *[3] Foo
+        }
+        ftl);
 
 it("falls back to argument's name if it is missing")
     ->expect($bundle->message('missing'))->toBe('{$arg}')

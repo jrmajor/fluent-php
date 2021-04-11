@@ -4,24 +4,24 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    -foo = Foo { $arg }
-    -bar = { -foo }
-    -baz = { -foo() }
-    -qux = { -foo(arg: 1) }
+        -foo = Foo { $arg }
+        -bar = { -foo }
+        -baz = { -foo() }
+        -qux = { -foo(arg: 1) }
 
-    ref-bar = { -bar }
-    ref-baz = { -baz }
-    ref-qux = { -qux }
+        ref-bar = { -bar }
+        ref-baz = { -baz }
+        ref-qux = { -qux }
 
-    call-bar-no-args = { -bar() }
-    call-baz-no-args = { -baz() }
-    call-qux-no-args = { -qux() }
+        call-bar-no-args = { -bar() }
+        call-baz-no-args = { -baz() }
+        call-qux-no-args = { -qux() }
 
-    call-bar-with-arg = { -bar(arg: 2) }
-    call-baz-with-arg = { -baz(arg: 2) }
-    call-qux-with-arg = { -qux(arg: 2) }
-    call-qux-with-other = { -qux(other: 3) }
-    ftl);
+        call-bar-with-arg = { -bar(arg: 2) }
+        call-baz-with-arg = { -baz(arg: 2) }
+        call-qux-with-arg = { -qux(arg: 2) }
+        call-qux-with-other = { -qux(other: 3) }
+        ftl);
 
 test('no parameterization, no parameterization, no externals')
     ->expect($bundle->message('ref-bar'))->toBe('Foo {$arg}');

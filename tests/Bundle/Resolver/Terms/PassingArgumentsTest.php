@@ -4,13 +4,13 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    -foo = Foo { $arg }
+        -foo = Foo { $arg }
 
-    ref-foo = { -foo }
-    call-foo-no-args = { -foo() }
-    call-foo-with-expected-arg = { -foo(arg: 1) }
-    call-foo-with-other-arg = { -foo(other: 3) }
-    ftl);
+        ref-foo = { -foo }
+        call-foo-no-args = { -foo() }
+        call-foo-with-expected-arg = { -foo(arg: 1) }
+        call-foo-with-other-arg = { -foo(other: 3) }
+        ftl);
 
 test('not parameterized, no externals')
     ->expect($bundle->message('ref-foo'))->toBe('Foo {$arg}');

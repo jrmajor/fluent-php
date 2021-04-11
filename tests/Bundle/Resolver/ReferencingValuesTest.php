@@ -5,44 +5,44 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    key1 = Value 1
-    -key2 = { $sel ->
-        [a] A2
-       *[b] B2
-    }
-    key3 = Value { 3 }
-    -key4 = { $sel ->
-        [a] A{ 4 }
-       *[b] B{ 4 }
-    }
-    key5 =
-        .a = A5
-        .b = B5
+        key1 = Value 1
+        -key2 = { $sel ->
+            [a] A2
+           *[b] B2
+        }
+        key3 = Value { 3 }
+        -key4 = { $sel ->
+            [a] A{ 4 }
+           *[b] B{ 4 }
+        }
+        key5 =
+            .a = A5
+            .b = B5
 
-    ref1 = { key1 }
-    ref2 = { -key2 }
-    ref3 = { key3 }
-    ref4 = { -key4 }
-    ref5 = { key5 }
+        ref1 = { key1 }
+        ref2 = { -key2 }
+        ref3 = { key3 }
+        ref4 = { -key4 }
+        ref5 = { key5 }
 
-    ref6 = { -key2(sel: "a") }
-    ref7 = { -key2(sel: "b") }
+        ref6 = { -key2(sel: "a") }
+        ref7 = { -key2(sel: "b") }
 
-    ref8 = { -key4(sel: "a") }
-    ref9 = { -key4(sel: "b") }
+        ref8 = { -key4(sel: "a") }
+        ref9 = { -key4(sel: "b") }
 
-    ref10 = { key5.a }
-    ref11 = { key5.b }
-    ref12 = { key5.c }
+        ref10 = { key5.a }
+        ref11 = { key5.b }
+        ref12 = { key5.c }
 
-    ref13 = { key6 }
-    ref14 = { key6.a }
+        ref13 = { key6 }
+        ref14 = { key6.a }
 
-    ref15 = { -key6 }
-    ref16 = { -key6.a ->
-       *[a] A
-    }
-    ftl);
+        ref15 = { -key6 }
+        ref16 = { -key6.a ->
+           *[a] A
+        }
+        ftl);
 
 it('can reference the value')
     ->expect($bundle->message('ref1'))->toBe('Value 1')

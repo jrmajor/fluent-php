@@ -4,16 +4,16 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    bar = { foo }Bar
+        foo = Foo
+        bar = { foo }Bar
 
-    placeable-message = { bar }Baz
+        placeable-message = { bar }Baz
 
-    baz =
-        .attr = { bar }BazAttribute
+        baz =
+            .attr = { bar }BazAttribute
 
-    placeable-attr = { baz.attr }
-    ftl);
+        placeable-attr = { baz.attr }
+        ftl);
 
 it('can be used as a value')
     ->expect($bundle->message('bar'))->toBe('FooBar');

@@ -4,12 +4,12 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo { $arg }
-    -bar = { foo }
-    ref-bar = { -bar }
-    call-bar = { -bar() }
-    call-bar-with-arg = { -bar(arg: 1) }
-    ftl);
+        foo = Foo { $arg }
+        -bar = { foo }
+        ref-bar = { -bar }
+        call-bar = { -bar() }
+        call-bar-with-arg = { -bar(arg: 1) }
+        ftl);
 
 test('no parameterization, no externals')
     ->expect($bundle->message('ref-bar'))->toBe('Foo {$arg}');

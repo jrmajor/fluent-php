@@ -15,8 +15,8 @@ it('throws syntax errors in strict mode', function () {
 test('errors are ignored by default and can be obtained by popErrors method', function () {
     $bundle = (new FluentBundle('en-US', useIsolating: false))
         ->addFtl(<<<'ftl'
-        foo = { $one } and { $two }
-        ftl);
+            foo = { $one } and { $two }
+            ftl);
 
     expect($bundle->message('foo'))->toBe('{$one} and {$two}');
 

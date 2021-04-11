@@ -6,20 +6,20 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    key1 = Value 1
-    key2 = { $sel ->
-        [a] A2
-       *[b] B2
-    }
-    key3 = Value { 3 }
-    key4 = { $sel ->
-        [a] A{ 4 }
-       *[b] B{ 4 }
-    }
-    key5 =
-        .a = A5
-        .b = B5
-    ftl);
+        key1 = Value 1
+        key2 = { $sel ->
+            [a] A2
+           *[b] B2
+        }
+        key3 = Value { 3 }
+        key4 = { $sel ->
+            [a] A{ 4 }
+           *[b] B{ 4 }
+        }
+        key5 =
+            .a = A5
+            .b = B5
+        ftl);
 
 it('returns the value')
     ->expect($bundle->message('key1'))->toBe('Value 1')

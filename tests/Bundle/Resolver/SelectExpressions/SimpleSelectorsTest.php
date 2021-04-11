@@ -5,15 +5,15 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    string-selector = { $selector ->
-        [a] A
-       *[b] B
-    }
-    number-selector = { $selector ->
-        [0] A
-       *[1] B
-    }
-    ftl);
+        string-selector = { $selector ->
+            [a] A
+           *[b] B
+        }
+        number-selector = { $selector ->
+            [0] A
+           *[1] B
+        }
+        ftl);
 
 it('falls back to default variant when selector is missing')
     ->expect($bundle->message('string-selector'))->toBe('B')

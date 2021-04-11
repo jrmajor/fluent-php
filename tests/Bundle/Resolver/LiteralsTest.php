@@ -4,29 +4,29 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, allowOverrides: true))
     ->addFtl(<<<'ftl'
-    matching-string = { "a" ->
-        [a] A
-       *[b] B
-    }
-    non-matching-string = { "c" ->
-        [a] A
-       *[b] B
-    }
+        matching-string = { "a" ->
+            [a] A
+           *[b] B
+        }
+        non-matching-string = { "c" ->
+            [a] A
+           *[b] B
+        }
 
-    matching-number = { 0 ->
-        [0] A
-       *[1] B
-    }
-    non-matching-number = { 2 ->
-        [0] A
-       *[1] B
-    }
+        matching-number = { 0 ->
+            [0] A
+           *[1] B
+        }
+        non-matching-number = { 2 ->
+            [0] A
+           *[1] B
+        }
 
-    number-matching-plural = { 1 ->
-        [one] A
-       *[other] B
-    }
-    ftl);
+        number-matching-plural = { 1 ->
+            [one] A
+           *[other] B
+        }
+        ftl);
 
 test('a matching string literal selector')
     ->expect($bundle->message('matching-string'))->toBe('A');

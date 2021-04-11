@@ -5,11 +5,11 @@ use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = { bar }
-    bar = { foo }
+        foo = { bar }
+        bar = { foo }
 
-    self = { self }
-    ftl);
+        self = { self }
+        ftl);
 
 it('returns {???} for cyclic reference')
     ->expect($bundle->message('foo'))->toBe('{???}')
@@ -25,13 +25,13 @@ test('returns {???} for cyclic self-reference')
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo =
-        { $sel ->
-           *[a] { foo }
-            [b] Bar
-        }
-    bar = { foo }
-    ftl);
+        foo =
+            { $sel ->
+               *[a] { foo }
+                [b] Bar
+            }
+        bar = { foo }
+        ftl);
 
 it('returns {???} for cyclic self-reference in a member')
     ->expect($bundle->message('foo', sel: 'a'))->toBe('{???}')
@@ -45,21 +45,21 @@ it('returns the other member if requested')
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    -foo =
-        { -bar.attr ->
-           *[a] Foo
-        }
-        .attr = a
+        -foo =
+            { -bar.attr ->
+               *[a] Foo
+            }
+            .attr = a
 
-    -bar =
-        { -foo.attr ->
-           *[a] Bar
-        }
-        .attr = { -foo }
+        -bar =
+            { -foo.attr ->
+               *[a] Bar
+            }
+            .attr = { -foo }
 
-    foo = { -foo }
-    bar = { -bar }
-    ftl);
+        foo = { -foo }
+        bar = { -bar }
+        ftl);
 
 it('returns the default variant for cyclic reference in a selector')
     ->expect($bundle->message('foo'))->toBe('Foo')

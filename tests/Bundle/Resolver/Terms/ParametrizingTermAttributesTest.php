@@ -4,33 +4,33 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    -ship = Ship
-        .gender = { $style ->
-           *[traditional] neuter
-            [chicago] feminine
-        }
+        -ship = Ship
+            .gender = { $style ->
+               *[traditional] neuter
+                [chicago] feminine
+            }
 
-    ref-attr = { -ship.gender ->
-       *[masculine] He
-        [feminine] She
-        [neuter] It
-    }
-    call-attr-no-args = { -ship.gender() ->
-       *[masculine] He
-        [feminine] She
-        [neuter] It
-    }
-    call-attr-with-expected-arg = { -ship.gender(style: "chicago") ->
-       *[masculine] He
-        [feminine] She
-        [neuter] It
-    }
-    call-attr-with-other-arg = { -ship.gender(other: 3) ->
-       *[masculine] He
-        [feminine] She
-        [neuter] It
-    }
-    ftl);
+        ref-attr = { -ship.gender ->
+           *[masculine] He
+            [feminine] She
+            [neuter] It
+        }
+        call-attr-no-args = { -ship.gender() ->
+           *[masculine] He
+            [feminine] She
+            [neuter] It
+        }
+        call-attr-with-expected-arg = { -ship.gender(style: "chicago") ->
+           *[masculine] He
+            [feminine] She
+            [neuter] It
+        }
+        call-attr-with-other-arg = { -ship.gender(other: 3) ->
+           *[masculine] He
+            [feminine] She
+            [neuter] It
+        }
+        ftl);
 
 test('not parameterized, no externals')
     ->expect($bundle->message('ref-attr'))->toBe('It');

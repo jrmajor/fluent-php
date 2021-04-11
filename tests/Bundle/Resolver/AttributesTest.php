@@ -5,18 +5,18 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    bar = Bar
-        .attr = Bar Attribute
-    baz = { foo } Baz
-    qux = { foo } Qux
-        .attr = Qux Attribute
+        foo = Foo
+        bar = Bar
+            .attr = Bar Attribute
+        baz = { foo } Baz
+        qux = { foo } Qux
+            .attr = Qux Attribute
 
-    ref-foo = { foo.missing }
-    ref-bar = { bar.missing }
-    ref-baz = { baz.missing }
-    ref-qux = { qux.missing }
-    ftl);
+        ref-foo = { foo.missing }
+        ref-bar = { bar.missing }
+        ref-baz = { baz.missing }
+        ref-qux = { qux.missing }
+        ftl);
 
 it('falls back to id.attribute for entities with string values and no attributes')
     ->expect($bundle->message('ref-foo'))->toBe('{foo.missing}')
@@ -44,14 +44,14 @@ it('falls back to id.attribute for entities with pattern values and other attrib
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-        .attr = Foo Attribute
-    bar = { foo } Bar
-        .attr = Bar Attribute
+        foo = Foo
+            .attr = Foo Attribute
+        bar = { foo } Bar
+            .attr = Bar Attribute
 
-    ref-foo = { foo.attr }
-    ref-bar = { bar.attr }
-    ftl);
+        ref-foo = { foo.attr }
+        ref-bar = { bar.attr }
+        ftl);
 
 test('attributes with string values can be referenced for entities with string values')
     ->expect($bundle->message('ref-foo'))->toBe('Foo Attribute');
@@ -67,18 +67,18 @@ test('attributes with string values can be formatted directly for entities with 
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    bar = Bar
-        .attr = { foo } Attribute
-    baz = { foo } Baz
-        .attr = { foo } Attribute
-    qux = Qux
-        .attr = { qux } Attribute
+        foo = Foo
+        bar = Bar
+            .attr = { foo } Attribute
+        baz = { foo } Baz
+            .attr = { foo } Attribute
+        qux = Qux
+            .attr = { qux } Attribute
 
-    ref-bar = { bar.attr }
-    ref-baz = { baz.attr }
-    ref-qux = { qux.attr }
-    ftl);
+        ref-bar = { bar.attr }
+        ref-baz = { baz.attr }
+        ref-qux = { qux.attr }
+        ftl);
 
 test('attributes with simple pattern values can be referenced for entities with string values')
     ->expect($bundle->message('ref-bar'))->toBe('Foo Attribute');
@@ -100,14 +100,14 @@ it('can be formatted directly when it uses a self-reference')
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-        .attr = { "a" ->
-            [a] A
-           *[b] B
-        }
+        foo = Foo
+            .attr = { "a" ->
+                [a] A
+               *[b] B
+            }
 
-    ref-foo = { foo.attr }
-    ftl);
+        ref-foo = { foo.attr }
+        ftl);
 
 test('attributes containing select expressions can be referenced')
     ->expect($bundle->message('ref-foo'))->toBe('A');

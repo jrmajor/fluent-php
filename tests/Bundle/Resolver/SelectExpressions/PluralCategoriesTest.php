@@ -4,16 +4,16 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    matching = { $selector ->
-        [one] A
-       *[other] B
-    }
+        matching = { $selector ->
+            [one] A
+           *[other] B
+        }
 
-    non-matching = { $selector ->
-        [one] A
-       *[default] D
-    }
-    ftl);
+        non-matching = { $selector ->
+            [one] A
+           *[default] D
+        }
+        ftl);
 
 it('returns variant for matching number selector')
     ->expect($bundle->message('matching', selector: 1))->toBe('A');
@@ -29,11 +29,11 @@ it('falls back to default variant for non-matching string selector')
 
 $bundle = (new FluentBundle('en-EN', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    msg = { $arg ->
-        [one] example
-       *[other] examples
-    }
-    ftl);
+        msg = { $arg ->
+            [one] example
+           *[other] examples
+        }
+        ftl);
 
 test('plural categories in english')
     ->expect($bundle->message('msg', arg: 1))->toBe('example')
@@ -44,13 +44,13 @@ test('plural categories in english')
 
 $bundle = (new FluentBundle('pl-PL', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    msg = { $arg ->
-        [one] przykład
-        [few] przykłady
-        [many] przykładów
-       *[other] przykładu
-    }
-    ftl);
+        msg = { $arg ->
+            [one] przykład
+            [few] przykłady
+            [many] przykładów
+           *[other] przykładu
+        }
+        ftl);
 
 test('plural categories in polish')
     ->expect($bundle->message('msg', arg: 1))->toBe('przykład')

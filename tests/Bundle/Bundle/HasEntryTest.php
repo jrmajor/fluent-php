@@ -4,33 +4,33 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US'))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    -bar = Term
+        foo = Foo
+        -bar = Term
 
-    # ERROR No value.
-    err1 =
-    # ERROR Broken value.
-    err2 = {}
-    # ERROR No attribute value.
-    err3 =
-        .attr =
-    # ERROR Broken attribute value.
-    err4 =
-        .attr1 = Attr
-        .attr2 = {}
+        # ERROR No value.
+        err1 =
+        # ERROR Broken value.
+        err2 = {}
+        # ERROR No attribute value.
+        err3 =
+            .attr =
+        # ERROR Broken attribute value.
+        err4 =
+            .attr1 = Attr
+            .attr2 = {}
 
-    # ERROR No value.
-    -err5 =
-    # ERROR Broken value.
-    -err6 = {}
-    # ERROR No attribute value.
-    -err7 =
-        .attr =
-    # ERROR Broken attribute value.
-    -err8 =
-        .attr1 = Attr
-        .attr2 = {}
-    ftl);
+        # ERROR No value.
+        -err5 =
+        # ERROR Broken value.
+        -err6 = {}
+        # ERROR No attribute value.
+        -err7 =
+            .attr =
+        # ERROR Broken attribute value.
+        -err8 =
+            .attr1 = Attr
+            .attr2 = {}
+        ftl);
 
 it('returns true for existing messages')
     ->expect($bundle->hasMessage('foo'))->toBeTrue();

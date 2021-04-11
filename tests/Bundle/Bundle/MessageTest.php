@@ -4,13 +4,13 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
     ->addFtl(<<<'ftl'
-    foo = Foo
-    -bar = Bar
+        foo = Foo
+        -bar = Bar
 
-    welcome = Welcome
-        .guest = Welcome, Guest
-        .user = Welcome, { $userName }
-    ftl);
+        welcome = Welcome
+            .guest = Welcome, Guest
+            .user = Welcome, { $userName }
+        ftl);
 
 it('returns messages')
     ->expect($bundle->message('foo'))->toBe('Foo');

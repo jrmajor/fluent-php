@@ -4,18 +4,18 @@ use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('ru', strict: true))
     ->addFtl(<<<'ftl'
-    simple-string = { "Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?" }
+        simple-string = { "Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?" }
 
-    double-backslash = { "abc\\def" }
-    double-quote = { "ab \"cd\" ef" }
+        double-backslash = { "abc\\def" }
+        double-quote = { "ab \"cd\" ef" }
 
-    simple-unicode = { "ab \u2042 ef" }
-    combining-unicode = { "Варша\u0301ва" }
-    unicode = { "ab \U01F984 ef" }
-    surrogates = { "\uD803\uDC83 is \U010C83" }
+        simple-unicode = { "ab \u2042 ef" }
+        combining-unicode = { "Варша\u0301ва" }
+        unicode = { "ab \U01F984 ef" }
+        surrogates = { "\uD803\uDC83 is \U010C83" }
 
-    complex-escape = { "\\\u2137\\\"\\u3\"\\" }
-    ftl);
+        complex-escape = { "\\\u2137\\\"\\u3\"\\" }
+        ftl);
 
 it('can parse simple string')
     ->expect($bundle->message('simple-string'))
