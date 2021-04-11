@@ -3,7 +3,7 @@ name: Tests
 on: [push]
 
 jobs:
-  pest:
+  unit-tests:
     name: PHP ${{ matrix.php }}, ${{ matrix.dependency-version }}
 
     runs-on: ubuntu-latest
@@ -31,3 +31,23 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           files: coverage.xml
+
+  static-analysis:
+    name: Static analysis
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install dependencies
+        run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse --no-progress --no-interaction
