@@ -52,5 +52,3 @@ test('assertNodeEquals assertion works', function () {
         annotations: true,
     );
 });
-
-

@@ -85,22 +85,22 @@ it('ignores all valid comments', function () {
     ftl;
 
     $expected = [
-        "type" => "Message",
-        "id" => [
-            "type" => "Identifier",
-            "name" => "foo",
+        'type' => 'Message',
+        'id' => [
+            'type' => 'Identifier',
+            'name' => 'foo',
         ],
-        "value" => [
-            "type" => "Pattern",
-            "elements" => [
+        'value' => [
+            'type' => 'Pattern',
+            'elements' => [
                 [
-                    "type" => "TextElement",
-                    "value" => "Foo",
+                    'type' => 'TextElement',
+                    'value' => 'Foo',
                 ],
             ],
         ],
-        "attributes" => [],
-        "comment" => null,
+        'attributes' => [],
+        'comment' => null,
     ];
 
     $message = $this->parser->parseEntry($input);

@@ -37,6 +37,7 @@ class FluentBundle
 {
     /** Unicode BiDi isolation characters. */
     public const FSI = "\u{2068}";
+
     public const PDI = "\u{2069}";
 
     /** @var array<string, Message> */
@@ -100,6 +101,7 @@ class FluentBundle
     {
         return array_key_exists($id, $this->terms);
     }
+
     private function reportError(ResolverException $error): void
     {
         $this->errors[] = $this->strict ? throw $error : $error;

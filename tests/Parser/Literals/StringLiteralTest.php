@@ -23,13 +23,13 @@ it('can parse unicode escapes', function () {
         ->toHaveProperty('value', 'A');
 
     expect(parseLiteral('x = {"\\\\u0041"}'))
-        ->toHaveProperty('value', "\\u0041");
+        ->toHaveProperty('value', '\\u0041');
 
     expect(parseLiteral('x = {"\\U01F602"}'))
-        ->toHaveProperty('value', "😂");
+        ->toHaveProperty('value', '😂');
 
     expect(parseLiteral('x = {"\\\\U01F602"}'))
-        ->toHaveProperty('value', "\\U01F602");
+        ->toHaveProperty('value', '\\U01F602');
 });
 
 test('trailing zeroes are not part unicode escapes', function () {

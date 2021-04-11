@@ -54,7 +54,7 @@ trait TestCase
                 throw new InvalidArgumentException("Expected node {$trace} should contain scalar \${$scalar}.");
             }
 
-            self::assertSame($expected[$scalar], $node->$scalar, "Scalar {$trace}::\${$scalar} does not match.");
+            self::assertSame($expected[$scalar], $node->{$scalar}, "Scalar {$trace}::\${$scalar} does not match.");
         }
 
         foreach (self::subnodesToCompare($node) as $subnode) {
@@ -66,7 +66,7 @@ trait TestCase
                 throw new InvalidArgumentException("Expected property {$trace}::\${$subnode} should be node, but it is scalar.");
             }
 
-            self::compareSubnode($expected[$subnode], $node->$subnode, "{$trace}::\${$subnode}");
+            self::compareSubnode($expected[$subnode], $node->{$subnode}, "{$trace}::\${$subnode}");
         }
 
         foreach (self::arraysOfNodesToCompare($node) as $array) {
@@ -78,7 +78,7 @@ trait TestCase
                 throw new InvalidArgumentException("Expected property {$trace}::\${$array} should be array.");
             }
 
-            self::compareArrayOfNodes($expected[$array], $node->$array, "{$trace}::\${$array}");
+            self::compareArrayOfNodes($expected[$array], $node->{$array}, "{$trace}::\${$array}");
         }
 
         if ($node instanceof Annotation) {
@@ -207,7 +207,7 @@ trait TestCase
             'Variant' => ['key', 'value'],
             // Syntax/Entries
             'Message' => ['id', 'value', 'comment'],
-            'Term' => ['id', 'value', 'comment',],
+            'Term' => ['id', 'value', 'comment'],
             // Syntax/Entries/Comments
             'Comment' => [],
             'GroupComment' => [],

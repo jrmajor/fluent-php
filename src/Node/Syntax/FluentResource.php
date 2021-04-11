@@ -11,5 +11,3 @@ final class FluentResource extends SyntaxNode
         public array $body = [],
     ) { }
 }
-
-

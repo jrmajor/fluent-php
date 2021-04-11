@@ -336,7 +336,7 @@ it('advances when encounters expected character', function () {
     $cursor->expectChar("\n");
     expect($cursor->index())->toBe(4);
 
-    $cursor->expectChar("b");
+    $cursor->expectChar('b');
     expect($cursor->index())->toBe(5);
 });
 

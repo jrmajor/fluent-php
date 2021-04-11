@@ -161,7 +161,7 @@ class FluentCursor extends Cursor
 
             $char = $this->next();
 
-            if ($this->isIdentifierStart()|| $char === '-' || $char === '#') {
+            if ($this->isIdentifierStart() || $char === '-' || $char === '#') {
                 break;
             }
         }
@@ -190,7 +190,7 @@ class FluentCursor extends Cursor
             return ($cc >= 97 && $cc <= 122) // a-z
                 || ($cc >= 65 && $cc <= 90) // A-Z
                 || ($cc >= 48 && $cc <= 57) // 0-9
-                ||  $cc === 95 || $cc === 45; // _-
+                || $cc === 95 || $cc === 45; // _-
         };
 
         return $this->takeChar($callback);

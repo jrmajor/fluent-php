@@ -23,6 +23,7 @@ use Major\Fluent\Node\Syntax\Expressions\MessageReference;
 use Major\Fluent\Node\Syntax\Expressions\SelectExpression;
 use Major\Fluent\Node\Syntax\Expressions\TermReference;
 use Major\Fluent\Node\Syntax\Expressions\VariableReference;
+use Major\Fluent\Node\Syntax\FluentResource;
 use Major\Fluent\Node\Syntax\Identifier;
 use Major\Fluent\Node\Syntax\Junk;
 use Major\Fluent\Node\Syntax\NamedArgument;
@@ -30,7 +31,6 @@ use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Node\Syntax\Patterns\PatternElement;
 use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
-use Major\Fluent\Node\Syntax\FluentResource;
 use Major\Fluent\Node\Syntax\Variant;
 
 class FluentParser
@@ -365,7 +365,6 @@ class FluentParser
 
         return $variants;
     }
-
 
     private function getVariant(FluentCursor $cursor, bool $hasDefault = false): Variant
     {

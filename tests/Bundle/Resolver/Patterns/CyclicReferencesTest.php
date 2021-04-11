@@ -70,4 +70,3 @@ it('returns the default variant for cyclic reference in a selector')
 it('can reference an attribute')
     ->expect($bundle->message('bar'))->toBe('Bar')
     ->and($bundle->popErrors())->toBeEmpty();
-

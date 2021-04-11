@@ -10,7 +10,7 @@
 function parseRelation(string $relation): array
 {
     preg_match(
-        '/^([niftvwce])\s*(?:(?:%|mod)\s*([0-9]+))?\s*(!?=)\s*(.+)$/',
+        '/^([niftvwce])\\s*(?:(?:%|mod)\\s*([0-9]+))?\\s*(!?=)\\s*(.+)$/',
         trim($relation), $matches,
     ) ?: throw new Exception();
 
@@ -65,7 +65,7 @@ function parseRule(string $rule): array
 
     $rule = explode('or', $rule);
 
-    foreach($rule as $key => $conditions) {
+    foreach ($rule as $key => $conditions) {
         $rule[$key] = explode('and', $conditions);
 
         foreach ($rule[$key] as $subKey => $condition) {
