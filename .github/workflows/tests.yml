@@ -3,31 +3,31 @@ name: Tests
 on: [push]
 
 jobs:
-    pest:
-        name: PHP ${{ matrix.php }}, ${{ matrix.dependency-version }}
+  pest:
+    name: PHP ${{ matrix.php }}, ${{ matrix.dependency-version }}
 
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                php: [8.0]
-                dependency-version: [prefer-lowest, prefer-stable]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [8.0]
+        dependency-version: [prefer-lowest, prefer-stable]
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
 
-            - name: Install dependencies
-              run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-progress --no-interaction
+      - name: Install dependencies
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-progress --no-interaction
 
-            - name: Execute tests
-              run: vendor/bin/pest --coverage-clover coverage.xml
+      - name: Execute tests
+        run: vendor/bin/pest --coverage-clover coverage.xml
 
-            - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v1
-              with:
-                  files: coverage.xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: coverage.xml
