@@ -11,6 +11,10 @@ jobs:
       matrix:
         php: [8.0]
         stability: [prefer-lowest, prefer-stable]
+        include:
+          - php: 8.1
+            flags: --ignore-platform-req=php
+            stability: prefer-stable
 
     steps:
       - name: Checkout code
@@ -22,7 +26,7 @@ jobs:
           php-version: ${{ matrix.php }}
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-progress --no-interaction
+        run: composer update --${{ matrix.stability }} ${{ matrix.flags }} --prefer-dist --no-progress --no-interaction
 
       - name: Execute tests
         run: vendor/bin/pest --coverage-clover coverage.xml
