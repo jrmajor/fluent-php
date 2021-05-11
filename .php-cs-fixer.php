@@ -18,7 +18,7 @@ return (new PhpCsFixer\Config())
         'no_mixed_echo_print' => true,
 
         // Array Notation
-        'array_syntax' => ['syntax' => 'short'],
+        'array_syntax' => true,
         'no_multiline_whitespace_around_double_arrow' => true,
         'no_trailing_comma_in_singleline_array' => true,
         'no_whitespace_before_comma_in_array' => true,
@@ -43,9 +43,9 @@ return (new PhpCsFixer\Config())
         // Class Notation
         'class_attributes_separation' => true,
         'class_definition' => false,
-        'ordered_class_elements' => ['order' => [
-            'use_trait', 'constant', 'property', 'method', 'magic',
-        ]],
+        'ordered_class_elements' => [
+            'order' => ['use_trait', 'constant', 'property', 'method', 'magic'],
+        ],
         'self_static_accessor' => true,
 
         // Comment
@@ -57,7 +57,9 @@ return (new PhpCsFixer\Config())
         'no_alternative_syntax' => true,
         'no_superfluous_elseif' => true,
         'no_trailing_comma_in_list_call' => true,
-        'no_unneeded_control_parentheses' => true,
+        'no_unneeded_control_parentheses' => [
+            'statements' => ['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield', 'yield_from'],
+        ],
         'no_unneeded_curly_braces' => true,
         'switch_continue_to_break' => true,
         'trailing_comma_in_multiline' => [
@@ -89,14 +91,16 @@ return (new PhpCsFixer\Config())
         'single_space_after_construct' => true,
 
         // List Notation
-        'list_syntax' => ['syntax' => 'short'],
+        'list_syntax' => true,
 
         // Namespace Notation
         'clean_namespace' => true,
         'no_leading_namespace_whitespace' => true,
 
         // Operator
-        'binary_operator_spaces' => ['operators' => ['|' => null]],
+        'binary_operator_spaces' => [
+            'operators' => ['|' => null],
+        ],
         'concat_space' => true,
         'increment_style' => ['style' => 'post'],
         'not_operator_with_successor_space' => true,
@@ -130,7 +134,9 @@ return (new PhpCsFixer\Config())
         'phpdoc_inline_tag_normalizer' => true,
         'phpdoc_line_span' => ['const' => 'single', 'property' => 'single'],
         'phpdoc_no_access' => true,
-        'phpdoc_no_alias_tag' => ['type' => 'var', 'link' => 'see'],
+        'phpdoc_no_alias_tag' => [
+            'replacements' => ['type' => 'var', 'link' => 'see'],
+        ],
         'phpdoc_no_empty_return' => true,
         'phpdoc_no_package' => true,
         'phpdoc_no_useless_inheritdoc' => true,
@@ -170,12 +176,12 @@ return (new PhpCsFixer\Config())
         // Whitespace
         'array_indentation' => true,
         'blank_line_before_statement' => ['statements' => [
-            'continue', 'declare', 'die', 'do', 'exit', 'for', 'foreach', 'if', 'include', 'include_once', 'require', 'require_once', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from',
+            'continue', 'declare', 'do', 'exit', 'for', 'foreach', 'if', 'include', 'include_once', 'require', 'require_once', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from',
         ]],
         'heredoc_indentation' => true,
-        'no_extra_blank_lines' => ['tokens' => [
-            'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'switch', 'use',
-        ]],
+        'no_extra_blank_lines' => [
+            'tokens' => ['break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'switch', 'use'],
+        ],
         'no_spaces_around_offset' => true,
     ])
     ->setFinder($finder);
