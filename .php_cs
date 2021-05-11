@@ -23,7 +23,6 @@ return (new PhpCsFixer\Config())
         'no_trailing_comma_in_singleline_array' => true,
         'no_whitespace_before_comma_in_array' => true,
         'normalize_index_brace' => true,
-        'trailing_comma_in_multiline_array' => true,
         'trim_array_spaces' => true,
         'whitespace_after_comma_in_array' => true,
 
@@ -61,6 +60,10 @@ return (new PhpCsFixer\Config())
         'no_unneeded_control_parentheses' => true,
         'no_unneeded_curly_braces' => true,
         'switch_continue_to_break' => true,
+        'trailing_comma_in_multiline' => [
+            'after_heredoc' => true,
+            'elements' => ['arrays', 'arguments', 'parameters'],
+        ],
 
         // Function Notation
         'function_typehint_space' => true,
