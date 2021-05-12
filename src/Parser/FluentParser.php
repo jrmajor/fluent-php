@@ -223,7 +223,6 @@ class FluentParser
             0 => new Comment($content),
             1 => new GroupComment($content),
             2 => new ResourceComment($content),
-            default => throw new ShouldNotHappen(), // @codeCoverageIgnore
         })->addSpan($spanStart, $cursor->index());
     }
 

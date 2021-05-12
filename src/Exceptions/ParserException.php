@@ -41,7 +41,6 @@ class ParserException extends Exception
             'E0027' => 'Unbalanced closing brace in TextElement.',
             'E0028' => 'Expected an inline expression',
             'E0029' => 'Expected simple expression as selector',
-            default => throw new ShouldNotHappen(), // @codeCoverageIgnore
         };
 
         if (isset($source)) {
