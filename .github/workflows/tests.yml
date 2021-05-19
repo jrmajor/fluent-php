@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   unit-tests:
-    name: PHP ${{ matrix.php }}, ${{ matrix.dependency-version }}
+    name: PHP ${{ matrix.php }}, ${{ matrix.stability }}
 
     runs-on: ubuntu-latest
     strategy:
