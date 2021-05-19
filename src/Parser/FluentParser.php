@@ -946,7 +946,7 @@ class FluentParser
             '"', '\\' => '\\'.$next,
             'u' => $this->getUnicodeEscapeSequence($cursor, $next, 4),
             'U' => $this->getUnicodeEscapeSequence($cursor, $next, 6),
-            default => throw new ParserException('E0025', ['char' => $next]),
+            default => throw new ParserException('E0025', ['char' => $next ?? 'EOF']),
         };
     }
 
