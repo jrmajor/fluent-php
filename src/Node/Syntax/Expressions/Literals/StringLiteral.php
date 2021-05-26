@@ -12,7 +12,7 @@ final class StringLiteral extends Literal
 
     public function parse(): StringLiteralValue
     {
-        $callback = function ($match) {
+        $callback = function ($match): string {
             if ($match[0] === '\\\\') {
                 return '\\';
             }
