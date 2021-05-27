@@ -119,13 +119,13 @@ class FluentBundle
         return $errors;
     }
 
-    public function message(string $messageId, mixed ...$arguments): ?string
+    public function message(string $_message, mixed ...$arguments): ?string
     {
         if (array_key_exists(0, $arguments) && is_array($arguments[0])) {
             $arguments = $arguments[0];
         }
 
-        $messageId = explode('.', $messageId, limit: 2);
+        $messageId = explode('.', $_message, limit: 2);
 
         $message = $this->messages[$messageId[0]] ?? null;
 

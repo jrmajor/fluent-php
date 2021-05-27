@@ -62,7 +62,7 @@ If bundle is in strict mode, `$ftl` parsing will be also done in strict mode.
 #### Formatting messages
 
 ```php
-message(string $messageId, mixed ...$arguments): ?string
+message(string $_message, mixed ...$arguments): ?string
 ```
 
 `message()` method accepts id of a message as a first parameter and message arguments as named parameters. It returns null for missing messages.
