@@ -1,5 +1,4 @@
 /vendor/
 composer.lock
-coverage.xml
 .php-cs-fixer.cache
 .phpunit.result.cache
