@@ -7,18 +7,27 @@ $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
         'CONCAT' => fn (...$args) => implode($args),
         'SUM' => fn (...$args) => array_sum($args),
         'JSON' => fn ($arg, $key, $another) => json_encode(func_get_args()),
+        'PROPS' => fn (object $object) => json_encode(get_object_vars($object)),
     ])
     ->addFtl(<<<'ftl'
-        foo = { CONCAT("Foo", "Bar") }
-        bar = { SUM(1, 2) }
-        baz = { JSON("test", another: 123, key: "value") }
+        strings = { CONCAT("Foo", "Bar") }
+        numbers = { SUM(1, 2.5) }
+        named-args = { JSON("test", another: 123, key: "value") }
+        objects = { PROPS($object) }
         ftl);
 
 it('works for strings')
-    ->expect($bundle->message('foo'))->toBe('FooBar');
+    ->expect($bundle->message('strings'))->toBe('FooBar');
 
 it('works for numbers')
-    ->expect($bundle->message('bar'))->toBe('3');
+    ->expect($bundle->message('numbers'))->toBe('3.5');
 
 it('works with named arguments')
-    ->expect($bundle->message('baz'))->toBe('["test","value",123]');
+    ->expect($bundle->message('named-args'))->toBe('["test","value",123]');
+
+$object = new class {
+    public string $prop = 'Object property';
+};
+
+it('variable type is preserved')
+    ->expect($bundle->message('objects', object: $object))->toBe('{"prop":"Object property"}');

@@ -421,17 +421,33 @@ final class FluentBundle
         $prepared = [];
 
         foreach ($arguments->positional as $argument) {
-            $prepared[] = $this->resolveExpression($argument, $scope);
+            $prepared[] = $this->resolveArgument($argument, $scope);
         }
 
         foreach ($arguments->named as $argument) {
-            $prepared[$argument->name->name] = $this->resolveExpression($argument->value, $scope);
+            $prepared[$argument->name->name] = $this->resolveArgument($argument->value, $scope);
         }
 
         return array_map(
             fn ($arg) => $arg instanceof FluentNumber ? $arg->value() : $arg,
             $prepared,
         );
+    }
+
+    protected function resolveArgument(
+        Expression $argument,
+        ResolutionScope $scope,
+    ): mixed {
+        if (
+            $argument instanceof VariableReference
+            && array_key_exists($id = $argument->id->name, $scope->arguments)
+        ) {
+            return $scope->arguments[$id];
+        }
+
+        $value = $this->resolveExpression($argument, $scope);
+
+        return $value instanceof FluentNumber ? $value->value() : $value;
     }
 
     protected function resolveSelectExpression(
