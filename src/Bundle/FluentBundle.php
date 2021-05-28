@@ -2,9 +2,10 @@
 
 namespace Major\Fluent\Bundle;
 
-use Exception;
+use Closure;
 use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
+use Major\Fluent\Exceptions\Bundle\FunctionExistsException;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
 use Major\Fluent\Exceptions\Bundle\TermExistsException;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
@@ -13,6 +14,7 @@ use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\ResolverException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 use Major\Fluent\Exceptions\ShouldNotHappen;
+use Major\Fluent\Node\Syntax\CallArguments;
 use Major\Fluent\Node\Syntax\Entries\Message;
 use Major\Fluent\Node\Syntax\Entries\Term;
 use Major\Fluent\Node\Syntax\Expressions\Expression;
@@ -45,6 +47,9 @@ final class FluentBundle
 
     /** @var array<string, Term> */
     protected array $terms = [];
+
+    /** @var array<string, Closure> */
+    protected array $functions = [];
 
     /** @var ResolverException[] */
     protected array $errors = [];
@@ -92,6 +97,34 @@ final class FluentBundle
         return $this;
     }
 
+    public function addFunction(
+        string $name,
+        Closure $function,
+        bool $allowOverrides = null,
+    ): static {
+        $allowOverrides ??= $this->allowOverrides;
+
+        if (! $allowOverrides && $this->hasFunction($name)) {
+            throw new FunctionExistsException($name);
+        }
+
+        $this->functions[$name] = $function;
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, Closure> $functions
+     */
+    public function addFunctions(array $functions, bool $allowOverrides = null): static
+    {
+        foreach ($functions as $name => $function) {
+            $this->addFunction($name, $function, $allowOverrides);
+        }
+
+        return $this;
+    }
+
     public function hasMessage(string $id): bool
     {
         return array_key_exists($id, $this->messages);
@@ -100,6 +133,11 @@ final class FluentBundle
     public function hasTerm(string $id): bool
     {
         return array_key_exists($id, $this->terms);
+    }
+
+    public function hasFunction(string $id): bool
+    {
+        return array_key_exists($id, $this->functions);
     }
 
     protected function reportError(ResolverException $error): void
@@ -357,7 +395,43 @@ final class FluentBundle
         FunctionReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
-        throw new Exception('Functions are not implemented yet.');
+        $name = $reference->id->name;
+
+        $function = $this->functions[$name] ?? null;
+
+        if (! $function) {
+            $this->reportError(new ReferenceException("Unknown function: {$name}()."));
+
+            return new FluentNone("{$name}()");
+        }
+
+        $arguments = $this->getFunctionArguments($reference->arguments, $scope);
+
+        return $function(...$arguments);
+    }
+
+    /**
+     * @return array<int|string, mixed>
+     */
+    protected function getFunctionArguments(
+        CallArguments $arguments,
+        ResolutionScope $scope,
+    ): array {
+        /** @var array<int|string, mixed> */
+        $prepared = [];
+
+        foreach ($arguments->positional as $argument) {
+            $prepared[] = $this->resolveExpression($argument, $scope);
+        }
+
+        foreach ($arguments->named as $argument) {
+            $prepared[$argument->name->name] = $this->resolveExpression($argument->value, $scope);
+        }
+
+        return array_map(
+            fn ($arg) => $arg instanceof FluentNumber ? $arg->value() : $arg,
+            $prepared,
+        );
     }
 
     protected function resolveSelectExpression(
