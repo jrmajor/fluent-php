@@ -39,8 +39,8 @@ $bundle->message('hello-user', userName: 'World'); // Hello, World!
 
 - `string $locale`: Locale to instantiate locale-specific formatters (eg. en-US, pl, zh-Hant-TW, fr-CA).
 - `bool $strict = false`: See [handling errors](#handling-errors).
-- `bool $allowOverrides = false`: Allow overriding existing messages and terms.
 - `bool $useIsolating = true`:  Specifying whether to use Unicode isolation marks (FSI, PDI) for BiDi interpolations.
+- `bool $allowOverrides = false`: Allow overriding existing messages and terms.
 
 #### Adding resources
 
