@@ -1,6 +1,6 @@
 {
     "name": "jrmajor/fluent",
-    "description": "PHP parser for Fluent",
+    "description": "Fluent localization system for PHP",
     "keywords": [
         "localization",
         "l10n",
