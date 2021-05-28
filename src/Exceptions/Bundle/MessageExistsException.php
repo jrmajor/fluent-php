@@ -2,7 +2,7 @@
 
 namespace Major\Fluent\Exceptions\Bundle;
 
-class MessageExistsException extends EntryExistsException
+final class MessageExistsException extends EntryExistsException
 {
     public function __construct(string $id)
     {

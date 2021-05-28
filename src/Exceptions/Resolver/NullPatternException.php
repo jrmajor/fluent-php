@@ -2,7 +2,7 @@
 
 namespace Major\Fluent\Exceptions\Resolver;
 
-class NullPatternException extends ResolverException
+final class NullPatternException extends ResolverException
 {
     public function __construct()
     {

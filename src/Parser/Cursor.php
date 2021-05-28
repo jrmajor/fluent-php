@@ -8,7 +8,7 @@ use Major\Fluent\Exceptions\ParserException;
 /**
  * @internal
  */
-class Cursor
+abstract class Cursor
 {
     protected int $index = 0;
 

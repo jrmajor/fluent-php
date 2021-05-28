@@ -7,7 +7,7 @@ use Major\Fluent\Exceptions\ParserException;
 /**
  * @internal
  */
-class FluentCursor extends Cursor
+final class FluentCursor extends Cursor
 {
     public function isIdentifierStart(): bool
     {

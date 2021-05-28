@@ -2,7 +2,7 @@
 
 namespace Major\Fluent\Exceptions\Bundle;
 
-class TermExistsException extends EntryExistsException
+final class TermExistsException extends EntryExistsException
 {
     public function __construct(string $id)
     {

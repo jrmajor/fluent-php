@@ -9,7 +9,7 @@ use WeakMap;
 /**
  * @internal
  */
-class ResolutionScope
+final class ResolutionScope
 {
     /** @var WeakMap<Pattern, true> */
     public WeakMap $dirty;

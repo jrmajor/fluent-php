@@ -33,10 +33,10 @@ use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
 use Major\Fluent\Node\Syntax\Variant;
 
-class FluentParser
+final class FluentParser
 {
     public function __construct(
-        private bool $strict = false,
+        protected bool $strict = false,
     ) { }
 
     public function parse(string $source): FluentResource
@@ -130,7 +130,7 @@ class FluentParser
         return $this->getEntryOrJunk($cursor);
     }
 
-    private function getEntryOrJunk(FluentCursor $cursor): Entry|Junk
+    protected function getEntryOrJunk(FluentCursor $cursor): Entry|Junk
     {
         $entryStartPosition = $cursor->index();
 
@@ -168,7 +168,7 @@ class FluentParser
         }
     }
 
-    private function getEntry(FluentCursor $cursor): Entry
+    protected function getEntry(FluentCursor $cursor): Entry
     {
         if ($cursor->currentChar() === '#') {
             return $this->getComment($cursor);
@@ -185,7 +185,7 @@ class FluentParser
         throw new ParserException('E0002');
     }
 
-    private function getComment(FluentCursor $cursor): BaseComment
+    protected function getComment(FluentCursor $cursor): BaseComment
     {
         $spanStart = $cursor->index();
 
@@ -226,7 +226,7 @@ class FluentParser
         })->addSpan($spanStart, $cursor->index());
     }
 
-    private function getMessage(FluentCursor $cursor): Message
+    protected function getMessage(FluentCursor $cursor): Message
     {
         $spanStart = $cursor->index();
 
@@ -248,7 +248,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getTerm(FluentCursor $cursor): Term
+    protected function getTerm(FluentCursor $cursor): Term
     {
         $spanStart = $cursor->index();
 
@@ -272,7 +272,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getIdentifier(FluentCursor $cursor): Identifier
+    protected function getIdentifier(FluentCursor $cursor): Identifier
     {
         $spanStart = $cursor->index();
 
@@ -289,7 +289,7 @@ class FluentParser
     /**
      * @return Attribute[]
      */
-    private function getAttributes(FluentCursor $cursor): array
+    protected function getAttributes(FluentCursor $cursor): array
     {
         /** @var Attribute[] */
         $attributes = [];
@@ -307,7 +307,7 @@ class FluentParser
         return $attributes;
     }
 
-    private function getAttribute(FluentCursor $cursor): Attribute
+    protected function getAttribute(FluentCursor $cursor): Attribute
     {
         $spanStart = $cursor->index();
 
@@ -332,7 +332,7 @@ class FluentParser
     /**
      * @return Variant[]
      */
-    private function getVariants(FluentCursor $cursor): array
+    protected function getVariants(FluentCursor $cursor): array
     {
         /** @var Variant[] */
         $variants = [];
@@ -365,7 +365,7 @@ class FluentParser
         return $variants;
     }
 
-    private function getVariant(FluentCursor $cursor, bool $hasDefault = false): Variant
+    protected function getVariant(FluentCursor $cursor, bool $hasDefault = false): Variant
     {
         $spanStart = $cursor->index();
 
@@ -401,7 +401,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getVariantKey(FluentCursor $cursor): Identifier|NumberLiteral
+    protected function getVariantKey(FluentCursor $cursor): Identifier|NumberLiteral
     {
         $char = $cursor->currentChar();
 
@@ -429,7 +429,7 @@ class FluentParser
      * indent of the first line of a block pattern must be taken into account when
      * calculating the maximum common indent.
      */
-    private function maybeGetPattern(FluentCursor $cursor): ?Pattern
+    protected function maybeGetPattern(FluentCursor $cursor): ?Pattern
     {
         $cursor->peekBlankInline();
 
@@ -450,7 +450,7 @@ class FluentParser
         return null;
     }
 
-    private function getPattern(FluentCursor $cursor, bool $block): Pattern
+    protected function getPattern(FluentCursor $cursor, bool $block): Pattern
     {
         $spanStart = $cursor->index();
 
@@ -521,7 +521,7 @@ class FluentParser
      * be trimmed and merged into adjacent TextElements, or turned into a new
      * TextElement, if it's surrounded by two Placeables.
      */
-    private function getIndent(FluentCursor $cursor, string $value, int $start): Indent
+    protected function getIndent(FluentCursor $cursor, string $value, int $start): Indent
     {
         return new Indent($value, $start, $cursor->index());
     }
@@ -533,7 +533,7 @@ class FluentParser
      * @param array<PatternElement|Indent> $elements
      * @return PatternElement[]
      */
-    private function dedent(array $elements, ?int $commonIndent): array
+    protected function dedent(array $elements, ?int $commonIndent): array
     {
         /** @var PatternElement[] */
         $trimmed = [];
@@ -592,7 +592,7 @@ class FluentParser
         return $trimmed;
     }
 
-    private function getTextElement(FluentCursor $cursor): TextElement
+    protected function getTextElement(FluentCursor $cursor): TextElement
     {
         $spanStart = $cursor->index();
 
@@ -618,7 +618,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getPlaceable(FluentCursor $cursor): Placeable
+    protected function getPlaceable(FluentCursor $cursor): Placeable
     {
         $spanStart = $cursor->index();
 
@@ -634,7 +634,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getExpression(FluentCursor $cursor): Expression|Placeable
+    protected function getExpression(FluentCursor $cursor): Expression|Placeable
     {
         $spanStart = $cursor->index();
 
@@ -683,7 +683,7 @@ class FluentParser
         return $selector;
     }
 
-    private function getInlineExpression(FluentCursor $cursor): Expression|Placeable
+    protected function getInlineExpression(FluentCursor $cursor): Expression|Placeable
     {
         $spanStart = $cursor->index();
 
@@ -765,7 +765,7 @@ class FluentParser
         throw new ParserException('E0028');
     }
 
-    private function getCallArguments(FluentCursor $cursor): CallArguments
+    protected function getCallArguments(FluentCursor $cursor): CallArguments
     {
         $spanStart = $cursor->index();
 
@@ -822,7 +822,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getCallArgument(FluentCursor $cursor): Expression|NamedArgument
+    protected function getCallArgument(FluentCursor $cursor): Expression|NamedArgument
     {
         $spanStart = $cursor->index();
 
@@ -852,7 +852,7 @@ class FluentParser
         throw new ParserException('E0009');
     }
 
-    private function getLiteral(FluentCursor $cursor): Literal
+    protected function getLiteral(FluentCursor $cursor): Literal
     {
         $spanStart = $cursor->index();
 
@@ -869,7 +869,7 @@ class FluentParser
         throw new ParserException('E0014');
     }
 
-    private function getNumber(FluentCursor $cursor): NumberLiteral
+    protected function getNumber(FluentCursor $cursor): NumberLiteral
     {
         $spanStart = $cursor->index();
 
@@ -893,7 +893,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getDigits(FluentCursor $cursor): string
+    protected function getDigits(FluentCursor $cursor): string
     {
         $number = '';
 
@@ -908,7 +908,7 @@ class FluentParser
         return $number;
     }
 
-    private function getString(FluentCursor $cursor): StringLiteral
+    protected function getString(FluentCursor $cursor): StringLiteral
     {
         $spanStart = $cursor->index();
 
@@ -934,7 +934,7 @@ class FluentParser
             ->addSpan($spanStart, $cursor->index());
     }
 
-    private function getEscapeSequence(FluentCursor $cursor): string
+    protected function getEscapeSequence(FluentCursor $cursor): string
     {
         $next = $cursor->currentChar();
 
@@ -950,7 +950,7 @@ class FluentParser
         };
     }
 
-    private function getUnicodeEscapeSequence(
+    protected function getUnicodeEscapeSequence(
         FluentCursor $cursor,
         string $u,
         int $digits,

@@ -65,7 +65,7 @@ final class PluralRules
     /**
      * @param mixed[] $relation
      */
-    private function matchesRelation(array $relation, FluentNumber $number): bool
+    protected function matchesRelation(array $relation, FluentNumber $number): bool
     {
         $operand = $this->getOperand($relation['operand'], $number);
 
@@ -92,7 +92,7 @@ final class PluralRules
         return $relation['equals'] ? false : true;
     }
 
-    private function getOperand(string $operand, FluentNumber $number): mixed
+    protected function getOperand(string $operand, FluentNumber $number): mixed
     {
         return match ($operand) {
             // absolute value of the source number
@@ -115,7 +115,7 @@ final class PluralRules
         };
     }
 
-    private function addTrailingZeroes(string $value, int $minimumFractionDigits): string
+    protected function addTrailingZeroes(string $value, int $minimumFractionDigits): string
     {
         while (strlen($value) < $minimumFractionDigits) {
             $value .= '0';
@@ -124,7 +124,7 @@ final class PluralRules
         return $value;
     }
 
-    private function visibleFractionDigits(FluentNumber $number): string
+    protected function visibleFractionDigits(FluentNumber $number): string
     {
         $string = (string) (abs($number->value()) - (int) abs($number->value()));
 

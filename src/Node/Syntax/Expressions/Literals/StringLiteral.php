@@ -8,7 +8,7 @@ use Major\Fluent\Node\LiteralValues\StringLiteralValue;
 final class StringLiteral extends Literal
 {
     // backslash backslash, backslash double quote, uHHHH, UHHHHHH
-    private const KNOWN_ESCAPES = '/(?:\\\\\\\\|\\\\"|\\\\[u]([0-9a-fA-F]{4})|\\\\[U]([0-9a-fA-F]{6}))/';
+    protected const KNOWN_ESCAPES = '/(?:\\\\\\\\|\\\\"|\\\\[u]([0-9a-fA-F]{4})|\\\\[U]([0-9a-fA-F]{6}))/';
 
     public function parse(): StringLiteralValue
     {

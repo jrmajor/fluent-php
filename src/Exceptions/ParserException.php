@@ -4,7 +4,7 @@ namespace Major\Fluent\Exceptions;
 
 use Exception;
 
-class ParserException extends Exception
+final class ParserException extends Exception
 {
     public function __construct(
         protected string $fluentErrorCode = 'E0001',

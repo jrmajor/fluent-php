@@ -33,7 +33,7 @@ use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\PluralRules\PluralRules;
 use Stringable;
 
-class FluentBundle
+final class FluentBundle
 {
     /** Unicode BiDi isolation characters. */
     public const FSI = "\u{2068}";
@@ -41,13 +41,13 @@ class FluentBundle
     public const PDI = "\u{2069}";
 
     /** @var array<string, Message> */
-    private array $messages = [];
+    protected array $messages = [];
 
     /** @var array<string, Term> */
-    private array $terms = [];
+    protected array $terms = [];
 
     /** @var ResolverException[] */
-    private array $errors = [];
+    protected array $errors = [];
 
     public function __construct(
         protected string $locale,
@@ -102,7 +102,7 @@ class FluentBundle
         return array_key_exists($id, $this->terms);
     }
 
-    private function reportError(ResolverException $error): void
+    protected function reportError(ResolverException $error): void
     {
         $this->errors[] = $this->strict ? throw $error : $error;
     }
@@ -148,7 +148,7 @@ class FluentBundle
         return null;
     }
 
-    private function resolvePattern(
+    protected function resolvePattern(
         ?Pattern $pattern,
         ResolutionScope $scope,
     ): string {
@@ -191,7 +191,7 @@ class FluentBundle
         return $result;
     }
 
-    private function resolvePlaceable(
+    protected function resolvePlaceable(
         Placeable $element,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -200,7 +200,7 @@ class FluentBundle
             : $this->resolveExpression($element->expression, $scope);
     }
 
-    private function resolveExpression(
+    protected function resolveExpression(
         Expression $expression,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -209,14 +209,14 @@ class FluentBundle
         return $this->{$method}($expression, $scope);
     }
 
-    private function resolveStringLiteral(
+    protected function resolveStringLiteral(
         StringLiteral $literal,
         ResolutionScope $scope,
     ): string {
         return $literal->parse()->value;
     }
 
-    private function resolveNumberLiteral(
+    protected function resolveNumberLiteral(
         NumberLiteral $literal,
         ResolutionScope $scope,
     ): FluentNumber {
@@ -226,7 +226,7 @@ class FluentBundle
             ->setFluentLocale($this->locale);
     }
 
-    private function resolveVariableReference(
+    protected function resolveVariableReference(
         VariableReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -268,7 +268,7 @@ class FluentBundle
         return new FluentNone("\${$id}");
     }
 
-    private function resolveMessageReference(
+    protected function resolveMessageReference(
         MessageReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -307,7 +307,7 @@ class FluentBundle
         return new FluentNone($id);
     }
 
-    private function resolveTermReference(
+    protected function resolveTermReference(
         TermReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -353,14 +353,14 @@ class FluentBundle
         return $resolved;
     }
 
-    private function resolveFunctionReference(
+    protected function resolveFunctionReference(
         FunctionReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
         throw new Exception('Functions are not implemented yet.');
     }
 
-    private function resolveSelectExpression(
+    protected function resolveSelectExpression(
         SelectExpression $expression,
         ResolutionScope $scope,
     ): string {
@@ -388,7 +388,7 @@ class FluentBundle
     /**
      * @param Variant[] $variants
      */
-    private function getDefaultVariant(
+    protected function getDefaultVariant(
         array $variants,
         ResolutionScope $scope,
     ): string {
@@ -401,7 +401,7 @@ class FluentBundle
         throw new ShouldNotHappen(); // @codeCoverageIgnore
     }
 
-    private function matchVariant(
+    protected function matchVariant(
         string|Stringable|FluentNumber $selector,
         string|Stringable|FluentNumber $key,
     ): bool {

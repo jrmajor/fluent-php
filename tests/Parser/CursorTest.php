@@ -1,10 +1,17 @@
 <?php
 
+namespace Major\Fluent\Tests\Parser;
+
 use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Parser\Cursor;
 
+function cursor(string $string): Cursor
+{
+    return new class ($string) extends Cursor {};
+}
+
 test('next, currentChar and index methods work', function () {
-    $cursor = new Cursor('abc🐠d');
+    $cursor = cursor('abc🐠d');
 
     expect($cursor->currentChar())->toBe('a');
     expect($cursor->index())->toBe(0);
@@ -27,7 +34,7 @@ test('next, currentChar and index methods work', function () {
 });
 
 test('peek, currentPeek and peekOffset methods work', function () {
-    $cursor = new Cursor('abc🐬d');
+    $cursor = cursor('abc🐬d');
 
     expect($cursor->currentPeek())->toBe('a');
     expect($cursor->peekOffset())->toBe(0);
@@ -50,7 +57,7 @@ test('peek, currentPeek and peekOffset methods work', function () {
   });
 
 test('peek and next methods work', function () {
-    $cursor = new Cursor('ab🦀d');
+    $cursor = cursor('ab🦀d');
 
     expect($cursor->peek())->toBe('b');
     expect($cursor->peekOffset())->toBe(1);
@@ -96,7 +103,7 @@ test('peek and next methods work', function () {
   });
 
 test('skipToPeek method works', function () {
-    $cursor = new Cursor('ab🦑d');
+    $cursor = cursor('ab🦑d');
 
     $cursor->peek(2);
 
@@ -123,7 +130,7 @@ test('skipToPeek method works', function () {
 });
 
 test('resetPeek method works', function () {
-    $cursor = new Cursor('abcd');
+    $cursor = cursor('abcd');
 
     $cursor->next();
     $cursor->peek(2);
@@ -160,7 +167,7 @@ test('resetPeek method works', function () {
 });
 
 it('treats crlf as a single character', function () {
-    $cursor = new Cursor("a\r\nb\r\n");
+    $cursor = cursor("a\r\nb\r\n");
 
     expect($cursor->currentChar())->toBe('a');
 
@@ -177,13 +184,13 @@ it('treats crlf as a single character', function () {
 });
 
 test('slice method works', function () {
-    $cursor = new Cursor('🐙ab🐙cd');
+    $cursor = cursor('🐙ab🐙cd');
 
     expect($cursor->slice(2, 5))->toBe('b🐙c');
 });
 
 it('can peek blank inline', function () {
-    $cursor = new Cursor("a   b     \r\n    \n");
+    $cursor = cursor("a   b     \r\n    \n");
 
     $cursor->next();
 
@@ -207,7 +214,7 @@ it('can peek blank inline', function () {
 });
 
 it('can skip blank inline', function () {
-    $cursor = new Cursor("a   b     \r\n    \n");
+    $cursor = cursor("a   b     \r\n    \n");
 
     $cursor->next();
 
@@ -231,7 +238,7 @@ it('can skip blank inline', function () {
 });
 
 it('can peek blank block', function () {
-    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+    $cursor = cursor("a b     \r\n    \n  c  \n");
 
     $cursor->next();
 
@@ -254,7 +261,7 @@ it('can peek blank block', function () {
 });
 
 it('can skip blank block', function () {
-    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+    $cursor = cursor("a b     \r\n    \n  c  \n");
 
     $cursor->next();
 
@@ -277,7 +284,7 @@ it('can skip blank block', function () {
 });
 
 it('can peek blank', function () {
-    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+    $cursor = cursor("a b     \r\n    \n  c  \n");
 
     $cursor->next();
 
@@ -301,7 +308,7 @@ it('can peek blank', function () {
 });
 
 it('can skip blank', function () {
-    $cursor = new Cursor("a b     \r\n    \n  c  \n");
+    $cursor = cursor("a b     \r\n    \n  c  \n");
 
     $cursor->next();
 
@@ -325,7 +332,7 @@ it('can skip blank', function () {
 });
 
 it('advances when encounters expected character', function () {
-    $cursor = new Cursor("a🦓\r\nb");
+    $cursor = cursor("a🦓\r\nb");
 
     $cursor->expectChar('a');
     expect($cursor->index())->toBe(1);
@@ -341,7 +348,7 @@ it('advances when encounters expected character', function () {
 });
 
 it('throws an error when does not encounter expected character', function () {
-    $cursor = new Cursor('a&b');
+    $cursor = cursor('a&b');
 
     $cursor->next();
 
@@ -355,7 +362,7 @@ it('throws an error when does not encounter expected character', function () {
 })->throws(ParserException::class, 'Expected token: "="');
 
 it('advances when encounters expected line end', function () {
-    $cursor = new Cursor("\na\r\nb");
+    $cursor = cursor("\na\r\nb");
 
     $cursor->expectLineEnd();
     expect($cursor->index())->toBe(1);
@@ -372,7 +379,7 @@ it('advances when encounters expected line end', function () {
 });
 
 it('throws an error when does not encounter expected line end', function () {
-    $cursor = new Cursor('a ');
+    $cursor = cursor('a ');
 
     try {
         $cursor->expectLineEnd();
@@ -384,7 +391,7 @@ it('throws an error when does not encounter expected line end', function () {
 })->throws(ParserException::class, 'Expected token: "␤"');
 
 it('can take character described by closure', function () {
-    $cursor = new Cursor('ac');
+    $cursor = cursor('ac');
 
     $callback = fn ($char) => $char === 'a' || $char === 'b';
 
