@@ -5,7 +5,7 @@
 
 A PHP implementation of [Project Fluent](https://projectfluent.org), a localization system by Mozilla.
 
-You can install it via composer: `composer require jrmajor/fluent`. It requires PHP 8.0 or higher.
+You can install it via Composer: `composer require jrmajor/fluent`. It requires PHP 8.0 or higher.
 
 ## Usage
 
@@ -19,7 +19,7 @@ $parser = new FluentParser(strict: true);
 $resource = $parser->parse('hello-user = Hello, { $userName }!');
 ```
 
-`$strict` constructor argument defaults to `false`. In strict mode syntax errors result in a `ParserException`. Otherwise they are ignored and represented in AST by `Junk`.
+`$strict` constructor argument defaults to `false`. In strict mode syntax errors result in a `ParserException`. Otherwise, they are ignored and represented in AST by `Junk`.
 
 ### Message formatting
 
@@ -35,16 +35,16 @@ $bundle->addFtl('hello-user = Hello, { $userName }!');
 $bundle->message('hello-user', userName: 'World'); // Hello, World!
 ```
 
-`FluentBundle` is single-language store of translation resources. It's constructor accepts following arguments:
+`FluentBundle` is single-language store of translation resources. Its constructor accepts following arguments:
 
-- `string $locale`: Locale to instantiate locale-specific formatters (eg. en-US, pl, zh-Hant-TW, fr-CA).
+- `string $locale`: Locale to instantiate locale-specific formatters (e.g. en-US, pl, zh-Hant-TW, fr-CA).
 - `bool $strict = false`: See [handling errors](#handling-errors).
 - `bool $useIsolating = true`:  Specifying whether to use Unicode isolation marks (FSI, PDI) for BiDi interpolations.
 - `bool $allowOverrides = false`: Allow overriding existing messages and terms.
 
 #### Adding resources
 
-Translations can be added to bundle using `addResource()` or `addFtl()` methods. The first one accepts `FluentResource` object returned by parser, while the second one accepts a raw FTL string.
+Translations can be added to bundle using `addResource()` or `addFtl()` methods. The first one accepts `FluentResource` object returned by the parser, while the second one accepts a raw FTL string.
 
 ```php
 addResource(FluentResource $resource, bool $allowOverrides = null): static
@@ -75,7 +75,7 @@ $bundle->message('welcome'); // Welcome
 $bundle->message('goodbye'); // null
 ```
 
-For attributes, you may use "dot" notation:
+For attributes, you may use “dot” notation:
 
 ```php
 $bundle->message('welcome.guest'); // Welcome, Guest
@@ -85,7 +85,7 @@ Message arguments may be passed as named arguments or as an associative array:
 
 ```php
 $bundle->message('welcome.user', userName: 'John'); // Welcome, John
-// or
+// equivalent to
 $bundle->message('welcome.user', ['userName' => 'John']); // Welcome, John
 ```
 
