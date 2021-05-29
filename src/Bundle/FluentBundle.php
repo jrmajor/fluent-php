@@ -429,10 +429,7 @@ final class FluentBundle
             $prepared[$argument->name->name] = $this->resolveArgument($argument->value, $scope);
         }
 
-        return array_map(
-            fn ($arg) => $arg instanceof FluentNumber ? $arg->value() : $arg,
-            $prepared,
-        );
+        return $prepared;
     }
 
     protected function resolveArgument(
