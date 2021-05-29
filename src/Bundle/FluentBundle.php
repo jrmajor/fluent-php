@@ -97,14 +97,9 @@ final class FluentBundle
         return $this;
     }
 
-    public function addFunction(
-        string $name,
-        Closure $function,
-        bool $allowOverrides = null,
-    ): static {
-        $allowOverrides ??= $this->allowOverrides;
-
-        if (! $allowOverrides && $this->hasFunction($name)) {
+    public function addFunction(string $name, Closure $function): static
+    {
+        if ($this->hasFunction($name)) {
             throw new FunctionExistsException($name);
         }
 
@@ -116,10 +111,10 @@ final class FluentBundle
     /**
      * @param array<string, Closure> $functions
      */
-    public function addFunctions(array $functions, bool $allowOverrides = null): static
+    public function addFunctions(array $functions): static
     {
         foreach ($functions as $name => $function) {
-            $this->addFunction($name, $function, $allowOverrides);
+            $this->addFunction($name, $function);
         }
 
         return $this;
