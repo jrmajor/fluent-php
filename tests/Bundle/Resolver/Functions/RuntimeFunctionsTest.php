@@ -29,14 +29,14 @@ it('works for numbers')
 it('works with named arguments')
     ->expect($bundle->message('named-args'))->toBe('["test","value",123]');
 
-$object = new class {
-    public string $prop = 'Object property';
-};
-
 it('preserves int and float types')
     ->expect($bundle->message('int'))->toBe('int')
     ->and($bundle->message('float'))->toBe('float')
     ->and($bundle->message('float-trailing-zeroes'))->toBe('float');
 
-it('variable type is preserved')
+$object = new class {
+    public string $prop = 'Object property';
+};
+
+it("preserves variable type when it's passed to function")
     ->expect($bundle->message('objects', object: $object))->toBe('{"prop":"Object property"}');
