@@ -3,6 +3,7 @@
 namespace Major\Fluent\Bundle;
 
 use Closure;
+use Exception;
 use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Bundle\FunctionExistsException;
@@ -59,7 +60,12 @@ final class FluentBundle
         protected bool $strict = false,
         protected bool $useIsolating = true,
         protected bool $allowOverrides = false,
-    ) { }
+    ) {
+        $this->functions = [
+            'NUMBER' => fn () => throw new Exception('NUMBER() function is not implemented.'),
+            'DATETIME' => fn () => throw new Exception('DATETIME() function is not implemented.'),
+        ];
+    }
 
     public function addResource(
         FluentResource $resource,
