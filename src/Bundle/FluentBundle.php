@@ -438,6 +438,12 @@ final class FluentBundle
         Expression $argument,
         ResolutionScope $scope,
     ): mixed {
+        if ($argument instanceof NumberLiteral) {
+            $number = $argument->parse();
+
+            return $number->precision === 0 ? (int) $number->value : $number->value;
+        }
+
         if (
             $argument instanceof VariableReference
             && array_key_exists($id = $argument->id->name, $scope->arguments)
