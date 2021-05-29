@@ -141,9 +141,11 @@ final class FluentBundle
         return array_key_exists($id, $this->functions);
     }
 
-    protected function reportError(ResolverException $error): void
+    protected function reportError(ResolverException $error, string $value = '???'): FluentNone
     {
         $this->errors[] = $this->strict ? throw $error : $error;
+
+        return new FluentNone($value);
     }
 
     /**
@@ -192,15 +194,11 @@ final class FluentBundle
         ResolutionScope $scope,
     ): string {
         if (! $pattern) {
-            $this->reportError(new NullPatternException());
-
-            return (string) new FluentNone();
+            return (string) $this->reportError(new NullPatternException());
         }
 
         if (isset($scope->dirty[$pattern])) {
-            $this->reportError(new CyclicReferenceException());
-
-            return (string) new FluentNone();
+            return (string) $this->reportError(new CyclicReferenceException());
         }
 
         $scope->dirty[$pattern] = true;
@@ -287,9 +285,7 @@ final class FluentBundle
             // Missing variables references produce ReferenceExceptions.
             $argument = $scope->arguments[$id];
         } else {
-            $this->reportError(new ReferenceException("Unknown variable: \${$id}."));
-
-            return new FluentNone("\${$id}");
+            return $this->reportError(new ReferenceException("Unknown variable: \${$id}."), "\${$id}");
         }
 
         // Return early if the argument already is an instance of Stringable.
@@ -302,9 +298,7 @@ final class FluentBundle
                 ->setFluentLocale($this->locale);
         }
 
-        $this->reportError(new TypeException($id, gettype($argument)));
-
-        return new FluentNone("\${$id}");
+        return $this->reportError(new TypeException($id, gettype($argument)), "\${$id}");
     }
 
     protected function resolveMessageReference(
@@ -316,9 +310,7 @@ final class FluentBundle
         $message = $this->messages[$id] ?? null;
 
         if (! $message) {
-            $this->reportError(new ReferenceException("Unknown message: {$id}."));
-
-            return new FluentNone($id);
+            return $this->reportError(new ReferenceException("Unknown message: {$id}."), $id);
         }
 
         if ($attributeName = $reference->attribute?->name) {
@@ -332,18 +324,17 @@ final class FluentBundle
                 return $this->resolvePattern($attribute->value, $scope);
             }
 
-            $this->reportError(new ReferenceException("Unknown attribute: {$id}.{$attributeName}."));
-
-            return new FluentNone("{$id}.{$attributeName}");
+            return $this->reportError(
+                new ReferenceException("Unknown attribute: {$id}.{$attributeName}."),
+                "{$id}.{$attributeName}",
+            );
         }
 
         if ($message->value) {
             return $this->resolvePattern($message->value, $scope);
         }
 
-        $this->reportError(new ReferenceException("No value: {$id}."));
-
-        return new FluentNone($id);
+        return $this->reportError(new ReferenceException("No value: {$id}."), $id);
     }
 
     protected function resolveTermReference(
@@ -355,9 +346,7 @@ final class FluentBundle
         $term = $this->terms[$id] ?? null;
 
         if (! $term) {
-            $this->reportError(new ReferenceException("Unknown term: -{$id}."));
-
-            return new FluentNone("-{$id}");
+            return $this->reportError(new ReferenceException("Unknown term: -{$id}."), "-{$id}");
         }
 
         if ($attributeName = $reference->attribute?->name) {
@@ -378,9 +367,10 @@ final class FluentBundle
                 return $resolved;
             }
 
-            $this->reportError(new ReferenceException("Unknown attribute: -{$id}.{$attributeName}."));
-
-            return new FluentNone("-{$id}.{$attributeName}");
+            return $this->reportError(
+                new ReferenceException("Unknown attribute: -{$id}.{$attributeName}."),
+                "-{$id}.{$attributeName}",
+            );
         }
 
         $scope->parameters = $reference->arguments?->named ?? [];
@@ -401,9 +391,7 @@ final class FluentBundle
         $function = $this->functions[$name] ?? null;
 
         if (! $function) {
-            $this->reportError(new ReferenceException("Unknown function: {$name}()."));
-
-            return new FluentNone("{$name}()");
+            return $this->reportError(new ReferenceException("Unknown function: {$name}()."), "{$name}()");
         }
 
         $arguments = $this->getFunctionArguments($reference->arguments, $scope);
