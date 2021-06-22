@@ -1,6 +1,6 @@
 <?php
 
-use function App\Tests\parseLiteral;
+use function Major\Fluent\Tests\parseLiteral;
 
 it('can parse integers')
     ->expect(parseLiteral('x = {0}'))->toHaveProperty('value', 0.0)->toHaveProperty('precision', 0)

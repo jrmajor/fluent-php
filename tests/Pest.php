@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Tests;
+namespace Major\Fluent\Tests;
 
 use Major\Fluent\Node\LiteralValues\LiteralValue;
 use Major\Fluent\Parser\FluentParser;
-use Major\Fluent\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 

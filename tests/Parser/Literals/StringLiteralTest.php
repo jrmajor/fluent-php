@@ -1,6 +1,6 @@
 <?php
 
-use function App\Tests\parseLiteral;
+use function Major\Fluent\Tests\parseLiteral;
 
 it('can parse string literal with no escape sequences')
     ->expect(parseLiteral('x = {"abc"}'))->toHaveProperty('value', 'abc');
