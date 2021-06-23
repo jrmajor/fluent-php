@@ -41,7 +41,7 @@ $bundle->message('hello-user', userName: 'World'); // Hello, World!
 
 - `string $locale`: Locale to instantiate locale-specific formatters (e.g. en-US, pl, zh-Hant-TW, fr-CA).
 - `bool $strict = false`: See [handling errors](#handling-errors).
-- `bool $useIsolating = true`:  Specifying whether to use Unicode isolation marks (FSI, PDI) for BiDi interpolations.
+- `bool $useIsolating = true`:  Specifying whether to use Unicode isolation marks (FSI, PDI) for bidirectional interpolations.
 - `bool $allowOverrides = false`: Allow overriding existing messages and terms.
 
 #### Adding resources
@@ -54,7 +54,7 @@ addResource(FluentResource $resource, bool $allowOverrides = null): static
 addFtl(string $ftl, bool $allowOverrides = null): static
 ````
 
-If `$allowOverrides` is left null, bundle default will be used.
+If `$allowOverrides` is `null`, bundle default will be used.
 
 If bundle is in strict mode, `$ftl` parsing will be also done in strict mode.
 
@@ -64,7 +64,7 @@ If bundle is in strict mode, `$ftl` parsing will be also done in strict mode.
 message(string $_message, mixed ...$arguments): ?string
 ```
 
-`message()` method accepts id of a message as a first parameter and message arguments as named parameters. It returns null for missing messages.
+`message()` method accepts an id of a message as a first parameter and message arguments as named parameters. It returns `null` for missing messages.
 
 ```ftl
 welcome = Welcome
