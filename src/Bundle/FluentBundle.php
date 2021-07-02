@@ -33,7 +33,7 @@ use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
 use Major\Fluent\Node\Syntax\Variant;
 use Major\Fluent\Parser\FluentParser;
-use Major\Fluent\PluralRules\PluralRules;
+use Major\PluralRules\PluralRules;
 use Stringable;
 
 final class FluentBundle
@@ -259,7 +259,7 @@ final class FluentBundle
     ): FluentNumber {
         $parsed = $literal->parse();
 
-        return (new FluentNumber($parsed->value, $parsed->precision))
+        return (new FluentNumber($parsed->value, $literal->value, $parsed->precision))
             ->setFluentLocale($this->locale);
     }
 
@@ -294,8 +294,7 @@ final class FluentBundle
         }
 
         if (is_numeric($argument)) {
-            return (new FluentNumber($argument))
-                ->setFluentLocale($this->locale);
+            return (new FluentNumber($argument))->setFluentLocale($this->locale);
         }
 
         return $this->reportError(new TypeException($id, gettype($argument)), "\${$id}");
@@ -501,7 +500,7 @@ final class FluentBundle
 
         if (
             $selector instanceof FluentNumber
-            && $key === PluralRules::select($this->locale, $selector)
+            && $key === PluralRules::select($this->locale, $selector->original())
         ) {
             return true;
         }

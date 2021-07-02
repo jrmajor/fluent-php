@@ -10,8 +10,3 @@ parameters:
 			count: 1
 			path: src/Parser/FluentParser.php
 
-		-
-			message: "#^Match expression does not handle remaining value\\: string$#"
-			count: 1
-			path: src/PluralRules/PluralRules.php
-

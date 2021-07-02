@@ -11,12 +11,24 @@ class FluentNumber implements Stringable
 
     public function __construct(
         protected int|float $value,
+        protected ?string $original = null,
         protected ?int $minimumFractionDigits = null,
     ) { }
 
     public function value(): int|float
     {
         return $this->value;
+    }
+
+    public function original(): string
+    {
+        if ($this->original !== null) {
+            return $this->original;
+        }
+
+        return is_float($this->value) && $this->value - round($this->value) === 0.0
+            ? (string) $this->value . '.0'
+            : (string) $this->value;
     }
 
     public function minimumFractionDigits(): int

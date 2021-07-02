@@ -29,7 +29,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "jrmajor/pluralrules": "dev-master"
     },
     "require-dev": {
         "ext-json": "*",
