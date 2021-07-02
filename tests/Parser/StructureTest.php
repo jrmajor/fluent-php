@@ -13,10 +13,10 @@ beforeEach(function () use ($skips) {
 });
 
 test('structure test', function (string $test) {
-    $source = file_get_contents(__DIR__."/../fixtures/structure/{$test}.ftl");
+    $source = file_get_contents(__DIR__ . "/../fixtures/structure/{$test}.ftl");
 
     $expectedAst = json_decode(
-        file_get_contents(__DIR__."/../fixtures/structure/{$test}.json"),
+        file_get_contents(__DIR__ . "/../fixtures/structure/{$test}.json"),
         associative: true,
         flags: JSON_THROW_ON_ERROR,
     );

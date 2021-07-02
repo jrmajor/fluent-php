@@ -485,7 +485,7 @@ final class FluentParser
                         ? (int) min($commonIndentLength, mb_strlen($indent))
                         : mb_strlen($indent);
 
-                    $elements[] = $this->getIndent($cursor, $blankLines.$indent, $blankStart);
+                    $elements[] = $this->getIndent($cursor, $blankLines . $indent, $blankStart);
 
                     continue;
                 }
@@ -558,7 +558,7 @@ final class FluentParser
             if ($prev && $prev instanceof TextElement) {
                 // Join adjacent TextElements by replacing them with their sum.
                 /** @phpstan-ignore-next-line */
-                $sum = (new TextElement($prev->value.$element->value))
+                $sum = (new TextElement($prev->value . $element->value))
                     ->addSpan($prev->span->start, $element->span->end); /** @phpstan-ignore-line */
 
                 $trimmed[count($trimmed) - 1] = $sum;
@@ -878,7 +878,7 @@ final class FluentParser
         if ($cursor->currentChar() === '-') {
             $cursor->next();
 
-            $value .= '-'.$this->getDigits($cursor);
+            $value .= '-' . $this->getDigits($cursor);
         } else {
             $value .= $this->getDigits($cursor);
         }
@@ -886,7 +886,7 @@ final class FluentParser
         if ($cursor->currentChar() === '.') {
             $cursor->next();
 
-            $value .= '.'.$this->getDigits($cursor);
+            $value .= '.' . $this->getDigits($cursor);
         }
 
         return (new NumberLiteral($value))
@@ -943,7 +943,7 @@ final class FluentParser
         }
 
         return match ($next) {
-            '"', '\\' => '\\'.$next,
+            '"', '\\' => '\\' . $next,
             'u' => $this->getUnicodeEscapeSequence($cursor, $next, 4),
             'U' => $this->getUnicodeEscapeSequence($cursor, $next, 6),
             default => throw new ParserException('E0025', ['char' => $next ?? 'EOF']),
@@ -965,13 +965,13 @@ final class FluentParser
 
             if ($char === null) {
                 throw new ParserException(
-                    'E0026', ['sequence' => '\\'.$u.$sequence.$cursor->currentChar()],
+                    'E0026', ['sequence' => '\\' . $u . $sequence . $cursor->currentChar()],
                 );
             }
 
             $sequence .= $char;
         }
 
-        return '\\'.$u.$sequence;
+        return '\\' . $u . $sequence;
     }
 }

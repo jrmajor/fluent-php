@@ -17,10 +17,10 @@ beforeEach(function () use ($skips) {
 });
 
 test('reference test', function (string $test) {
-    $source = file_get_contents(__DIR__."/../fixtures/reference/{$test}.ftl");
+    $source = file_get_contents(__DIR__ . "/../fixtures/reference/{$test}.ftl");
 
     $expectedAst = json_decode(
-        file_get_contents(__DIR__."/../fixtures/reference/{$test}.json"),
+        file_get_contents(__DIR__ . "/../fixtures/reference/{$test}.json"),
         associative: true,
         flags: JSON_THROW_ON_ERROR,
     );

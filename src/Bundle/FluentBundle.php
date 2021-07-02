@@ -241,7 +241,7 @@ final class FluentBundle
         Expression $expression,
         ResolutionScope $scope,
     ): string|Stringable {
-        $method = 'resolve'.$expression->getType();
+        $method = 'resolve' . $expression->getType();
 
         return $this->{$method}($expression, $scope);
     }
