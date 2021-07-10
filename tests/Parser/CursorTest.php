@@ -7,7 +7,7 @@ use Major\Fluent\Parser\Cursor;
 
 function cursor(string $string): Cursor
 {
-    return new class ($string) extends Cursor {};
+    return new class($string) extends Cursor {};
 }
 
 test('next, currentChar and index methods work', function () {

@@ -9,8 +9,6 @@ return Major\CS\config($finder, [
     'ordered_class_elements' => [
         'order' => ['use_trait', 'constant', 'property', 'method', 'magic'],
     ],
-    // Forces braces also for anonymous classes.
-    'new_with_braces' => false,
     // Broken for @var PHPDocs.
     'phpdoc_summary' => false,
     // Remove throw, broken when using throw expressions inline after ?: or ??.

@@ -34,7 +34,7 @@ it('preserves int and float types')
     ->and($bundle->message('float'))->toBe('float')
     ->and($bundle->message('float-trailing-zeroes'))->toBe('float');
 
-$object = new class {
+$object = new class() {
     public string $prop = 'Object property';
 };
 
