@@ -162,7 +162,11 @@ final class FluentBundle
 
     public function message(string $_message, mixed ...$arguments): ?string
     {
-        if (array_key_exists(0, $arguments) && is_array($arguments[0])) {
+        if (
+            count($arguments) === 1
+            && array_key_exists(0, $arguments)
+            && is_array($arguments[0])
+        ) {
             $arguments = $arguments[0];
         }
 
