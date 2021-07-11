@@ -292,6 +292,10 @@ final class FluentBundle
             return $this->reportError(new ReferenceException("Unknown variable: \${$id}."), "\${$id}");
         }
 
+        if ($argument instanceof FluentNumber) {
+            return $argument->setFluentLocale($this->locale);
+        }
+
         // Return early if the argument already is an instance of Stringable.
         if (is_string($argument) || $argument instanceof Stringable) {
             return $argument;

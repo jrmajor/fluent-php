@@ -7,6 +7,9 @@ use Major\Fluent\Exceptions\Resolver\TypeException;
 $bundle = (new FluentBundle('en-US'))
     ->addFtl('foo = { $arg }');
 
+$bundlePL = (new FluentBundle('pl-PL'))
+    ->addFtl('foo = { $arg }');
+
 it('can not be an array')
     ->expect($bundle->message('foo', arg: [1, 2, 'key' => 3]))->toBe('{$arg}')
     ->and($bundle->popErrors())->toHaveError(
@@ -53,4 +56,6 @@ $fluentNumber = new FluentNumber(1, minimumFractionDigits: 2);
 
 it('can be a FluentNumber')
     ->expect($bundle->message('foo', arg: $fluentNumber))->toBe('1.00')
-    ->and($bundle->popErrors())->toBeEmpty();
+    ->and($bundle->popErrors())->toBeEmpty()
+    ->and($bundlePL->message('foo', arg: $fluentNumber))->toBe('1,00')
+    ->and($bundlePL->popErrors())->toBeEmpty();
