@@ -403,7 +403,19 @@ final class FluentBundle
 
         $arguments = $this->getFunctionArguments($reference->arguments, $scope);
 
-        return $function(...$arguments);
+        $output = $function(...$arguments);
+
+        if (is_string($output) || $output instanceof Stringable) {
+            return $output;
+        }
+
+        if (is_numeric($output)) {
+            return (new FluentNumber($output))->setFluentLocale($this->locale);
+        }
+
+        $type = get_debug_type($output);
+
+        return $this->reportError(new TypeException("Return value of {$name}() must be of type string|Stringable, {$type} returned."), "{$name}()");
     }
 
     /**
