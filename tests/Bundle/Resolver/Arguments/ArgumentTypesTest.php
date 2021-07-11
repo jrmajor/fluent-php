@@ -13,31 +13,31 @@ $bundlePL = (new FluentBundle('pl-PL'))
 it('can not be an array')
     ->expect($bundle->message('foo', arg: [1, 2, 'key' => 3]))->toBe('{$arg}')
     ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable type not supported: $arg, array.',
+        TypeException::class, 'Variable $arg is of unsupported type array.',
     );
 
 it('can not be a boolean')
     ->expect($bundle->message('foo', arg: true))->toBe('{$arg}')
     ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable type not supported: $arg, boolean.',
+        TypeException::class, 'Variable $arg is of unsupported type bool.',
     );
 
 it('can not be null')
     ->expect($bundle->message('foo', arg: null))->toBe('{$arg}')
     ->and($bundle->popErrors())->toHaveError(
-            TypeException::class, 'Variable type not supported: $arg, NULL.',
+            TypeException::class, 'Variable $arg is of unsupported type null.',
     );
 
 it('can not be an object')
     ->expect($bundle->message('foo', arg: new stdClass()))->toBe('{$arg}')
     ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable type not supported: $arg, object.',
+        TypeException::class, 'Variable $arg is of unsupported type stdClass.',
     );
 
 it('can not be a closure')
     ->expect($bundle->message('foo', arg: fn () => null))->toBe('{$arg}')
     ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable type not supported: $arg, object.',
+        TypeException::class, 'Variable $arg is of unsupported type Closure.',
     );
 
 it('can be a string')

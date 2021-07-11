@@ -305,7 +305,9 @@ final class FluentBundle
             return (new FluentNumber($argument))->setFluentLocale($this->locale);
         }
 
-        return $this->reportError(new TypeException($id, gettype($argument)), "\${$id}");
+        $type = get_debug_type($argument);
+
+        return $this->reportError(new TypeException("Variable \${$id} is of unsupported type {$type}."), "\${$id}");
     }
 
     protected function resolveMessageReference(
