@@ -52,10 +52,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "generate-plurals": [
-            "php generate_plurals.php"
-        ]
-    }
+    "prefer-stable": true
 }
