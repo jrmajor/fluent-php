@@ -38,7 +38,8 @@
         "pestphp/pest": "^1.7 <1.8",
         "phpunit/phpunit": "^9.5",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "jrmajor/cs": "dev-master"
+        "jrmajor/cs": "dev-master",
+        "symfony/var-dumper": "^5.3"
     },
     "autoload": {
         "psr-4": {
