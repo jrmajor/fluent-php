@@ -458,7 +458,12 @@ final class FluentBundle
 
         $value = $this->resolveExpression($argument, $scope);
 
-        return $value instanceof FluentNumber ? $value->value() : $value;
+        return match (get_debug_type($value)) {
+            FluentNone::class => null,
+            /** @phpstan-ignore-next-line */
+            FluentNumber::class => $value->value(),
+            default => $value,
+        };
     }
 
     protected function resolveSelectExpression(

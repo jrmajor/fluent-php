@@ -1,6 +1,7 @@
 <?php
 
 use Major\Fluent\Bundle\FluentBundle;
+use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
@@ -20,6 +21,7 @@ $bundle = (new FluentBundle('en-US', useIsolating: false))
         float = { TYPE(4.5) }
         float-trailing-zeroes = { TYPE(8.0) }
         objects = { PROPS($object) }
+        unknown = { TYPE($arg) }
         wrong-return = { WRONG_RETURN() }
         ftl);
 
@@ -48,6 +50,12 @@ $object = new class() {
 it("preserves variable type when it's passed to function")
     ->expect($bundle->message('objects', object: $object))->toBe('{"prop":"Object property"}')
     ->and($bundle->popErrors())->toBeEmpty();
+
+it('converts unknown variables to null')
+    ->expect($bundle->message('unknown'))->toBe('null')
+    ->and($bundle->popErrors())->toHaveError(
+        ReferenceException::class, 'Unknown variable: $arg.',
+    );
 
 it('throws a type error when function returns wrong type')
     ->expect($bundle->message('wrong-return'))->toBe('{WRONG_RETURN()}')
