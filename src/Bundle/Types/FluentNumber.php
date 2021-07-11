@@ -55,6 +55,6 @@ class FluentNumber implements Stringable
             $this->minimumFractionDigits(),
         );
 
-        return $formatter->format($this->value) ?: (string) $this->value;
+        return $formatter->format($this->value);
     }
 }
