@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f61e8c97ae3e6b46ebe52b7c974a3bf8",
+    "content-hash": "6501c534bbd5c98880af242fef00cef6",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
-            "version": "v0.1.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/pluralrules.git",
-                "reference": "c27bffab745b0d2a26345f52d16f7eac8ce91d0d"
+                "reference": "717f66d7ff64243a3800779681f58e67fafdc690"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/c27bffab745b0d2a26345f52d16f7eac8ce91d0d",
-                "reference": "c27bffab745b0d2a26345f52d16f7eac8ce91d0d",
+                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/717f66d7ff64243a3800779681f58e67fafdc690",
+                "reference": "717f66d7ff64243a3800779681f58e67fafdc690",
                 "shasum": ""
             },
             "require": {
@@ -31,6 +31,8 @@
                 "nunomaduro/collision": "^5.5",
                 "pestphp/pest": "^1.8",
                 "phpstan/phpstan": "^0.12.90",
+                "spatie/fork": "^1.1",
+                "symfony/finder": "^5.3",
                 "symfony/var-dumper": "^5.3"
             },
             "type": "library",
@@ -39,7 +41,8 @@
                     "Major\\PluralRules\\": "src"
                 },
                 "files": [
-                    "src/operands.php"
+                    "src/operands.php",
+                    "src/operators.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -60,9 +63,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/pluralrules/issues",
-                "source": "https://github.com/jrmajor/pluralrules/tree/v0.1.0"
+                "source": "https://github.com/jrmajor/pluralrules/tree/v1.0.0"
             },
-            "time": "2021-07-02T11:36:05+00:00"
+            "time": "2021-07-13T11:36:38+00:00"
         }
     ],
     "packages-dev": [
@@ -891,16 +894,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v1.7.1",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "11ebe014fbf57e8aa30757ab39c1e1de388720e6"
+                "reference": "d90ddf889cca8acf9f9a7ccbb36c34af8926f082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/11ebe014fbf57e8aa30757ab39c1e1de388720e6",
-                "reference": "11ebe014fbf57e8aa30757ab39c1e1de388720e6",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/d90ddf889cca8acf9f9a7ccbb36c34af8926f082",
+                "reference": "d90ddf889cca8acf9f9a7ccbb36c34af8926f082",
                 "shasum": ""
             },
             "require": {
@@ -966,7 +969,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v1.7.1"
+                "source": "https://github.com/pestphp/pest/tree/v1.10.0"
             },
             "funding": [
                 {
@@ -994,7 +997,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-06-24T20:44:57+00:00"
+            "time": "2021-07-12T10:54:40+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
