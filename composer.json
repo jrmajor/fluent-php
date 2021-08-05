@@ -34,8 +34,8 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "phpstan/phpstan": "^0.12.90",
-        "pestphp/pest": "^1.10",
+        "phpstan/phpstan": "^0.12.94",
+        "pestphp/pest": "^1.15",
         "phpunit/phpunit": "^9.5",
         "friendsofphp/php-cs-fixer": "^3.0",
         "jrmajor/cs": "dev-master",
