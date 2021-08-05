@@ -9,10 +9,5 @@ return Major\CS\config($finder, [
     'ordered_class_elements' => [
         'order' => ['use_trait', 'constant', 'property', 'method', 'magic'],
     ],
-    // Broken for @var PHPDocs.
     'phpdoc_summary' => false,
-    // Remove throw, broken when using throw expressions inline after ?: or ??.
-    'no_extra_blank_lines' => [
-        'tokens' => ['break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'switch', 'use'],
-    ],
 ]);
