@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b80e2d8f4705de743dd96c95f195045b",
+    "content-hash": "ca40cfda88140ab73aa0babf6f00423c",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -216,16 +216,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f"
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5b668aef16090008790395c02c893b1ba13f7e08",
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08",
                 "shasum": ""
             },
             "require": {
@@ -282,9 +282,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.2"
             },
-            "time": "2021-05-16T18:07:53+00:00"
+            "time": "2021-08-05T19:00:23+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -649,23 +649,22 @@
         },
         {
             "name": "jrmajor/cs",
-            "version": "dev-master",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/php-cs.git",
-                "reference": "a49c8e8ad1c6ea9e729de0adfd27149c4b3e5279"
+                "reference": "b33be626fce493c77aed06a4d6d098f1dcf8f1f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/a49c8e8ad1c6ea9e729de0adfd27149c4b3e5279",
-                "reference": "a49c8e8ad1c6ea9e729de0adfd27149c4b3e5279",
+                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/b33be626fce493c77aed06a4d6d098f1dcf8f1f6",
+                "reference": "b33be626fce493c77aed06a4d6d098f1dcf8f1f6",
                 "shasum": ""
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "3.0.2",
                 "php": ">= 7.1"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -686,9 +685,9 @@
             "homepage": "https://github.com/jrmajor/php-cs",
             "support": {
                 "issues": "https://github.com/jrmajor/php-cs/issues",
-                "source": "https://github.com/jrmajor/php-cs/tree/master"
+                "source": "https://github.com/jrmajor/php-cs/tree/v0.1.1"
             },
-            "time": "2021-08-05T13:52:53+00:00"
+            "time": "2021-08-05T14:27:23+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -806,16 +805,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v5.6.0",
+            "version": "v5.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "0122ac6b03c75279ef78d1c0ad49725dfc52a8d2"
+                "reference": "0f0f46b6345ee788325b5ce9d53c4e851b2293a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/0122ac6b03c75279ef78d1c0ad49725dfc52a8d2",
-                "reference": "0122ac6b03c75279ef78d1c0ad49725dfc52a8d2",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/0f0f46b6345ee788325b5ce9d53c4e851b2293a0",
+                "reference": "0f0f46b6345ee788325b5ce9d53c4e851b2293a0",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +826,7 @@
             "require-dev": {
                 "brianium/paratest": "^6.1",
                 "fideloper/proxy": "^4.4.1",
-                "friendsofphp/php-cs-fixer": "^2.17.3",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "fruitcake/laravel-cors": "^2.0.3",
                 "laravel/framework": "^8.0 || ^9.0",
                 "nunomaduro/larastan": "^0.6.2",
@@ -890,7 +889,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-07-26T20:39:06+00:00"
+            "time": "2021-08-12T13:56:54+00:00"
         },
         {
             "name": "pestphp/pest",
@@ -4676,9 +4675,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "jrmajor/cs": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
