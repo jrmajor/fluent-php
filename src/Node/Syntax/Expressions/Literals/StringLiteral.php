@@ -23,7 +23,7 @@ final class StringLiteral extends Literal
 
             $codepoint = intval($match[1] ?: $match[2], 16);
 
-            if ($codepoint <= 0xD7FF || 0xE000 <= $codepoint) {
+            if ($codepoint <= 0xD7FF || $codepoint >= 0xE000) {
                 // It's an Unicode scalar value.
                 return mb_chr($codepoint);
             }

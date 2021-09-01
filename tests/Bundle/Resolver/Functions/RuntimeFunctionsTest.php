@@ -43,7 +43,7 @@ it('preserves int and float types')
     ->and($bundle->message('float-trailing-zeroes'))->toBe('float')
     ->and($bundle->popErrors())->toBeEmpty();
 
-$object = new class() {
+$object = new class () {
     public string $prop = 'Object property';
 };
 
