@@ -47,7 +47,7 @@ class FluentNumber implements Stringable
 
         $formatter->setAttribute(
             NumberFormatter::MIN_FRACTION_DIGITS,
-            $this->minimumFractionDigits(),
+            $this->minimumFractionDigits ?? 0,
         );
 
         return $formatter->format($this->value);
