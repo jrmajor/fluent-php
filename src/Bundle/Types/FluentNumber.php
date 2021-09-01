@@ -31,11 +31,6 @@ class FluentNumber implements Stringable
             : (string) $this->value;
     }
 
-    public function minimumFractionDigits(): int
-    {
-        return $this->minimumFractionDigits ?? 0;
-    }
-
     public function setFluentLocale(string $locale): self
     {
         $this->locale = $locale;
