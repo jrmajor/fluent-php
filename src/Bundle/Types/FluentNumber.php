@@ -27,7 +27,7 @@ class FluentNumber implements Stringable
         }
 
         return is_float($this->value) && $this->value - round($this->value) === 0.0
-            ? (string) $this->value . '.0'
+            ? $this->value . '.0'
             : (string) $this->value;
     }
 

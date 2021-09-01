@@ -224,7 +224,7 @@ final class FluentBundle
 
             $result .= $useIsolating ? self::FSI : '';
 
-            $result .= (string) $this->resolvePlaceable($element, $scope);
+            $result .= $this->resolvePlaceable($element, $scope);
 
             $result .= $useIsolating ? self::PDI : '';
         }
