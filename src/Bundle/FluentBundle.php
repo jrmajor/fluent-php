@@ -44,16 +44,16 @@ final class FluentBundle
     public const PDI = "\u{2069}";
 
     /** @var array<string, Message> */
-    protected array $messages = [];
+    private array $messages = [];
 
     /** @var array<string, Term> */
-    protected array $terms = [];
+    private array $terms = [];
 
     /** @var array<string, Closure> */
-    protected array $functions = [];
+    private array $functions = [];
 
     /** @var ResolverException[] */
-    protected array $errors = [];
+    private array $errors = [];
 
     public function __construct(
         protected string $locale,
@@ -141,7 +141,7 @@ final class FluentBundle
         return array_key_exists($id, $this->functions);
     }
 
-    protected function reportError(ResolverException $error, string $value = '???'): FluentNone
+    private function reportError(ResolverException $error, string $value = '???'): FluentNone
     {
         $this->errors[] = $this->strict ? throw $error : $error;
 
@@ -193,7 +193,7 @@ final class FluentBundle
         return null;
     }
 
-    protected function resolvePattern(
+    private function resolvePattern(
         ?Pattern $pattern,
         ResolutionScope $scope,
     ): string {
@@ -232,7 +232,7 @@ final class FluentBundle
         return $result;
     }
 
-    protected function resolvePlaceable(
+    private function resolvePlaceable(
         Placeable $element,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -241,7 +241,7 @@ final class FluentBundle
             : $this->resolveExpression($element->expression, $scope);
     }
 
-    protected function resolveExpression(
+    private function resolveExpression(
         Expression $expression,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -250,14 +250,14 @@ final class FluentBundle
         return $this->{$method}($expression, $scope);
     }
 
-    protected function resolveStringLiteral(
+    private function resolveStringLiteral(
         StringLiteral $literal,
         ResolutionScope $scope,
     ): string {
         return $literal->parse()->value;
     }
 
-    protected function resolveNumberLiteral(
+    private function resolveNumberLiteral(
         NumberLiteral $literal,
         ResolutionScope $scope,
     ): FluentNumber {
@@ -267,7 +267,7 @@ final class FluentBundle
             ->setFluentLocale($this->locale);
     }
 
-    protected function resolveVariableReference(
+    private function resolveVariableReference(
         VariableReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -310,7 +310,7 @@ final class FluentBundle
         return $this->reportError(new TypeException("Variable \${$id} is of unsupported type {$type}."), "\${$id}");
     }
 
-    protected function resolveMessageReference(
+    private function resolveMessageReference(
         MessageReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -346,7 +346,7 @@ final class FluentBundle
         return $this->reportError(new ReferenceException("No value: {$id}."), $id);
     }
 
-    protected function resolveTermReference(
+    private function resolveTermReference(
         TermReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -391,7 +391,7 @@ final class FluentBundle
         return $resolved;
     }
 
-    protected function resolveFunctionReference(
+    private function resolveFunctionReference(
         FunctionReference $reference,
         ResolutionScope $scope,
     ): string|Stringable {
@@ -423,7 +423,7 @@ final class FluentBundle
     /**
      * @return array<int|string, mixed>
      */
-    protected function getFunctionArguments(
+    private function getFunctionArguments(
         CallArguments $arguments,
         ResolutionScope $scope,
     ): array {
@@ -441,7 +441,7 @@ final class FluentBundle
         return $prepared;
     }
 
-    protected function resolveArgument(
+    private function resolveArgument(
         Expression $argument,
         ResolutionScope $scope,
     ): mixed {
@@ -468,7 +468,7 @@ final class FluentBundle
         };
     }
 
-    protected function resolveSelectExpression(
+    private function resolveSelectExpression(
         SelectExpression $expression,
         ResolutionScope $scope,
     ): string {
@@ -496,7 +496,7 @@ final class FluentBundle
     /**
      * @param Variant[] $variants
      */
-    protected function getDefaultVariant(
+    private function getDefaultVariant(
         array $variants,
         ResolutionScope $scope,
     ): string {
@@ -509,7 +509,7 @@ final class FluentBundle
         throw new ShouldNotHappen(); // @codeCoverageIgnore
     }
 
-    protected function matchVariant(
+    private function matchVariant(
         string|Stringable|FluentNumber $selector,
         string|Stringable|FluentNumber $key,
     ): bool {
