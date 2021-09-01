@@ -10,4 +10,5 @@ return Major\CS\config($finder, [
         'order' => ['use_trait', 'constant', 'property', 'method', 'magic'],
     ],
     'phpdoc_summary' => false,
+    'no_unused_imports' => false,
 ]);
