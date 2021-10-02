@@ -5,7 +5,7 @@
 
 A PHP implementation of [Project Fluent](https://projectfluent.org), a localization system by Mozilla.
 
-You can install it via Composer: `composer require jrmajor/fluent`. It requires PHP 8.0 or higher.
+You may install it via Composer: `composer require jrmajor/fluent`. It requires PHP 8.0 or higher.
 
 Use [jrmajor/laravel-fluent](https://github.com/jrmajor/laravel-fluent) package to integrate Fluent translations into your Laravel application.
 
