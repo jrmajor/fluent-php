@@ -1,16 +1,15 @@
-name: Tests
+name: Static analysis
 
 on: [push]
 
 jobs:
-  unit-tests:
-    name: PHP ${{ matrix.php }}, ${{ matrix.stability }}
+  static-analysis:
+    name: PHP ${{ matrix.php }}
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: ['8.0']
-        stability: [prefer-lowest, prefer-stable]
 
     steps:
       - name: Checkout code
@@ -22,7 +21,7 @@ jobs:
           php-version: ${{ matrix.php }}
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --no-progress --no-interaction
+        run: composer install --no-progress --no-interaction
 
-      - name: Execute tests
-        run: vendor/bin/pest
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse --no-progress --no-interaction
