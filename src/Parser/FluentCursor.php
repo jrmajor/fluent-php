@@ -166,9 +166,10 @@ final class FluentCursor extends Cursor
     public function takeIdStart(): string
     {
         if ($this->isIdentifierStart()) {
-            // If current char was null, charIsIdentifierStart would return false.
-            /** @var string */
             $idStart = $this->currentChar();
+
+            // If current char was null, charIsIdentifierStart would return false.
+            assert(is_string($idStart));
 
             $this->next();
 

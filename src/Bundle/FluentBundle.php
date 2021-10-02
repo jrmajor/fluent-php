@@ -220,7 +220,7 @@ final class FluentBundle
                 continue;
             }
 
-            /** @var Placeable $element */
+            assert($element instanceof Placeable);
 
             $result .= $useIsolating ? self::FSI : '';
 
