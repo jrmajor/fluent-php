@@ -13,7 +13,8 @@ final class Indent
 
     public function __construct(
         public string $value,
-        int $start, int $end,
+        int $start,
+        int $end,
     ) {
         $this->span = new Span($start, $end);
     }

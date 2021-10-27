@@ -11,4 +11,5 @@ return Major\CS\config($finder, [
     ],
     'phpdoc_summary' => false,
     'no_unused_imports' => false,
+    PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer::name() => false,
 ]);

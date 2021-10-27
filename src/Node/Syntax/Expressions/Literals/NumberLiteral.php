@@ -8,7 +8,7 @@ final class NumberLiteral extends Literal
 {
     public function parse(): NumberLiteralValue
     {
-        $value = (float) ($this->value);
+        $value = (float) $this->value;
 
         $decimalPosition = mb_strpos($this->value, '.');
 
