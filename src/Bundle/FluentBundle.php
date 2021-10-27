@@ -69,7 +69,7 @@ final class FluentBundle
 
     public function addResource(
         FluentResource $resource,
-        bool $allowOverrides = null,
+        ?bool $allowOverrides = null,
     ): static {
         $allowOverrides ??= $this->allowOverrides;
 
@@ -94,7 +94,7 @@ final class FluentBundle
         return $this;
     }
 
-    public function addFtl(string $ftl, bool $allowOverrides = null): static
+    public function addFtl(string $ftl, ?bool $allowOverrides = null): static
     {
         $parser = new FluentParser($this->strict);
 

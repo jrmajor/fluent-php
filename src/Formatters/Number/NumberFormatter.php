@@ -18,11 +18,11 @@ final class NumberFormatter
     public function formatDecimal(
         int|float $number,
         bool $useGrouping = true,
-        int $minimumIntegerDigits = null,
-        int $minimumFractionDigits = null,
-        int $maximumFractionDigits = null,
-        int $minimumSignificantDigits = null,
-        int $maximumSignificantDigits = null,
+        ?int $minimumIntegerDigits = null,
+        ?int $minimumFractionDigits = null,
+        ?int $maximumFractionDigits = null,
+        ?int $minimumSignificantDigits = null,
+        ?int $maximumSignificantDigits = null,
     ): string {
         $formatter = $this->createBaseFormatter(
             'decimal',
@@ -45,13 +45,13 @@ final class NumberFormatter
     public function formatCurrency(
         int|float $number,
         string $currency,
-        string $currencyDisplay = null,
-        bool $useGrouping = null,
-        int $minimumIntegerDigits = null,
-        int $minimumFractionDigits = null,
-        int $maximumFractionDigits = null,
-        int $minimumSignificantDigits = null,
-        int $maximumSignificantDigits = null,
+        ?string $currencyDisplay = null,
+        ?bool $useGrouping = null,
+        ?int $minimumIntegerDigits = null,
+        ?int $minimumFractionDigits = null,
+        ?int $maximumFractionDigits = null,
+        ?int $minimumSignificantDigits = null,
+        ?int $maximumSignificantDigits = null,
     ): string {
         if ($currencyDisplay !== null) {
             throw NumberFormatterException::unsupportedOption('currencyDisplay');
@@ -74,12 +74,12 @@ final class NumberFormatter
 
     public function formatPercent(
         int|float $number,
-        bool $useGrouping = null,
-        int $minimumIntegerDigits = null,
-        int $minimumFractionDigits = null,
-        int $maximumFractionDigits = null,
-        int $minimumSignificantDigits = null,
-        int $maximumSignificantDigits = null,
+        ?bool $useGrouping = null,
+        ?int $minimumIntegerDigits = null,
+        ?int $minimumFractionDigits = null,
+        ?int $maximumFractionDigits = null,
+        ?int $minimumSignificantDigits = null,
+        ?int $maximumSignificantDigits = null,
     ): string {
         $formatter = $this->createBaseFormatter(
             'percent',
@@ -101,12 +101,12 @@ final class NumberFormatter
      */
     private function createBaseFormatter(
         string $style,
-        bool $useGrouping = null,
-        int $minimumIntegerDigits = null,
-        int $minimumFractionDigits = null,
-        int $maximumFractionDigits = null,
-        int $minimumSignificantDigits = null,
-        int $maximumSignificantDigits = null,
+        ?bool $useGrouping = null,
+        ?int $minimumIntegerDigits = null,
+        ?int $minimumFractionDigits = null,
+        ?int $maximumFractionDigits = null,
+        ?int $minimumSignificantDigits = null,
+        ?int $maximumSignificantDigits = null,
     ): BaseNumberFormatter {
         $useGrouping ??= true;
 
