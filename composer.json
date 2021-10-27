@@ -34,10 +34,10 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "phpstan/phpstan": "^0.12.97",
-        "pestphp/pest": "^1.18",
+        "phpstan/phpstan": "^0.12.99",
+        "pestphp/pest": "^1.20",
         "phpunit/phpunit": "^9.5",
-        "jrmajor/cs": "^0.2.2",
+        "jrmajor/cs": "^0.3.1",
         "symfony/var-dumper": "^5.3"
     },
     "autoload": {
