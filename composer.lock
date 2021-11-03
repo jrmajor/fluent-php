@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "034d3ec329c9b7de695437e60e94dda5",
+    "content-hash": "efe9dcf11d85f0a5dd2650e18d9f58ab",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
