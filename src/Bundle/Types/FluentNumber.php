@@ -7,7 +7,7 @@ use Stringable;
 
 final class FluentNumber implements Stringable
 {
-    protected string $locale = 'en';
+    private string $locale = 'en';
 
     public function __construct(
         protected int|float $value,
