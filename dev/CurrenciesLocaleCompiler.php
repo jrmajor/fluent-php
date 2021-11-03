@@ -133,6 +133,10 @@ final class CurrenciesLocaleCompiler
             $currency = (string) $data->Ccy;
             $minorUnits = (string) $data->CcyMnrUnts;
 
+            if (! is_numeric($minorUnits)) {
+                continue;
+            }
+
             $this->minorUnits[$currency] = (int) $minorUnits;
         }
     }
