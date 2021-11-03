@@ -11,7 +11,6 @@ final class Symbols
         public string $decimal,
         public string $group,
         public string $percentSign,
-        public string $plusSign,
         public string $minusSign,
     ) { }
 }
