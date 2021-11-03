@@ -34,10 +34,12 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "phpstan/phpstan": "^0.12.99",
-        "pestphp/pest": "^1.20",
-        "phpunit/phpunit": "^9.5",
+        "ext-simplexml": "*",
         "jrmajor/cs": "^0.3.1",
+        "nunomaduro/collision": "^5.10",
+        "pestphp/pest": "^1.20",
+        "phpstan/phpstan": "^0.12.99",
+        "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^5.3"
     },
     "autoload": {
@@ -47,9 +49,14 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Major\\Fluent\\Dev\\": "dev",
             "Major\\Fluent\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "make": ["composer make-numbers"],
+        "make-numbers": ["php dev/make-numbers.php"]
+    }
 }

@@ -1,6 +1,7 @@
 parameters:
     level: max
     paths:
+        - dev
         - src
 
 includes:
