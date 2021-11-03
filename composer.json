@@ -35,7 +35,7 @@
     "require-dev": {
         "ext-json": "*",
         "ext-simplexml": "*",
-        "jrmajor/cs": "^0.3.1",
+        "jrmajor/cs": "^0.3.2",
         "nunomaduro/collision": "^5.10",
         "pestphp/pest": "^1.20",
         "phpstan/phpstan": "^0.12.99",
