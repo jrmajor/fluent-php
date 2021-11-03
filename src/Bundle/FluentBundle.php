@@ -67,6 +67,9 @@ final class FluentBundle
         ];
     }
 
+    /**
+     * @return $this
+     */
     public function addResource(
         FluentResource $resource,
         ?bool $allowOverrides = null,
@@ -94,6 +97,9 @@ final class FluentBundle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function addFtl(string $ftl, ?bool $allowOverrides = null): static
     {
         $parser = new FluentParser($this->strict);
@@ -103,6 +109,9 @@ final class FluentBundle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function addFunction(string $name, Closure $function): static
     {
         if ($this->hasFunction($name)) {
@@ -116,6 +125,7 @@ final class FluentBundle
 
     /**
      * @param array<string, Closure> $functions
+     * @return $this
      */
     public function addFunctions(array $functions): static
     {

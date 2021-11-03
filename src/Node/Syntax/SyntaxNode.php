@@ -9,6 +9,9 @@ abstract class SyntaxNode extends BaseNode
 {
     public ?Span $span = null;
 
+    /**
+     * @return $this
+     */
     public function addSpan(int $start, int $end): static
     {
         $this->span = new Span($start, $end);
