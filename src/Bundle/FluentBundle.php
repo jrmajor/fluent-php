@@ -264,7 +264,7 @@ final class FluentBundle
         $parsed = $literal->parse();
 
         return (new FluentNumber($parsed->value, $literal->value, $parsed->precision))
-            ->setFluentLocale($this->locale);
+            ->setLocale($this->locale);
     }
 
     private function resolveVariableReference(
@@ -293,7 +293,7 @@ final class FluentBundle
         }
 
         if ($argument instanceof FluentNumber) {
-            return $argument->setFluentLocale($this->locale);
+            return $argument->setLocale($this->locale);
         }
 
         // Return early if the argument already is an instance of Stringable.
@@ -302,7 +302,7 @@ final class FluentBundle
         }
 
         if (is_numeric($argument)) {
-            return (new FluentNumber($argument))->setFluentLocale($this->locale);
+            return (new FluentNumber($argument))->setLocale($this->locale);
         }
 
         $type = get_debug_type($argument);
@@ -412,7 +412,7 @@ final class FluentBundle
         }
 
         if (is_numeric($output)) {
-            return (new FluentNumber($output))->setFluentLocale($this->locale);
+            return (new FluentNumber($output))->setLocale($this->locale);
         }
 
         $type = get_debug_type($output);

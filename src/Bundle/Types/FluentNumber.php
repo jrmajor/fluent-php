@@ -15,6 +15,16 @@ class FluentNumber implements Stringable
         protected ?int $minimumFractionDigits = null,
     ) { }
 
+    /**
+     * @return $this
+     */
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
     public function value(): int|float
     {
         return $this->value;
@@ -29,13 +39,6 @@ class FluentNumber implements Stringable
         return is_float($this->value) && $this->value - round($this->value) === 0.0
             ? $this->value . '.0'
             : (string) $this->value;
-    }
-
-    public function setFluentLocale(string $locale): self
-    {
-        $this->locale = $locale;
-
-        return $this;
     }
 
     public function __toString(): string
