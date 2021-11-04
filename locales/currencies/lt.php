@@ -69,7 +69,7 @@ return [
     'CLF' => new C('CLF', 'Čiliečių unidades de fomentos', plurals: ['one' => 'Čiliečių unidades de fomentos', 'few' => 'Čiliečių unidades de fomentos', 'many' => 'Čiliečių unidades de fomentos', 'other' => 'Čiliečių unidades de fomentos'], minorUnits: 4),
     'CLP' => new C('CLP', 'Čilės pesas', plurals: ['one' => 'Čilės pesas', 'few' => 'Čilės pesai', 'many' => 'Čilės peso', 'other' => 'Čilės pesų'], minorUnits: 0),
     'CNH' => new C('CNH', 'Kinijos Užsienio juanis', plurals: ['one' => 'Kinijos Užsienio juanis', 'few' => 'Kinijos Užsienio juaniai', 'many' => 'Kinijos Užsienio juanio', 'other' => 'Kinijos Užsienio juanių']),
-    'CNX' => new C('CNX', 'Kinijos \"People\" banko doleris', plurals: ['one' => 'Kinijos "People" banko doleris', 'few' => 'Kinijos "People" banko doleriai', 'many' => 'Kinijos "People" banko dolerio', 'other' => 'Kinijos "People" banko dolerių']),
+    'CNX' => new C('CNX', 'Kinijos "People" banko doleris', plurals: ['one' => 'Kinijos "People" banko doleris', 'few' => 'Kinijos "People" banko doleriai', 'many' => 'Kinijos "People" banko dolerio', 'other' => 'Kinijos "People" banko dolerių']),
     'CNY' => new C('CNY', 'Kinijos ženminbi juanis', plurals: ['one' => 'Kinijos ženminbi juanis', 'few' => 'Kinijos ženminbi juaniai', 'many' => 'Kinijos ženminbi juanio', 'other' => 'Kinijos ženminbi juanių']),
     'COP' => new C('COP', 'Kolumbijos pesas', plurals: ['one' => 'Kolumbijos pesas', 'few' => 'Kolumbijos pesai', 'many' => 'Kolumbijos peso', 'other' => 'Kolumbijos pesų']),
     'COU' => new C('COU', 'unidad de valor realai', plurals: ['one' => 'unidad de valor realas', 'few' => 'unidad de valor realai', 'many' => 'unidad de valor realai', 'other' => 'unidad de valor realai']),

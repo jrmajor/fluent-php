@@ -58,6 +58,8 @@ final class CurrenciesLocaleCompiler
         $symbol = $data['symbol']
             ?? throw new Exception("No symbol for {$code} in {$this->locale}");
 
+        $name = str_replace('\\"', '"', $name);
+
         $compiled = "new C('{$code}'";
 
         if ($name !== $code && $symbol !== $code) {
@@ -80,7 +82,7 @@ final class CurrenciesLocaleCompiler
             $compiled .= ", minorUnits: {$this->minorUnits($code)}";
         }
 
-        return $compiled . ")";
+        return $compiled . ')';
     }
 
     /**
