@@ -84,7 +84,7 @@ final class NumbersLocaleCompiler
 
         $symbols = array_map(
             fn ($type) => "'" . $all[$type] . "'",
-            ['decimal', 'group', 'percentSign', 'minusSign'],
+            ['decimal', 'group', 'minusSign', 'percentSign'],
         );
 
         $symbols = str_replace("'\u{00A0}'", '"\\u{00A0}"', $symbols);

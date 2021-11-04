@@ -10,5 +10,5 @@ return new Locale(
     "#,##0\u{00A0}%",
     '¤#,##0.00',
     2,
-    new Symbols(',', '.', '%', '-'),
+    new Symbols(',', '.', '-', '%'),
 );

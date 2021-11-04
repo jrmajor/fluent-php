@@ -10,8 +10,8 @@ final class Symbols
     public function __construct(
         public string $decimal,
         public string $group,
-        public string $percentSign,
         public string $minusSign,
+        public string $percentSign,
     ) { }
 
     /**
