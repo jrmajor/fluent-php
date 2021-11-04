@@ -13,4 +13,17 @@ final class Symbols
         public string $percentSign,
         public string $minusSign,
     ) { }
+
+    /**
+     * @return array<string, string>
+     */
+    public function replacements(): array
+    {
+        return [
+            '.' => $this->decimal,
+            ',' => $this->group,
+            '-' => $this->minusSign,
+            '%' => $this->percentSign,
+        ];
+    }
 }
