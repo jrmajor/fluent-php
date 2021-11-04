@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'English (St. Vincent & Grenadines)',
-    'latn',
-    '#,##0.###',
-    '#,##0%',
-    '¤#,##0.00',
-    1,
-    new Symbols('.', ',', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('English (St. Vincent & Grenadines)', currency: '¤#,##0.00');

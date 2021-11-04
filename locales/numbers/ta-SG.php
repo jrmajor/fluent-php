@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'Tamil (Singapore)',
-    'latn',
-    '#,##0.###',
-    '#,##0%',
-    "¤\u{00A0}#,##0.00",
-    1,
-    new Symbols('.', ',', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Tamil (Singapore)', currency: "¤\u{00A0}#,##0.00");

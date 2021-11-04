@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'Estonian',
-    'latn',
-    '#,##0.###',
-    '#,##0%',
-    "#,##0.00\u{00A0}¤",
-    2,
-    new Symbols(',', "\u{00A0}", '−', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Estonian', grouping: 2, symbols: [',', "\u{00A0}", '−', '%']);

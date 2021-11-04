@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'Dutch (Sint Maarten)',
-    'latn',
-    '#,##0.###',
-    '#,##0%',
-    "¤\u{00A0}#,##0.00;¤\u{00A0}-#,##0.00",
-    1,
-    new Symbols(',', '.', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Dutch (Sint Maarten)', currency: "¤\u{00A0}#,##0.00;¤\u{00A0}-#,##0.00", symbols: [',', '.', '-', '%']);

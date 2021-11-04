@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'Spanish (Costa Rica)',
-    'latn',
-    '#,##0.###',
-    "#,##0\u{00A0}%",
-    '¤#,##0.00',
-    1,
-    new Symbols(',', "\u{00A0}", '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Spanish (Costa Rica)', percent: "#,##0\u{00A0}%", currency: '¤#,##0.00', symbols: [',', "\u{00A0}", '-', '%']);

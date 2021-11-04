@@ -46,7 +46,7 @@ final class NumberFormatter
             $number *= 100;
         }
 
-        $pattern = $this->locale->{$options->style . 'Format'};
+        $pattern = $this->locale->{$options->style};
 
         if (str_contains($pattern, ';')) {
             $pattern = explode(';', $pattern)[$number < 0 ? 1 : 0];
@@ -169,7 +169,7 @@ final class NumberFormatter
         $size = 3;
 
         for ($i = 0; strlen($int) > $size; $i++) {
-            if ($i === 0 && strlen($int) < $size + $this->locale->minimumGroupingDigits) {
+            if ($i === 0 && strlen($int) < $size + $this->locale->grouping) {
                 break;
             }
 
@@ -188,7 +188,7 @@ final class NumberFormatter
 
     private function applyReplacements(Options $o, string $formatted): string
     {
-        $replacer = fn (string $char) => $this->locale->symbols->replacements()[$char] ?? $char;
+        $replacer = fn (string $char) => $this->locale->symbolReplacements()[$char] ?? $char;
 
         $formatted = implode('', array_map($replacer, str_split($formatted)));
 

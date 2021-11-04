@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'English (Macao SAR China)',
-    'latn',
-    '#,##0.###',
-    '#,##0%',
-    '¤#,##0.00',
-    1,
-    new Symbols('.', ',', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('English (Macao SAR China)', currency: '¤#,##0.00');

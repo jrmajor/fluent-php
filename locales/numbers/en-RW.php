@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'English (Rwanda)',
-    'latn',
-    '#,##0.###',
-    '#,##0%',
-    '¤#,##0.00',
-    1,
-    new Symbols('.', ',', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('English (Rwanda)', currency: '¤#,##0.00');

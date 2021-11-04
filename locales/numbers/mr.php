@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'Marathi',
-    'deva',
-    '#,##,##0.###',
-    '#,##0%',
-    '¤#,##0.00',
-    1,
-    new Symbols('.', ',', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Marathi', system: 'deva', decimal: '#,##,##0.###', currency: '¤#,##0.00');

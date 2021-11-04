@@ -5,30 +5,14 @@ declare(strict_types=1);
 namespace Major\Fluent\Dev;
 
 use Exception;
-use Locale;
+use Locale as IntlLocale;
+use Major\Fluent\Formatters\Number\Locale\Locale;
+use ReflectionClass;
 
 final class NumbersLocaleCompiler
 {
     /** @var array<mixed> */
     private array $numbers;
-
-    /** @var array<string, int> */
-    public static array $systems = [];
-
-    /** @var array<string, int> */
-    public static array $decimalPatterns = [];
-
-    /** @var array<string, int> */
-    public static array $percentPatterns = [];
-
-    /** @var array<string, int> */
-    public static array $currencyPatterns = [];
-
-    /** @var array<int, int> */
-    public static array $grouping = [];
-
-    /** @var array<string, int> */
-    public static array $symbols = [];
 
     public function __construct(
         private string $locale,
@@ -41,25 +25,35 @@ final class NumbersLocaleCompiler
 
     public function make(): void
     {
-        $name = Locale::getDisplayName($this->locale);
+        $name = IntlLocale::getDisplayName($this->locale);
 
-        $compiled = <<<PHP
-            <?php
+        $compiled = "<?php\n\nreturn new Major\\Fluent\\Formatters\\Number\\Locale\\Locale('{$name}'";
 
-            use Major\\Fluent\\Formatters\\Number\\Locale\\Locale;
-            use Major\\Fluent\\Formatters\\Number\\Locale\\Symbols;
+        if ($this->system() !== $this->getDefault('system')) {
+            $compiled .= ", system: '{$this->system()}'";
+        }
 
-            return new Locale(
-                '{$name}',
-                '{$this->system()}',
-                {$this->format('decimal')},
-                {$this->format('percent')},
-                {$this->format('currency')},
-                {$this->minimumGrouping()},
-                {$this->symbols()},
-            );
+        if ($this->pattern('decimal') !== $this->getDefault('decimal')) {
+            $compiled .= ', decimal: ' . $this->encodedPattern('decimal');
+        }
 
-            PHP;
+        if ($this->pattern('percent') !== $this->getDefault('percent')) {
+            $compiled .= ', percent: ' . $this->encodedPattern('percent');
+        }
+
+        if ($this->pattern('currency') !== $this->getDefault('currency')) {
+            $compiled .= ', currency: ' . $this->encodedPattern('currency');
+        }
+
+        if ($this->grouping() !== $this->getDefault('grouping')) {
+            $compiled .= ", grouping: {$this->grouping()}";
+        }
+
+        if ($this->symbols() !== $this->getDefault('symbols')) {
+            $compiled .= ", symbols: {$this->symbols()}";
+        }
+
+        $compiled .= ");\n";
 
         file_put_contents(__DIR__ . "/../locales/numbers/{$this->locale}.php", $compiled)
             ?: throw new Exception("Failed to write {$this->locale}.php");
@@ -67,41 +61,43 @@ final class NumbersLocaleCompiler
 
     private function system(): string
     {
-        $system = $this->numbers['defaultNumberingSystem'];
-
-        self::$systems[$system] ??= 0;
-        self::$systems[$system]++;
-
-        return $system;
+        return $this->numbers['defaultNumberingSystem'];
     }
 
-    private function format(string $type): string
+    /**
+     * @param 'decimal'|'percent'|'currency' $type
+     */
+    private function pattern(string $type): string
     {
         $key = "{$type}Formats-numberSystem-{$this->system()}";
-        $format = $this->numbers[$key]['standard'];
+        $pattern = $this->numbers[$key]['standard'];
 
-        assert(is_string($format));
+        assert(is_string($pattern));
 
-        if (! preg_match("/^[¤,.\\-;%#0\u{00A0}\u{200E}\u{200F}]+$/", $format)) {
-            throw new Exception("Pattern {$format} contains invalid characters.");
+        if (! preg_match("/^[¤,.\\-;%#0\u{00A0}\u{200E}\u{200F}]+$/", $pattern)) {
+            throw new Exception("Pattern {$pattern} contains invalid characters.");
         }
 
-        $format = str_replace("\u{00A0}", '\\u{00A0}', $format);
-        $format = str_replace("\u{200E}", '\\u{200E}', $format);
-        $format = str_replace("\u{200F}", '\\u{200F}', $format);
-
-        self::${$type . 'Patterns'}[$type][$format] ??= 0;
-        self::${$type . 'Patterns'}[$type][$format]++;
-
-        return str_contains($format, '\\') ? "\"{$format}\"" : "'{$format}'";
+        return $pattern;
     }
 
-    private function minimumGrouping(): string
+    /**
+     * @param 'decimal'|'percent'|'currency' $type
+     */
+    private function encodedPattern(string $type): string
+    {
+        $pattern = $this->pattern($type);
+
+        $pattern = str_replace("\u{00A0}", '\\u{00A0}', $pattern);
+        $pattern = str_replace("\u{200E}", '\\u{200E}', $pattern);
+        $pattern = str_replace("\u{200F}", '\\u{200F}', $pattern);
+
+        return str_contains($pattern, '\\') ? "\"{$pattern}\"" : "'{$pattern}'";
+    }
+
+    private function grouping(): string
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
-
-        self::$grouping[$grouping] ??= 0;
-        self::$grouping[$grouping]++;
 
         return preg_match('/^[0-9]+$/', $grouping) ? $grouping
             : throw new Exception('minimumGroupingDigits should be numeric.');
@@ -118,11 +114,26 @@ final class NumbersLocaleCompiler
 
         $symbols = str_replace("'\u{00A0}'", '"\\u{00A0}"', $symbols);
 
-        $symbols = '[' . implode(', ', $symbols) . ']';
+        return '[' . implode(', ', $symbols) . ']';
+    }
 
-        self::$symbols[$symbols] ??= 0;
-        self::$symbols[$symbols]++;
+    /**
+     * @param 'system'|'decimal'|'percent'|'currency'|'grouping'|'symbols' $key
+     */
+    public static function getDefault(string $key): string
+    {
+        $parameters = (new ReflectionClass(Locale::class))
+            ->getConstructor()
+            ?->getParameters()
+            ?? throw new Exception('Failed to get constructor parameters.');
 
-        return $symbols;
+       return match ($key) {
+           'system' => $parameters[1]->getDefaultValue(),
+           'decimal' => $parameters[2]->getDefaultValue(),
+           'percent' => $parameters[3]->getDefaultValue(),
+           'currency' => $parameters[4]->getDefaultValue(),
+           'grouping' => (string) $parameters[5]->getDefaultValue(),
+           'symbols' => "['" . implode("', '", $parameters[6]->getDefaultValue()) . "']",
+       };
     }
 }

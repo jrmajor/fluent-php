@@ -1,14 +1,3 @@
 <?php
 
-use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Formatters\Number\Locale\Symbols;
-
-return new Locale(
-    'Assamese',
-    'beng',
-    '#,##,##0.###',
-    '#,##,##0%',
-    "¤\u{00A0}#,##,##0.00",
-    1,
-    new Symbols('.', ',', '-', '%'),
-);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Assamese', system: 'beng', decimal: '#,##,##0.###', percent: '#,##,##0%', currency: "¤\u{00A0}#,##,##0.00");
