@@ -35,7 +35,7 @@ final class CurrenciesLocaleCompiler
         $compiled = <<<PHP
             <?php
 
-            use Major\\Fluent\\Formatters\\Number\\Locale\\Currency;
+            use Major\\Fluent\\Formatters\\Number\\Locale\\Currency as C;
 
             return [
                 {$currencies},
@@ -52,35 +52,35 @@ final class CurrenciesLocaleCompiler
      */
     private function makeCurrency(array $data, string $code): string
     {
+        $name = $data['displayName']
+            ?? throw new Exception("No display name for {$code} in {$this->locale}");
+
         $symbol = $data['symbol']
             ?? throw new Exception("No symbol for {$code} in {$this->locale}");
 
-        $compiled = <<<PHP
-            new Currency(
-                    code: '{$code}',
-                    symbol: '{$symbol}',
-            PHP;
+        $compiled = "new C('{$code}'";
 
-        $i = "\n        ";
-
-        if (isset($data['narrowSymbol'])) {
-            $compiled .= "{$i}narrowSymbol: '{$data['narrowSymbol']}',";
+        if ($name !== $code && $symbol !== $code) {
+            $compiled .= ", '{$name}', '{$symbol}'";
+        } elseif ($name !== $code) {
+            $compiled .= ", '{$name}'";
+        } elseif ($symbol !== $code) {
+            $compiled .= ", symbol: '{$symbol}'";
         }
 
-        if (isset($data['displayName'])) {
-            $displayName = str_replace('\\"', '"', $data['displayName']);
-            $compiled .= "{$i}displayName: '{$displayName}',";
+        if (isset($data['narrowSymbol'])) {
+            $compiled .= ", narrow: '{$data['narrowSymbol']}'";
         }
 
         if ($plurals = $this->makePlurals($data)) {
-            $compiled .= "{$i}plurals: {$plurals}";
+            $compiled .= ", plurals: {$plurals}";
         }
 
-        if ($this->minorUnits($code) !== null) {
-            $compiled .= "{$i}minorUnits: '{$this->minorUnits($code)}',";
+        if ($this->minorUnits($code) !== 2) {
+            $compiled .= ", minorUnits: {$this->minorUnits($code)}";
         }
 
-        return $compiled . "\n    )";
+        return $compiled . ")";
     }
 
     /**
@@ -102,22 +102,20 @@ final class CurrenciesLocaleCompiler
             return null;
         }
 
-        $compiled = '[';
-
         foreach ($plurals as $category => $plural) {
-            $compiled .= "\n            '{$category}' => '{$plural}',";
+            $plurals[$category] = "'{$category}' => '{$plural}'";
         }
 
-        return $compiled . "\n        ],";
+        return '[' . implode(', ', $plurals) . ']';
     }
 
-    private function minorUnits(string $code): ?int
+    private function minorUnits(string $code): int
     {
         if (! isset($this->minorUnits)) {
             $this->loadMinorUnits();
         }
 
-        return $this->minorUnits[$code] ?? null;
+        return $this->minorUnits[$code] ?? 2;
     }
 
     private function loadMinorUnits(): void

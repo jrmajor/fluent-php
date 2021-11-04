@@ -7,13 +7,20 @@ namespace Major\Fluent\Formatters\Number\Locale;
  */
 final class Currency
 {
+    public string $name;
+
+    public string $symbol;
+
     public function __construct(
         public string $code,
-        public string $symbol,
-        public ?string $narrowSymbol = null,
-        public ?string $displayName = null,
+        ?string $name = null,
+        ?string $symbol = null,
+        public ?string $narrow = null,
         /** @var ?array<string, string> */
         public ?array $plurals = null,
         public int $minorUnits = 2,
-    ) { }
+    ) {
+        $this->name = $name ?? $code;
+        $this->symbol = $symbol ?? $code;
+    }
 }
