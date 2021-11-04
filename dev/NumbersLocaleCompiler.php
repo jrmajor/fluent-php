@@ -12,6 +12,24 @@ final class NumbersLocaleCompiler
     /** @var array<mixed> */
     private array $numbers;
 
+    /** @var array<string, int> */
+    public static array $systems = [];
+
+    /** @var array<string, int> */
+    public static array $decimalPatterns = [];
+
+    /** @var array<string, int> */
+    public static array $percentPatterns = [];
+
+    /** @var array<string, int> */
+    public static array $currencyPatterns = [];
+
+    /** @var array<int, int> */
+    public static array $grouping = [];
+
+    /** @var array<string, int> */
+    public static array $symbols = [];
+
     public function __construct(
         private string $locale,
     ) {
@@ -49,7 +67,12 @@ final class NumbersLocaleCompiler
 
     private function system(): string
     {
-        return $this->numbers['defaultNumberingSystem'];
+        $system = $this->numbers['defaultNumberingSystem'];
+
+        self::$systems[$system] ??= 0;
+        self::$systems[$system]++;
+
+        return $system;
     }
 
     private function format(string $type): string
@@ -67,12 +90,18 @@ final class NumbersLocaleCompiler
         $format = str_replace("\u{200E}", '\\u{200E}', $format);
         $format = str_replace("\u{200F}", '\\u{200F}', $format);
 
+        self::${$type . 'Patterns'}[$type][$format] ??= 0;
+        self::${$type . 'Patterns'}[$type][$format]++;
+
         return str_contains($format, '\\') ? "\"{$format}\"" : "'{$format}'";
     }
 
     private function minimumGrouping(): string
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
+
+        self::$grouping[$grouping] ??= 0;
+        self::$grouping[$grouping]++;
 
         return preg_match('/^[0-9]+$/', $grouping) ? $grouping
             : throw new Exception('minimumGroupingDigits should be numeric.');
@@ -89,6 +118,11 @@ final class NumbersLocaleCompiler
 
         $symbols = str_replace("'\u{00A0}'", '"\\u{00A0}"', $symbols);
 
-        return 'new Symbols(' . implode(', ', $symbols) . ')';
+        $symbols = '[' . implode(', ', $symbols) . ']';
+
+        self::$symbols[$symbols] ??= 0;
+        self::$symbols[$symbols]++;
+
+        return $symbols;
     }
 }
