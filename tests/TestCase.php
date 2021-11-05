@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
 
         $result = $_bundle->message($_message, ...$arguments);
 
-        foreach($_bundle->popErrors() as $error) {
+        foreach ($_bundle->popErrors() as $error) {
             throw $error;
         }
 
