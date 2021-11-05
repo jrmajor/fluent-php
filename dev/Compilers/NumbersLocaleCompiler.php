@@ -10,6 +10,7 @@ use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Formatters\Number\NumberFormatter;
+use Safe as s;
 
 final class NumbersLocaleCompiler
 {
@@ -71,7 +72,7 @@ final class NumbersLocaleCompiler
 
         $regex = NumberFormatter::PATTERN_REGEX;
 
-        if (! preg_match("/^{$regex}(;{$regex})?$/", $pattern)) {
+        if (! s\preg_match("/^{$regex}(;{$regex})?$/", $pattern)) {
             throw new Exception("Pattern {$pattern} is invalid.");
         }
 
@@ -89,7 +90,7 @@ final class NumbersLocaleCompiler
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
 
-        return preg_match('/^[0-9]+$/', $grouping) ? $grouping
+        return s\preg_match('/^[0-9]+$/', $grouping) ? $grouping
             : throw new Exception('minimumGroupingDigits should be numeric.');
     }
 

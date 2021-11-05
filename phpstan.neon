@@ -5,6 +5,10 @@ parameters:
         - locales
         - src
     ignoreErrors:
+        - '#^Function substr is unsafe to use\.#'
+        -
+            message: '#^Function .* is unsafe to use\. It can return FALSE instead of throwing an exception\.#'
+            path: src
         -
             message: '#^Match expression does not handle remaining value: string$#'
             count: 1
@@ -13,3 +17,6 @@ parameters:
             message: '#^Match expression does not handle remaining value: int<min, -1>$#'
             count: 1
             path: src/Parser/FluentParser.php
+
+includes:
+    - vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon

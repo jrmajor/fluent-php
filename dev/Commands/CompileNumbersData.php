@@ -7,6 +7,7 @@ use Major\Fluent\Dev\Compilers\NumbersLocaleCompiler as Compiler;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Safe as s;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -132,7 +133,7 @@ class CompileNumbersData extends Command
     {
         $stat = array_map(fn (array $locales) => count($locales), $this->{$stat});
 
-        arsort($stat);
+        s\arsort($stat);
 
         return $stat;
     }
