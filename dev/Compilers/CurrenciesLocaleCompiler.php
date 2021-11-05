@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Major\Fluent\Dev;
+namespace Major\Fluent\Dev\Compilers;
 
 use Exception;
 use SimpleXMLElement;
@@ -16,9 +16,9 @@ final class CurrenciesLocaleCompiler
     private array $minorUnits;
 
     public function __construct(
-        private string $locale,
+        public string $locale,
     ) {
-        $currencies = file_get_contents(__DIR__ . "/../node_modules/cldr-numbers-modern/main/{$locale}/currencies.json")
+        $currencies = file_get_contents(__DIR__ . "/../../node_modules/cldr-numbers-modern/main/{$locale}/currencies.json")
             ?: throw new Exception("Failed to read currencies.json data for {$locale}.");
 
         $this->currencies = json_decode($currencies, associative: true)['main'][$locale]['numbers']['currencies'];
@@ -43,7 +43,7 @@ final class CurrenciesLocaleCompiler
 
             PHP;
 
-        file_put_contents(__DIR__ . "/../locales/currencies/{$this->locale}.php", $compiled)
+        file_put_contents(__DIR__ . "/../../locales/currencies/{$this->locale}.php", $compiled)
             ?: throw new Exception("Failed to write {$this->locale}.php");
     }
 
@@ -122,7 +122,7 @@ final class CurrenciesLocaleCompiler
 
     private function loadMinorUnits(): void
     {
-        $xml = file_get_contents(__DIR__ . '/ISO4217.xml')
+        $xml = file_get_contents(__DIR__ . '/../ISO4217.xml')
             ?: throw new Exception();
 
         $xml = new SimpleXMLElement($xml);
