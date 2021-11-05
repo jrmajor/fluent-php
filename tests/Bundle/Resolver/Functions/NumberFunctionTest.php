@@ -22,9 +22,9 @@ class NumberFunctionTest extends TestCase
             zeroes = { NUMBER(1.00) }
             ftl;
 
-        $this->us = (new FluentBundle('en-US', strict: true, useIsolating: false))->addFtl($ftl);
+        $this->us = (new FluentBundle('en-US', useIsolating: false))->addFtl($ftl);
 
-        $this->pl = (new FluentBundle('pl', strict: true, useIsolating: false))->addFtl($ftl);
+        $this->pl = (new FluentBundle('pl', useIsolating: false))->addFtl($ftl);
     }
 
     public function testNumberFunctionWorks(): void

@@ -18,8 +18,12 @@ abstract class TestCase extends BaseTestCase
     ): void {
         self::assertEmpty($_bundle->popErrors(), 'There are errors in bundle before an assertion.');
 
-        self::assertSame($_expected, $_bundle->message($_message, ...$arguments));
+        $result = $_bundle->message($_message, ...$arguments);
 
-        self::assertEmpty($_bundle->popErrors(), 'There are errors in bundle.');
+        foreach($_bundle->popErrors() as $error) {
+            throw $error;
+        }
+
+        self::assertSame($_expected, $result);
     }
 }
