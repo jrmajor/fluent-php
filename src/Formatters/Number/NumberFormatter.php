@@ -48,27 +48,12 @@ final class NumberFormatter
             $number *= 100;
         }
 
-        $pattern = $this->locale->{$options->style};
-
-        if (str_contains($pattern, ';')) {
-            $pattern = explode(';', $pattern)[$number < 0 ? 1 : 0];
-            $minus = '';
-        } else {
-            $minus = '-';
-        }
-
-        if ($number < 0) {
-            $number = abs($number);
-        } else {
-            $minus = '';
-        }
+        [$pattern, $minus, $number] = $this->handleNegativeValues(
+            $this->locale->{$options->style}, $number,
+        );
 
         [$pre, $pattern, $post] = $this->splitPattern($pattern);
-
-        $number = explode('.', (string) $number);
-
-        $int = $number[0];
-        $frac = $number[1] ?? '';
+        [$int, $frac] = $this->splitNumber($number);
 
         $frac = $this->applyMinimumFractionDigits($options, $int, $frac);
         [$int, $frac] = $this->applyMaximumFractionDigits($options, $int, $frac);
@@ -82,6 +67,23 @@ final class NumberFormatter
         }
 
         return $this->applyReplacements($options, $minus . $pre . $formatted . $post);
+    }
+
+    /**
+     * @return array{string, string, int|float}
+     */
+    private function handleNegativeValues(string $pattern, int|float $number): array
+    {
+        if (str_contains($pattern, ';')) {
+            $pattern = explode(';', $pattern)[$number < 0 ? 1 : 0];
+            $minus = '';
+        } else {
+            $minus = '-';
+        }
+
+        return $number < 0
+            ? [$pattern, $minus, abs($number)]
+            : [$pattern, '', $number];
     }
 
     private function applyMinimumFractionDigits(Options $o, string $int, string $frac): string
@@ -272,5 +274,18 @@ final class NumberFormatter
 
         /** @phpstan-ignore-next-line */
         return array_slice($matches, 1);
+    }
+
+    /**
+     * @return array{string, string}
+     */
+    private function splitNumber(int|float $number): array
+    {
+        $number = (string) $number;
+
+        /** @phpstan-ignore-next-line */
+        return str_contains($number, '.')
+            ? explode('.', $number, 2)
+            : [$number, ''];
     }
 }
