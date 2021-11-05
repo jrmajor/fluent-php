@@ -6,7 +6,9 @@ namespace Major\Fluent\Dev\Compilers;
 
 use Exception;
 use Locale as IntlLocale;
+use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
+use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Formatters\Number\NumberFormatter;
 use ReflectionClass;
@@ -19,10 +21,7 @@ final class NumbersLocaleCompiler
     public function __construct(
         public string $locale,
     ) {
-        $numbers = file_get_contents(__DIR__ . "/../../node_modules/cldr-numbers-modern/main/{$locale}/numbers.json")
-            ?: throw new Exception("Failed to read numbers.json data for {$locale}.");
-
-        $this->numbers = json_decode($numbers, associative: true)['main'][$locale]['numbers'];
+        $this->numbers = CldrData::get('numbers', $locale, 'numbers')['main'][$locale]['numbers'];
     }
 
     public function make(): void
@@ -57,8 +56,7 @@ final class NumbersLocaleCompiler
 
         $compiled .= ");\n";
 
-        file_put_contents(__DIR__ . "/../../locales/numbers/{$this->locale}.php", $compiled)
-            ?: throw new Exception("Failed to write {$this->locale}.php");
+        LocaleFiles::store('numbers', $this->locale, $compiled);
     }
 
     public function system(): string

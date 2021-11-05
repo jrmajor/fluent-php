@@ -4,9 +4,9 @@ namespace Major\Fluent\Dev\Commands;
 
 use Exception;
 use Major\Fluent\Dev\Compilers\NumbersLocaleCompiler as Compiler;
-use Major\Fluent\Dev\Helpers\AvailableLocales;
-use Major\Fluent\Dev\Helpers\Directory;
+use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults;
+use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -53,9 +53,9 @@ class CompileNumbersData extends Command
     {
         $start = microtime(true);
 
-        Directory::prepare('numbers');
+        LocaleFiles::prepareDirectory('numbers');
 
-        foreach (AvailableLocales::all() as $locale) {
+        foreach (CldrData::locales('numbers') as $locale) {
             $compiler = new Compiler($locale);
 
             $compiler->make();

@@ -5,23 +5,21 @@ declare(strict_types=1);
 namespace Major\Fluent\Dev\Compilers;
 
 use Exception;
-use SimpleXMLElement;
+use Major\Fluent\Dev\Helpers\CldrData;
+use Major\Fluent\Dev\Helpers\IsoData;
+use Major\Fluent\Dev\Helpers\LocaleFiles;
 
 final class CurrenciesLocaleCompiler
 {
     /** @var array<string, array<string, string>> */
     private array $currencies;
 
-    /** @var array<string, int> */
-    private array $minorUnits;
-
     public function __construct(
         public string $locale,
     ) {
-        $currencies = file_get_contents(__DIR__ . "/../../node_modules/cldr-numbers-modern/main/{$locale}/currencies.json")
-            ?: throw new Exception("Failed to read currencies.json data for {$locale}.");
+        $key = "currencies.main.{$locale}.numbers.currencies";
 
-        $this->currencies = json_decode($currencies, associative: true)['main'][$locale]['numbers']['currencies'];
+        $this->currencies = CldrData::get('numbers', $locale, $key);
     }
 
     public function make(): void
@@ -43,8 +41,7 @@ final class CurrenciesLocaleCompiler
 
             PHP;
 
-        file_put_contents(__DIR__ . "/../../locales/currencies/{$this->locale}.php", $compiled)
-            ?: throw new Exception("Failed to write {$this->locale}.php");
+        LocaleFiles::store('currencies', $this->locale, $compiled);
     }
 
     /**
@@ -78,8 +75,8 @@ final class CurrenciesLocaleCompiler
             $compiled .= ", plurals: {$plurals}";
         }
 
-        if ($this->minorUnits($code) !== 2) {
-            $compiled .= ", minorUnits: {$this->minorUnits($code)}";
+        if (IsoData::minorUnits($code) !== 2) {
+            $compiled .= ', minorUnits: ' . IsoData::minorUnits($code);
         }
 
         return $compiled . ')';
@@ -109,35 +106,5 @@ final class CurrenciesLocaleCompiler
         }
 
         return '[' . implode(', ', $plurals) . ']';
-    }
-
-    private function minorUnits(string $code): int
-    {
-        if (! isset($this->minorUnits)) {
-            $this->loadMinorUnits();
-        }
-
-        return $this->minorUnits[$code] ?? 2;
-    }
-
-    private function loadMinorUnits(): void
-    {
-        $xml = file_get_contents(__DIR__ . '/../ISO4217.xml')
-            ?: throw new Exception();
-
-        $xml = new SimpleXMLElement($xml);
-
-        $this->minorUnits = [];
-
-        foreach ($xml->CcyTbl->children() as $data) {
-            $currency = (string) $data->Ccy;
-            $minorUnits = (string) $data->CcyMnrUnts;
-
-            if (! is_numeric($minorUnits)) {
-                continue;
-            }
-
-            $this->minorUnits[$currency] = (int) $minorUnits;
-        }
     }
 }
