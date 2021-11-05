@@ -44,6 +44,10 @@ final class NumberFormatter
         $currency = $this->getCurrency($options);
         $options->fillWithDefaults($currency);
 
+        if ($options->style === 'currency') {
+            throw new InvalidArgumentException('Currency formatting is not supported yet.');
+        }
+
         if ($options->style === 'percent') {
             $number *= 100;
         }
