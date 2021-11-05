@@ -256,7 +256,7 @@ final class NumberFormatter
         assert($currency !== null);
 
         return $this->currencies[$currency]
-            ?? throw NumberFormatterException::missingCurrency($currency);
+            ?? throw new InvalidArgumentException("Currency \"{$currency}\" does not exist.");
     }
 
     /**
