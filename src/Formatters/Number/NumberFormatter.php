@@ -28,9 +28,9 @@ final class NumberFormatter
 
     public function __construct(string $locale)
     {
-        $locale = mb_strtolower(str_replace('_', '-', $locale));
+        $locale = str_replace('_', '-', $locale);
 
-        if (! preg_match('/^[a-z-]+$/', $locale)) {
+        if (! preg_match('/^[A-Za-z-]+$/', $locale)) {
             throw new InvalidArgumentException("Locale \"{$locale}\" contains invalid characters.");
         }
 
@@ -201,28 +201,46 @@ final class NumberFormatter
 
     private function loadLocaleData(string $locale): void
     {
-        $parts = explode('-', $locale, 2);
+        $this->locale = $this->loadFile('numbers', $locale);
+        $this->currencies = $this->loadFile('currencies', $locale);
+    }
+
+    private function loadFile(string $directory, string $locale): mixed
+    {
+        $parts = explode('-', strtolower($locale), 2);
 
         $language = $parts[0];
         $region = $parts[1] ?? null;
 
-        $basePath = __DIR__ . '/../../../locales/';
+        $files = glob(__DIR__ . "/../../../locales/{$directory}/{$language}*.php");
 
-        if ($region !== null && file_exists($fn = "{$basePath}/numbers/{$language}-{$region}.php")) {
-            $this->locale = require $fn;
-        } elseif (file_exists($fn = "{$basePath}/numbers/{$language}.php")) {
-            $this->locale = require $fn;
-        } else {
-            throw new InvalidArgumentException("Unsupported locale: {$locale}.");
+        if ($files === false) {
+            throw new ShouldNotHappen();
         }
 
-        if ($region !== null && file_exists($fn = "{$basePath}/currencies/{$language}-{$region}.php")) {
-            $this->currencies = require $fn;
-        } elseif (file_exists($fn = "{$basePath}/currencies/{$language}.php")) {
-            $this->currencies = require $fn;
-        } else {
-            throw new InvalidArgumentException("Unsupported locale: {$locale}.");
+        $withoutRegion = null;
+
+        foreach ($files as $path) {
+            $fileLocale = strtolower(substr($path, strrpos($path, '/') + 1, -4));
+
+            if ($region !== null && $fileLocale === "{$language}-{$region}") {
+                return require $path;
+            }
+
+            if ($fileLocale === $language) {
+                if ($region === null) {
+                    return require $path;
+                } else {
+                    $withoutRegion = $path;
+                }
+            }
         }
+
+        if ($withoutRegion !== null) {
+            return require $withoutRegion;
+        }
+
+        throw new InvalidArgumentException("Unsupported locale: {$locale}.");
     }
 
     private function getCurrency(Options $options): ?Currency
