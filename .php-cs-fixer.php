@@ -10,7 +10,6 @@ return Major\CS\config($finder, [
         'order' => ['use_trait', 'constant', 'property', 'method', 'magic'],
     ],
     'phpdoc_summary' => false,
-    'no_unused_imports' => false,
     // Remove throw from tokens, removes blank line when throw is used as an expression.
     'no_extra_blank_lines' => [
         'tokens' => ['case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'switch'],

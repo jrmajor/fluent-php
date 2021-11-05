@@ -9,9 +9,7 @@ use Locale as IntlLocale;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
-use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Formatters\Number\NumberFormatter;
-use ReflectionClass;
 
 final class NumbersLocaleCompiler
 {
