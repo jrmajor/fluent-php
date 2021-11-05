@@ -12,6 +12,8 @@ use Major\Fluent\Formatters\Number\Locale\Locale;
  */
 final class NumberFormatter
 {
+    public const PATTERN_REGEX = "([¤\\-%\u{00A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{00A0}]*)";
+
     private const NUMERAL_SYSTEMS = [
         'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
         'arabext' => ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
@@ -262,10 +264,9 @@ final class NumberFormatter
      */
     private function splitPattern(string $pattern): array
     {
-        $regex = "/^([¤\\-%\u{00A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{00A0}]*)$/";
         $matches = [];
 
-        if (! preg_match($regex, $pattern, $matches)) {
+        if (! preg_match('/^' . self::PATTERN_REGEX . '$/', $pattern, $matches)) {
             throw new ShouldNotHappen();
         }
 

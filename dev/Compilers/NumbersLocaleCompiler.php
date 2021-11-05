@@ -8,6 +8,7 @@ use Exception;
 use Locale as IntlLocale;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Formatters\Number\Locale\Locale;
+use Major\Fluent\Formatters\Number\NumberFormatter;
 use ReflectionClass;
 
 final class NumbersLocaleCompiler
@@ -72,8 +73,10 @@ final class NumbersLocaleCompiler
 
         assert(is_string($pattern));
 
-        if (! preg_match("/^[¤,.\\-;%#0\u{00A0}\u{200E}\u{200F}]+$/", $pattern)) {
-            throw new Exception("Pattern {$pattern} contains invalid characters.");
+        $regex = NumberFormatter::PATTERN_REGEX;
+
+        if (! preg_match("/^{$regex}(;{$regex})?$/", $pattern)) {
+            throw new Exception("Pattern {$pattern} is invalid.");
         }
 
         return $pattern;

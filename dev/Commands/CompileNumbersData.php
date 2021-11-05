@@ -81,12 +81,14 @@ class CompileNumbersData extends Command
             'grouping' => ['grouping', 'Minimum grouping digits'],
             'symbols' => ['symbols', 'Symbol set'],
         ] as $stat => $data) {
-            if (! $input->getOption('all') && ! $input->getOption($data[0])) {
+            [$option, $title] = $data;
+
+            if (! $input->getOption('all') && ! $input->getOption($option)) {
                 continue;
             }
 
             (new Table($output))
-                ->setHeaders([$data[1], 'Count'])
+                ->setHeaders([$title, 'Count'])
                 ->setRows($this->rowsForStatTable($stat))
                 ->render();
 
@@ -160,7 +162,7 @@ class CompileNumbersData extends Command
             return $name;
         }
 
-        throw new Exception('No stats.');
+        throw new Exception("No stats for {$stat}.");
     }
 
     private function escape(string $string): string

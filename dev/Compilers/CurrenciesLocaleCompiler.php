@@ -53,10 +53,10 @@ final class CurrenciesLocaleCompiler
     private function makeCurrency(array $data, string $code): string
     {
         $name = $data['displayName']
-            ?? throw new Exception("No display name for {$code} in {$this->locale}");
+            ?? throw new Exception("No display name for {$code} in {$this->locale}.");
 
         $symbol = $data['symbol']
-            ?? throw new Exception("No symbol for {$code} in {$this->locale}");
+            ?? throw new Exception("No symbol for {$code} in {$this->locale}.");
 
         $name = str_replace('\\"', '"', $name);
 
