@@ -19,6 +19,8 @@ final class FluentNumber implements Stringable
     ) { }
 
     /**
+     * @internal
+     *
      * @return $this
      */
     public function setLocale(string $locale): self
@@ -39,11 +41,17 @@ final class FluentNumber implements Stringable
         return $this;
     }
 
+    /**
+     * @internal
+     */
     public function value(): int|float
     {
         return $this->value;
     }
 
+    /**
+     * @internal
+     */
     public function original(): string
     {
         if ($this->original !== null) {
@@ -55,6 +63,9 @@ final class FluentNumber implements Stringable
             : (string) $this->value();
     }
 
+    /**
+     * @internal
+     */
     public function __toString(): string
     {
         return (new NumberFormatter($this->locale))->format(
