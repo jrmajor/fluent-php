@@ -9,7 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 (new Provider())->register();
 
-$application = new Application();
+$application = new Application('fluent-php locale data compiler');
 
 $application->addCommands([
     new Commands\CompileCurrenciesData(),
