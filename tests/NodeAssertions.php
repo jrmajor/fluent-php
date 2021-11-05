@@ -47,6 +47,10 @@ trait NodeAssertions
             return;
         }
 
+        if (! is_dir(dirname(self::$cachePath))) {
+            mkdir(dirname(self::$cachePath), recursive: true);
+        }
+
         if (! file_exists(self::$cachePath)) {
             file_put_contents(self::$cachePath, '{}');
         }
