@@ -41,4 +41,10 @@ class NumberFunctionTest extends TestCase
         $this->assertTranslation('42%', $this->us, 'percent', arg: 0.42);
         $this->assertTranslation('42%', $this->pl, 'percent', arg: 0.42);
     }
+
+    public function testItRetainsTrailingZeroes(): void
+    {
+        $this->assertTranslation('1.00', $this->us, 'zeroes');
+        $this->assertTranslation('1,00', $this->pl, 'zeroes');
+    }
 }

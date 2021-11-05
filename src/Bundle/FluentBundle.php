@@ -64,12 +64,8 @@ final class FluentBundle
         protected bool $allowOverrides = false,
     ) {
         $this->functions = [
-            'NUMBER' => function ($number, ...$options) {
-                return (new FluentNumber($number))
-                    ->setLocale($this->locale)
-                    ->setOptions($options);
-            },
-            'DATETIME' => fn () => throw new Exception('DATETIME() function is not implemented.'),
+            'NUMBER' => Closure::fromCallable([$this, 'numberFunction']),
+            'DATETIME' => Closure::fromCallable([$this, 'dateTimeFunction']),
         ];
     }
 
@@ -420,7 +416,7 @@ final class FluentBundle
             return $this->reportError(new ReferenceException("Unknown function: {$name}()."), "{$name}()");
         }
 
-        $arguments = $this->getFunctionArguments($reference->arguments, $scope);
+        $arguments = $this->getFunctionArguments($reference->arguments, $scope, $name === 'NUMBER');
 
         try {
             $output = $function(...$arguments);
@@ -447,12 +443,13 @@ final class FluentBundle
     private function getFunctionArguments(
         CallArguments $arguments,
         ResolutionScope $scope,
+        bool $number = false,
     ): array {
         /** @var array<int|string, mixed> */
         $prepared = [];
 
-        foreach ($arguments->positional as $argument) {
-            $prepared[] = $this->resolveArgument($argument, $scope);
+        foreach ($arguments->positional as $position => $argument) {
+            $prepared[] = $this->resolveArgument($argument, $scope, $position === 0 && $number);
         }
 
         foreach ($arguments->named as $argument) {
@@ -465,8 +462,9 @@ final class FluentBundle
     private function resolveArgument(
         Expression $argument,
         ResolutionScope $scope,
+        bool $number = false,
     ): mixed {
-        if ($argument instanceof NumberLiteral) {
+        if ($argument instanceof NumberLiteral && ! $number) {
             $number = $argument->parse();
 
             return $number->precision === 0 ? (int) $number->value : $number->value;
@@ -484,7 +482,7 @@ final class FluentBundle
         return match (get_debug_type($value)) {
             FluentNone::class => null,
             /** @phpstan-ignore-next-line */
-            FluentNumber::class => $value->value(),
+            FluentNumber::class => $number ? $value : $value->value(),
             default => $value,
         };
     }
@@ -554,5 +552,22 @@ final class FluentBundle
         }
 
         return false;
+    }
+
+    private function numberFunction(
+        int|float|FluentNumber $number,
+        int|string|bool ...$options,
+    ): FluentNumber {
+        if (! $number instanceof FluentNumber) {
+            $number = new FluentNumber($number);
+        }
+
+        /** @phpstan-ignore-next-line */
+        return $number->setLocale($this->locale)->setOptions($options);
+    }
+
+    private function dateTimeFunction(): void
+    {
+        throw new Exception('DATETIME() function is not implemented.');
     }
 }
