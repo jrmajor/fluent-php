@@ -273,8 +273,9 @@ final class FluentBundle
     ): FluentNumber {
         $parsed = $literal->parse();
 
-        return (new FluentNumber($parsed->value, $literal->value, $parsed->precision))
-            ->setLocale($this->locale);
+        return (new FluentNumber($parsed->value, $literal->value))
+            ->setLocale($this->locale)
+            ->setOptions(['minimumFractionDigits' => $parsed->precision]);
     }
 
     private function resolveVariableReference(

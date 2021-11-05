@@ -2,17 +2,20 @@
 
 namespace Major\Fluent\Bundle\Types;
 
-use NumberFormatter;
+use Major\Fluent\Formatters\Number\NumberFormatter;
+use Major\Fluent\Formatters\Number\Options;
 use Stringable;
 
 final class FluentNumber implements Stringable
 {
     private string $locale = 'en';
 
+    /** @var array<string, mixed> */
+    private array $options = [];
+
     public function __construct(
-        protected int|float $value,
-        protected ?string $original = null,
-        protected ?int $minimumFractionDigits = null,
+        private int|float $value,
+        private ?string $original = null,
     ) { }
 
     /**
@@ -21,6 +24,17 @@ final class FluentNumber implements Stringable
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     * @return $this
+     */
+    public function setOptions(array $options): self
+    {
+        $this->options = array_merge($this->options, $options);
 
         return $this;
     }
@@ -36,23 +50,15 @@ final class FluentNumber implements Stringable
             return $this->original;
         }
 
-        return is_float($this->value) && $this->value - round($this->value) === 0.0
-            ? $this->value . '.0'
-            : (string) $this->value;
+        return is_float($this->value()) && $this->value() - round($this->value()) === 0.0
+            ? $this->value() . '.0'
+            : (string) $this->value();
     }
 
     public function __toString(): string
     {
-        $formatter = NumberFormatter::create(
-            $this->locale,
-            NumberFormatter::DEFAULT_STYLE,
+        return (new NumberFormatter($this->locale))->format(
+            $this->value, new Options(...$this->options),
         );
-
-        $formatter->setAttribute(
-            NumberFormatter::MIN_FRACTION_DIGITS,
-            $this->minimumFractionDigits ?? 0,
-        );
-
-        return $formatter->format($this->value);
     }
 }
