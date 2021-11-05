@@ -11,6 +11,6 @@ final class FunctionException extends ResolverException
      */
     public function __construct(string $function, Throwable $e)
     {
-        parent::__construct("$function() function error: {$e->getMessage()}", previous: $e);
+        parent::__construct("{$function}() function error: {$e->getMessage()}", previous: $e);
     }
 }
