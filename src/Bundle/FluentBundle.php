@@ -10,6 +10,7 @@ use Major\Fluent\Exceptions\Bundle\FunctionExistsException;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
 use Major\Fluent\Exceptions\Bundle\TermExistsException;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
+use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\ResolverException;
@@ -35,6 +36,7 @@ use Major\Fluent\Node\Syntax\Variant;
 use Major\Fluent\Parser\FluentParser;
 use Major\PluralRules\PluralRules;
 use Stringable;
+use Throwable;
 
 final class FluentBundle
 {
@@ -420,7 +422,11 @@ final class FluentBundle
 
         $arguments = $this->getFunctionArguments($reference->arguments, $scope);
 
-        $output = $function(...$arguments);
+        try {
+            $output = $function(...$arguments);
+        } catch (Throwable $e) {
+            return $this->reportError(new FunctionException($name, $e), "{$name}()");
+        }
 
         if (is_string($output) || $output instanceof Stringable) {
             return $output;
