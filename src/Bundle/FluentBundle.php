@@ -62,7 +62,11 @@ final class FluentBundle
         protected bool $allowOverrides = false,
     ) {
         $this->functions = [
-            'NUMBER' => fn () => throw new Exception('NUMBER() function is not implemented.'),
+            'NUMBER' => function ($number, ...$options) {
+                return (new FluentNumber($number))
+                    ->setLocale($this->locale)
+                    ->setOptions($options);
+            },
             'DATETIME' => fn () => throw new Exception('DATETIME() function is not implemented.'),
         ];
     }
