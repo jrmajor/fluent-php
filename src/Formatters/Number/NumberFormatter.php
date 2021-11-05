@@ -12,7 +12,7 @@ use Major\Fluent\Formatters\Number\Locale\Locale;
  */
 final class NumberFormatter
 {
-    private const NUMBERING_SYSTEMS = [
+    private const NUMERAL_SYSTEMS = [
         'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
         'arabext' => ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
         'beng' => ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
@@ -194,7 +194,7 @@ final class NumberFormatter
 
         return str_replace(
             range(0, 9),
-            self::NUMBERING_SYSTEMS[$this->locale->system],
+            self::NUMERAL_SYSTEMS[$this->locale->system],
             $formatted,
         );
     }
