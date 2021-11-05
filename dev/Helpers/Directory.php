@@ -4,6 +4,8 @@ namespace Major\Fluent\Dev\Helpers;
 
 use Exception;
 
+use function Safe\glob;
+
 final class Directory
 {
     public static function path(string $dir): string

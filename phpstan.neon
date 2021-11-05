@@ -4,6 +4,12 @@ parameters:
         - dev
         - locales
         - src
-
-includes:
-    - phpstan-baseline.neon
+    ignoreErrors:
+        -
+            message: '#^Match expression does not handle remaining value: string$#'
+            count: 1
+            path: src/Exceptions/ParserException.php
+        -
+            message: '#^Match expression does not handle remaining value: int<min, -1>$#'
+            count: 1
+            path: src/Parser/FluentParser.php
