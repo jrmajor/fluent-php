@@ -27,7 +27,7 @@ final class Options
         }
 
         if (! in_array($currencyDisplay, ['symbol', 'narrowSymbol', 'code', 'name'], true)) {
-            throw new InvalidArgumentException('Allowed values of currencyDisplay are decimal, currency, percent and unit.');
+            throw new InvalidArgumentException('Allowed values of currencyDisplay are symbol, narrowSymbol, code and name.');
         }
 
         if ($style === 'currency' && $currency === null) {
