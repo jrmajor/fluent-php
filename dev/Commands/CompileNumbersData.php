@@ -67,7 +67,7 @@ class CompileNumbersData extends Command
 
         $this->checkDefaults($output);
 
-        $output->writeln('<info>Generated in ' . round(microtime(true) - $start, 2) . 's</info>');
+        $output->writeln('<info>Compiled in ' . round(microtime(true) - $start, 2) . 's</info>');
 
         return Command::SUCCESS;
     }

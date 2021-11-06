@@ -25,7 +25,7 @@ class CompileCurrenciesData extends Command
             (new Compiler($locale))->make();
         }
 
-        $output->writeln('<info>Generated in ' . round(microtime(true) - $start, 2) . 's</info>');
+        $output->writeln('<info>Compiled in ' . round(microtime(true) - $start, 2) . 's</info>');
 
         return Command::SUCCESS;
     }
