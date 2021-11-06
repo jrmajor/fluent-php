@@ -3,6 +3,7 @@
 namespace Major\Fluent\Dev\Helpers;
 
 use Safe as s;
+use Symfony\Component\Finder\Finder;
 
 final class LocaleFiles
 {
@@ -26,8 +27,38 @@ final class LocaleFiles
         }
     }
 
+    /**
+     * @return array<string, string[]>
+     */
+    public static function regions(): array
+    {
+        $files = (new Finder())->in(self::path('currencies'))->files();
+        $regions = [];
+
+        foreach ($files as $file) {
+            if (
+                $file->getExtension() !== 'php'
+                || ! str_contains($file->getFilename(), '-')
+            ) {
+                continue;
+            }
+
+            $language = explode('-', $file->getFilename())[0];
+
+            $regions[$language] ??= [];
+            $regions[$language][] = $file->getBasename('.php');
+        }
+
+        return $regions;
+    }
+
     public static function store(string $type, string $locale, string $content): void
     {
         s\file_put_contents(self::path("{$type}/{$locale}.php"), $content);
+    }
+
+    public static function read(string $type, string $locale): string
+    {
+        return s\file_get_contents(self::path("{$type}/{$locale}.php"));
     }
 }

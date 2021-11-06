@@ -32,11 +32,11 @@ final class LocaleData
     {
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
-        if ($region !== null) {
-            return require $region;
+        if ($region === null) {
+            return require $language;
         }
 
-        return require $language;
+        return array_merge(require $language, require $region);
     }
 
     /**
@@ -84,7 +84,7 @@ final class LocaleData
     /**
      * @return string[]
      */
-    protected static function getFiles(string $type, string $language): array
+    private static function getFiles(string $type, string $language): array
     {
         $files = glob(self::PATH . "{$type}/{$language}*.php");
 
