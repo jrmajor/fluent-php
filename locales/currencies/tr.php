@@ -261,7 +261,6 @@ return [
     'UYI' => new C('UYI', 'Uruguay Peso en Unidades Indexadas', plurals: ['one' => 'Uruguay Peso en Unidades Indexadas', 'other' => 'Uruguay Peso en Unidades Indexadas'], minorUnits: 0),
     'UYP' => new C('UYP', 'Uruguay Pezosu (1975–1993)', plurals: ['one' => 'Uruguay Pezosu (1975–1993)', 'other' => 'Uruguay Pezosu (1975–1993)']),
     'UYU' => new C('UYU', 'Uruguay Pesosu', plurals: ['one' => 'Uruguay pesosu', 'other' => 'Uruguay pesosu']),
-    'UYW' => new C('UYW', minorUnits: 4),
     'UZS' => new C('UZS', 'Özbekistan Somu', plurals: ['one' => 'Özbekistan somu', 'other' => 'Özbekistan somu']),
     'VEB' => new C('VEB', 'Venezuela Bolivarı (1871–2008)', plurals: ['one' => 'Venezuela Bolivarı (1871–2008)', 'other' => 'Venezuela Bolivarı (1871–2008)']),
     'VEF' => new C('VEF', 'Venezuela Bolivarı (2008–2018)', plurals: ['one' => 'Venezuela bolivarı (2008–2018)', 'other' => 'Venezuela bolivarı (2008–2018)']),

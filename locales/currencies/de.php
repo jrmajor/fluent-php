@@ -261,7 +261,6 @@ return [
     'UYI' => new C('UYI', 'Uruguayischer Peso (Indexierte Rechnungseinheiten)', plurals: ['one' => 'Uruguayischer Peso (Indexierte Rechnungseinheiten)', 'other' => 'Uruguayische Pesos (Indexierte Rechnungseinheiten)'], minorUnits: 0),
     'UYP' => new C('UYP', 'Uruguayischer Peso (1975–1993)', plurals: ['one' => 'Uruguayischer Peso (1975–1993)', 'other' => 'Uruguayische Pesos (1975–1993)']),
     'UYU' => new C('UYU', 'Uruguayischer Peso', plurals: ['one' => 'Uruguayischer Peso', 'other' => 'Uruguayische Pesos']),
-    'UYW' => new C('UYW', minorUnits: 4),
     'UZS' => new C('UZS', 'Usbekistan-Sum', plurals: ['one' => 'Usbekistan-Sum', 'other' => 'Usbekistan-Sum']),
     'VEB' => new C('VEB', 'Venezolanischer Bolívar (1871–2008)', plurals: ['one' => 'Venezolanischer Bolívar (1871–2008)', 'other' => 'Venezolanische Bolívares (1871–2008)']),
     'VEF' => new C('VEF', 'Venezolanischer Bolívar (2008–2018)', plurals: ['one' => 'Venezolanischer Bolívar (2008–2018)', 'other' => 'Venezolanische Bolívares (2008–2018)']),

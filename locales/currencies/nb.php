@@ -261,7 +261,6 @@ return [
     'UYI' => new C('UYI', 'uruguyanske pesos (indekserte enheter)', plurals: ['one' => 'uruguyanske pesos (indekserte enheter)', 'other' => 'uruguyanske pesos (indekserte enheter)'], minorUnits: 0),
     'UYP' => new C('UYP', 'uruguayanske pesos (1975–1993)', plurals: ['one' => 'uruguayansk peso (1975–1993)', 'other' => 'uruguayanske pesos (1975–1993)']),
     'UYU' => new C('UYU', 'uruguayanske pesos', plurals: ['one' => 'uruguyansk peso', 'other' => 'uruguayanske pesos']),
-    'UYW' => new C('UYW', minorUnits: 4),
     'UZS' => new C('UZS', 'usbekiske som', plurals: ['one' => 'usbekisk som', 'other' => 'usbekiske som']),
     'VEB' => new C('VEB', 'venezuelanske bolivar (1871–2008)', plurals: ['one' => 'venezuelansk bolivar (1871–2008)', 'other' => 'venezuelanske bolivar (1871–2008)']),
     'VEF' => new C('VEF', 'venezuelanske bolivar (2008–2018)', plurals: ['one' => 'venezuelansk bolivar (2008–2018)', 'other' => 'venezuelanske bolivar (2008–2018)']),
