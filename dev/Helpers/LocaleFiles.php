@@ -61,4 +61,9 @@ final class LocaleFiles
     {
         return s\file_get_contents(self::path("{$type}/{$locale}.php"));
     }
+
+    public static function remove(string $type, string $locale): void
+    {
+        s\unlink(self::path("{$type}/{$locale}.php"));
+    }
 }

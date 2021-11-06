@@ -4,6 +4,7 @@ namespace Major\Fluent\Dev\Compilers;
 
 use Illuminate\Support\Str;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Exceptions\ShouldNotHappen;
 use Safe as s;
 
 final class CurrenciesOptimizer
@@ -49,7 +50,15 @@ final class CurrenciesOptimizer
             $rawData = s\preg_replace("/\\s+'{$currency}' => .*/", '', $rawData);
         }
 
-        LocaleFiles::store('currencies', $region, $rawData);
+        if (str_contains($rawData, "return [\n];")) {
+            if (! str_contains($region, '-')) {
+                throw new ShouldNotHappen();
+            }
+
+            LocaleFiles::remove('currencies', $region);
+        } else {
+            LocaleFiles::store('currencies', $region, $rawData);
+        }
     }
 
     /**
