@@ -8,9 +8,6 @@ use Safe as s;
 
 final class CurrenciesOptimizer
 {
-    /** @var array<string, string> */
-    private array $languageData;
-
     public function __construct(
         private string $language,
         /** @var string[] */
@@ -19,21 +16,29 @@ final class CurrenciesOptimizer
 
     public function optimize(): void
     {
-        $this->languageData = $this->loadLocaleData($this->language);
+        $rootData = $this->loadLocaleData('root');
+
+        $this->optimizeRegion($this->language, $rootData);
+
+        $languageData = $this->loadLocaleData($this->language);
 
         foreach ($this->regions as $region) {
-            $this->optimizeRegion($region);
+            $this->optimizeRegion($region, $rootData, $languageData);
         }
     }
 
-    private function optimizeRegion(string $region): void
+    /**
+     * @param array<string, string> $rootData
+     * @param array<string, string> $baseData
+     */
+    private function optimizeRegion(string $region, array $rootData, array $baseData = []): void
     {
         $currencies = $this->loadLocaleData($region);
 
         $currenciesToRemove = [];
 
         foreach ($currencies as $currency => $data) {
-            if ($this->languageData[$currency] === $data) {
+            if (($baseData[$currency] ?? $rootData[$currency]) === $data) {
                 $currenciesToRemove[] = $currency;
             }
         }

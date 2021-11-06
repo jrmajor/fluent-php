@@ -30,13 +30,14 @@ final class LocaleData
      */
     public static function loadCurrencies(string $locale): array
     {
+        $root = self::getRootPath('currencies');
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
         if ($region === null) {
-            return require $language;
+            return array_merge(require $root, require $language);
         }
 
-        return array_merge(require $language, require $region);
+        return array_merge(require $root, require $language, require $region);
     }
 
     /**
@@ -93,5 +94,10 @@ final class LocaleData
         }
 
         return $files;
+    }
+
+    private static function getRootPath(string $type): string
+    {
+        return self::PATH . "{$type}/root.php";
     }
 }
