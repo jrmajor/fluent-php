@@ -4,6 +4,7 @@ namespace Major\Fluent\Formatters\Number;
 
 use InvalidArgumentException;
 use Major\Fluent\Exceptions\ShouldNotHappen;
+use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 
@@ -209,46 +210,8 @@ final class NumberFormatter
 
     private function loadLocaleData(string $locale): void
     {
-        $this->locale = $this->loadFile('numbers', $locale);
-        $this->currencies = $this->loadFile('currencies', $locale);
-    }
-
-    private function loadFile(string $directory, string $locale): mixed
-    {
-        $parts = explode('-', strtolower($locale), 2);
-
-        $language = $parts[0];
-        $region = $parts[1] ?? null;
-
-        $files = glob(__DIR__ . "/../../../locales/{$directory}/{$language}*.php");
-
-        if ($files === false) {
-            throw new ShouldNotHappen();
-        }
-
-        $withoutRegion = null;
-
-        foreach ($files as $path) {
-            $fileLocale = strtolower(substr($path, strrpos($path, '/') + 1, -4));
-
-            if ($region !== null && $fileLocale === "{$language}-{$region}") {
-                return require $path;
-            }
-
-            if ($fileLocale === $language) {
-                if ($region === null) {
-                    return require $path;
-                } else {
-                    $withoutRegion = $path;
-                }
-            }
-        }
-
-        if ($withoutRegion !== null) {
-            return require $withoutRegion;
-        }
-
-        throw new InvalidArgumentException("Unsupported locale: {$locale}.");
+        $this->locale = LocaleData::loadNumbers($locale);
+        $this->currencies = LocaleData::loadCurrencies($locale);
     }
 
     private function getCurrency(Options $options): ?Currency
