@@ -2,7 +2,9 @@
 
 namespace Major\Fluent\Tests;
 
-use Symfony\Component\Process\Process;
+use Psl\Hash;
+use Psl\Shell;
+use Psl\Str;
 
 /**
  * @mixin TestCase
@@ -24,7 +26,7 @@ trait NodeAssertions
     {
         self::loadCache();
 
-        $hash = sha1($command);
+        $hash = Hash\hash($command, 'sha1');
 
         if (! isset(self::$cache[$hash])) {
             self::$cache[$hash] = self::freshNodeOutput($command);
@@ -36,9 +38,9 @@ trait NodeAssertions
 
     private static function freshNodeOutput(string $command): string
     {
-        $process = new Process(['node', '-e', "console.log({$command})"]);
+        $output = Shell\execute('node', ['-e', "console.log({$command})"]);
 
-        return substr($process->mustRun()->getOutput(), 0, -1);
+        return Str\strip_suffix($output, "\n");
     }
 
     private static function loadCache(): void

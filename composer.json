@@ -41,7 +41,6 @@
         "phpstan/phpstan": "^0.12.99",
         "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^5.3",
-        "symfony/process": "^5.3",
         "symfony/console": "^5.3",
         "illuminate/support": "^8.69",
         "azjezz/psl": "^1.9"
