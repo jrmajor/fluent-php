@@ -10,6 +10,7 @@ use Major\Fluent\Dev\Helpers\IsoData;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Psl\Dict;
 use Psl\Str;
+use Psl\Type;
 use Psl\Vec;
 
 final class CurrenciesLocaleCompiler
@@ -56,7 +57,7 @@ final class CurrenciesLocaleCompiler
         $symbol = $data['symbol']
             ?? throw new Exception("No symbol for {$code} in {$this->locale}.");
 
-        $name = str_replace('\\"', '"', $name);
+        $name = Str\replace($name, '\\"', '"');
 
         $compiled = "new C('{$code}'";
 
@@ -88,24 +89,18 @@ final class CurrenciesLocaleCompiler
      */
     private function makePlurals(array $data): ?string
     {
-        $plurals = [];
+        $data = Dict\filter_keys($data, fn ($key) => Str\starts_with($key, 'displayName-count-'));
 
-        foreach ($data as $key => $value) {
-            if (! str_starts_with($key, 'displayName-count-')) {
-                continue;
-            }
-
-            $plurals[substr($key, 18)] = str_replace('\\"', '"', $value);
-        }
-
-        if (! $plurals) {
+        if (! $data) {
             return null;
         }
 
-        foreach ($plurals as $category => $plural) {
-            $plurals[$category] = "'{$category}' => '{$plural}'";
-        }
+        $data = Dict\map_keys($data, function ($key) {
+            return Type\string()->coerce(Str\after($key, 'displayName-count-'));
+        });
+        $data = Dict\map($data, fn ($value) => Str\replace($value, '\\"', '"'));
+        $data = Dict\map_with_key($data, fn ($category, $pattern) => "'{$category}' => '{$pattern}'");
 
-        return '[' . implode(', ', $plurals) . ']';
+        return '[' . Str\join(Vec\values($data), ', ') . ']';
     }
 }

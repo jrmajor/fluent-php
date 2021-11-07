@@ -7,6 +7,7 @@ use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Psl\Dict;
+use Psl\Str;
 use Psl\Type;
 use Psl\Vec;
 use Symfony\Component\Console\Command\Command;
@@ -163,12 +164,12 @@ class CompileNumbersData extends Command
         }))[0];
     }
 
-    private function escape(string $string): string
+    private function escape(string $value): string
     {
-        return str_replace(
-            ["\u{00A0}", "\u{200E}", "\u{200F}"],
-            ['\\u{00A0}', '\\u{200E}', '\\u{200F}'],
-            $string,
-        );
+        return Str\replace_every($value, [
+            "\u{00A0}" => '\\u{00A0}',
+            "\u{200E}" => '\\u{200E}',
+            "\u{200F}" => '\\u{200F}',
+        ]);
     }
 }

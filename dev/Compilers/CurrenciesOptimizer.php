@@ -52,8 +52,8 @@ final class CurrenciesOptimizer
             $rawData = Regex\replace($rawData, "/\\s+'{$currency}' => .*/", '');
         }
 
-        if (str_contains($rawData, "return [\n];")) {
-            if (! str_contains($region, '-')) {
+        if (Str\contains($rawData, "return [\n];")) {
+            if (! Str\contains($region, '-')) {
                 throw new ShouldNotHappen();
             }
 

@@ -3,6 +3,7 @@
 namespace Major\Fluent\Dev\Helpers;
 
 use Psl\Filesystem;
+use Psl\Str;
 use SimpleXMLElement;
 
 final class IsoData
@@ -29,13 +30,13 @@ final class IsoData
 
         foreach ($xml->CcyTbl->children() as $data) {
             $currency = (string) $data->Ccy;
-            $minorUnits = (string) $data->CcyMnrUnts;
+            $minorUnits = Str\to_int((string) $data->CcyMnrUnts);
 
-            if (! is_numeric($minorUnits)) {
+            if ($minorUnits === null) {
                 continue;
             }
 
-            self::$minorUnits[$currency] = (int) $minorUnits;
+            self::$minorUnits[$currency] = $minorUnits;
         }
     }
 }
