@@ -261,7 +261,6 @@ return [
     'UYI' => new C('UYI', 'uruguajské peso (v indexovaných jednotkách)', plurals: ['one' => 'uruguajské peso (v indexovaných jednotkách)', 'few' => 'uruguajské pesos (v indexovaných jednotkách)', 'many' => 'uruguajského pesa (v indexovaných jednotkách)', 'other' => 'uruguajských pesos (v indexovaných jednotkách)'], minorUnits: 0),
     'UYP' => new C('UYP', 'uruguajské peso (1975 – 1993)', plurals: ['one' => 'uruguajské peso (1975 – 1993)', 'few' => 'uruguajské pesos (1975 – 1993)', 'many' => 'uruguajského pesa (1975 – 1993)', 'other' => 'uruguajských pesos (1975 – 1993)']),
     'UYU' => new C('UYU', 'uruguajské peso', plurals: ['one' => 'uruguajské peso', 'few' => 'uruguajské pesos', 'many' => 'uruguajského pesa', 'other' => 'uruguajských pesos']),
-    'UYW' => new C('UYW', minorUnits: 4),
     'UZS' => new C('UZS', 'uzbecký sum', plurals: ['one' => 'uzbecký sum', 'few' => 'uzbecké sumy', 'many' => 'uzbeckého sumu', 'other' => 'uzbeckých sumov']),
     'VEB' => new C('VEB', 'venezuelský bolívar (1871 – 2008)', plurals: ['one' => 'venezuelský bolívar (1871 – 2008)', 'few' => 'venezuelské bolívary (1871 – 2008)', 'many' => 'venezuelského bolívaru (1871 – 2008)', 'other' => 'venezuelských bolívarov (1871 – 2008)']),
     'VEF' => new C('VEF', 'venezuelský bolívar (2008–2018)', plurals: ['one' => 'venezuelský bolívar (2008–2018)', 'few' => 'venezuelské bolívary (2008–2018)', 'many' => 'venezuelského bolívaru (2008–2018)', 'other' => 'venezuelských bolívarov (2008–2018)']),

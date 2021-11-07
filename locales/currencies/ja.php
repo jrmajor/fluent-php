@@ -261,7 +261,6 @@ return [
     'UYI' => new C('UYI', 'ウルグアイ ペソエン', plurals: ['other' => 'ウルグアイ ペソエン'], minorUnits: 0),
     'UYP' => new C('UYP', 'ウルグアイ ペソ (1975–1993)', plurals: ['other' => 'ウルグアイ ペソ (1975–1993)']),
     'UYU' => new C('UYU', 'ウルグアイ ペソ', plurals: ['other' => 'ウルグアイ ペソ']),
-    'UYW' => new C('UYW', minorUnits: 4),
     'UZS' => new C('UZS', 'ウズベキスタン スム', plurals: ['other' => 'ウズベキスタン スム']),
     'VEB' => new C('VEB', 'ベネズエラ ボリバル (1871–2008)', plurals: ['other' => 'ベネズエラ ボリバル (1871–2008)']),
     'VEF' => new C('VEF', 'ベネズエラ ボリバル (2008–2018)', plurals: ['other' => 'ベネズエラ ボリバル (2008–2018)']),

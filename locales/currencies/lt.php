@@ -261,7 +261,6 @@ return [
     'UYI' => new C('UYI', 'Urugvajaus pesai en unidades indexadas', plurals: ['one' => 'Urugvajaus pesas en unidades indexadas', 'few' => 'Uragvajaus pesai en unidades indexadas', 'many' => 'Urugvajaus pesai en unidades indexadas', 'other' => 'Urugvajaus pesai en unidades indexadas'], minorUnits: 0),
     'UYP' => new C('UYP', 'Urugvajaus pesas (1975–1993)', plurals: ['one' => 'Urugvajaus pesas (1975–1993)', 'few' => 'Urugvajaus pesai (1975–1993)', 'many' => 'Urugvajaus peso (1975–1993)', 'other' => 'Urugvajaus pesų (1975–1993)']),
     'UYU' => new C('UYU', 'Urugvajaus pesas', plurals: ['one' => 'Urugvajaus pesas', 'few' => 'Urugvajaus pesai', 'many' => 'Urugvajaus peso', 'other' => 'Urugvajaus pesų']),
-    'UYW' => new C('UYW', minorUnits: 4),
     'UZS' => new C('UZS', 'Uzbekistano sumas', plurals: ['one' => 'Uzbekistano sumas', 'few' => 'Uzbekistano sumai', 'many' => 'Uzbekistano sumo', 'other' => 'Uzbekistano sumų']),
     'VEB' => new C('VEB', 'Venesuelos bolivaras (1871–2008)', plurals: ['one' => 'Venesuelos bolivaras (1871–2008)', 'few' => 'Venesuelos bolivarai (1871–2008)', 'many' => 'Venesuelos bolivaro (1871–2008)', 'other' => 'Venesuelos bolivarų (1871–2008)']),
     'VEF' => new C('VEF', 'Venesuelos bolivaras (2008–2018)', plurals: ['one' => 'Venesuelos bolivaras (2008–2018)', 'few' => 'Venesuelos bolivarai (2008–2018)', 'many' => 'Venesuelos bolivaro (2008–2018)', 'other' => 'Venesuelos bolivarų (2008–2018)']),
