@@ -2,7 +2,6 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
-use Generator;
 use Psl\Filesystem;
 use Psl\Json;
 use Psl\Str;

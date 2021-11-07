@@ -19,11 +19,11 @@ final class CurrenciesOptimizer
 
     public function optimize(): void
     {
-        $rootData = $this->loadLocaleData('root');
+        $rootData = $this->readLocaleData('root');
 
         $this->optimizeRegion($this->language, $rootData);
 
-        $languageData = $this->loadLocaleData($this->language);
+        $languageData = $this->readLocaleData($this->language);
 
         foreach ($this->regions as $region) {
             $this->optimizeRegion($region, $rootData, $languageData);
@@ -36,7 +36,7 @@ final class CurrenciesOptimizer
      */
     private function optimizeRegion(string $region, array $rootData, array $baseData = []): void
     {
-        $currencies = $this->loadLocaleData($region);
+        $currencies = $this->readLocaleData($region);
 
         $currenciesToRemove = [];
 
@@ -66,7 +66,7 @@ final class CurrenciesOptimizer
     /**
      * @return array<string, string>
      */
-    private function loadLocaleData(string $locale): array
+    private function readLocaleData(string $locale): array
     {
         $data = LocaleFiles::read('currencies', $locale);
 

@@ -149,11 +149,10 @@ class CompileNumbersData extends Command
      */
     private function rowsForStatTable(string $stat): array
     {
-        $rows = Dict\map_with_key($this->stat($stat), function ($key, $count) {
-            return [$this->escape((string) $key), $count];
-        });
-
-        return Vec\values($rows);
+        return Vec\enumerate(Dict\map_keys(
+            $this->stat($stat),
+            fn ($key) => $this->escape((string) $key),
+        ));
     }
 
     private function mostPopular(string $stat): string|int
