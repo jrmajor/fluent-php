@@ -2,134 +2,326 @@
 
 namespace Major\Fluent\Formatters\Number;
 
-use NumberFormatter as BaseNumberFormatter;
+use InvalidArgumentException;
+use Major\Fluent\Exceptions\ShouldNotHappen;
+use Major\Fluent\Formatters\LocaleData;
+use Major\Fluent\Formatters\Number\Locale\Currency;
+use Major\Fluent\Formatters\Number\Locale\Locale;
+use Major\PluralRules\PluralRules;
 
 /**
  * @internal
  */
 final class NumberFormatter
 {
-    private static array $data = [];
+    public const PATTERN_REGEX = "([¤\\-%\u{00A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{00A0}]*)";
 
-    public function __construct(
-        private string $locale,
-    ) { }
+    private const NUMERAL_SYSTEMS = [
+        'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+        'arabext' => ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
+        'beng' => ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+        'deva' => ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+        'latn' => ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        'mymr' => ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+    ];
 
-    public function formatDecimal(
-        int|float $number,
-        bool $useGrouping = true,
-        ?int $minimumIntegerDigits = null,
-        ?int $minimumFractionDigits = null,
-        ?int $maximumFractionDigits = null,
-        ?int $minimumSignificantDigits = null,
-        ?int $maximumSignificantDigits = null,
-    ): string {
-        $formatter = $this->createBaseFormatter(
-            'decimal',
-            $useGrouping,
-            $minimumIntegerDigits,
-            $minimumFractionDigits,
-            $maximumFractionDigits,
-            $minimumSignificantDigits,
-            $maximumSignificantDigits,
-        );
+    private Locale $locale;
 
-        $formatted = $formatter->format($number);
+    /** @var Currency[] */
+    private array $currencies = [];
 
-        return $formatted === false ? throw NumberFormatterException::formatting() : $formatted;
-    }
+    public function __construct(string $locale)
+    {
+        $locale = str_replace('_', '-', $locale);
 
-    /**
-     * @param 'symbol'|'narrowSymbol'|'code'|'name' $currencyDisplay
-     */
-    public function formatCurrency(
-        int|float $number,
-        string $currency,
-        ?string $currencyDisplay = null,
-        ?bool $useGrouping = null,
-        ?int $minimumIntegerDigits = null,
-        ?int $minimumFractionDigits = null,
-        ?int $maximumFractionDigits = null,
-        ?int $minimumSignificantDigits = null,
-        ?int $maximumSignificantDigits = null,
-    ): string {
-        if ($currencyDisplay !== null) {
-            throw NumberFormatterException::unsupportedOption('currencyDisplay');
+        if (! preg_match('/^[A-Za-z-]+$/', $locale)) {
+            throw new InvalidArgumentException("Locale \"{$locale}\" contains invalid characters.");
         }
 
-        $formatter = $this->createBaseFormatter(
-            'currency',
-            $useGrouping,
-            $minimumIntegerDigits,
-            $minimumFractionDigits,
-            $maximumFractionDigits,
-            $minimumSignificantDigits,
-            $maximumSignificantDigits,
-        );
-
-        $formatted = $formatter->formatCurrency($number, $currency);
-
-        return $formatted === false ? throw NumberFormatterException::formatting() : $formatted;
+        $this->loadLocaleData($locale);
     }
 
-    public function formatPercent(
-        int|float $number,
-        ?bool $useGrouping = null,
-        ?int $minimumIntegerDigits = null,
-        ?int $minimumFractionDigits = null,
-        ?int $maximumFractionDigits = null,
-        ?int $minimumSignificantDigits = null,
-        ?int $maximumSignificantDigits = null,
-    ): string {
-        $formatter = $this->createBaseFormatter(
-            'percent',
-            $useGrouping,
-            $minimumIntegerDigits,
-            $minimumFractionDigits,
-            $maximumFractionDigits,
-            $minimumSignificantDigits,
-            $maximumSignificantDigits,
+    public function format(int|float $number, Options $options): string
+    {
+        $original = $number;
+
+        $options->fillWithDefaults(
+            $options->style === 'currency' ? $this->getCurrency($options) : null,
         );
 
-        $formatted = $formatter->format($number);
+        if ($options->style === 'currency' && $options->currencyDisplay === 'name') {
+            $pattern = $this->locale->decimal;
+        } else {
+            $pattern = $this->locale->{$options->style};
+        }
 
-        return $formatted === false ? throw NumberFormatterException::formatting() : $formatted;
+        if ($options->style === 'percent') {
+            $number *= 100;
+        }
+
+        [$pattern, $minus, $number] = $this->handleNegativeValues($pattern, $number);
+
+        [$pre, $pattern, $post] = $this->splitPattern($pattern);
+        [$int, $frac] = $this->splitNumber($number);
+
+        $frac = $this->applyMinimumFractionDigits($options, $int, $frac);
+        [$int, $frac] = $this->applyMaximumFractionDigits($options, $int, $frac);
+        $int = $this->applyMaximumSignificantDigits($options, $int);
+        $int = $this->applyMinimumIntegerDigits($options, $int);
+
+        $formatted = $this->applyGrouping($options, $pattern, $int);
+
+        if (strlen($frac)) {
+            $formatted .= '.' . $frac;
+        }
+
+        $minus = $this->applyReplacements($minus);
+        $formatted = $this->applyReplacements($pre . $formatted . $post);
+
+        if ($options->style !== 'currency') {
+            return $minus . $formatted;
+        }
+
+        if ($options->currencyDisplay === 'name') {
+            return $this->applyCurrencyName($options, $minus . $formatted, $original);
+        }
+
+        return $minus . $this->insertCurrencySymbol($options, $formatted);
     }
 
     /**
-     * @param 'decimal'|'currency'|'percent' $style
+     * @return array{string, string, int|float}
      */
-    private function createBaseFormatter(
-        string $style,
-        ?bool $useGrouping = null,
-        ?int $minimumIntegerDigits = null,
-        ?int $minimumFractionDigits = null,
-        ?int $maximumFractionDigits = null,
-        ?int $minimumSignificantDigits = null,
-        ?int $maximumSignificantDigits = null,
-    ): BaseNumberFormatter {
-        $useGrouping ??= true;
+    private function handleNegativeValues(string $pattern, int|float $number): array
+    {
+        if (str_contains($pattern, ';')) {
+            $pattern = explode(';', $pattern)[$number < 0 ? 1 : 0];
+            $minus = '';
+        } else {
+            $minus = '-';
+        }
 
-        $formatter = BaseNumberFormatter::create($this->locale, match ($style) {
-            'decimal' => BaseNumberFormatter::DECIMAL,
-            'currency' => BaseNumberFormatter::CURRENCY,
-            'percent' => BaseNumberFormatter::PERCENT,
-        });
+        return $number < 0
+            ? [$pattern, $minus, abs($number)]
+            : [$pattern, '', $number];
+    }
 
-        $formatter->setAttribute(BaseNumberFormatter::GROUPING_USED, (int) $useGrouping);
+    private function applyMinimumFractionDigits(Options $o, string $int, string $frac): string
+    {
+        $minimumFractionDigits = $o->minimumSignificantDigits !== null
+            ? $o->minimumSignificantDigits - strlen($int)
+            : $o->minimumFractionDigits;
 
-        foreach ([
-            BaseNumberFormatter::MIN_INTEGER_DIGITS => $minimumIntegerDigits,
-            BaseNumberFormatter::MIN_FRACTION_DIGITS => $minimumFractionDigits,
-            BaseNumberFormatter::MAX_FRACTION_DIGITS => $maximumFractionDigits,
-            BaseNumberFormatter::MIN_SIGNIFICANT_DIGITS => $minimumSignificantDigits,
-            BaseNumberFormatter::MAX_SIGNIFICANT_DIGITS => $maximumSignificantDigits,
-        ] as $attribute => $value) {
-            if ($value !== null) {
-                $formatter->setAttribute($attribute, $value);
+        assert($minimumFractionDigits !== null);
+
+        return str_pad($frac, $minimumFractionDigits, '0');
+    }
+
+    /**
+     * @return array{string, string}
+     */
+    private function applyMaximumFractionDigits(Options $o, string $int, string $frac): array
+    {
+        $maximumFractionDigits = $o->maximumSignificantDigits !== null
+            ? $o->maximumSignificantDigits - strlen($int)
+            : $o->maximumFractionDigits;
+
+        assert($maximumFractionDigits !== null);
+
+        if ($maximumFractionDigits <= 0) {
+            $intWithoutLast = substr($int, 0, strlen($int) - 1);
+            $intLastDigit = (int) substr($int, strlen($int) - 1);
+
+            if ((int) substr($frac, 0, 1) >= 5) {
+                $intLastDigit++;
+            }
+
+            return [$intWithoutLast . $intLastDigit, ''];
+        }
+
+        if (strlen($frac) <= $maximumFractionDigits) {
+            return [$int, $frac];
+        }
+
+        $withoutLast = substr($frac, 0, $maximumFractionDigits - 1);
+        $lastDigit = (int) substr($frac, $maximumFractionDigits - 1, 1);
+
+        if ((int) substr($frac, $maximumFractionDigits, 1) >= 5) {
+            $lastDigit++;
+        }
+
+        return [$int, $withoutLast . $lastDigit];
+    }
+
+    private function applyMaximumSignificantDigits(Options $o, string $int): string
+    {
+        if (
+            $o->maximumSignificantDigits === null
+            || strlen($int) <= $o->maximumSignificantDigits
+        ) {
+            return $int;
+        }
+
+        $withoutLast = substr($int, 0, $o->maximumSignificantDigits - 1);
+        $lastDigit = (int) substr($int, $o->maximumSignificantDigits - 1, 1);
+        $padding = str_repeat('0', strlen($int) - $o->maximumSignificantDigits);
+
+        if ((int) substr($int, $o->maximumSignificantDigits, 1) >= 5) {
+            $lastDigit++;
+        }
+
+        return $withoutLast . $lastDigit . $padding;
+    }
+
+    private function applyMinimumIntegerDigits(Options $o, string $int): string
+    {
+        if ($o->minimumIntegerDigits === null) {
+            return $int;
+        }
+
+        return str_pad($int, $o->minimumIntegerDigits, '0', STR_PAD_LEFT);
+    }
+
+    private function applyGrouping(Options $o, string $pattern, string $int): string
+    {
+        if (! $o->useGrouping) {
+            return $int;
+        }
+
+        $chunks = [];
+        $int = strrev($int);
+        $size = 3;
+
+        for ($i = 0; strlen($int) > $size; $i++) {
+            if ($i === 0 && strlen($int) < $size + $this->locale->grouping) {
+                break;
+            }
+
+            $chunks[] = strrev(substr($int, 0, $size));
+            $int = substr($int, $size);
+
+            if ($i === 0) {
+                $size = str_contains($pattern, '#,##,##0') ? 2 : 3;
             }
         }
 
-        return $formatter;
+        $chunks[] = strrev($int);
+
+        return implode(',', array_reverse($chunks));
+    }
+
+    private function applyReplacements(string $string): string
+    {
+        $string = implode('', array_map(
+            fn (string $char) => $this->locale->symbol($char),
+            str_split($string),
+        ));
+
+        return str_replace(
+            range(0, 9),
+            self::NUMERAL_SYSTEMS[$this->locale->system],
+            $string,
+        );
+    }
+
+    private function applyCurrencyName(Options $o, string $formatted, int|float $original): string
+    {
+        $currency = $this->getCurrency($o);
+
+        $category = PluralRules::select($this->locale->code, $original);
+        $name = $currency->plurals[$category] ?? $currency->name;
+        $pattern = $this->locale->unitPattern($category);
+
+        return str_replace(['{0}', '{1}'], [$formatted, $name], $pattern);
+    }
+
+    private function insertCurrencySymbol(Options $o, string $formatted): string
+    {
+        $currency = $this->getCurrency($o);
+
+        $symbol = match ($o->currencyDisplay) {
+            'symbol' => $currency->symbol,
+            'narrowSymbol' => $currency->narrow,
+            'code' => $currency->code,
+        };
+
+        $prefix = '';
+
+        if (str_starts_with($formatted, "\u{200E}")) {
+            $formatted = mb_substr($formatted, 1);
+            $prefix = "\u{200E}";
+        }
+
+        $before = match ('¤') {
+            mb_substr($formatted, 0, 1) => true,
+            mb_substr($formatted, -1) => false,
+            default => throw new ShouldNotHappen(),
+        };
+
+        $formatted = str_replace('¤', '', $formatted);
+
+        $borderingFormatted = $before ? mb_substr($formatted, 0, 1) : mb_substr($formatted, -1);
+        $borderingSymbol = ! $before ? mb_substr($symbol, 0, 1) : mb_substr($symbol, -1);
+
+        if (
+            ! $this->isDigit($borderingFormatted)
+            || preg_match('/^\\p{S}|\\p{Z}$/u', $borderingSymbol)
+        ) {
+            return $prefix . ($before ? $symbol . $formatted : $formatted . $symbol);
+        }
+
+        return $prefix . ($before ? "{$symbol}\u{00A0}{$formatted}" : "{$formatted}\u{00A0}{$symbol}");
+    }
+
+    private function isDigit(string $c): bool
+    {
+        return in_array($c, self::NUMERAL_SYSTEMS[$this->locale->system], true);
+    }
+
+    private function loadLocaleData(string $locale): void
+    {
+        $this->locale = LocaleData::loadNumbers($locale);
+        $this->currencies = LocaleData::loadCurrencies($locale);
+    }
+
+    private function getCurrency(Options $options): Currency
+    {
+        if ($options->style !== 'currency') {
+            throw new InvalidArgumentException();
+        }
+
+        $currency = $options->currency;
+
+        assert($currency !== null);
+
+        return $this->currencies[$currency] ?? new Currency($currency);
+    }
+
+    /**
+     * @return array{string, string, string}
+     */
+    private function splitPattern(string $pattern): array
+    {
+        $matches = [];
+
+        if (! preg_match('/^' . self::PATTERN_REGEX . '$/', $pattern, $matches)) {
+            throw new ShouldNotHappen();
+        }
+
+        /** @phpstan-ignore-next-line */
+        return array_slice($matches, 1);
+    }
+
+    /**
+     * @return array{string, string}
+     */
+    private function splitNumber(int|float $number): array
+    {
+        $number = (string) $number;
+
+        /** @phpstan-ignore-next-line */
+        return str_contains($number, '.')
+            ? explode('.', $number, 2)
+            : [$number, ''];
     }
 }

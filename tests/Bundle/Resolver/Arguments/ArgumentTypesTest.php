@@ -52,10 +52,8 @@ it('can be a float')
     ->expect($bundle->message('foo', arg: 1.5))->toBe('1.5')
     ->and($bundle->popErrors())->toBeEmpty();
 
-$fluentNumber = new FluentNumber(1, minimumFractionDigits: 2);
-
 it('can be a FluentNumber')
-    ->expect($bundle->message('foo', arg: $fluentNumber))->toBe('1.00')
+    ->expect($bundle->message('foo', arg: new FluentNumber(0.42)))->toBe('0.42')
     ->and($bundle->popErrors())->toBeEmpty()
-    ->and($bundlePL->message('foo', arg: $fluentNumber))->toBe('1,00')
+    ->and($bundlePL->message('foo', arg: new FluentNumber(0.42)))->toBe('0,42')
     ->and($bundlePL->popErrors())->toBeEmpty();

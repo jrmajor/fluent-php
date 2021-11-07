@@ -1,6 +1,7 @@
 <?php
 
 use Major\Fluent\Bundle\FluentBundle;
+use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 
@@ -12,6 +13,7 @@ $bundle = (new FluentBundle('en-US', useIsolating: false))
         'TYPE' => fn ($arg) => get_debug_type($arg),
         'PROPS' => fn (object $object) => json_encode(get_object_vars($object)),
         'WRONG_RETURN' => fn () => new stdClass(),
+        'THROWS' => fn () => throw new Exception('Something went wrong!'),
     ])
     ->addFtl(<<<'ftl'
         strings = { CONCAT("Foo", "Bar") }
@@ -23,6 +25,7 @@ $bundle = (new FluentBundle('en-US', useIsolating: false))
         objects = { PROPS($object) }
         unknown = { TYPE($arg) }
         wrong-return = { WRONG_RETURN() }
+        throws = { THROWS() }
         ftl);
 
 it('works for strings')
@@ -62,4 +65,11 @@ it('throws a type error when function returns wrong type')
     ->and($bundle->popErrors())->toHaveError(
         TypeException::class,
         'Return value of WRONG_RETURN() must be of type string|Stringable, stdClass returned.',
+    );
+
+it('throws a function error when function throws')
+    ->expect($bundle->message('throws'))->toBe('{THROWS()}')
+    ->and($bundle->popErrors())->toHaveError(
+        FunctionException::class,
+        'THROWS() function error: Something went wrong!',
     );

@@ -34,11 +34,18 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "phpstan/phpstan": "^0.12.99",
+        "ext-simplexml": "*",
+        "jrmajor/cs": "^0.3.2",
+        "nunomaduro/collision": "^5.10",
         "pestphp/pest": "^1.20",
+        "phpstan/phpstan": "^0.12.99",
         "phpunit/phpunit": "^9.5",
-        "jrmajor/cs": "^0.3.1",
-        "symfony/var-dumper": "^5.3"
+        "symfony/var-dumper": "^5.3",
+        "symfony/process": "^5.3",
+        "symfony/console": "^5.3",
+        "thecodingmachine/safe": "^1.3",
+        "thecodingmachine/phpstan-safe-rule": "^1.0",
+        "illuminate/support": "^8.69"
     },
     "autoload": {
         "psr-4": {
@@ -47,6 +54,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Major\\Fluent\\Dev\\": "dev",
             "Major\\Fluent\\Tests\\": "tests"
         }
     },

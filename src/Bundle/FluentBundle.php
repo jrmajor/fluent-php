@@ -10,6 +10,7 @@ use Major\Fluent\Exceptions\Bundle\FunctionExistsException;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
 use Major\Fluent\Exceptions\Bundle\TermExistsException;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
+use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\ResolverException;
@@ -35,6 +36,7 @@ use Major\Fluent\Node\Syntax\Variant;
 use Major\Fluent\Parser\FluentParser;
 use Major\PluralRules\PluralRules;
 use Stringable;
+use Throwable;
 
 final class FluentBundle
 {
@@ -62,11 +64,14 @@ final class FluentBundle
         protected bool $allowOverrides = false,
     ) {
         $this->functions = [
-            'NUMBER' => fn () => throw new Exception('NUMBER() function is not implemented.'),
-            'DATETIME' => fn () => throw new Exception('DATETIME() function is not implemented.'),
+            'NUMBER' => Closure::fromCallable([$this, 'numberFunction']),
+            'DATETIME' => Closure::fromCallable([$this, 'dateTimeFunction']),
         ];
     }
 
+    /**
+     * @return $this
+     */
     public function addResource(
         FluentResource $resource,
         ?bool $allowOverrides = null,
@@ -94,6 +99,9 @@ final class FluentBundle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function addFtl(string $ftl, ?bool $allowOverrides = null): static
     {
         $parser = new FluentParser($this->strict);
@@ -103,6 +111,9 @@ final class FluentBundle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function addFunction(string $name, Closure $function): static
     {
         if ($this->hasFunction($name)) {
@@ -116,6 +127,7 @@ final class FluentBundle
 
     /**
      * @param array<string, Closure> $functions
+     * @return $this
      */
     public function addFunctions(array $functions): static
     {
@@ -263,8 +275,9 @@ final class FluentBundle
     ): FluentNumber {
         $parsed = $literal->parse();
 
-        return (new FluentNumber($parsed->value, $literal->value, $parsed->precision))
-            ->setFluentLocale($this->locale);
+        return (new FluentNumber($parsed->value, $literal->value))
+            ->setLocale($this->locale)
+            ->setOptions(['minimumFractionDigits' => $parsed->precision]);
     }
 
     private function resolveVariableReference(
@@ -293,7 +306,7 @@ final class FluentBundle
         }
 
         if ($argument instanceof FluentNumber) {
-            return $argument->setFluentLocale($this->locale);
+            return $argument->setLocale($this->locale);
         }
 
         // Return early if the argument already is an instance of Stringable.
@@ -302,7 +315,7 @@ final class FluentBundle
         }
 
         if (is_numeric($argument)) {
-            return (new FluentNumber($argument))->setFluentLocale($this->locale);
+            return (new FluentNumber($argument))->setLocale($this->locale);
         }
 
         $type = get_debug_type($argument);
@@ -403,16 +416,20 @@ final class FluentBundle
             return $this->reportError(new ReferenceException("Unknown function: {$name}()."), "{$name}()");
         }
 
-        $arguments = $this->getFunctionArguments($reference->arguments, $scope);
+        $arguments = $this->getFunctionArguments($reference->arguments, $scope, $name === 'NUMBER');
 
-        $output = $function(...$arguments);
+        try {
+            $output = $function(...$arguments);
+        } catch (Throwable $e) {
+            return $this->reportError(new FunctionException($name, $e), "{$name}()");
+        }
 
         if (is_string($output) || $output instanceof Stringable) {
             return $output;
         }
 
         if (is_numeric($output)) {
-            return (new FluentNumber($output))->setFluentLocale($this->locale);
+            return (new FluentNumber($output))->setLocale($this->locale);
         }
 
         $type = get_debug_type($output);
@@ -426,12 +443,13 @@ final class FluentBundle
     private function getFunctionArguments(
         CallArguments $arguments,
         ResolutionScope $scope,
+        bool $number = false,
     ): array {
         /** @var array<int|string, mixed> */
         $prepared = [];
 
-        foreach ($arguments->positional as $argument) {
-            $prepared[] = $this->resolveArgument($argument, $scope);
+        foreach ($arguments->positional as $position => $argument) {
+            $prepared[] = $this->resolveArgument($argument, $scope, $position === 0 && $number);
         }
 
         foreach ($arguments->named as $argument) {
@@ -444,8 +462,9 @@ final class FluentBundle
     private function resolveArgument(
         Expression $argument,
         ResolutionScope $scope,
+        bool $number = false,
     ): mixed {
-        if ($argument instanceof NumberLiteral) {
+        if ($argument instanceof NumberLiteral && ! $number) {
             $number = $argument->parse();
 
             return $number->precision === 0 ? (int) $number->value : $number->value;
@@ -463,7 +482,7 @@ final class FluentBundle
         return match (get_debug_type($value)) {
             FluentNone::class => null,
             /** @phpstan-ignore-next-line */
-            FluentNumber::class => $value->value(),
+            FluentNumber::class => $number ? $value : $value->value(),
             default => $value,
         };
     }
@@ -533,5 +552,22 @@ final class FluentBundle
         }
 
         return false;
+    }
+
+    private function numberFunction(
+        int|float|FluentNumber $number,
+        int|string|bool ...$options,
+    ): FluentNumber {
+        if (! $number instanceof FluentNumber) {
+            $number = new FluentNumber($number);
+        }
+
+        /** @phpstan-ignore-next-line */
+        return $number->setLocale($this->locale)->setOptions($options);
+    }
+
+    private function dateTimeFunction(): void
+    {
+        throw new Exception('DATETIME() function is not implemented.');
     }
 }

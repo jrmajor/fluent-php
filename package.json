@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "dependencies": {
+    "cldr-numbers-modern": "^39.0.0"
+  }
+}
