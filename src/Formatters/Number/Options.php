@@ -33,6 +33,14 @@ final class Options
         if ($style === 'currency' && $currency === null) {
             throw new InvalidArgumentException('Currency must be specified when using currency formatting.');
         }
+
+        if ($currency !== null) {
+            if (! preg_match('/^[a-zA-Z]{3}$/', $currency)) {
+                throw new InvalidArgumentException("Currency \"{$currency}\" is invalid.");
+            }
+
+            $this->currency = strtoupper($currency);
+        }
     }
 
     /**

@@ -14,6 +14,10 @@ parameters:
             count: 1
             path: src/Exceptions/ParserException.php
         -
+            message: '#^Match expression does not handle remaining value: string$#'
+            count: 1
+            path: src/Formatters/Number/NumberFormatter.php
+        -
             message: '#^Match expression does not handle remaining value: int<min, -1>$#'
             count: 1
             path: src/Parser/FluentParser.php

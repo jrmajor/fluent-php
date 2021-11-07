@@ -7,6 +7,8 @@ namespace Major\Fluent\Formatters\Number\Locale;
  */
 final class Locale
 {
+    public string $code;
+
     public function __construct(
         public string $name,
         public string $system = 'latn',
@@ -18,14 +20,15 @@ final class Locale
         public array $symbols = ['.', ',', '-', '%'],
         /** @var array<string, string> */
         public array $unitPatterns = [],
-    ) { }
+    ) {
+        $path = debug_backtrace()[0]['file'];
 
-    /**
-     * @return array<string, string>
-     */
-    public function symbolReplacements(): array
+        $this->code = substr($path, strrpos($path, '/') + 1, -4);
+    }
+
+    public function symbol(string $symbol): string
     {
-        return array_combine(['.', ',', '-', '%'], $this->symbols);
+        return array_combine(['.', ',', '-', '%'], $this->symbols)[$symbol] ?? $symbol;
     }
 
     public function unitPattern(string $plural): string

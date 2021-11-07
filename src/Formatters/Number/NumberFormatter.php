@@ -7,6 +7,7 @@ use Major\Fluent\Exceptions\ShouldNotHappen;
 use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
+use Major\PluralRules\PluralRules;
 
 /**
  * @internal
@@ -42,20 +43,23 @@ final class NumberFormatter
 
     public function format(int|float $number, Options $options): string
     {
-        $currency = $this->getCurrency($options);
-        $options->fillWithDefaults($currency);
+        $original = $number;
 
-        if ($options->style === 'currency') {
-            throw new InvalidArgumentException('Currency formatting is not supported yet.');
+        $options->fillWithDefaults(
+            $options->style === 'currency' ? $this->getCurrency($options) : null,
+        );
+
+        if ($options->style === 'currency' && $options->currencyDisplay === 'name') {
+            $pattern = $this->locale->decimal;
+        } else {
+            $pattern = $this->locale->{$options->style};
         }
 
         if ($options->style === 'percent') {
             $number *= 100;
         }
 
-        [$pattern, $minus, $number] = $this->handleNegativeValues(
-            $this->locale->{$options->style}, $number,
-        );
+        [$pattern, $minus, $number] = $this->handleNegativeValues($pattern, $number);
 
         [$pre, $pattern, $post] = $this->splitPattern($pattern);
         [$int, $frac] = $this->splitNumber($number);
@@ -71,7 +75,18 @@ final class NumberFormatter
             $formatted .= '.' . $frac;
         }
 
-        return $this->applyReplacements($options, $minus . $pre . $formatted . $post);
+        $minus = $this->applyReplacements($minus);
+        $formatted = $this->applyReplacements($pre . $formatted . $post);
+
+        if ($options->style !== 'currency') {
+            return $minus . $formatted;
+        }
+
+        if ($options->currencyDisplay === 'name') {
+            return $this->applyCurrencyName($options, $minus . $formatted, $original);
+        }
+
+        return $minus . $this->insertCurrencySymbol($options, $formatted);
     }
 
     /**
@@ -195,17 +210,72 @@ final class NumberFormatter
         return implode(',', array_reverse($chunks));
     }
 
-    private function applyReplacements(Options $o, string $formatted): string
+    private function applyReplacements(string $string): string
     {
-        $replacer = fn (string $char) => $this->locale->symbolReplacements()[$char] ?? $char;
-
-        $formatted = implode('', array_map($replacer, str_split($formatted)));
+        $string = implode('', array_map(
+            fn (string $char) => $this->locale->symbol($char),
+            str_split($string),
+        ));
 
         return str_replace(
             range(0, 9),
             self::NUMERAL_SYSTEMS[$this->locale->system],
-            $formatted,
+            $string,
         );
+    }
+
+    private function applyCurrencyName(Options $o, string $formatted, int|float $original): string
+    {
+        $currency = $this->getCurrency($o);
+
+        $category = PluralRules::select($this->locale->code, $original);
+        $name = $currency->plurals[$category] ?? $currency->name;
+        $pattern = $this->locale->unitPattern($category);
+
+        return str_replace(['{0}', '{1}'], [$formatted, $name], $pattern);
+    }
+
+    private function insertCurrencySymbol(Options $o, string $formatted): string
+    {
+        $currency = $this->getCurrency($o);
+
+        $symbol = match ($o->currencyDisplay) {
+            'symbol' => $currency->symbol,
+            'narrowSymbol' => $currency->narrow,
+            'code' => $currency->code,
+        };
+
+        $prefix = '';
+
+        if (str_starts_with($formatted, "\u{200E}")) {
+            $formatted = mb_substr($formatted, 1);
+            $prefix = "\u{200E}";
+        }
+
+        $before = match ('¤') {
+            mb_substr($formatted, 0, 1) => true,
+            mb_substr($formatted, -1) => false,
+            default => throw new ShouldNotHappen(),
+        };
+
+        $formatted = str_replace('¤', '', $formatted);
+
+        $borderingFormatted = $before ? mb_substr($formatted, 0, 1) : mb_substr($formatted, -1);
+        $borderingSymbol = ! $before ? mb_substr($symbol, 0, 1) : mb_substr($symbol, -1);
+
+        if (
+            ! $this->isDigit($borderingFormatted)
+            || preg_match('/^\\p{S}|\\p{Z}$/u', $borderingSymbol)
+        ) {
+            return $prefix . ($before ? $symbol . $formatted : $formatted . $symbol);
+        }
+
+        return $prefix . ($before ? "{$symbol}\u{00A0}{$formatted}" : "{$formatted}\u{00A0}{$symbol}");
+    }
+
+    private function isDigit(string $c): bool
+    {
+        return in_array($c, self::NUMERAL_SYSTEMS[$this->locale->system], true);
     }
 
     private function loadLocaleData(string $locale): void
@@ -214,18 +284,17 @@ final class NumberFormatter
         $this->currencies = LocaleData::loadCurrencies($locale);
     }
 
-    private function getCurrency(Options $options): ?Currency
+    private function getCurrency(Options $options): Currency
     {
         if ($options->style !== 'currency') {
-            return null;
+            throw new InvalidArgumentException();
         }
 
         $currency = $options->currency;
 
         assert($currency !== null);
 
-        return $this->currencies[$currency]
-            ?? throw new InvalidArgumentException("Currency \"{$currency}\" does not exist.");
+        return $this->currencies[$currency] ?? new Currency($currency);
     }
 
     /**
