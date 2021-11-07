@@ -11,7 +11,8 @@ use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Formatters\Number\NumberFormatter;
-use Safe as s;
+use Psl\Regex;
+use Psl\Type;
 
 final class NumbersLocaleCompiler
 {
@@ -79,7 +80,7 @@ final class NumbersLocaleCompiler
 
         $regex = NumberFormatter::PATTERN_REGEX;
 
-        if (! s\preg_match("/^{$regex}(;{$regex})?$/", $pattern)) {
+        if (! Regex\matches($pattern, "/^{$regex}(;{$regex})?$/")) {
             throw new Exception("Pattern {$pattern} is invalid.");
         }
 
@@ -97,8 +98,7 @@ final class NumbersLocaleCompiler
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
 
-        return s\preg_match('/^[0-9]+$/', $grouping) ? $grouping
-            : throw new Exception('minimumGroupingDigits should be numeric.');
+        return (string) Type\int()->coerce($grouping);
     }
 
     public function symbols(): string

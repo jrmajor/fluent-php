@@ -4,7 +4,7 @@ namespace Major\Fluent\Dev\Helpers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Safe as s;
+use Psl\Filesystem;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 
@@ -17,17 +17,10 @@ final class LocaleFiles
 
     public static function prepareDirectory(string $dir): void
     {
-        if (! is_dir(self::path($dir))) {
-            s\mkdir(self::path($dir), recursive: true);
+        $dir = self::path($dir);
 
-            return;
-        }
-
-        $files = s\glob(self::path($dir) . '/*');
-
-        foreach ($files as $file) {
-            s\unlink($file);
-        }
+        Filesystem\delete_directory($dir, true);
+        Filesystem\create_directory($dir);
     }
 
     /**
@@ -50,16 +43,16 @@ final class LocaleFiles
 
     public static function store(string $type, string $locale, string $content): void
     {
-        s\file_put_contents(self::path("{$type}/{$locale}.php"), $content);
+        Filesystem\write_file(self::path("{$type}/{$locale}.php"), $content);
     }
 
     public static function read(string $type, string $locale): string
     {
-        return s\file_get_contents(self::path("{$type}/{$locale}.php"));
+        return Filesystem\read_file(self::path("{$type}/{$locale}.php"));
     }
 
     public static function remove(string $type, string $locale): void
     {
-        s\unlink(self::path("{$type}/{$locale}.php"));
+        Filesystem\delete_file(self::path("{$type}/{$locale}.php"));
     }
 }

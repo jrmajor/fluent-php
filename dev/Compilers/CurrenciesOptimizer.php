@@ -5,7 +5,7 @@ namespace Major\Fluent\Dev\Compilers;
 use Illuminate\Support\Str;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Exceptions\ShouldNotHappen;
-use Safe as s;
+use Psl\Regex;
 
 final class CurrenciesOptimizer
 {
@@ -47,7 +47,7 @@ final class CurrenciesOptimizer
         $rawData = LocaleFiles::read('currencies', $region);
 
         foreach ($currenciesToRemove as $currency) {
-            $rawData = s\preg_replace("/\\s+'{$currency}' => .*/", '', $rawData);
+            $rawData = Regex\replace($rawData, "/\\s+'{$currency}' => .*/", '');
         }
 
         if (str_contains($rawData, "return [\n];")) {

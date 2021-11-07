@@ -3,7 +3,8 @@
 namespace Major\Fluent\Dev\Helpers;
 
 use Generator;
-use Safe as s;
+use Psl\Filesystem;
+use Psl\Json;
 use Symfony\Component\Finder\Finder;
 
 final class CldrData
@@ -29,7 +30,7 @@ final class CldrData
 
         $path = self::path($package, "{$locale}/{$filename}.json");
 
-        $data = s\json_decode(s\file_get_contents($path), true);
+        $data = Json\decode(Filesystem\read_file($path), true);
 
         return data_get($data, $key);
     }
