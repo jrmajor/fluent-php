@@ -25,17 +25,13 @@ final class CldrData
      */
     public static function get(string $package, string $locale, string $key): array
     {
-        $keys = explode('.', $key);
+        [$filename, $key] = explode('.', $key, 2);
 
-        $path = self::path($package, $locale . '/' . array_shift($keys));
+        $path = self::path($package, "{$locale}/{$filename}.json");
 
-        $data = s\json_decode(s\file_get_contents("{$path}.json"), true);
+        $data = s\json_decode(s\file_get_contents($path), true);
 
-        foreach ($keys as $key) {
-            $data = $data[$key];
-        }
-
-        return $data;
+        return data_get($data, $key);
     }
 
     private static function path(string $package, string $path = ''): string

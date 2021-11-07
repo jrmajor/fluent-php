@@ -17,18 +17,17 @@ final class CurrenciesLocaleCompiler
     public function __construct(
         public string $locale,
     ) {
-        $key = "currencies.main.{$locale}.numbers.currencies";
-
-        $this->currencies = CldrData::get('numbers', $locale, $key);
+        $this->currencies = CldrData::get(
+            'numbers', $locale, "currencies.main.{$locale}.numbers.currencies",
+        );
     }
 
     public function make(): void
     {
-        $currencies = array_map(function (string $code, array $data) {
-            return "'{$code}' => " . $this->makeCurrency($data, $code);
-        }, array_keys($this->currencies), $this->currencies);
-
-        $currencies = implode(",\n    ", $currencies);
+        $currencies = collect($this->currencies)
+            ->map(fn ($data, $code) => $this->makeCurrency($data, $code))
+            ->map(fn ($data, $code) => "'{$code}' => {$data}")
+            ->implode(",\n    ");
 
         $compiled = <<<PHP
             <?php

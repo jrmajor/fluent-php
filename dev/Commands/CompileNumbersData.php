@@ -2,12 +2,11 @@
 
 namespace Major\Fluent\Dev\Commands;
 
-use Exception;
+use Illuminate\Support\Collection;
 use Major\Fluent\Dev\Compilers\NumbersLocaleCompiler as Compiler;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
-use Safe as s;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -127,15 +126,13 @@ class CompileNumbersData extends Command
     }
 
     /**
-     * @return array<string|int, int>
+     * @return Collection<string|int, int>
      */
-    private function stat(string $stat): array
+    private function stat(string $stat): Collection
     {
-        $stat = array_map(fn (array $locales) => count($locales), $this->{$stat});
-
-        s\arsort($stat);
-
-        return $stat;
+        return collect($this->{$stat})
+            ->map(fn (array $locales) => count($locales))
+            ->sortDesc();
     }
 
     /**
@@ -143,27 +140,17 @@ class CompileNumbersData extends Command
      */
     private function rowsForStatTable(string $stat): array
     {
-        $rows = [];
-
-        foreach ($this->stat($stat) as $key => $count) {
-            $rows[] = [$this->escape((string) $key), $count];
-        }
-
-        return $rows;
+        return $this->stat($stat)->map(function (int $count, string|int $key) {
+            return [$this->escape((string) $key), $count];
+        })->values()->all();
     }
 
     private function mostPopular(string $stat): string|int
     {
-        $stat = match ($stat) {
+        return $this->stat(match ($stat) {
             'grouping', 'symbols' => $stat,
             default => $stat . 's',
-        };
-
-        foreach ($this->stat($stat) as $name => $item) {
-            return $name;
-        }
-
-        throw new Exception("No stats for {$stat}.");
+        })->keys()->first();
     }
 
     private function escape(string $string): string

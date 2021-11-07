@@ -20,7 +20,7 @@ final class NumbersLocaleCompiler
     public function __construct(
         public string $locale,
     ) {
-        $this->numbers = CldrData::get('numbers', $locale, 'numbers')['main'][$locale]['numbers'];
+        $this->numbers = CldrData::get('numbers', $locale, "numbers.main.{$locale}.numbers");
     }
 
     public function make(): void
