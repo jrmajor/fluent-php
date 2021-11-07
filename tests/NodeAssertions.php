@@ -15,9 +15,9 @@ trait NodeAssertions
     private static array $cache;
 
     public static function assertEqualsNodeOutput(
-        string $expected, string $command, string $message,
+        string $command, string $actual, string $message,
     ): void {
-        self::assertSame($expected, self::getNodeOutput($command), $message);
+        self::assertSame(self::getNodeOutput($command), $actual, $message);
     }
 
     private static function getNodeOutput(string $command): string
