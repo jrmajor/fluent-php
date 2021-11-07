@@ -3,5 +3,5 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
-    'BND' => new C('BND', 'Dolar Brunei', '$', plurals: ['other' => 'Dolar Brunei']),
+    'BND' => new C('BND', 'Dolar Brunei', '$', narrow: '$', plurals: ['other' => 'Dolar Brunei']),
 ];
