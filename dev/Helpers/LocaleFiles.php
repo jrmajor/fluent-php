@@ -2,7 +2,10 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Safe as s;
+use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 
 final class LocaleFiles
@@ -33,23 +36,16 @@ final class LocaleFiles
     public static function regions(): array
     {
         $files = (new Finder())->in(self::path('currencies'))->files();
-        $regions = [];
 
-        foreach ($files as $file) {
-            if (
-                $file->getExtension() !== 'php'
-                || ! str_contains($file->getFilename(), '-')
-            ) {
-                continue;
-            }
-
-            $language = explode('-', $file->getFilename())[0];
-
-            $regions[$language] ??= [];
-            $regions[$language][] = $file->getBasename('.php');
-        }
-
-        return $regions;
+        return collect($files)
+            ->filter(fn (SplFileInfo $f) => $f->getExtension() === 'php')
+            ->map(fn (SplFileInfo $f) => $f->getBasename('.php'))
+            ->groupBy(fn (string $locale) => Str::before($locale, '-'))
+            ->map(function (Collection $c, string $lang) {
+                return $c->reject(fn (string $region) => $region === $lang)->values();
+            })
+            ->forget('root')
+            ->toArray();
     }
 
     public static function store(string $type, string $locale, string $content): void
