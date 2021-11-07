@@ -6,6 +6,7 @@ namespace Major\Fluent\Dev\Compilers;
 
 use Exception;
 use Locale as IntlLocale;
+use Major\Fluent\Dev\Exceptions\InvalidCurrencySpacing;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
@@ -53,9 +54,15 @@ final class NumbersLocaleCompiler
             $compiled .= ", symbols: {$this->symbols()}";
         }
 
+        if ($this->unitPatterns()) {
+            $compiled .= ", unitPatterns: {$this->unitPatterns()}";
+        }
+
         $compiled .= ");\n";
 
         LocaleFiles::store('numbers', $this->locale, $compiled);
+
+        $this->checkCurrencySpacing();
     }
 
     public function system(): string
@@ -105,6 +112,50 @@ final class NumbersLocaleCompiler
         }, ['decimal', 'group', 'minusSign', 'percentSign']);
 
         return $this->escape('[' . implode(', ', $symbols) . ']');
+    }
+
+    private function unitPatterns(): ?string
+    {
+        $data = $this->numbers["currencyFormats-numberSystem-{$this->system()}"];
+
+        $patterns = [];
+
+        foreach ($data as $key => $value) {
+            if (! str_starts_with($key, 'unitPattern-count-') || $value === '{0} {1}') {
+                continue;
+            }
+
+            $patterns[substr($key, 18)] = $value;
+        }
+
+        if (! $patterns) {
+            return null;
+        }
+
+        foreach ($patterns as $category => $pattern) {
+            $patterns[$category] = "'{$category}' => '{$pattern}'";
+        }
+
+        return '[' . implode(', ', $patterns) . ']';
+    }
+
+    public function checkCurrencySpacing(): void
+    {
+        $spacing = $this->numbers["currencyFormats-numberSystem-{$this->system()}"]['currencySpacing'];
+
+        foreach ([
+            'currencyMatch' => '[[:^S:]&[:^Z:]]',
+            'surroundingMatch' => '[:digit:]',
+            'insertBetween' => "\u{00A0}",
+        ] as $key => $value) {
+            if ($spacing['beforeCurrency'][$key] !== $value) {
+                throw new InvalidCurrencySpacing($this->locale, 'beforeCurrency', $key);
+            }
+
+            if ($spacing['afterCurrency'][$key] !== $value) {
+                throw new InvalidCurrencySpacing($this->locale, 'afterCurrency', $key);
+            }
+        }
     }
 
     public function escape(string $value): string

@@ -16,6 +16,8 @@ final class Locale
         public int $grouping = 1,
         /** @var array{string, string, string, string} */
         public array $symbols = ['.', ',', '-', '%'],
+        /** @var array<string, string> */
+        public array $unitPatterns = [],
     ) { }
 
     /**
@@ -24,5 +26,10 @@ final class Locale
     public function symbolReplacements(): array
     {
         return array_combine(['.', ',', '-', '%'], $this->symbols);
+    }
+
+    public function unitPattern(string $plural): string
+    {
+        return $this->unitPatterns[$plural] ?? '{0} {1}';
     }
 }
