@@ -66,8 +66,8 @@ final class CurrenciesLocaleCompiler
             $compiled .= ", symbol: '{$symbol}'";
         }
 
-        if (isset($data['narrowSymbol'])) {
-            $compiled .= ", narrow: '{$data['narrowSymbol']}'";
+        if (($data['symbol-alt-narrow'] ?? $code) !== $code) {
+            $compiled .= ", narrow: '{$data['symbol-alt-narrow']}'";
         }
 
         if ($plurals = $this->makePlurals($data)) {
