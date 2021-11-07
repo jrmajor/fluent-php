@@ -6,20 +6,18 @@ use Generator;
 use Psl\Filesystem;
 use Psl\Json;
 use Psl\Str;
-use Symfony\Component\Finder\Finder;
+use Psl\Vec;
 
 final class CldrData
 {
     /**
-     * @return Generator<string>
+     * @return list<string>
      */
-    public static function locales(string $package): Generator
+    public static function locales(string $package): array
     {
-        $locales = (new Finder())->in(self::path($package))->directories();
+        $locales = Filesystem\read_directory(self::path($package));
 
-        foreach ($locales as $locale) {
-            yield $locale->getFilename();
-        }
+        return Vec\map($locales, fn ($l) => Filesystem\get_filename($l));
     }
 
     /**
