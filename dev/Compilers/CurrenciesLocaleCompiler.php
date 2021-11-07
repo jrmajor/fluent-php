@@ -8,6 +8,9 @@ use Exception;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\IsoData;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Psl\Dict;
+use Psl\Str;
+use Psl\Vec;
 
 final class CurrenciesLocaleCompiler
 {
@@ -24,10 +27,9 @@ final class CurrenciesLocaleCompiler
 
     public function make(): void
     {
-        $currencies = collect($this->currencies)
-            ->map(fn ($data, $code) => $this->makeCurrency($data, $code))
-            ->map(fn ($data, $code) => "'{$code}' => {$data}")
-            ->implode(",\n    ");
+        $c = Dict\map_with_key($this->currencies, fn ($code, $data) => $this->makeCurrency($code, $data));
+        $c = Dict\map_with_key($c, fn ($code, $data) => "'{$code}' => {$data}");
+        $currencies = Str\join(Vec\values($c), ",\n    ");
 
         $compiled = <<<PHP
             <?php
@@ -46,7 +48,7 @@ final class CurrenciesLocaleCompiler
     /**
      * @param array<string, string> $data
      */
-    private function makeCurrency(array $data, string $code): string
+    private function makeCurrency(string $code, array $data): string
     {
         $name = $data['displayName']
             ?? throw new Exception("No display name for {$code} in {$this->locale}.");

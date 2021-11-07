@@ -2,10 +2,12 @@
 
 namespace Major\Fluent\Dev\Compilers;
 
-use Illuminate\Support\Str;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Exceptions\ShouldNotHappen;
+use Psl\Dict;
 use Psl\Regex;
+use Psl\Str;
+use Psl\Vec;
 
 final class CurrenciesOptimizer
 {
@@ -68,15 +70,12 @@ final class CurrenciesOptimizer
     {
         $data = LocaleFiles::read('currencies', $locale);
 
-        return Str::of($data)
-            ->after("return [\n    '")
-            ->before("),\n];")
-            ->explode("),\n    '")
-            ->mapWithKeys(function (string $data) {
-                $data = explode("' => new C(", $data, 2);
+        $data = (string) Str\after($data, "return [\n    '");
+        $data = (string) Str\before($data, "),\n];");
+        $data = Str\split($data, "),\n    '");
+        $data = Vec\map($data, fn ($s) => Str\split($s, "' => new C(", 2));
+        $data = Dict\reindex($data, fn ($s): string => $s[0]);
 
-                return [$data[0] => $data[1]];
-            })
-            ->all();
+        return Dict\map($data, fn ($s): string => $s[1]);
     }
 }

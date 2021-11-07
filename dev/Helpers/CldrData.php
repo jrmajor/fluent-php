@@ -5,6 +5,7 @@ namespace Major\Fluent\Dev\Helpers;
 use Generator;
 use Psl\Filesystem;
 use Psl\Json;
+use Psl\Str;
 use Symfony\Component\Finder\Finder;
 
 final class CldrData
@@ -26,13 +27,17 @@ final class CldrData
      */
     public static function get(string $package, string $locale, string $key): array
     {
-        [$filename, $key] = explode('.', $key, 2);
+        [$filename, $keys] = explode('.', $key, 2);
 
         $path = self::path($package, "{$locale}/{$filename}.json");
 
         $data = Json\decode(Filesystem\read_file($path), true);
 
-        return data_get($data, $key);
+        foreach (Str\split($keys, '.') as $key) {
+            $data = $data[$key];
+        }
+
+        return $data;
     }
 
     private static function path(string $package, string $path = ''): string

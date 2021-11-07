@@ -2,11 +2,10 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use Psl\Dict;
 use Psl\Filesystem;
-use SplFileInfo;
-use Symfony\Component\Finder\Finder;
+use Psl\Str;
+use Psl\Vec;
 
 final class LocaleFiles
 {
@@ -24,21 +23,22 @@ final class LocaleFiles
     }
 
     /**
-     * @return array<string, string[]>
+     * @return array<string, list<string>>
      */
     public static function regions(): array
     {
-        $files = (new Finder())->in(self::path('currencies'))->files();
+        $files = Filesystem\read_directory(self::path('currencies'));
 
-        return collect($files)
-            ->filter(fn (SplFileInfo $f) => $f->getExtension() === 'php')
-            ->map(fn (SplFileInfo $f) => $f->getBasename('.php'))
-            ->groupBy(fn (string $locale) => Str::before($locale, '-'))
-            ->map(function (Collection $c, string $lang) {
-                return $c->reject(fn (string $region) => $region === $lang)->values();
-            })
-            ->forget('root')
-            ->toArray();
+        $files = Vec\filter($files, fn ($path) => Filesystem\get_extension($path) === 'php');
+        $files = Vec\map($files, fn ($path) => Filesystem\get_basename($path, '.php'));
+        $files = Dict\group_by($files, fn (string $locale) => Str\before($locale, '-') ?? $locale);
+        $files = Dict\map_with_key($files, function (string $lang, array $c) {
+            return Vec\values(Vec\filter($c, fn (string $region) => $region !== $lang));
+        });
+
+        unset($files['root']);
+
+        return $files;
     }
 
     public static function store(string $type, string $locale, string $content): void
