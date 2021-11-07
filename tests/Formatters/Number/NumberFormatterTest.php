@@ -16,8 +16,8 @@ abstract class NumberFormatterTest extends TestCase
         $jsonOptions = json_encode($options);
 
         self::assertEqualsNodeOutput(
-            (new NumberFormatter($locale))->format($number, new Options(...$options)),
             "new Intl.NumberFormat('{$locale}', {$jsonOptions}).format({$number})",
+            (new NumberFormatter($locale))->format($number, new Options(...$options)),
             "Failed asserting that formatting of {$number} for {$locale} with {$jsonOptions} is correct.",
         );
     }
