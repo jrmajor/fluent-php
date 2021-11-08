@@ -43,8 +43,8 @@ final class ParserException extends Exception
             'E0029' => 'Expected simple expression as selector',
         };
 
-        if (isset($source)) {
-            $message .= " somewhere in \"{$source}\"";
+        if ($source !== null) {
+            $message .= " somewhere in \"{$source}\".";
         }
 
         parent::__construct($message);
