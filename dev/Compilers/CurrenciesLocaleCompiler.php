@@ -43,7 +43,7 @@ final class CurrenciesLocaleCompiler
 
             PHP;
 
-        LocaleFiles::store('currencies', $this->locale, $compiled);
+        LocaleFiles::write('currencies', $this->locale, $compiled);
     }
 
     /**

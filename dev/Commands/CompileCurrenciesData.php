@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CompileCurrenciesData extends Command
+final class CompileCurrenciesData extends Command
 {
     protected static $defaultName = 'currencies';
 

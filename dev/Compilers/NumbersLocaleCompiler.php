@@ -64,7 +64,7 @@ final class NumbersLocaleCompiler
 
         $compiled .= ");\n";
 
-        LocaleFiles::store('numbers', $this->locale, $compiled);
+        LocaleFiles::write('numbers', $this->locale, $compiled);
 
         $this->checkCurrencySpacing();
     }

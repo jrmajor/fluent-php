@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CompileNumbersData extends Command
+final class CompileNumbersData extends Command
 {
     protected static $defaultName = 'numbers';
 

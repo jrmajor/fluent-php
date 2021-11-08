@@ -9,11 +9,6 @@ use Psl\Vec;
 
 final class LocaleFiles
 {
-    public static function path(string $path): string
-    {
-        return __DIR__ . "/../../locales/{$path}";
-    }
-
     public static function prepareDirectory(string $dir): void
     {
         $dir = self::path($dir);
@@ -41,7 +36,7 @@ final class LocaleFiles
         return $files;
     }
 
-    public static function store(string $type, string $locale, string $content): void
+    public static function write(string $type, string $locale, string $content): void
     {
         Filesystem\write_file(self::path("{$type}/{$locale}.php"), $content);
     }
@@ -51,8 +46,13 @@ final class LocaleFiles
         return Filesystem\read_file(self::path("{$type}/{$locale}.php"));
     }
 
-    public static function remove(string $type, string $locale): void
+    public static function delete(string $type, string $locale): void
     {
         Filesystem\delete_file(self::path("{$type}/{$locale}.php"));
+    }
+
+    private static function path(string $path): string
+    {
+        return __DIR__ . "/../../locales/{$path}";
     }
 }

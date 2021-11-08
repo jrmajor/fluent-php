@@ -57,9 +57,9 @@ final class CurrenciesOptimizer
                 throw new ShouldNotHappen();
             }
 
-            LocaleFiles::remove('currencies', $region);
+            LocaleFiles::delete('currencies', $region);
         } else {
-            LocaleFiles::store('currencies', $region, $rawData);
+            LocaleFiles::write('currencies', $region, $rawData);
         }
     }
 
