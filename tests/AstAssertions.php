@@ -3,12 +3,8 @@
 namespace Major\Fluent\Tests;
 
 use InvalidArgumentException;
-use Major\Fluent\Exceptions\ShouldNotHappen;
 use Major\Fluent\Node\BaseNode;
 use Major\Fluent\Node\Syntax\Annotation;
-use Psl\Type;
-use Psl\Type\TypeInterface;
-use Psl\Iter;
 
 /**
  * @mixin TestCase
