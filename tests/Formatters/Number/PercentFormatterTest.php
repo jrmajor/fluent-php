@@ -8,8 +8,9 @@ final class PercentFormatterTest extends NumberFormatterTest
 {
     /**
      * @dataProvider providePercentCases
+     * @testdox it works for percent patterns
      */
-    public function testItWorksForPercentPatterns(
+    public function testPercent(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'percent']);

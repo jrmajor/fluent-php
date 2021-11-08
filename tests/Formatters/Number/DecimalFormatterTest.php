@@ -8,8 +8,9 @@ final class DecimalFormatterTest extends NumberFormatterTest
 {
     /**
      * @dataProvider provideDecimalCases
+     * @testdox it works for decimal patterns
      */
-    public function testItWorksForDecimalPatterns(
+    public function testDecimal(
         string $locale, int|float $number, array $options = [],
     ): void {
         $this->assertNumberFormat($locale, $number, $options);

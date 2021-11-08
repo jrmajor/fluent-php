@@ -8,8 +8,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
 {
     /**
      * @dataProvider provideCodeDisplayCases
+     * @testdox it works with code display
      */
-    public function testItWorksWithCodeDisplay(
+    public function testCode(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'code']);
@@ -19,8 +20,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
 
     /**
      * @dataProvider provideSymbolDisplayCases
+     * @testdox it works with symbol display
      */
-    public function testItWorksWithSymbolDisplay(
+    public function testSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'symbol']);
@@ -30,8 +32,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
 
     /**
      * @dataProvider provideNarrowSymbolDisplayCases
+     * @testdox it works with narrow symbol display
      */
-    public function testItWorksWithNarrowSymbolDisplay(
+    public function testNarrowSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'narrowSymbol']);
@@ -41,8 +44,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
 
     /**
      * @dataProvider provideNameDisplayCases
+     * @testdox it works with name display
      */
-    public function testItWorksWithNameDisplay(
+    public function testName(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'name']);
