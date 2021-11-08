@@ -2,11 +2,14 @@
 
 namespace Major\Fluent\Dev\Commands;
 
-use Illuminate\Support\Collection;
 use Major\Fluent\Dev\Compilers\NumbersLocaleCompiler as Compiler;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Psl\Dict;
+use Psl\Str;
+use Psl\Type;
+use Psl\Vec;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -126,13 +129,20 @@ class CompileNumbersData extends Command
     }
 
     /**
-     * @return Collection<string|int, int>
+     * @return array<string|int, int>
      */
-    private function stat(string $stat): Collection
+    private function stat(string $stat): array
     {
-        return collect($this->{$stat})
-            ->map(fn (array $locales) => count($locales))
-            ->sortDesc();
+        $stat = Type\dict(
+            Type\union(Type\string(), Type\int()),
+            Type\vec(Type\string()),
+        )->assert($this->{$stat});
+
+        $stats = Dict\map($stat, fn (array $locales) => count($locales));
+
+        arsort($stats);
+
+        return $stats;
     }
 
     /**
@@ -140,25 +150,26 @@ class CompileNumbersData extends Command
      */
     private function rowsForStatTable(string $stat): array
     {
-        return $this->stat($stat)->map(function (int $count, string|int $key) {
-            return [$this->escape((string) $key), $count];
-        })->values()->all();
+        return Vec\enumerate(Dict\map_keys(
+            $this->stat($stat),
+            fn ($key) => $this->escape((string) $key),
+        ));
     }
 
     private function mostPopular(string $stat): string|int
     {
-        return $this->stat(match ($stat) {
+        return Vec\keys($this->stat(match ($stat) {
             'grouping', 'symbols' => $stat,
             default => $stat . 's',
-        })->keys()->first();
+        }))[0];
     }
 
-    private function escape(string $string): string
+    private function escape(string $value): string
     {
-        return str_replace(
-            ["\u{00A0}", "\u{200E}", "\u{200F}"],
-            ['\\u{00A0}', '\\u{200E}', '\\u{200F}'],
-            $string,
-        );
+        return Str\replace_every($value, [
+            "\u{00A0}" => '\\u{00A0}',
+            "\u{200E}" => '\\u{200E}',
+            "\u{200F}" => '\\u{200F}',
+        ]);
     }
 }

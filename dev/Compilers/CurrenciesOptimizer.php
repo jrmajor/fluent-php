@@ -2,10 +2,12 @@
 
 namespace Major\Fluent\Dev\Compilers;
 
-use Illuminate\Support\Str;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Exceptions\ShouldNotHappen;
-use Safe as s;
+use Psl\Dict;
+use Psl\Regex;
+use Psl\Str;
+use Psl\Vec;
 
 final class CurrenciesOptimizer
 {
@@ -17,11 +19,11 @@ final class CurrenciesOptimizer
 
     public function optimize(): void
     {
-        $rootData = $this->loadLocaleData('root');
+        $rootData = $this->readLocaleData('root');
 
         $this->optimizeRegion($this->language, $rootData);
 
-        $languageData = $this->loadLocaleData($this->language);
+        $languageData = $this->readLocaleData($this->language);
 
         foreach ($this->regions as $region) {
             $this->optimizeRegion($region, $rootData, $languageData);
@@ -34,7 +36,7 @@ final class CurrenciesOptimizer
      */
     private function optimizeRegion(string $region, array $rootData, array $baseData = []): void
     {
-        $currencies = $this->loadLocaleData($region);
+        $currencies = $this->readLocaleData($region);
 
         $currenciesToRemove = [];
 
@@ -47,11 +49,11 @@ final class CurrenciesOptimizer
         $rawData = LocaleFiles::read('currencies', $region);
 
         foreach ($currenciesToRemove as $currency) {
-            $rawData = s\preg_replace("/\\s+'{$currency}' => .*/", '', $rawData);
+            $rawData = Regex\replace($rawData, "/\\s+'{$currency}' => .*/", '');
         }
 
-        if (str_contains($rawData, "return [\n];")) {
-            if (! str_contains($region, '-')) {
+        if (Str\contains($rawData, "return [\n];")) {
+            if (! Str\contains($region, '-')) {
                 throw new ShouldNotHappen();
             }
 
@@ -64,19 +66,16 @@ final class CurrenciesOptimizer
     /**
      * @return array<string, string>
      */
-    private function loadLocaleData(string $locale): array
+    private function readLocaleData(string $locale): array
     {
         $data = LocaleFiles::read('currencies', $locale);
 
-        return Str::of($data)
-            ->after("return [\n    '")
-            ->before("),\n];")
-            ->explode("),\n    '")
-            ->mapWithKeys(function (string $data) {
-                $data = explode("' => new C(", $data, 2);
+        $data = (string) Str\after($data, "return [\n    '");
+        $data = (string) Str\before($data, "),\n];");
+        $data = explode("),\n    '", $data);
+        $data = Vec\map($data, fn ($s) => Str\split($s, "' => new C(", 2));
+        $data = Dict\reindex($data, fn ($s): string => $s[0]);
 
-                return [$data[0] => $data[1]];
-            })
-            ->all();
+        return Dict\map($data, fn ($s): string => $s[1]);
     }
 }

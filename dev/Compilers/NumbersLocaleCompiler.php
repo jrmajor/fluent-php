@@ -11,7 +11,11 @@ use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Major\Fluent\Formatters\Number\NumberFormatter;
-use Safe as s;
+use Psl\Dict;
+use Psl\Regex;
+use Psl\Str;
+use Psl\Type;
+use Psl\Vec;
 
 final class NumbersLocaleCompiler
 {
@@ -75,11 +79,11 @@ final class NumbersLocaleCompiler
         $key = "{$type}Formats-numberSystem-{$this->system()}";
         $pattern = $this->numbers[$key]['standard'];
 
-        assert(is_string($pattern));
+        Type\string()->assert($pattern);
 
         $regex = NumberFormatter::PATTERN_REGEX;
 
-        if (! s\preg_match("/^{$regex}(;{$regex})?$/", $pattern)) {
+        if (! Regex\matches($pattern, "/^{$regex}(;{$regex})?$/")) {
             throw new Exception("Pattern {$pattern} is invalid.");
         }
 
@@ -90,53 +94,50 @@ final class NumbersLocaleCompiler
     {
         $pattern = $this->escape($this->pattern($type));
 
-        return str_contains($pattern, '\\') ? "\"{$pattern}\"" : "'{$pattern}'";
+        return Str\contains($pattern, '\\') ? "\"{$pattern}\"" : "'{$pattern}'";
     }
 
     public function grouping(): string
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
 
-        return s\preg_match('/^[0-9]+$/', $grouping) ? $grouping
-            : throw new Exception('minimumGroupingDigits should be numeric.');
+        return (string) Type\int()->coerce($grouping);
     }
 
     public function symbols(): string
     {
         $all = $this->numbers["symbols-numberSystem-{$this->system()}"];
 
-        $symbols = array_map(function ($type) use ($all) {
+        $escaper = function ($type) use ($all): string {
             $type = $this->escape($all[$type]);
 
-            return str_contains($type, '\\') ? "\"{$type}\"" : "'{$type}'";
-        }, ['decimal', 'group', 'minusSign', 'percentSign']);
+            return Str\contains($type, '\\') ? "\"{$type}\"" : "'{$type}'";
+        };
 
-        return $this->escape('[' . implode(', ', $symbols) . ']');
+        $symbols = Vec\map(['decimal', 'group', 'minusSign', 'percentSign'], $escaper);
+
+        return '[' . Str\join($symbols, ', ') . ']';
     }
 
     private function unitPatterns(): ?string
     {
         $data = $this->numbers["currencyFormats-numberSystem-{$this->system()}"];
 
-        $patterns = [];
+        $data = Type\dict(Type\string(), Type\mixed())->coerce($data);
 
-        foreach ($data as $key => $value) {
-            if (! str_starts_with($key, 'unitPattern-count-') || $value === '{0} {1}') {
-                continue;
-            }
+        $data = Dict\filter_keys($data, fn ($key) => Str\starts_with($key, 'unitPattern-count-'));
+        $data = Dict\filter($data, fn ($value) => $value !== '{0} {1}');
 
-            $patterns[substr($key, 18)] = $value;
-        }
-
-        if (! $patterns) {
+        if (! $data) {
             return null;
         }
 
-        foreach ($patterns as $category => $pattern) {
-            $patterns[$category] = "'{$category}' => '{$pattern}'";
-        }
+        $data = Dict\map_keys($data, function ($key) {
+            return Type\string()->coerce(Str\after($key, 'unitPattern-count-'));
+        });
+        $data = Dict\map_with_key($data, fn ($category, $pattern) => "'{$category}' => '{$pattern}'");
 
-        return '[' . implode(', ', $patterns) . ']';
+        return '[' . Str\join(Vec\values($data), ', ') . ']';
     }
 
     public function checkCurrencySpacing(): void
@@ -160,10 +161,10 @@ final class NumbersLocaleCompiler
 
     public function escape(string $value): string
     {
-        return str_replace(
-            ["\u{00A0}", "\u{200E}", "\u{200F}"],
-            ['\\u{00A0}', '\\u{200E}', '\\u{200F}'],
-            $value,
-        );
+        return Str\replace_every($value, [
+            "\u{00A0}" => '\\u{00A0}',
+            "\u{200E}" => '\\u{200E}',
+            "\u{200F}" => '\\u{200F}',
+        ]);
     }
 }

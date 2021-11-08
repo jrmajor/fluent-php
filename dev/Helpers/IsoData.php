@@ -2,7 +2,8 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
-use Safe as s;
+use Psl\Filesystem;
+use Psl\Str;
 use SimpleXMLElement;
 
 final class IsoData
@@ -21,7 +22,7 @@ final class IsoData
 
     private static function loadMinorUnits(): void
     {
-        $xml = s\file_get_contents(__DIR__ . '/../ISO4217.xml');
+        $xml = Filesystem\read_file(__DIR__ . '/../ISO4217.xml');
 
         $xml = new SimpleXMLElement($xml);
 
@@ -29,13 +30,13 @@ final class IsoData
 
         foreach ($xml->CcyTbl->children() as $data) {
             $currency = (string) $data->Ccy;
-            $minorUnits = (string) $data->CcyMnrUnts;
+            $minorUnits = Str\to_int((string) $data->CcyMnrUnts);
 
-            if (! is_numeric($minorUnits)) {
+            if ($minorUnits === null) {
                 continue;
             }
 
-            self::$minorUnits[$currency] = (int) $minorUnits;
+            self::$minorUnits[$currency] = $minorUnits;
         }
     }
 }

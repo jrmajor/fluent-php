@@ -2,22 +2,21 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
-use Generator;
-use Safe as s;
-use Symfony\Component\Finder\Finder;
+use Psl\Filesystem;
+use Psl\Json;
+use Psl\Str;
+use Psl\Vec;
 
 final class CldrData
 {
     /**
-     * @return Generator<string>
+     * @return list<string>
      */
-    public static function locales(string $package): Generator
+    public static function locales(string $package): array
     {
-        $locales = (new Finder())->in(self::path($package))->directories();
+        $locales = Filesystem\read_directory(self::path($package));
 
-        foreach ($locales as $locale) {
-            yield $locale->getFilename();
-        }
+        return Vec\map($locales, fn ($l) => Filesystem\get_filename($l));
     }
 
     /**
@@ -25,13 +24,17 @@ final class CldrData
      */
     public static function get(string $package, string $locale, string $key): array
     {
-        [$filename, $key] = explode('.', $key, 2);
+        [$filename, $keys] = explode('.', $key, 2);
 
         $path = self::path($package, "{$locale}/{$filename}.json");
 
-        $data = s\json_decode(s\file_get_contents($path), true);
+        $data = Json\decode(Filesystem\read_file($path), true);
 
-        return data_get($data, $key);
+        foreach (Str\split($keys, '.') as $key) {
+            $data = $data[$key];
+        }
+
+        return $data;
     }
 
     private static function path(string $package, string $path = ''): string

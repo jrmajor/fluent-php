@@ -5,6 +5,7 @@ namespace Major\Fluent\Dev\Helpers;
 use Exception;
 use InvalidArgumentException;
 use Major\Fluent\Formatters\Number\Locale\Locale;
+use Psl\Str;
 use ReflectionClass;
 
 final class LocaleDefaults
@@ -22,7 +23,7 @@ final class LocaleDefaults
             'percentPattern' => $parameters[3]->getDefaultValue(),
             'currencyPattern' => $parameters[4]->getDefaultValue(),
             'grouping' => (string) $parameters[5]->getDefaultValue(),
-            'symbols' => "['" . implode("', '", $parameters[6]->getDefaultValue()) . "']",
+            'symbols' => "['" . Str\join($parameters[6]->getDefaultValue(), "', '") . "']",
             default => throw new InvalidArgumentException("Property {$key} does not exist."),
         };
     }
