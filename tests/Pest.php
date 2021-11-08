@@ -2,19 +2,7 @@
 
 namespace Major\Fluent\Tests;
 
-use Major\Fluent\Node\LiteralValues\LiteralValue;
-use Major\Fluent\Parser\FluentParser;
-
 uses(TestCase::class)->in(__DIR__);
-
-function parseLiteral(string $input): LiteralValue
-{
-  $ast = (new FluentParser())->parseEntry($input);
-
-  $expression = $ast->value->elements[0]->expression;
-
-  return $expression->parse();
-}
 
 expect()->extend('toBeException', function (string $class, string $message) {
     $this->toBeInstanceOf($class);

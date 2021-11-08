@@ -1,129 +1,159 @@
 <?php
 
+namespace Major\Fluent\Tests\Parser;
+
 use Major\Fluent\Parser\FluentParser;
+use Major\Fluent\Tests\TestCase;
 
-beforeEach(fn () => $this->parser = new FluentParser());
+final class ParseEntryTest extends TestCase
+{
+    private FluentParser $parser;
 
-it('can parse simple message', function () {
-    $expected = [
-        'type' => 'Message',
-        'id' => [
-            'type' => 'Identifier',
-            'name' => 'foo',
-        ],
-        'value' => [
-            'type' => 'Pattern',
-            'elements' => [
-                [
-                    'type' => 'TextElement',
-                    'value' => 'Foo',
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->parser = new FluentParser(true);
+    }
+
+    /**
+     * @testdox it can parse simple message
+     */
+    public function testMessage(): void
+    {
+        $expected = [
+            'type' => 'Message',
+            'id' => [
+                'type' => 'Identifier',
+                'name' => 'foo',
+            ],
+            'value' => [
+                'type' => 'Pattern',
+                'elements' => [
+                    [
+                        'type' => 'TextElement',
+                        'value' => 'Foo',
+                    ],
                 ],
             ],
-        ],
-        'attributes' => [],
-        'comment' => null,
-    ];
+            'attributes' => [],
+            'comment' => null,
+        ];
 
-    $message = $this->parser
-        ->parseEntry('foo = Foo');
+        $message = $this->parser->parseEntry('foo = Foo');
 
-    $this->assertNodeEquals($expected, $message);
-});
+        $this->assertNodeEquals($expected, $message);
+    }
 
-it('ignores attached comment', function () {
-    $expected = [
-        'type' => 'Message',
-        'id' => [
-            'type' => 'Identifier',
-            'name' => 'foo',
-        ],
-        'value' => [
-            'type' => 'Pattern',
-            'elements' => [
-                [
-                    'type' => 'TextElement',
-                    'value' => 'Foo',
+    /**
+     * @testdox it ignores attached comment
+     */
+    public function testAttachedComment(): void
+    {
+        $expected = [
+            'type' => 'Message',
+            'id' => [
+                'type' => 'Identifier',
+                'name' => 'foo',
+            ],
+            'value' => [
+                'type' => 'Pattern',
+                'elements' => [
+                    [
+                        'type' => 'TextElement',
+                        'value' => 'Foo',
+                    ],
                 ],
             ],
-        ],
-        'attributes' => [],
-        'comment' => null,
-    ];
+            'attributes' => [],
+            'comment' => null,
+        ];
 
-    $message = $this->parser
-        ->parseEntry("# Attached Comment\nfoo = Foo");
+        $message = $this->parser->parseEntry("# Attached Comment\nfoo = Foo");
 
-    $this->assertNodeEquals($expected, $message);
-});
+        $this->assertNodeEquals($expected, $message);
+    }
 
-it('returns junk', function () {
-    $expected = [
-        'type' => 'Junk',
-        'content' => 'junk',
-        'annotations' => [
-            [
-                'type' => 'Annotation',
-                'code' => 'E0003',
-                'message' => 'Expected token: "="',
-                'arguments' => ['='],
-            ],
-        ],
-    ];
-
-    $junk = $this->parser
-        ->parseEntry("# Attached Comment\njunk");
-
-    $this->assertNodeEquals($expected, $junk);
-});
-
-it('ignores all valid comments', function () {
-    $input = <<<'ftl'
-        # Attached Comment
-        ## Group Comment
-        ### Resource Comment
-        foo = Foo
-        ftl;
-
-    $expected = [
-        'type' => 'Message',
-        'id' => [
-            'type' => 'Identifier',
-            'name' => 'foo',
-        ],
-        'value' => [
-            'type' => 'Pattern',
-            'elements' => [
+    /**
+     * @testdox it returns junk
+     */
+    public function testJunk(): void
+    {
+        $expected = [
+            'type' => 'Junk',
+            'content' => 'junk',
+            'annotations' => [
                 [
-                    'type' => 'TextElement',
-                    'value' => 'Foo',
+                    'type' => 'Annotation',
+                    'code' => 'E0003',
+                    'message' => 'Expected token: "="',
+                    'arguments' => ['='],
                 ],
             ],
-        ],
-        'attributes' => [],
-        'comment' => null,
-    ];
+        ];
 
-    $message = $this->parser->parseEntry($input);
+        $junk = $this->parser->parseEntry("# Attached Comment\njunk");
 
-    $this->assertNodeEquals($expected, $message);
-  });
+        $this->assertNodeEquals($expected, $junk);
+    }
 
-it('does not ignore invalid comments', function () {
-    $expected = [
-        'type' => 'Junk',
-        'content' => '##Invalid Comment',
-        'annotations' => [
-            [
-                'type' => 'Annotation',
-                'code' => 'E0003',
-                'message' => 'Expected token: " "',
-                'arguments' => [' '],
+    /**
+     * @testdox it ignores all valid comments
+     */
+    public function testValidComments(): void
+    {
+        $input = <<<'ftl'
+            # Attached Comment
+            ## Group Comment
+            ### Resource Comment
+            foo = Foo
+            ftl;
+
+        $expected = [
+            'type' => 'Message',
+            'id' => [
+                'type' => 'Identifier',
+                'name' => 'foo',
             ],
-        ],
-    ];
+            'value' => [
+                'type' => 'Pattern',
+                'elements' => [
+                    [
+                        'type' => 'TextElement',
+                        'value' => 'Foo',
+                    ],
+                ],
+            ],
+            'attributes' => [],
+            'comment' => null,
+        ];
 
-    $message = $this->parser
-        ->parseEntry("# Attached Comment\n##Invalid Comment");
+        $message = $this->parser->parseEntry($input);
 
-    $this->assertNodeEquals($expected, $message);
-});
+        $this->assertNodeEquals($expected, $message);
+    }
+
+    /**
+     * @testdox it does not ignore invalid comments
+     */
+    public function testInvalidComments(): void
+    {
+        $expected = [
+            'type' => 'Junk',
+            'content' => '##Invalid Comment',
+            'annotations' => [
+                [
+                    'type' => 'Annotation',
+                    'code' => 'E0003',
+                    'message' => 'Expected token: " "',
+                    'arguments' => [' '],
+                ],
+            ],
+        ];
+
+        $message = $this->parser
+            ->parseEntry("# Attached Comment\n##Invalid Comment");
+
+        $this->assertNodeEquals($expected, $message);
+    }
+}

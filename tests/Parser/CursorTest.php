@@ -4,405 +4,488 @@ namespace Major\Fluent\Tests\Parser;
 
 use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Parser\Cursor;
+use Major\Fluent\Tests\TestCase;
+use Throwable;
 
-function cursor(string $string): Cursor
+final class CursorTest extends TestCase
 {
-    return new class ($string) extends Cursor {};
-}
-
-test('next, currentChar and index methods work', function () {
-    $cursor = cursor('abc🐠d');
-
-    expect($cursor->currentChar())->toBe('a');
-    expect($cursor->index())->toBe(0);
-
-    expect($cursor->next(2))->toBe('c');
-    expect($cursor->currentChar())->toBe('c');
-    expect($cursor->index())->toBe(2);
-
-    expect($cursor->next())->toBe('🐠');
-    expect($cursor->currentChar())->toBe('🐠');
-    expect($cursor->index())->toBe(3);
-
-    expect($cursor->next())->toBe('d');
-    expect($cursor->currentChar())->toBe('d');
-    expect($cursor->index())->toBe(4);
-
-    expect($cursor->next())->toBeNull();
-    expect($cursor->currentChar())->toBeNull();
-    expect($cursor->index())->toBe(5);
-});
-
-test('peek, currentPeek and peekOffset methods work', function () {
-    $cursor = cursor('abc🐬d');
-
-    expect($cursor->currentPeek())->toBe('a');
-    expect($cursor->peekOffset())->toBe(0);
-
-    expect($cursor->peek(2))->toBe('c');
-    expect($cursor->currentPeek())->toBe('c');
-    expect($cursor->peekOffset())->toBe(2);
-
-    expect($cursor->peek())->toBe('🐬');
-    expect($cursor->currentPeek())->toBe('🐬');
-    expect($cursor->peekOffset())->toBe(3);
-
-    expect($cursor->peek())->toBe('d');
-    expect($cursor->currentPeek())->toBe('d');
-    expect($cursor->peekOffset())->toBe(4);
-
-    expect($cursor->peek())->toBeNull();
-    expect($cursor->currentPeek())->toBeNull();
-    expect($cursor->peekOffset())->toBe(5);
-  });
-
-test('peek and next methods work', function () {
-    $cursor = cursor('ab🦀d');
-
-    expect($cursor->peek())->toBe('b');
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(0);
-
-    expect($cursor->next())->toBe('b');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(1);
-
-    expect($cursor->peek())->toBe('🦀');
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(1);
-
-    expect($cursor->next())->toBe('🦀');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(2);
-    expect($cursor->currentChar())->toBe('🦀');
-    expect($cursor->currentPeek())->toBe('🦀');
-
-    expect($cursor->peek())->toBe('d');
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(2);
-
-    expect($cursor->next())->toBe('d');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(3);
-    expect($cursor->currentChar())->toBe('d');
-    expect($cursor->currentPeek())->toBe('d');
-
-    expect($cursor->peek())->toBeNull();
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(3);
-    expect($cursor->currentChar())->toBe('d');
-    expect($cursor->currentPeek())->toBeNull();
-
-    expect($cursor->peek())->toBeNull();
-    expect($cursor->peekOffset())->toBe(2);
-    expect($cursor->index())->toBe(3);
-
-    expect($cursor->next())->toBeNull();
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(4);
-  });
-
-test('skipToPeek method works', function () {
-    $cursor = cursor('ab🦑d');
-
-    $cursor->peek(2);
-
-    $cursor->skipToPeek();
-
-    expect($cursor->currentChar())->toBe('🦑');
-    expect($cursor->currentPeek())->toBe('🦑');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(2);
-
-    $cursor->peek();
-
-    expect($cursor->currentChar())->toBe('🦑');
-    expect($cursor->currentPeek())->toBe('d');
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(2);
-
-    $cursor->next();
-
-    expect($cursor->currentChar())->toBe('d');
-    expect($cursor->currentPeek())->toBe('d');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(3);
-});
-
-test('resetPeek method works', function () {
-    $cursor = cursor('abcd');
-
-    $cursor->next();
-    $cursor->peek(2);
-    $cursor->resetPeek();
-
-    expect($cursor->currentChar())->toBe('b');
-    expect($cursor->currentPeek())->toBe('b');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(1);
-
-    $cursor->peek();
-
-    expect($cursor->currentChar())->toBe('b');
-    expect($cursor->currentPeek())->toBe('c');
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(1);
-
-    $cursor->peek(3);
-    $cursor->resetPeek();
-
-    expect($cursor->currentChar())->toBe('b');
-    expect($cursor->currentPeek())->toBe('b');
-    expect($cursor->peekOffset())->toBe(0);
-    expect($cursor->index())->toBe(1);
-
-    expect($cursor->peek())->toBe('c');
-    expect($cursor->currentChar())->toBe('b');
-    expect($cursor->currentPeek())->toBe('c');
-    expect($cursor->peekOffset())->toBe(1);
-    expect($cursor->index())->toBe(1);
-
-    expect($cursor->peek())->toBe('d');
-    expect($cursor->peek())->toBeNull();
-});
-
-it('treats crlf as a single character', function () {
-    $cursor = cursor("a\r\nb\r\n");
-
-    expect($cursor->currentChar())->toBe('a');
-
-    expect($cursor->next())->toBe("\n");
-    expect($cursor->currentChar())->toBe("\n");
-
-    $cursor->peek(2);
-
-    expect($cursor->currentPeek())->toBe("\n");
-
-    $cursor->skipToPeek();
-
-    expect($cursor->currentChar())->toBe("\n");
-});
-
-test('slice method works', function () {
-    $cursor = cursor('🐙ab🐙cd');
-
-    expect($cursor->slice(2, 5))->toBe('b🐙c');
-});
-
-it('can peek blank inline', function () {
-    $cursor = cursor("a   b     \r\n    \n");
-
-    $cursor->next();
-
-    expect($cursor->peekBlankInline())->toBe('   ');
-    expect($cursor->index())->toBe(1);
-    expect($cursor->peekOffset())->toBe(3);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    expect($cursor->peekBlankInline())->toBe('     ');
-    expect($cursor->index())->toBe(5);
-    expect($cursor->peekOffset())->toBe(5);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    expect($cursor->peekBlankInline())->toBe('    ');
-    expect($cursor->index())->toBe(12);
-    expect($cursor->peekOffset())->toBe(4);
-});
-
-it('can skip blank inline', function () {
-    $cursor = cursor("a   b     \r\n    \n");
-
-    $cursor->next();
-
-    expect($cursor->skipBlankInline())->toBe('   ');
-    expect($cursor->index())->toBe(4);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    expect($cursor->skipBlankInline())->toBe('     ');
-    expect($cursor->index())->toBe(10);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    expect($cursor->skipBlankInline())->toBe('    ');
-    expect($cursor->index())->toBe(16);
-    expect($cursor->peekOffset())->toBe(0);
-});
-
-it('can peek blank block', function () {
-    $cursor = cursor("a b     \r\n    \n  c  \n");
-
-    $cursor->next();
-
-    expect($cursor->peekBlankBlock())->toBe('');
-    expect($cursor->index())->toBe(1);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->next(2);
-
-    expect($cursor->peekBlankBlock())->toBe("\n\n");
-    expect($cursor->index())->toBe(3);
-    expect($cursor->peekOffset())->toBe(12);
-
-    $cursor->skipToPeek();
-    $cursor->next(3);
-
-    expect($cursor->peekBlankBlock())->toBe("\n");
-    expect($cursor->index())->toBe(18);
-    expect($cursor->peekOffset())->toBe(3);
-});
-
-it('can skip blank block', function () {
-    $cursor = cursor("a b     \r\n    \n  c  \n");
-
-    $cursor->next();
-
-    expect($cursor->skipBlankBlock())->toBe('');
-    expect($cursor->index())->toBe(1);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->next(2);
-
-    expect($cursor->skipBlankBlock())->toBe("\n\n");
-    expect($cursor->index())->toBe(15);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->skipToPeek();
-    $cursor->next(3);
-
-    expect($cursor->skipBlankBlock())->toBe("\n");
-    expect($cursor->index())->toBe(21);
-    expect($cursor->peekOffset())->toBe(0);
-});
-
-it('can peek blank', function () {
-    $cursor = cursor("a b     \r\n    \n  c  \n");
-
-    $cursor->next();
-
-    $cursor->peekBlank();
-    expect($cursor->index())->toBe(1);
-    expect($cursor->peekOffset())->toBe(1);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    $cursor->peekBlank();
-    expect($cursor->index())->toBe(3);
-    expect($cursor->peekOffset())->toBe(14);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    $cursor->peekBlank();
-    expect($cursor->index())->toBe(18);
-    expect($cursor->peekOffset())->toBe(3);
-});
-
-it('can skip blank', function () {
-    $cursor = cursor("a b     \r\n    \n  c  \n");
-
-    $cursor->next();
-
-    $cursor->skipBlank();
-    expect($cursor->index())->toBe(2);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    $cursor->skipBlank();
-    expect($cursor->index())->toBe(17);
-    expect($cursor->peekOffset())->toBe(0);
-
-    $cursor->skipToPeek();
-    $cursor->next();
-
-    $cursor->skipBlank();
-    expect($cursor->index())->toBe(21);
-    expect($cursor->peekOffset())->toBe(0);
-});
-
-it('advances when encounters expected character', function () {
-    $cursor = cursor("a🦓\r\nb");
-
-    $cursor->expectChar('a');
-    expect($cursor->index())->toBe(1);
-
-    $cursor->expectChar('🦓');
-    expect($cursor->index())->toBe(2);
-
-    $cursor->expectChar("\n");
-    expect($cursor->index())->toBe(4);
-
-    $cursor->expectChar('b');
-    expect($cursor->index())->toBe(5);
-});
-
-it('throws an error when does not encounter expected character', function () {
-    $cursor = cursor('a&b');
-
-    $cursor->next();
-
-    try {
-        $cursor->expectChar('=');
-    } catch (Throwable $throwable) {
-        expect($cursor->index())->toBe(1);
-
-        throw $throwable;
+    /**
+     * @testdox next, currentChar and index methods
+     */
+    public function testNextCurrentCharAndIndex(): void
+    {
+        $cursor = $this->cursor('abc🐠d');
+
+        $this->assertSame('a', $cursor->currentChar());
+        $this->assertSame(0, $cursor->index());
+
+        $this->assertSame('c', $cursor->next(2));
+        $this->assertSame('c', $cursor->currentChar());
+        $this->assertSame(2, $cursor->index());
+
+        $this->assertSame('🐠', $cursor->next());
+        $this->assertSame('🐠', $cursor->currentChar());
+        $this->assertSame(3, $cursor->index());
+
+        $this->assertSame('d', $cursor->next());
+        $this->assertSame('d', $cursor->currentChar());
+        $this->assertSame(4, $cursor->index());
+
+        $this->assertNull($cursor->next());
+        $this->assertNull($cursor->currentChar());
+        $this->assertSame(5, $cursor->index());
     }
-})->throws(ParserException::class, 'Expected token: "="');
 
-it('advances when encounters expected line end', function () {
-    $cursor = cursor("\na\r\nb");
+    /**
+     * @testdox peek, currentPeek and peekOffset methods work
+     */
+    public function testPeekCurrentPeekAndOffset(): void
+    {
+        $cursor = $this->cursor('abc🐬d');
 
-    $cursor->expectLineEnd();
-    expect($cursor->index())->toBe(1);
+        $this->assertSame('a', $cursor->currentPeek());
+        $this->assertSame(0, $cursor->peekOffset());
 
-    $cursor->next();
+        $this->assertSame('c', $cursor->peek(2));
+        $this->assertSame('c', $cursor->currentPeek());
+        $this->assertSame(2, $cursor->peekOffset());
 
-    $cursor->expectLineEnd();
-    expect($cursor->index())->toBe(4);
+        $this->assertSame('🐬', $cursor->peek());
+        $this->assertSame('🐬', $cursor->currentPeek());
+        $this->assertSame(3, $cursor->peekOffset());
 
-    $cursor->next();
+        $this->assertSame('d', $cursor->peek());
+        $this->assertSame('d', $cursor->currentPeek());
+        $this->assertSame(4, $cursor->peekOffset());
 
-    $cursor->expectLineEnd();
-    expect($cursor->index())->toBe(5);
-});
+        $this->assertNull($cursor->peek());
+        $this->assertNull($cursor->currentPeek());
+        $this->assertSame(5, $cursor->peekOffset());
+    }
 
-it('throws an error when does not encounter expected line end', function () {
-    $cursor = cursor('a ');
+    /**
+     * @testdox peek and next methods
+     */
+    public function testPeekAndNext(): void
+    {
+        $cursor = $this->cursor('ab🦀d');
 
-    try {
+        $this->assertSame('b', $cursor->peek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(0, $cursor->index());
+
+        $this->assertSame('b', $cursor->next());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(1, $cursor->index());
+
+        $this->assertSame('🦀', $cursor->peek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(1, $cursor->index());
+
+        $this->assertSame('🦀', $cursor->next());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(2, $cursor->index());
+        $this->assertSame('🦀', $cursor->currentChar());
+        $this->assertSame('🦀', $cursor->currentPeek());
+
+        $this->assertSame('d', $cursor->peek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(2, $cursor->index());
+
+        $this->assertSame('d', $cursor->next());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(3, $cursor->index());
+        $this->assertSame('d', $cursor->currentChar());
+        $this->assertSame('d', $cursor->currentPeek());
+
+        $this->assertNull($cursor->peek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(3, $cursor->index());
+        $this->assertSame('d', $cursor->currentChar());
+        $this->assertNull($cursor->currentPeek());
+
+        $this->assertNull($cursor->peek());
+        $this->assertSame(2, $cursor->peekOffset());
+        $this->assertSame(3, $cursor->index());
+
+        $this->assertNull($cursor->next());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(4, $cursor->index());
+    }
+
+    /**
+     * @testdox skipToPeek method works
+     */
+    public function testSkipToPeek(): void
+    {
+        $cursor = $this->cursor('ab🦑d');
+
+        $cursor->peek(2);
+
+        $cursor->skipToPeek();
+
+        $this->assertSame('🦑', $cursor->currentChar());
+        $this->assertSame('🦑', $cursor->currentPeek());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(2, $cursor->index());
+
+        $cursor->peek();
+
+        $this->assertSame('🦑', $cursor->currentChar());
+        $this->assertSame('d', $cursor->currentPeek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(2, $cursor->index());
+
+        $cursor->next();
+
+        $this->assertSame('d', $cursor->currentChar());
+        $this->assertSame('d', $cursor->currentPeek());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(3, $cursor->index());
+    }
+
+    /**
+     * @testdox resetPeek method
+     */
+    public function testResetPeek(): void
+    {
+        $cursor = $this->cursor('abcd');
+
+        $cursor->next();
+        $cursor->peek(2);
+        $cursor->resetPeek();
+
+        $this->assertSame('b', $cursor->currentChar());
+        $this->assertSame('b', $cursor->currentPeek());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(1, $cursor->index());
+
+        $cursor->peek();
+
+        $this->assertSame('b', $cursor->currentChar());
+        $this->assertSame('c', $cursor->currentPeek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(1, $cursor->index());
+
+        $cursor->peek(3);
+        $cursor->resetPeek();
+
+        $this->assertSame('b', $cursor->currentChar());
+        $this->assertSame('b', $cursor->currentPeek());
+        $this->assertSame(0, $cursor->peekOffset());
+        $this->assertSame(1, $cursor->index());
+
+        $this->assertSame('c', $cursor->peek());
+        $this->assertSame('b', $cursor->currentChar());
+        $this->assertSame('c', $cursor->currentPeek());
+        $this->assertSame(1, $cursor->peekOffset());
+        $this->assertSame(1, $cursor->index());
+
+        $this->assertSame('d', $cursor->peek());
+        $this->assertNull($cursor->peek());
+    }
+
+    /**
+     * @testdox it treats crlf as a single character
+     */
+    public function testClRf(): void
+    {
+        $cursor = $this->cursor("a\r\nb\r\n");
+
+        $this->assertSame('a', $cursor->currentChar());
+
+        $this->assertSame("\n", $cursor->next());
+        $this->assertSame("\n", $cursor->currentChar());
+
+        $cursor->peek(2);
+
+        $this->assertSame("\n", $cursor->currentPeek());
+
+        $cursor->skipToPeek();
+
+        $this->assertSame("\n", $cursor->currentChar());
+    }
+
+    /**
+     * @testdox slice method works
+     */
+    public function testSlice(): void
+    {
+        $cursor = $this->cursor('🐙ab🐙cd');
+
+        $this->assertSame('b🐙c', $cursor->slice(2, 5));
+    }
+
+    /**
+     * @testdox it can peek blank inline
+     */
+    public function testPeekBlankInline(): void
+    {
+        $cursor = $this->cursor("a   b     \r\n    \n");
+
+        $cursor->next();
+
+        $this->assertSame('   ', $cursor->peekBlankInline());
+        $this->assertSame(1, $cursor->index());
+        $this->assertSame(3, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $this->assertSame('     ', $cursor->peekBlankInline());
+        $this->assertSame(5, $cursor->index());
+        $this->assertSame(5, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $this->assertSame('    ', $cursor->peekBlankInline());
+        $this->assertSame(12, $cursor->index());
+        $this->assertSame(4, $cursor->peekOffset());
+    }
+
+    /**
+     * @testdox it can skip blank inline
+     */
+    public function testSkipBlankInline(): void
+    {
+        $cursor = $this->cursor("a   b     \r\n    \n");
+
+        $cursor->next();
+
+        $this->assertSame('   ', $cursor->skipBlankInline());
+        $this->assertSame(4, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $this->assertSame('     ', $cursor->skipBlankInline());
+        $this->assertSame(10, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $this->assertSame('    ', $cursor->skipBlankInline());
+        $this->assertSame(16, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+    }
+
+    /**
+     * @testdox it can peek blank block
+     */
+    public function testPeekBlankBlock(): void
+    {
+        $cursor = $this->cursor("a b     \r\n    \n  c  \n");
+
+        $cursor->next();
+
+        $this->assertSame('', $cursor->peekBlankBlock());
+        $this->assertSame(1, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->next(2);
+
+        $this->assertSame("\n\n", $cursor->peekBlankBlock());
+        $this->assertSame(3, $cursor->index());
+        $this->assertSame(12, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next(3);
+
+        $this->assertSame("\n", $cursor->peekBlankBlock());
+        $this->assertSame(18, $cursor->index());
+        $this->assertSame(3, $cursor->peekOffset());
+    }
+
+    /**
+     * @testdox it can skip blank block
+     */
+    public function testSkipBlankBlock(): void
+    {
+        $cursor = $this->cursor("a b     \r\n    \n  c  \n");
+
+        $cursor->next();
+
+        $this->assertSame('', $cursor->skipBlankBlock());
+        $this->assertSame(1, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->next(2);
+
+        $this->assertSame("\n\n", $cursor->skipBlankBlock());
+        $this->assertSame(15, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next(3);
+
+        $this->assertSame("\n", $cursor->skipBlankBlock());
+        $this->assertSame(21, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+    }
+
+    /**
+     * @testdox it can peek blank
+     */
+    public function testPeekBlank(): void
+    {
+        $cursor = $this->cursor("a b     \r\n    \n  c  \n");
+
+        $cursor->next();
+
+        $cursor->peekBlank();
+        $this->assertSame(1, $cursor->index());
+        $this->assertSame(1, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $cursor->peekBlank();
+        $this->assertSame(3, $cursor->index());
+        $this->assertSame(14, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $cursor->peekBlank();
+        $this->assertSame(18, $cursor->index());
+        $this->assertSame(3, $cursor->peekOffset());
+    }
+
+    /**
+     * @testdox it can skip blank
+     */
+    public function testSkipBlank(): void
+    {
+        $cursor = $this->cursor("a b     \r\n    \n  c  \n");
+
+        $cursor->next();
+
+        $cursor->skipBlank();
+        $this->assertSame(2, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $cursor->skipBlank();
+        $this->assertSame(17, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+
+        $cursor->skipToPeek();
+        $cursor->next();
+
+        $cursor->skipBlank();
+        $this->assertSame(21, $cursor->index());
+        $this->assertSame(0, $cursor->peekOffset());
+    }
+
+    /**
+     * @testdox it advances when encounters expected character
+     */
+    public function testExpectChar(): void
+    {
+        $cursor = $this->cursor("a🦓\r\nb");
+
+        $cursor->expectChar('a');
+        $this->assertSame(1, $cursor->index());
+
+        $cursor->expectChar('🦓');
+        $this->assertSame(2, $cursor->index());
+
+        $cursor->expectChar("\n");
+        $this->assertSame(4, $cursor->index());
+
+        $cursor->expectChar('b');
+        $this->assertSame(5, $cursor->index());
+    }
+
+    /**
+     * @testdox it throws an error when does not encounter expected character
+     */
+    public function testExpectedCharThrow(): void
+    {
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessage('Expected token: "="');
+
+        $cursor = $this->cursor('a&b');
+
+        $cursor->next();
+
+        try {
+            $cursor->expectChar('=');
+        } catch (Throwable $throwable) {
+            $this->assertSame(1, $cursor->index());
+
+            throw $throwable;
+        }
+    }
+
+    /**
+     * @testdox it advances when encounters expected line end
+     */
+    public function testExpectLineEnd(): void
+    {
+        $cursor = $this->cursor("\na\r\nb");
+
         $cursor->expectLineEnd();
-    } catch (Throwable $throwable) {
-        expect($cursor->index())->toBe(0);
+        $this->assertSame(1, $cursor->index());
 
-        throw $throwable;
+        $cursor->next();
+
+        $cursor->expectLineEnd();
+        $this->assertSame(4, $cursor->index());
+
+        $cursor->next();
+
+        $cursor->expectLineEnd();
+        $this->assertSame(5, $cursor->index());
     }
-})->throws(ParserException::class, 'Expected token: "␤"');
 
-it('can take character described by closure', function () {
-    $cursor = cursor('ac');
+    /**
+     * @testdox it throws an error when does not encounter expected line end
+     */
+    public function testExpectedLineEndThrow(): void
+    {
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessage('Expected token: "␤"');
 
-    $callback = fn ($char) => $char === 'a' || $char === 'b';
+        $cursor = $this->cursor('a ');
 
-    expect($cursor->takeChar($callback))->toBe('a');
-    expect($cursor->index())->toBe(1);
+        try {
+            $cursor->expectLineEnd();
+        } catch (Throwable $throwable) {
+            $this->assertSame(0, $cursor->index());
 
-    expect($cursor->takeChar($callback))->toBeNull();
-    expect($cursor->index())->toBe(1);
+            throw $throwable;
+        }
+    }
 
-    $cursor->next();
+    /**
+     * @testdox it can take character described by closure
+     */
+    public function testTake(): void
+    {
+        $cursor = $this->cursor('ac');
 
-    expect($cursor->takeChar($callback))->toBeNull();
-    expect($cursor->index())->toBe(2);
-});
+        $callback = fn ($char) => $char === 'a' || $char === 'b';
+
+        $this->assertSame('a', $cursor->takeChar($callback));
+        $this->assertSame(1, $cursor->index());
+
+        $this->assertNull($cursor->takeChar($callback));
+        $this->assertSame(1, $cursor->index());
+
+        $cursor->next();
+
+        $this->assertNull($cursor->takeChar($callback));
+        $this->assertSame(2, $cursor->index());
+    }
+
+    private function cursor(string $string): Cursor
+    {
+        return new class ($string) extends Cursor {};
+    }
+}
