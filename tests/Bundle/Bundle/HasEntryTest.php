@@ -1,57 +1,96 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Bundle;
 
-$bundle = (new FluentBundle('en-US'))
-    ->addFtl(<<<'ftl'
-        foo = Foo
-        -bar = Term
+use Major\Fluent\Tests\TestCase;
 
-        # ERROR No value.
-        err1 =
-        # ERROR Broken value.
-        err2 = {}
-        # ERROR No attribute value.
-        err3 =
-            .attr =
-        # ERROR Broken attribute value.
-        err4 =
-            .attr1 = Attr
-            .attr2 = {}
+final class HasEntryTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        # ERROR No value.
-        -err5 =
-        # ERROR Broken value.
-        -err6 = {}
-        # ERROR No attribute value.
-        -err7 =
-            .attr =
-        # ERROR Broken attribute value.
-        -err8 =
-            .attr1 = Attr
-            .attr2 = {}
-        ftl);
+        $this->bundle->addFtl(<<<'ftl'
+            foo = Foo
+            -bar = Term
 
-it('returns true for existing messages')
-    ->expect($bundle->hasMessage('foo'))->toBeTrue();
+            # ERROR No value.
+            err1 =
+            # ERROR Broken value.
+            err2 = {}
+            # ERROR No attribute value.
+            err3 =
+                .attr =
+            # ERROR Broken attribute value.
+            err4 =
+                .attr1 = Attr
+                .attr2 = {}
 
-it('returns true for existing terms')
-    ->expect($bundle->hasTerm('bar'))->toBeTrue();
+            # ERROR No value.
+            -err5 =
+            # ERROR Broken value.
+            -err6 = {}
+            # ERROR No attribute value.
+            -err7 =
+                .attr =
+            # ERROR Broken attribute value.
+            -err8 =
+                .attr1 = Attr
+                .attr2 = {}
+            ftl);
+    }
 
-it('returns false for missing messages')
-    ->expect($bundle->hasMessage('bar'))->toBeFalse();
+    /**
+     * @testdox it returns true for existing messages
+     */
+    public function testExistingMessage(): void
+    {
+        $this->assertTrue($this->bundle->hasMessage('foo'));
+    }
 
-it('returns false for missing terms')
-    ->expect($bundle->hasTerm('foo'))->toBeFalse();
+    /**
+     * @testdox it returns true for existing terms
+     */
+    public function testExistingTerm(): void
+    {
+        $this->assertTrue($this->bundle->hasTerm('bar'));
+    }
 
-it('returns false for broken messages')
-    ->expect($bundle->hasMessage('err1'))->toBeFalse()
-    ->and($bundle->hasMessage('err2'))->toBeFalse()
-    ->and($bundle->hasMessage('err3'))->toBeFalse()
-    ->and($bundle->hasMessage('err4'))->toBeFalse();
+    /**
+     * @testdox it returns false for missing messages
+     */
+    public function testMissingMessage(): void
+    {
+        $this->assertFalse($this->bundle->hasMessage('bar'));
+    }
 
-it('returns false for broken terms')
-    ->expect($bundle->hasTerm('err5'))->toBeFalse()
-    ->and($bundle->hasTerm('err6'))->toBeFalse()
-    ->and($bundle->hasTerm('err7'))->toBeFalse()
-    ->and($bundle->hasTerm('err8'))->toBeFalse();
+    /**
+     * @testdox it returns false for missing terms
+     */
+    public function testMissingTerm(): void
+    {
+        $this->assertFalse($this->bundle->hasTerm('foo'));
+    }
+
+    /**
+     * @testdox it returns false for broken messages
+     */
+    public function testBrokenMessage(): void
+    {
+        $this->assertFalse($this->bundle->hasMessage('err1'));
+        $this->assertFalse($this->bundle->hasMessage('err2'));
+        $this->assertFalse($this->bundle->hasMessage('err3'));
+        $this->assertFalse($this->bundle->hasMessage('err4'));
+    }
+
+    /**
+     * @testdox it returns false for broken terms
+     */
+    public function testBrokenTerm(): void
+    {
+        $this->assertFalse($this->bundle->hasTerm('err5'));
+        $this->assertFalse($this->bundle->hasTerm('err6'));
+        $this->assertFalse($this->bundle->hasTerm('err7'));
+        $this->assertFalse($this->bundle->hasTerm('err8'));
+    }
+}
