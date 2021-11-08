@@ -89,7 +89,7 @@ final class CurrenciesLocaleCompiler
      */
     private function makePlurals(array $data): ?string
     {
-        $data = Dict\filter_keys($data, fn ($key) => Str\starts_with($key, 'displayName-count-'));
+        $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, 'displayName-count-'));
 
         if (! $data) {
             return null;

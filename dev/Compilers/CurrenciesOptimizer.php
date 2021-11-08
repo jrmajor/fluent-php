@@ -72,7 +72,7 @@ final class CurrenciesOptimizer
 
         $data = (string) Str\after($data, "return [\n    '");
         $data = (string) Str\before($data, "),\n];");
-        $data = Str\split($data, "),\n    '");
+        $data = explode("),\n    '", $data);
         $data = Vec\map($data, fn ($s) => Str\split($s, "' => new C(", 2));
         $data = Dict\reindex($data, fn ($s): string => $s[0]);
 
