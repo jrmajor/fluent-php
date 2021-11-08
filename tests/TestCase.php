@@ -4,26 +4,28 @@ namespace Major\Fluent\Tests;
 
 use Major\Fluent\Bundle\FluentBundle;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Throwable;
 
 abstract class TestCase extends BaseTestCase
 {
     use AstAssertions;
     use NodeAssertions;
+    use TranslationAssertions;
 
-    public static function assertTranslation(
-        $_expected,
-        FluentBundle $_bundle,
-        string $_message,
-        mixed ...$arguments,
-    ): void {
-        self::assertEmpty($_bundle->popErrors(), 'There are errors in bundle before an assertion.');
+    /** @readonly */
+    protected FluentBundle $bundle;
 
-        $result = $_bundle->message($_message, ...$arguments);
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        foreach ($_bundle->popErrors() as $error) {
-            throw $error;
-        }
+        $this->bundle = new FluentBundle('en-US', useIsolating: false);
+    }
 
-        self::assertSame($_expected, $result);
+    public static function assertExceptionMatches(string $expected, string $message, Throwable $actual): void
+    {
+        self::assertSame($expected, get_class($actual), 'Expected exception class does not match actual.');
+
+        self::assertSame($message, $actual->getMessage(), 'Expected exception message does not match actual.');
     }
 }
