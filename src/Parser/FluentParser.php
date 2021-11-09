@@ -713,8 +713,6 @@ final class FluentParser
 
             $id = $this->getIdentifier($cursor);
 
-            // PHPStan does not understand, that the cursor has been moved
-            /** @phpstan-ignore-next-line */
             if ($cursor->currentChar() === '.') {
                 $cursor->next();
 

@@ -44,11 +44,8 @@ trait AstAssertions
     /**
      * @param array<mixed, mixed> $expected
      */
-    private static function compareNodeData(
-        array $expected,
-        BaseNode $node,
-        string $trace,
-    ): void {
+    private static function compareNodeData(array $expected, BaseNode $node, string $trace): void
+    {
         foreach (self::scalarsToCompare($node) as $scalar) {
             if (! array_key_exists($scalar, $expected)) {
                 throw new InvalidArgumentException("Expected node {$trace} should contain scalar \${$scalar}.");
@@ -97,11 +94,8 @@ trait AstAssertions
     /**
      * @param ?array<mixed, mixed> $expected
      */
-    private static function compareSubnode(
-        ?array $expected,
-        ?BaseNode $node,
-        string $trace,
-    ): void {
+    private static function compareSubnode(?array $expected, ?BaseNode $node, string $trace): void
+    {
         if ($expected === null && $node === null) {
             return;
         }
@@ -128,14 +122,11 @@ trait AstAssertions
     }
 
     /**
-     * @param array[] $expected
-     * @param BaseNode[] $actual
+     * @param list<array<string, mixed>> $expected
+     * @param list<BaseNode> $actual
      */
-    private static function compareArrayOfNodes(
-        array $expected,
-        array $actual,
-        string $trace,
-    ): void {
+    private static function compareArrayOfNodes(array $expected, array $actual, string $trace): void
+    {
         self::assertSame(
             $expectedCount = count($expected),
             $actualCount = count($actual),

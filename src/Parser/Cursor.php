@@ -49,6 +49,9 @@ abstract class Cursor
         return $this->charAt($this->index + $this->peekOffset);
     }
 
+    /**
+     * @impure
+     */
     public function next(int $chars = 1): ?string
     {
         $this->peekOffset = 0;
