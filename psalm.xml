@@ -14,4 +14,8 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
+    <plugins>
+        <pluginClass class="Psl\Psalm\Plugin"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
 </psalm>
