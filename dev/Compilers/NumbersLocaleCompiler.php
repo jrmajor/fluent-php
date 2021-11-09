@@ -97,11 +97,11 @@ final class NumbersLocaleCompiler
         return Str\contains($pattern, '\\') ? "\"{$pattern}\"" : "'{$pattern}'";
     }
 
-    public function grouping(): string
+    public function grouping(): int
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
 
-        return (string) Type\int()->coerce($grouping);
+        return Type\int()->coerce($grouping);
     }
 
     public function symbols(): string
