@@ -2,44 +2,90 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver;
 
-use Major\Fluent\Bundle\FluentBundle;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('ru', strict: true))
-    ->addFtl(<<<'ftl'
-        simple-string = { "Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?" }
+final class StringLiteralsTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        double-backslash = { "abc\\def" }
-        double-quote = { "ab \"cd\" ef" }
+        $this->bundle->addFtl(<<<'ftl'
+            simple-string = { "Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?" }
 
-        simple-unicode = { "ab \u2042 ef" }
-        combining-unicode = { "Варша\u0301ва" }
-        unicode = { "ab \U01F984 ef" }
-        surrogates = { "\uD803\uDC83 is \U010C83" }
+            double-backslash = { "abc\\def" }
+            double-quote = { "ab \"cd\" ef" }
 
-        complex-escape = { "\\\u2137\\\"\\u3\"\\" }
-        ftl);
+            simple-unicode = { "ab \u2042 ef" }
+            combining-unicode = { "Варша\u0301ва" }
+            unicode = { "ab \U01F984 ef" }
+            surrogates = { "\uD803\uDC83 is \U010C83" }
 
-it('can parse simple string')
-    ->expect($bundle->message('simple-string'))
-    ->toBe('Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?');
+            complex-escape = { "\\\u2137\\\"\\u3\"\\" }
+            ftl);
+    }
 
-it('can escape backslash')
-    ->expect($bundle->message('double-backslash'))->toBe('abc\\def');
+    /**
+     * @testdox it can parse simple string
+     */
+    public function testSimple(): void
+    {
+        $this->assertTranslation('Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?', 'simple-string');
+    }
 
-it('can escape double quote')
-    ->expect($bundle->message('double-quote'))->toBe('ab "cd" ef');
+    /**
+     * @testdox it can escape backslash
+     */
+    public function testBackslash(): void
+    {
+        $this->assertTranslation('abc\\def', 'double-backslash');
+    }
 
-it('can escape simple unicode characters')
-    ->expect($bundle->message('simple-unicode'))->toBe('ab ⁂ ef');
+    /**
+     * @testdox it can escape double quote
+     */
+    public function testQuote(): void
+    {
+        $this->assertTranslation('ab "cd" ef', 'double-quote');
+    }
 
-it('can escape combining unicode characters')
-    ->expect($bundle->message('combining-unicode'))->toBe('Варша́ва');
+    /**
+     * @testdox it can escape simple unicode characters
+     */
+    public function testUnicode(): void
+    {
+        $this->assertTranslation('ab ⁂ ef', 'simple-unicode');
+    }
 
-it('can escape unicode characters above U+FFFF')
-    ->expect($bundle->message('unicode'))->toBe('ab 🦄 ef');
+    /**
+     * @testdox it can escape combining unicode characters
+     */
+    public function testCombiningUnicode(): void
+    {
+        $this->assertTranslation('Варша́ва', 'combining-unicode');
+    }
 
-it('does not allow escape sequences representing surrogate code points')
-    ->expect($bundle->message('surrogates'))->toBe('�� is 𐲃');
+    /**
+     * @testdox it can escape unicode characters above U+FFFF
+     */
+    public function testUnicodeAboveFFFF(): void
+    {
+        $this->assertTranslation('ab 🦄 ef', 'unicode');
+    }
 
-it('can parse complex escape sequences')
-    ->expect($bundle->message('complex-escape'))->toBe('\\ℷ\\"\\u3"\\');
+    /**
+     * @testdox it does not allow escape sequences representing surrogate code points
+     */
+    public function testSurrogates(): void
+    {
+        $this->assertTranslation('�� is 𐲃', 'surrogates');
+    }
+
+    /**
+     * @testdox it can parse complex escape sequences
+     */
+    public function testComplexEscape(): void
+    {
+        $this->assertTranslation('\\ℷ\\"\\u3"\\', 'complex-escape');
+    }
+}

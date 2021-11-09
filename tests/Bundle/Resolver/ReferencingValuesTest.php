@@ -2,110 +2,165 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver;
 
-use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        key1 = Value 1
-        -key2 = { $sel ->
-            [a] A2
-           *[b] B2
-        }
-        key3 = Value { 3 }
-        -key4 = { $sel ->
-            [a] A{ 4 }
-           *[b] B{ 4 }
-        }
-        key5 =
-            .a = A5
-            .b = B5
+final class ReferencingValuesTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        ref1 = { key1 }
-        ref2 = { -key2 }
-        ref3 = { key3 }
-        ref4 = { -key4 }
-        ref5 = { key5 }
+        $this->bundle->addFtl(<<<'ftl'
+            key1 = Value 1
+            -key2 = { $sel ->
+                [a] A2
+               *[b] B2
+            }
+            key3 = Value { 3 }
+            -key4 = { $sel ->
+                [a] A{ 4 }
+               *[b] B{ 4 }
+            }
+            key5 =
+                .a = A5
+                .b = B5
 
-        ref6 = { -key2(sel: "a") }
-        ref7 = { -key2(sel: "b") }
+            ref1 = { key1 }
+            ref2 = { -key2 }
+            ref3 = { key3 }
+            ref4 = { -key4 }
+            ref5 = { key5 }
 
-        ref8 = { -key4(sel: "a") }
-        ref9 = { -key4(sel: "b") }
+            ref6 = { -key2(sel: "a") }
+            ref7 = { -key2(sel: "b") }
 
-        ref10 = { key5.a }
-        ref11 = { key5.b }
-        ref12 = { key5.c }
+            ref8 = { -key4(sel: "a") }
+            ref9 = { -key4(sel: "b") }
 
-        ref13 = { key6 }
-        ref14 = { key6.a }
+            ref10 = { key5.a }
+            ref11 = { key5.b }
+            ref12 = { key5.c }
 
-        ref15 = { -key6 }
-        ref16 = { -key6.a ->
-           *[a] A
-        }
-        ftl);
+            ref13 = { key6 }
+            ref14 = { key6.a }
 
-it('can reference the value')
-    ->expect($bundle->message('ref1'))->toBe('Value 1')
-    ->and($bundle->popErrors())->toBeEmpty();
+            ref15 = { -key6 }
+            ref16 = { -key6.a ->
+               *[a] A
+            }
+            ftl);
+    }
 
-it('can reference the default variant')
-    ->expect($bundle->message('ref2'))->toBe('B2')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can reference the value
+     */
+    public function testValue(): void
+    {
+        $this->assertTranslation('Value 1', 'ref1');
+    }
 
-it('can reference the value if it is a pattern')
-    ->expect($bundle->message('ref3'))->toBe('Value 3')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can reference the default variant
+     */
+    public function testDefaultVariant(): void
+    {
+        $this->assertTranslation('B2', 'ref2');
+    }
 
-it('can reference the default variant if it is a pattern')
-    ->expect($bundle->message('ref4'))->toBe('B4')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can reference the value if it is a pattern
+     */
+    public function testPatternValue(): void
+    {
+        $this->assertTranslation('Value 3', 'ref3');
+    }
 
-it('falls back to id if there is no value')
-    ->expect($bundle->message('ref5'))->toBe('{key5}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'No value: key5.',
-    );
+    /**
+     * @testdox it can reference the default variant if it is a pattern
+     */
+    public function testPatternDefaultVariant(): void
+    {
+        $this->assertTranslation('B4', 'ref4');
+    }
 
-it('can reference variants')
-    ->expect($bundle->message('ref6'))->toBe('A2')
-    ->and($bundle->message('ref7'))->toBe('B2')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it falls back to id if there is no value
+     */
+    public function testFallback(): void
+    {
+        $this->assertTranslationErrors('{key5}', [
+            [ReferenceException::class, 'No value: key5.'],
+        ], 'ref5');
+    }
 
-it('can reference variants which are patterns')
-    ->expect($bundle->message('ref8'))->toBe('A4')
-    ->and($bundle->message('ref9'))->toBe('B4')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can reference variants
+     */
+    public function testVariants(): void
+    {
+        $this->assertTranslation('A2', 'ref6');
+        $this->assertTranslation('B2', 'ref7');
+    }
 
-it('can reference attributes')
-    ->expect($bundle->message('ref10'))->toBe('A5')
-    ->and($bundle->message('ref11'))->toBe('B5')
-    ->and($bundle->message('ref12'))->toBe('{key5.c}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown attribute: key5.c.',
-    );
+    /**
+     * @testdox it can reference variants which are patterns
+     */
+    public function testPatternVariants(): void
+    {
+        $this->assertTranslation('A4', 'ref8');
+        $this->assertTranslation('B4', 'ref9');
+    }
 
-test('missing message reference')
-    ->expect($bundle->message('ref13'))->toBe('{key6}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown message: key6.',
-    );
+    /**
+     * @testdox it can reference attributes
+     */
+    public function testAttributes(): void
+    {
+        $this->assertTranslation('A5', 'ref10');
+        $this->assertTranslation('B5', 'ref11');
+        $this->assertTranslationErrors('{key5.c}', [
+            [ReferenceException::class, 'Unknown attribute: key5.c.'],
+        ], 'ref12');
+    }
 
-test('missing message attribute reference')
-    ->expect($bundle->message('ref14'))->toBe('{key6}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown message: key6.',
-    );
+    /**
+     * @testdox missing message reference
+     */
+    public function testMissingMessage(): void
+    {
+        $this->assertTranslationErrors('{key6}', [
+            [ReferenceException::class, 'Unknown message: key6.'],
+        ], 'ref13');
+    }
 
-test('missing term reference')
-    ->expect($bundle->message('ref15'))->toBe('{-key6}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown term: -key6.',
-    );
+    /**
+     * @testdox missing message attribute reference
+     */
+    public function testMissingAttribute(): void
+    {
+        $this->assertTranslationErrors('{key6}', [
+            [ReferenceException::class, 'Unknown message: key6.'],
+        ], 'ref14');
+    }
 
-test('missing term attribute reference')
-    ->expect($bundle->message('ref16'))->toBe('A')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown term: -key6.',
-    );
+    /**
+     * @testdox missing term reference
+     */
+    public function testMissingTerm(): void
+    {
+        $this->assertTranslationErrors('{-key6}', [
+            [ReferenceException::class, 'Unknown term: -key6.'],
+        ], 'ref15');
+    }
+
+    /**
+     * @testdox missing term attribute reference
+     */
+    public function testMissingTermReference(): void
+    {
+        $this->assertTranslationErrors('A', [
+            [ReferenceException::class, 'Unknown term: -key6.'],
+        ], 'ref16');
+    }
+}

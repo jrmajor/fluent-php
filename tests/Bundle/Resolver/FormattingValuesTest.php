@@ -2,54 +2,85 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver;
 
-use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        key1 = Value 1
-        key2 = { $sel ->
-            [a] A2
-           *[b] B2
-        }
-        key3 = Value { 3 }
-        key4 = { $sel ->
-            [a] A{ 4 }
-           *[b] B{ 4 }
-        }
-        key5 =
-            .a = A5
-            .b = B5
-        ftl);
+final class FormattingValuesTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-it('returns the value')
-    ->expect($bundle->message('key1'))->toBe('Value 1')
-    ->and($bundle->popErrors())->toBeEmpty();
+        $this->bundle->addFtl(<<<'ftl'
+            key1 = Value 1
+            key2 = { $sel ->
+                [a] A2
+               *[b] B2
+            }
+            key3 = Value { 3 }
+            key4 = { $sel ->
+                [a] A{ 4 }
+               *[b] B{ 4 }
+            }
+            key5 =
+                .a = A5
+                .b = B5
+            ftl);
+    }
 
-it('returns the default variant')
-    ->expect($bundle->message('key2'))->toBe('B2')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown variable: $sel.',
-    );
+    /**
+     * @testdox it returns the value
+     */
+    public function testValue(): void
+    {
+        $this->assertTranslation('Value 1', 'key1');
+    }
 
-it('returns the value if it is a pattern')
-    ->expect($bundle->message('key3'))->toBe('Value 3')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it returns the default variant
+     */
+    public function testDefaultVariant(): void
+    {
+        $this->assertTranslationErrors('B2', [
+            [ReferenceException::class, 'Unknown variable: $sel.'],
+        ], 'key2');
+    }
 
-it('returns the default variant if it is a pattern')
-    ->expect($bundle->message('key4'))->toBe('B4')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown variable: $sel.',
-    );
+    /**
+     * @testdox it returns the value if it is a pattern
+     */
+    public function testPattern(): void
+    {
+        $this->assertTranslation('Value 3', 'key3');
+    }
 
-it('returns {???} when trying to format a message with null value')
-    ->expect($bundle->message('key5'))->toBe('{???}')
-    ->and($bundle->popErrors())->toHaveError(
-        NullPatternException::class, 'Null pattern can not be formatted.',
-    );
+    /**
+     * @testdox it returns the default variant if it is a pattern
+     */
+    public function testPatternVariant(): void
+    {
+        $this->assertTranslationErrors('B4', [
+            [ReferenceException::class, 'Unknown variable: $sel.'],
+        ], 'key4');
+    }
 
-it('supports dot notation for referencing message attributes')
-    ->expect($bundle->message('key5.a'))->toBe('A5')
-    ->and($bundle->message('key5.b'))->toBe('B5')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it returns {???} when trying to format a message with null value
+     */
+    public function testNullValue(): void
+    {
+        $this->assertTranslationErrors('{???}', [
+            [NullPatternException::class, 'Null pattern can not be formatted.'],
+        ], 'key5');
+    }
+
+    /**
+     * @testdox it supports dot notation for referencing message attributes
+     */
+    public function testAttributes(): void
+    {
+        $this->assertTranslation('A5', 'key5.a');
+        $this->assertTranslation('B5', 'key5.b');
+    }
+}

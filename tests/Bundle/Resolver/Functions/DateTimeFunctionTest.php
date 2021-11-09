@@ -2,7 +2,6 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
-use Exception;
 use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Tests\TestCase;
 
