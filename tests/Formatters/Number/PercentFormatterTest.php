@@ -4,7 +4,7 @@ namespace Major\Fluent\Tests\Formatters\Number;
 
 use Generator;
 
-final class PercentFormatterTest extends NumberFormatterTest
+final class PercentFormatterTest extends NumberFormatterTestCase
 {
     /**
      * @param array<string, mixed> $options

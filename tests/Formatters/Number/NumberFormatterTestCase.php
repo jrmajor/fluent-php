@@ -6,7 +6,7 @@ use Major\Fluent\Formatters\Number\NumberFormatter;
 use Major\Fluent\Formatters\Number\Options;
 use Major\Fluent\Tests\TestCase;
 
-abstract class NumberFormatterTest extends TestCase
+abstract class NumberFormatterTestCase extends TestCase
 {
     /**
      * @param array<string, mixed> $options

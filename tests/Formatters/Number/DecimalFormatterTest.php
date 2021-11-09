@@ -4,7 +4,7 @@ namespace Major\Fluent\Tests\Formatters\Number;
 
 use Generator;
 
-final class DecimalFormatterTest extends NumberFormatterTest
+final class DecimalFormatterTest extends NumberFormatterTestCase
 {
     /**
      * @param array<string, mixed> $options
