@@ -2,73 +2,97 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver\Patterns;
 
-use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = { bar }
-        bar = { foo }
+final class CyclicReferencesTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        self = { self }
-        ftl);
+        $this->bundle->addFtl(<<<'ftl'
+            cyclic = { cyclic-ref }
+            cyclic-ref = { cyclic }
 
-it('returns {???} for cyclic reference')
-    ->expect($bundle->message('foo'))->toBe('{???}')
-    ->and($bundle->popErrors())->toHaveError(
-        CyclicReferenceException::class, 'Placeable contains cyclic reference.',
-    );
+            self = { self }
 
-test('returns {???} for cyclic self-reference')
-    ->expect($bundle->message('self'))->toBe('{???}')
-    ->and($bundle->popErrors())->toHaveError(
-        CyclicReferenceException::class, 'Placeable contains cyclic reference.',
-    );
+            member =
+                { $sel ->
+                   *[a] { member }
+                    [b] Bar
+                }
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo =
-            { $sel ->
-               *[a] { foo }
-                [b] Bar
-            }
-        bar = { foo }
-        ftl);
+            -foo =
+                { -bar.attr ->
+                   *[a] Foo
+                }
+                .attr = a
 
-it('returns {???} for cyclic self-reference in a member')
-    ->expect($bundle->message('foo', sel: 'a'))->toBe('{???}')
-    ->and($bundle->popErrors())->toHaveError(
-        CyclicReferenceException::class, 'Placeable contains cyclic reference.',
-    );
+            -bar =
+                { -foo.attr ->
+                   *[a] Bar
+                }
+                .attr = { -foo }
 
-it('returns the other member if requested')
-    ->expect($bundle->message('foo', sel: 'b'))->toBe('Bar')
-    ->and($bundle->popErrors())->toBeEmpty();
+            foo = { -foo }
+            bar = { -bar }
+            ftl);
+    }
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        -foo =
-            { -bar.attr ->
-               *[a] Foo
-            }
-            .attr = a
+    /**
+     * @testdox it returns {???} for cyclic reference
+     */
+    public function testCyclic(): void
+    {
+        $this->assertTranslationErrors('{???}', [
+            [CyclicReferenceException::class, 'Placeable contains cyclic reference.'],
+        ], 'cyclic');
+    }
 
-        -bar =
-            { -foo.attr ->
-               *[a] Bar
-            }
-            .attr = { -foo }
+    /**
+     * @testdox returns {???} for cyclic self-reference
+     */
+    public function testSelf(): void
+    {
+            $this->assertTranslationErrors('{???}', [
+                [CyclicReferenceException::class, 'Placeable contains cyclic reference.'],
+            ], 'self');
+    }
 
-        foo = { -foo }
-        bar = { -bar }
-        ftl);
+    /**
+     * @testdox it returns {???} for cyclic self-reference in a member
+     */
+    public function testMember(): void
+    {
+        $this->assertTranslationErrors('{???}', [
+            [CyclicReferenceException::class, 'Placeable contains cyclic reference.'],
+        ], 'member', ['sel' => 'a']);
+    }
 
-it('returns the default variant for cyclic reference in a selector')
-    ->expect($bundle->message('foo'))->toBe('Foo')
-    ->and($bundle->popErrors())->toHaveError(
-        CyclicReferenceException::class, 'Placeable contains cyclic reference.',
-    );
+    /**
+     * @testdox it returns the other member if requested
+     */
+    public function testOtherMember(): void
+    {
+        $this->assertTranslation('Bar', 'member', ['sel' => 'b']);
+    }
 
-it('can reference an attribute')
-    ->expect($bundle->message('bar'))->toBe('Bar')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it returns the default variant for cyclic reference in a selector
+     */
+    public function testSelector(): void
+    {
+        $this->assertTranslationErrors('Foo', [
+            [CyclicReferenceException::class, 'Placeable contains cyclic reference.'],
+        ], 'foo');
+    }
+
+    /**
+     * @testdox it can reference an attribute
+     */
+    public function testAttribute(): void
+    {
+        $this->assertTranslation('Bar', 'bar');
+    }
+}

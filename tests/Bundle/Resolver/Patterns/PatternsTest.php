@@ -2,71 +2,105 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver\Patterns;
 
-use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = Foo
-        ftl);
+final class PatternsTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-it('returns the simple string value')
-    ->expect($bundle->message('foo'))->toBe('Foo');
+        $this->bundle->addFtl(<<<'ftl'
+            simple = Simple
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = Foo
-        -bar = Bar
+            foo = Foo
+            -bar = Bar
 
-        ref-message = { foo }
-        ref-term = { -bar }
+            ref-message = { foo }
+            ref-term = { -bar }
 
-        ref-missing-message = { missing }
-        ref-missing-term = { -missing }
+            ref-missing-message = { missing }
+            ref-missing-term = { -missing }
 
-        ref-malformed = { malformed
-        ftl);
+            ref-malformed = { malformed
 
-it('resolves the reference to a message')
-    ->expect($bundle->message('ref-message'))->toBe('Foo')
-    ->and($bundle->popErrors())->toBeEmpty();
+            msg-no-val =
+                .attr = Foo Attr
+            no-val-ref = { msg-no-val } Bar
+            ftl);
+    }
 
-it('resolves the reference to a term')
-    ->expect($bundle->message('ref-term'))->toBe('Bar')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it returns the simple string value
+     */
+    public function testSimple(): void
+    {
+        $this->assertTranslation('Simple', 'simple');
+    }
 
-it('returns the id if the referenced message is missing')
-    ->expect($bundle->message('ref-missing-message'))->toBe('{missing}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown message: missing.',
-    );
+    /**
+     * @testdox it resolves the reference to a message
+     */
+    public function testRefMessage(): void
+    {
+        $this->assertTranslation('Foo', 'ref-message');
+    }
 
-it('returns the id if the referenced term is missing')
-    ->expect($bundle->message('ref-missing-term'))->toBe('{-missing}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown term: -missing.',
-    );
+    /**
+     * @testdox it resolves the reference to a term
+     */
+    public function testRefTerm(): void
+    {
+        $this->assertTranslation('Bar', 'ref-term');
+    }
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl(<<<'ftl'
-        msg-no-val =
-            .attr = Foo Attr
-        ref = { msg-no-val } Bar
-        ftl);
+    /**
+     * @testdox it returns the id if the referenced message is missing
+     */
+    public function testRefMessageMissing(): void
+    {
+        $this->assertTranslationErrors('{missing}', [
+            [ReferenceException::class, 'Unknown message: missing.'],
+        ], 'ref-missing-message');
+    }
 
-it('returns {???} when trying to format a message with null value')
-    ->expect($bundle->message('msg-no-val'))->toBe('{???}')
-    ->and($bundle->popErrors())->toHaveError(
-        NullPatternException::class, 'Null pattern can not be formatted.',
-    );
+    /**
+     * @testdox it returns the id if the referenced term is missing
+     */
+    public function testRefTermMissing(): void
+    {
+        $this->assertTranslationErrors('{-missing}', [
+            [ReferenceException::class, 'Unknown term: -missing.'],
+        ], 'ref-missing-term');
+    }
 
-it('formats the attribute of a message with null value')
-    ->expect($bundle->message('msg-no-val.attr'))->toBe('Foo Attr')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it returns {???} when trying to format a message with null value
+     */
+    public function testNullValue(): void
+    {
+        $this->assertTranslationErrors('{???}', [
+            [NullPatternException::class, 'Null pattern can not be formatted.'],
+        ], 'msg-no-val');
+    }
 
-it('falls back to id when the referenced message has no value')
-    ->expect($bundle->message('ref'))->toBe('{msg-no-val} Bar')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'No value: msg-no-val.',
-    );
+    /**
+     * @testdox it formats the attribute of a message with null value
+     */
+    public function testNullValueAttribute(): void
+    {
+        $this->assertTranslation('Foo Attr', 'msg-no-val.attr');
+    }
+
+    /**
+     * @testdox it falls back to id when the referenced message has no value
+     */
+    public function testNoValueFallback(): void
+    {
+        $this->assertTranslationErrors('{msg-no-val} Bar', [
+            [ReferenceException::class, 'No value: msg-no-val.'],
+        ], 'no-val-ref');
+    }
+}
