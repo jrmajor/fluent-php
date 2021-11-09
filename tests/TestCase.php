@@ -12,7 +12,6 @@ abstract class TestCase extends BaseTestCase
     use NodeAssertions;
     use TranslationAssertions;
 
-    /** @readonly */
     protected FluentBundle $bundle;
 
     protected function setUp(): void
