@@ -3,11 +3,20 @@
 namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
 use Exception;
-use Major\Fluent\Bundle\FluentBundle;
+use Major\Fluent\Exceptions\Resolver\FunctionException;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl('datetime = { DATETIME() }');
+final class DateTimeFunctionTest extends TestCase
+{
+    /**
+     * @testdox it throws exception
+     */
+    public function testThrow(): void
+    {
+        $this->bundle->addFtl('datetime = { DATETIME() }');
 
-test('it throws exception', function () use ($bundle) {
-    $bundle->message('datetime');
-})->throws(Exception::class, 'DATETIME() function is not implemented.');
+        $this->assertTranslationErrors('{DATETIME()}', [
+            [FunctionException::class, 'DATETIME() function error: DATETIME() function is not implemented.'],
+        ], 'datetime');
+    }
+}

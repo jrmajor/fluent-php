@@ -2,46 +2,86 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
-use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', useIsolating: false))
-    ->addFtl('foo = { MISSING("Foo") }');
+final class FunctionsTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-it('falls back to the name of the function')
-    ->expect($bundle->message('foo'))->toBe('{MISSING()}')
-    ->and($bundle->popErrors())->toHaveError(
-        ReferenceException::class, 'Unknown function: MISSING().',
-    );
+        $this->bundle->addFunction('IDENTITY', fn (...$args) => $args[0]);
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFunction('IDENTITY', fn (...$args) => $args[0])
-    ->addFtl(<<<'ftl'
-        foo = Foo
-            .attr = Attribute
-        pass-nothing       = { IDENTITY() }
-        pass-string        = { IDENTITY("a", 23, adf: "ads", bgf: 234) }
-        pass-number        = { IDENTITY(1) }
-        pass-message       = { IDENTITY(foo) }
-        pass-attr          = { IDENTITY(foo.attr) }
-        pass-variable      = { IDENTITY($var) }
-        pass-function-call = { IDENTITY(IDENTITY(1)) }
-        ftl);
+        $this->bundle->addFtl(<<<'ftl'
+            missing = { MISSING("Foo") }
+            foo = Foo
+                .attr = Attribute
+            pass-nothing       = { IDENTITY() }
+            pass-string        = { IDENTITY("a", 23, adf: "ads", bgf: 234) }
+            pass-number        = { IDENTITY(1) }
+            pass-message       = { IDENTITY(foo) }
+            pass-attr          = { IDENTITY(foo.attr) }
+            pass-variable      = { IDENTITY($var) }
+            pass-function-call = { IDENTITY(IDENTITY(1)) }
+            ftl);
+    }
 
-it('accepts strings')
-    ->expect($bundle->message('pass-string'))->toBe('a');
+    /**
+     * @testdox it falls back to the name of the function
+     */
+    public function testFallback(): void
+    {
+        $this->assertTranslationErrors('{MISSING()}', [
+            [ReferenceException::class, 'Unknown function: MISSING().'],
+        ], 'missing');
+    }
 
-it('accepts numbers')
-    ->expect($bundle->message('pass-number'))->toBe('1');
+    /**
+     * @testdox it accepts strings
+     */
+    public function testStrings(): void
+    {
+        $this->assertTranslation('a', 'pass-string');
+    }
 
-it('accepts message references')
-    ->expect($bundle->message('pass-message'))->toBe('Foo');
+    /**
+     * @testdox it accepts numbers
+     */
+    public function testNumbers(): void
+    {
+        $this->assertTranslation('1', 'pass-number');
+    }
 
-it('accepts attribute references')
-    ->expect($bundle->message('pass-attr'))->toBe('Attribute');
+    /**
+     * @testdox it accepts message references
+     */
+    public function testMessageReferences(): void
+    {
+        $this->assertTranslation('Foo', 'pass-message');
+    }
 
-it('accepts variables')
-    ->expect($bundle->message('pass-variable', var: 'Variable'))->toBe('Variable');
+    /**
+     * @testdox it accepts attribute references
+     */
+    public function testAttributeReferences(): void
+    {
+        $this->assertTranslation('Attribute', 'pass-attr');
+    }
 
-it('accepts function calls')
-    ->expect($bundle->message('pass-function-call'))->toBe('1');
+    /**
+     * @testdox it accepts variables
+     */
+    public function testVariables(): void
+    {
+        $this->assertTranslation('Variable', 'pass-variable', ['var' => 'Variable']);
+    }
+
+    /**
+     * @testdox it accepts function calls
+     */
+    public function testFunctionCalls(): void
+    {
+        $this->assertTranslation('1', 'pass-function-call');
+    }
+}
