@@ -1,34 +1,65 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Bundle;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = Foo
-        -bar = Bar
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-        welcome = Welcome
-            .guest = Welcome, Guest
-            .user = Welcome, { $userName }
-        ftl);
+final class MessageTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-it('returns messages')
-    ->expect($bundle->message('foo'))->toBe('Foo');
+        $this->bundle->addFtl(<<<'ftl'
+            foo = Foo
+            -bar = Bar
 
-it('returns null for missing messages')
-    ->expect($bundle->message('baz'))->toBeNull();
+            welcome = Welcome
+                .guest = Welcome, Guest
+                .user = Welcome, { $userName }
+            ftl);
+    }
 
-it('returns null for terms')
-    ->expect($bundle->message('bar'))->toBeNull();
+    #[TestDox('it returns messages')]
+    public function testMessage(): void
+    {
+        $this->assertTranslation('Foo', 'foo');
+    }
 
-test('message attributes can be accessed using "dot" notation')
-    ->expect($bundle->message('welcome.guest'))->toBe('Welcome, Guest');
+    #[TestDox('it returns null for missing messages')]
+    public function testMissingMessage(): void
+    {
+        $this->assertNull($this->bundle->message('baz'));
+    }
 
-it('returns null for missing attributes')
-    ->expect($bundle->message('welcome.guest'))->toBe('Welcome, Guest');
+    #[TestDox('it returns null for terms')]
+    public function testTerm(): void
+    {
+        $this->assertNull($this->bundle->message('bar'));
+    }
 
-it('accepts message arguments as named arguments')
-    ->expect($bundle->message('welcome.user', userName: 'John'))->toBe('Welcome, John');
+    #[TestDox('message attributes can be accessed using "dot" notation')]
+    public function testAttribute(): void
+    {
+        $this->assertTranslation('Welcome, Guest', 'welcome.guest');
+    }
 
-it('accepts message arguments as an associative array')
-    ->expect($bundle->message('welcome.user', ['userName' => 'John']))->toBe('Welcome, John');
+    #[TestDox('it returns null for missing attributes')]
+    public function testMissingAttribute(): void
+    {
+        $this->assertTranslation('Welcome, Guest', 'welcome.guest');
+    }
+
+    #[TestDox('it accepts message arguments as named arguments')]
+    public function testNamedArguments(): void
+    {
+        $this->assertTranslation('Welcome, John', 'welcome.user', ['userName' => 'John']);
+    }
+
+    #[TestDox('it accepts message arguments as an associative array')]
+    public function testArrayArguments(): void
+    {
+        $this->assertTranslation('Welcome, John', 'welcome.user', ['userName' => 'John']);
+    }
+}

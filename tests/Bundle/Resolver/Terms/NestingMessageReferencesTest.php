@@ -1,30 +1,58 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Terms;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = Foo { $arg }
-        -bar = { foo }
-        ref-bar = { -bar }
-        call-bar = { -bar() }
-        call-bar-with-arg = { -bar(arg: 1) }
-        ftl);
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-test('no parameterization, no externals')
-    ->expect($bundle->message('ref-bar'))->toBe('Foo {$arg}');
+final class NestingMessageReferencesTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('no parameterization, but with externals')
-    ->expect($bundle->message('ref-bar', arg: 5))->toBe('Foo {$arg}');
+        $this->bundle->addFtl(<<<'ftl'
+            foo = Foo { $arg }
+            -bar = { foo }
+            ref-bar = { -bar }
+            call-bar = { -bar() }
+            call-bar-with-arg = { -bar(arg: 1) }
+            ftl);
+    }
 
-test('no arguments, no externals')
-    ->expect($bundle->message('call-bar'))->toBe('Foo {$arg}');
+    #[TestDox('no parameterization, no externals')]
+    public function testNoParamNoExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'ref-bar');
+    }
 
-test('no arguments, but with externals')
-    ->expect($bundle->message('call-bar', arg: 5))->toBe('Foo {$arg}');
+    #[TestDox('no parameterization, but with externals')]
+    public function testNoParamExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'ref-bar', ['arg' => 5]);
+    }
 
-test('with arguments, no externals')
-    ->expect($bundle->message('call-bar-with-arg'))->toBe('Foo 1');
+    #[TestDox('no arguments, no externals')]
+    public function testNoArgNoExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'call-bar');
+    }
 
-test('with arguments and with externals')
-    ->expect($bundle->message('call-bar-with-arg', arg: 5))->toBe('Foo 1');
+    #[TestDox('no arguments, but with externals')]
+    public function testNoArgExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'call-bar', ['arg' => 5]);
+    }
+
+    #[TestDox('with arguments, no externals')]
+    public function testArgNoExt(): void
+    {
+        $this->assertTranslation('Foo 1', 'call-bar-with-arg');
+    }
+
+    #[TestDox('with arguments and with externals')]
+    public function testArgExt(): void
+    {
+        $this->assertTranslation('Foo 1', 'call-bar-with-arg', ['arg' => 5]);
+    }
+}

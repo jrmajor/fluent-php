@@ -18,7 +18,7 @@ trait AstAssertions
     /**
      * @param array<mixed, mixed> $expected
      */
-    public function assertNodeEquals(
+    public static function assertNodeEquals(
         array $expected,
         BaseNode $node,
         bool $spans = false,
@@ -36,7 +36,7 @@ trait AstAssertions
             $expected['type'] = 'FluentResource';
         }
 
-        self::assertEquals($expected['type'], $node->getType(), 'Root node type does not match.');
+        self::assertSame($expected['type'], $node->getType(), 'Root node type does not match.');
 
         self::compareNodeData($expected, $node, $node->getType());
     }
@@ -111,6 +111,8 @@ trait AstAssertions
             "Expected optional subnode {$trace} to be null.",
         );
 
+        assert($expected !== null);
+
         if (! array_key_exists('type', $expected)) {
             throw new InvalidArgumentException("Expected node {$trace} should have specified type.");
         }
@@ -141,7 +143,7 @@ trait AstAssertions
         );
 
         foreach ($expected as $key => $expectedNode) {
-            if (! is_array($expectedNode) && ! is_null($expectedNode)) {
+            if (! is_array($expectedNode)) {
                 throw new InvalidArgumentException("Expected subnode {$trace}[{$key}] should be node, but it is scalar.");
             }
 
@@ -150,128 +152,60 @@ trait AstAssertions
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     private static function scalarsToCompare(BaseNode $node): array
     {
         return match ($node->getType()) {
             'Span' => ['start', 'end'],
-            // Syntax
             'Annotation' => ['code', 'message'],
-            'Attribute' => [],
-            'CallArguments' => [],
             'Identifier' => ['name'],
-            'Junk' => ['content'],
-            'NamedArgument' => [],
-            'FluentResource' => [],
+            'Junk', 'Comment', 'GroupComment', 'ResourceComment' => ['content'],
             'Variant' => ['default'],
-            // Syntax/Entries
-            'Message' => [],
-            'Term' => [],
-            // Syntax/Entries/Comments
-            'Comment' => ['content'],
-            'GroupComment' => ['content'],
-            'ResourceComment' => ['content'],
-            // Syntax/Expressions
-            'FunctionReference' => [],
-            'MessageReference' => [],
-            'SelectExpression' => [],
-            'TermReference' => [],
-            'VariableReference' => [],
-            // Syntax/Expressions/Literals
-            'NumberLiteral' => ['value'],
-            'StringLiteral' => ['value'],
-            // Syntax/Patterns
-            'Pattern' => [],
-            'Placeable' => [],
-            'TextElement' => ['value'],
-            default => throw new InvalidArgumentException(),
+            'NumberLiteral', 'StringLiteral', 'TextElement' => ['value'],
+            default => [],
         };
     }
 
     /**
-     * @return string[]
+     * @return list<string>>
      */
     private static function subnodesToCompare(BaseNode $node): array
     {
         $subnodes = match ($node->getType()) {
-            'Span' => [],
-            // Syntax
-            'Annotation' => [],
             'Attribute' => ['id', 'value'],
-            'CallArguments' => [],
-            'Identifier' => [],
-            'Junk' => [],
             'NamedArgument' => ['name', 'value'],
-            'FluentResource' => [],
             'Variant' => ['key', 'value'],
-            // Syntax/Entries
-            'Message' => ['id', 'value', 'comment'],
-            'Term' => ['id', 'value', 'comment'],
-            // Syntax/Entries/Comments
-            'Comment' => [],
-            'GroupComment' => [],
-            'ResourceComment' => [],
-            // Syntax/Expressions
+            'Message', 'Term' => ['id', 'value', 'comment'],
             'FunctionReference' => ['id', 'arguments'],
             'MessageReference' => ['id', 'attribute'],
             'SelectExpression' => ['selector'],
             'TermReference' => ['id', 'attribute', 'arguments'],
             'VariableReference' => ['id'],
-            // Syntax/Expressions/Literals
-            'NumberLiteral' => [],
-            'StringLiteral' => [],
-            // Syntax/Patterns
-            'Pattern' => [],
             'Placeable' => ['expression'],
-            'TextElement' => [],
-            default => throw new InvalidArgumentException(),
+            default => [],
         };
 
         if (self::$spans && $node->getType() !== 'Span') {
-            array_push($subnodes, 'span');
+            $subnodes[] = 'span';
         }
 
         return $subnodes;
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     private static function arraysOfNodesToCompare(BaseNode $node): array
     {
         return match ($node->getType()) {
-            'Span' => [],
-            // Syntax
-            'Annotation' => [],
-            'Attribute' => [],
             'CallArguments' => ['positional', 'named'],
-            'Identifier' => [],
             'Junk' => self::$annotations ? ['annotations'] : [],
-            'NamedArgument' => [],
             'FluentResource' => ['body'],
-            'Variant' => [],
-            // Syntax/Entries
-            'Message' => ['attributes'],
-            'Term' => ['attributes'],
-            // Syntax/Entries/Comments
-            'Comment' => [],
-            'GroupComment' => [],
-            'ResourceComment' => [],
-            // Syntax/Expressions
-            'FunctionReference' => [],
-            'MessageReference' => [],
+            'Message', 'Term' => ['attributes'],
             'SelectExpression' => ['variants'],
-            'TermReference' => [],
-            'VariableReference' => [],
-            // Syntax/Expressions/Literals
-            'NumberLiteral' => [],
-            'StringLiteral' => [],
-            // Syntax/Patterns
             'Pattern' => ['elements'],
-            'Placeable' => [],
-            'TextElement' => [],
-            default => throw new InvalidArgumentException(),
+            default => [],
         };
     }
 }

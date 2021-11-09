@@ -1,44 +1,69 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver;
 
-$bundle = (new FluentBundle('en-US', strict: true, allowOverrides: true))
-    ->addFtl(<<<'ftl'
-        matching-string = { "a" ->
-            [a] A
-           *[b] B
-        }
-        non-matching-string = { "c" ->
-            [a] A
-           *[b] B
-        }
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-        matching-number = { 0 ->
-            [0] A
-           *[1] B
-        }
-        non-matching-number = { 2 ->
-            [0] A
-           *[1] B
-        }
+final class LiteralsTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        number-matching-plural = { 1 ->
-            [one] A
-           *[other] B
-        }
-        ftl);
+        $this->bundle->addFtl(<<<'ftl'
+            matching-string = { "a" ->
+                [a] A
+               *[b] B
+            }
+            non-matching-string = { "c" ->
+                [a] A
+               *[b] B
+            }
 
-test('a matching string literal selector')
-    ->expect($bundle->message('matching-string'))->toBe('A');
+            matching-number = { 0 ->
+                [0] A
+               *[1] B
+            }
+            non-matching-number = { 2 ->
+                [0] A
+               *[1] B
+            }
 
-test('a non-matching string literal selector')
-    ->expect($bundle->message('non-matching-string'))->toBe('B');
+            number-matching-plural = { 1 ->
+                [one] A
+               *[other] B
+            }
+            ftl);
+    }
 
-test('a matching number literal selector')
-    ->expect($bundle->message('matching-number'))->toBe('A');
+    #[TestDox('a matching string literal selector')]
+    public function testString(): void
+    {
+        $this->assertTranslation('A', 'matching-string');
+    }
 
-test('a non-matching number literal selector')
-    ->expect($bundle->message('non-matching-number'))->toBe('B');
+    #[TestDox('a non-matching string literal selector')]
+    public function testStringFallback(): void
+    {
+        $this->assertTranslation('B', 'non-matching-string');
+    }
 
-test('a number literal selector matching a plural category')
-    ->expect($bundle->message('number-matching-plural'))->toBe('A');
+    #[TestDox('a matching number literal selector')]
+    public function testNumber(): void
+    {
+        $this->assertTranslation('A', 'matching-number');
+    }
+
+    #[TestDox('a non-matching number literal selector')]
+    public function testNumberFallback(): void
+    {
+        $this->assertTranslation('B', 'non-matching-number');
+    }
+
+    #[TestDox('a number literal selector matching a plural category')]
+    public function testPlural(): void
+    {
+        $this->assertTranslation('A', 'number-matching-plural');
+    }
+}

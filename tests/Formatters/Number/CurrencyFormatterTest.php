@@ -3,13 +3,17 @@
 namespace Major\Fluent\Tests\Formatters\Number;
 
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 
-final class CurrencyFormatterTest extends NumberFormatterTest
+final class CurrencyFormatterTest extends NumberFormatterTestCase
 {
     /**
-     * @dataProvider provideCodeDisplayCases
+     * @param array<string, mixed> $options
      */
-    public function testItWorksWithCodeDisplay(
+    #[DataProvider('provideCodeDisplayCases')]
+    #[TestDox('it works with code display')]
+    public function testCode(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'code']);
@@ -18,9 +22,11 @@ final class CurrencyFormatterTest extends NumberFormatterTest
     }
 
     /**
-     * @dataProvider provideSymbolDisplayCases
+     * @param array<string, mixed> $options
      */
-    public function testItWorksWithSymbolDisplay(
+    #[DataProvider('provideSymbolDisplayCases')]
+    #[TestDox('it works with symbol display')]
+    public function testSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'symbol']);
@@ -29,9 +35,11 @@ final class CurrencyFormatterTest extends NumberFormatterTest
     }
 
     /**
-     * @dataProvider provideNarrowSymbolDisplayCases
+     * @param array<string, mixed> $options
      */
-    public function testItWorksWithNarrowSymbolDisplay(
+    #[DataProvider('provideNarrowSymbolDisplayCases')]
+    #[TestDox('it works with narrow symbol display')]
+    public function testNarrowSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'narrowSymbol']);
@@ -40,9 +48,11 @@ final class CurrencyFormatterTest extends NumberFormatterTest
     }
 
     /**
-     * @dataProvider provideNameDisplayCases
+     * @param array<string, mixed> $options
      */
-    public function testItWorksWithNameDisplay(
+    #[DataProvider('provideNameDisplayCases')]
+    #[TestDox('it works with name display')]
+    public function testName(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'name']);
@@ -50,6 +60,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         $this->assertNumberFormat($locale, $number, $options);
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideCodeDisplayCases(): Generator
     {
         foreach ([
@@ -66,6 +79,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideSymbolDisplayCases(): Generator
     {
         foreach ([
@@ -82,6 +98,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideNarrowSymbolDisplayCases(): Generator
     {
         foreach ([
@@ -98,6 +117,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideNameDisplayCases(): Generator
     {
         foreach ([
@@ -114,6 +136,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<string>
+     */
     private function provideLocales(): Generator
     {
         yield from [

@@ -1,16 +1,32 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Terms;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        -bar = Bar
-        term-ref = { -bar }
-        term-call = { -bar() }
-        ftl);
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-test('terms can be referenced without parens')
-    ->expect($bundle->message('term-ref'))->toBe('Bar');
+final class ReferencesAndCallsTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('terms can be parameterized')
-    ->expect($bundle->message('term-call'))->toBe('Bar');
+        $this->bundle->addFtl(<<<'ftl'
+            -bar = Bar
+            term-ref = { -bar }
+            term-call = { -bar() }
+            ftl);
+    }
+
+    #[TestDox('terms can be referenced without parens')]
+    public function testNoParams(): void
+    {
+        $this->assertTranslation('Bar', 'term-ref');
+    }
+
+    #[TestDox('terms can be parameterized')]
+    public function testParams(): void
+    {
+        $this->assertTranslation('Bar', 'term-call');
+    }
+}

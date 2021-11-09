@@ -3,13 +3,17 @@
 namespace Major\Fluent\Tests\Formatters\Number;
 
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 
-final class PercentFormatterTest extends NumberFormatterTest
+final class PercentFormatterTest extends NumberFormatterTestCase
 {
     /**
-     * @dataProvider providePercentCases
+     * @param array<string, mixed> $options
      */
-    public function testItWorksForPercentPatterns(
+    #[DataProvider('providePercentCases')]
+    #[TestDox('it works for percent patterns')]
+    public function testPercent(
         string $locale, int|float $number, array $options = [],
     ): void {
         $options = array_merge($options, ['style' => 'percent']);
@@ -17,6 +21,9 @@ final class PercentFormatterTest extends NumberFormatterTest
         $this->assertNumberFormat($locale, $number, $options);
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function providePercentCases(): Generator
     {
         foreach ([

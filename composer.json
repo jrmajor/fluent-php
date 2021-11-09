@@ -35,12 +35,12 @@
         "ext-simplexml": "*",
         "jrmajor/cs": "^0.3.2",
         "nunomaduro/collision": "^5.10",
-        "pestphp/pest": "^1.20",
         "phpstan/phpstan": "^0.12.99",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "10.0.x-dev",
         "symfony/var-dumper": "^5.3",
         "symfony/console": "^5.3",
-        "azjezz/psl": "^1.9"
+        "azjezz/psl": "^1.9",
+        "phpstan/phpstan-phpunit": "^0.12.22"
     },
     "autoload": {
         "psr-4": {

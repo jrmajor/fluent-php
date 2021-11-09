@@ -6,12 +6,13 @@ use Major\Fluent\Formatters\Number\NumberFormatter;
 use Major\Fluent\Formatters\Number\Options;
 use Major\Fluent\Tests\TestCase;
 
-abstract class NumberFormatterTest extends TestCase
+abstract class NumberFormatterTestCase extends TestCase
 {
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function assertNumberFormat(
-        string $locale,
-        int|float $number,
-        array $options = [],
+        string $locale, int|float $number, array $options = [],
     ): void {
         $jsonOptions = json_encode($options);
 

@@ -1,48 +1,79 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Primitives;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = Foo
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-        placeable-literal = { "Foo" } Bar
-        placeable-message = { foo } Bar
+final class SimpleStringTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        selector-literal = { "Foo" ->
-           *[Foo] Member 1
-        }
+        $this->bundle->addFtl(<<<'ftl'
+            foo = Foo
 
-        bar =
-            .attr = Bar Attribute
+            placeable-literal = { "Foo" } Bar
+            placeable-message = { foo } Bar
 
-        placeable-attr = { bar.attr }
+            selector-literal = { "Foo" ->
+               *[Foo] Member 1
+            }
 
-        -baz = Baz
-            .attr = BazAttribute
+            bar =
+                .attr = Bar Attribute
 
-        selector-attr = { -baz.attr ->
-           *[BazAttribute] Member 3
-        }
-        ftl);
+            placeable-attr = { bar.attr }
 
-it('can be used as a value')
-    ->expect($bundle->message('foo'))->toBe('Foo');
+            -baz = Baz
+                .attr = BazAttribute
 
-it('can be used in a placeable')
-    ->expect($bundle->message('placeable-literal'))->toBe('Foo Bar');
+            selector-attr = { -baz.attr ->
+               *[BazAttribute] Member 3
+            }
+            ftl);
+    }
 
-it('can be a value of a message referenced in a placeable')
-    ->expect($bundle->message('placeable-message'))->toBe('Foo Bar');
+    #[TestDox('it can be used as a value')]
+    public function testValue(): void
+    {
+        $this->assertTranslation('Foo', 'foo');
+    }
 
-it('can be a selector')
-    ->expect($bundle->message('selector-literal'))->toBe('Member 1');
+    #[TestDox('it can be used in a placeable')]
+    public function testPlaceable(): void
+    {
+        $this->assertTranslation('Foo Bar', 'placeable-literal');
+    }
 
-it('can be used as an attribute value')
-    ->expect($bundle->message('bar.attr'))->toBe('Bar Attribute');
+    #[TestDox('it can be a value of a message referenced in a placeable')]
+    public function testPlaceableMessage(): void
+    {
+        $this->assertTranslation('Foo Bar', 'placeable-message');
+    }
 
-it('can be a value of an attribute used in a placeable')
-    ->expect($bundle->message('placeable-attr'))->toBe('Bar Attribute');
+    #[TestDox('it can be a selector')]
+    public function testSelector(): void
+    {
+        $this->assertTranslation('Member 1', 'selector-literal');
+    }
 
-it('can be a value of an attribute used as a selector')
-    ->expect($bundle->message('selector-attr'))->toBe('Member 3');
+    #[TestDox('it can be used as an attribute value')]
+    public function testAttribute(): void
+    {
+        $this->assertTranslation('Bar Attribute', 'bar.attr');
+    }
+
+    #[TestDox('it can be a value of an attribute used in a placeable')]
+    public function testPlaceableAttribute(): void
+    {
+        $this->assertTranslation('Bar Attribute', 'placeable-attr');
+    }
+
+    #[TestDox('it can be a value of an attribute used as a selector')]
+    public function testSelectorAttribute(): void
+    {
+        $this->assertTranslation('Member 3', 'selector-attr');
+    }
+}

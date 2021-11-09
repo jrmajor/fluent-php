@@ -1,19 +1,35 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Primitives;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        one = { 1 }
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-        select = { 1 ->
-           *[0] Zero
-            [1] One
-        }
-        ftl);
+final class NumberTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-it('can be used in a placeable')
-    ->expect($bundle->message('one'))->toBe('1');
+        $this->bundle->addFtl(<<<'ftl'
+            one = { 1 }
 
-it('can be used as a selector')
-    ->expect($bundle->message('select'))->toBe('One');
+            select = { 1 ->
+               *[0] Zero
+                [1] One
+            }
+            ftl);
+    }
+
+    #[TestDox('it can be used in a placeable')]
+    public function testPlaceable(): void
+    {
+        $this->assertTranslation('1', 'one');
+    }
+
+    #[TestDox('it can be used as a selector')]
+    public function testSelector(): void
+    {
+        $this->assertTranslation('One', 'select');
+    }
+}

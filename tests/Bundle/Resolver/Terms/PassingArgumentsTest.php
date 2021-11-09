@@ -1,37 +1,71 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Terms;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        -foo = Foo { $arg }
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-        ref-foo = { -foo }
-        call-foo-no-args = { -foo() }
-        call-foo-with-expected-arg = { -foo(arg: 1) }
-        call-foo-with-other-arg = { -foo(other: 3) }
-        ftl);
+final class PassingArgumentsTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('not parameterized, no externals')
-    ->expect($bundle->message('ref-foo'))->toBe('Foo {$arg}');
+        $this->bundle->addFtl(<<<'ftl'
+            -foo = Foo { $arg }
 
-test('not parameterized but with externals')
-    ->expect($bundle->message('ref-foo', arg: 1))->toBe('Foo {$arg}');
+            ref-foo = { -foo }
+            call-foo-no-args = { -foo() }
+            call-foo-with-expected-arg = { -foo(arg: 1) }
+            call-foo-with-other-arg = { -foo(other: 3) }
+            ftl);
+    }
 
-test('no arguments, no externals')
-    ->expect($bundle->message('call-foo-no-args'))->toBe('Foo {$arg}');
+    #[TestDox('not parameterized, no externals')]
+    public function testNoParamNoExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'ref-foo');
+    }
 
-test('no arguments, but with externals')
-    ->expect($bundle->message('call-foo-no-args', arg: 1))->toBe('Foo {$arg}');
+    #[TestDox('not parameterized but with externals')]
+    public function testNoParamExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'ref-foo', ['arg' => 1]);
+    }
 
-test('with expected arguments, no externals')
-    ->expect($bundle->message('call-foo-with-expected-arg'))->toBe('Foo 1');
+    #[TestDox('no arguments, no externals')]
+    public function testNoArgNoExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'call-foo-no-args');
+    }
 
-test('with expected arguments, and with externals')
-    ->expect($bundle->message('call-foo-with-expected-arg', arg: 5))->toBe('Foo 1');
+    #[TestDox('no arguments, but with externals')]
+    public function testNoArgExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'call-foo-no-args', ['arg' => 1]);
+    }
 
-test('with other arguments, no externals')
-    ->expect($bundle->message('call-foo-with-other-arg'))->toBe('Foo {$arg}');
+    #[TestDox('with expected arguments, no externals')]
+    public function testExpectedArgNoExt(): void
+    {
+        $this->assertTranslation('Foo 1', 'call-foo-with-expected-arg');
+    }
 
-test('with other arguments, and with externals')
-    ->expect($bundle->message('call-foo-with-other-arg', arg: 5))->toBe('Foo {$arg}');
+    #[TestDox('with expected arguments, and with externals')]
+    public function testExpectedArgExt(): void
+    {
+        $this->assertTranslation('Foo 1', 'call-foo-with-expected-arg', ['arg' => 5]);
+    }
+
+    #[TestDox('with other arguments, no externals')]
+    public function testOtherArgNoExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'call-foo-with-other-arg');
+    }
+
+    #[TestDox('with other arguments, and with externals')]
+    public function testOtherArgExt(): void
+    {
+        $this->assertTranslation('Foo {$arg}', 'call-foo-with-other-arg', ['arg' => 5]);
+    }
+}

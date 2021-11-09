@@ -1,28 +1,50 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Primitives;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        foo = Foo
-        bar = { foo }Bar
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-        placeable-message = { bar }Baz
+final class ComplexStringTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        baz =
-            .attr = { bar }BazAttribute
+        $this->bundle->addFtl(<<<'ftl'
+            foo = Foo
+            bar = { foo }Bar
 
-        placeable-attr = { baz.attr }
-        ftl);
+            placeable-message = { bar }Baz
 
-it('can be used as a value')
-    ->expect($bundle->message('bar'))->toBe('FooBar');
+            baz =
+                .attr = { bar }BazAttribute
 
-it('can be a value of a message referenced in a placeable')
-    ->expect($bundle->message('placeable-message'))->toBe('FooBarBaz');
+            placeable-attr = { baz.attr }
+            ftl);
+    }
 
-it('can be used as an attribute value')
-    ->expect($bundle->message('baz.attr'))->toBe('FooBarBazAttribute');
+    #[TestDox('it can be used as a value')]
+    public function testValue(): void
+    {
+        $this->assertTranslation('FooBar', 'bar');
+    }
 
-it('can be a value of an attribute used in a placeable')
-    ->expect($bundle->message('placeable-attr'))->toBe('FooBarBazAttribute');
+    #[TestDox('it can be a value of a message referenced in a placeable')]
+    public function testPlaceableValue(): void
+    {
+        $this->assertTranslation('FooBarBaz', 'placeable-message');
+    }
+
+    #[TestDox('it can be used as an attribute value')]
+    public function testAttribute(): void
+    {
+        $this->assertTranslation('FooBarBazAttribute', 'baz.attr');
+    }
+
+    #[TestDox('it can be a value of an attribute used in a placeable')]
+    public function testPlaceableAttribute(): void
+    {
+        $this->assertTranslation('FooBarBazAttribute', 'placeable-attr');
+    }
+}

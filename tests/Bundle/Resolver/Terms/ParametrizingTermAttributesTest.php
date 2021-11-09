@@ -1,57 +1,91 @@
 <?php
 
-use Major\Fluent\Bundle\FluentBundle;
+namespace Major\Fluent\Tests\Bundle\Resolver\Terms;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        -ship = Ship
-            .gender = { $style ->
-               *[traditional] neuter
-                [chicago] feminine
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
+
+final class ParametrizingTermAttributesTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->bundle->addFtl(<<<'ftl'
+            -ship = Ship
+                .gender = { $style ->
+                   *[traditional] neuter
+                    [chicago] feminine
+                }
+
+            ref-attr = { -ship.gender ->
+               *[masculine] He
+                [feminine] She
+                [neuter] It
             }
+            call-attr-no-args = { -ship.gender() ->
+               *[masculine] He
+                [feminine] She
+                [neuter] It
+            }
+            call-attr-with-expected-arg = { -ship.gender(style: "chicago") ->
+               *[masculine] He
+                [feminine] She
+                [neuter] It
+            }
+            call-attr-with-other-arg = { -ship.gender(other: 3) ->
+               *[masculine] He
+                [feminine] She
+                [neuter] It
+            }
+            ftl);
+    }
 
-        ref-attr = { -ship.gender ->
-           *[masculine] He
-            [feminine] She
-            [neuter] It
-        }
-        call-attr-no-args = { -ship.gender() ->
-           *[masculine] He
-            [feminine] She
-            [neuter] It
-        }
-        call-attr-with-expected-arg = { -ship.gender(style: "chicago") ->
-           *[masculine] He
-            [feminine] She
-            [neuter] It
-        }
-        call-attr-with-other-arg = { -ship.gender(other: 3) ->
-           *[masculine] He
-            [feminine] She
-            [neuter] It
-        }
-        ftl);
+    #[TestDox('not parameterized, no externals')]
+    public function testNoParamNoExt(): void
+    {
+        $this->assertTranslation('It', 'ref-attr');
+    }
 
-test('not parameterized, no externals')
-    ->expect($bundle->message('ref-attr'))->toBe('It');
+    #[TestDox('not parameterized but with externals')]
+    public function testNoParamExt(): void
+    {
+        $this->assertTranslation('It', 'ref-attr', ['style' => 'chicago']);
+    }
 
-test('not parameterized but with externals')
-    ->expect($bundle->message('ref-attr', style: 'chicago'))->toBe('It');
+    #[TestDox('no arguments, no externals')]
+    public function testNoArgNoExt(): void
+    {
+        $this->assertTranslation('It', 'call-attr-no-args');
+    }
 
-test('no arguments, no externals')
-    ->expect($bundle->message('call-attr-no-args'))->toBe('It');
+    #[TestDox('no arguments, but with externals')]
+    public function testNoArgExt(): void
+    {
+        $this->assertTranslation('It', 'call-attr-no-args', ['style' => 'chicago']);
+    }
 
-test('no arguments, but with externals')
-    ->expect($bundle->message('call-attr-no-args', style: 'chicago'))->toBe('It');
+    #[TestDox('with expected arguments, no externals')]
+    public function testExpectedArgNoExt(): void
+    {
+        $this->assertTranslation('She', 'call-attr-with-expected-arg');
+    }
 
-test('with expected arguments, no externals')
-    ->expect($bundle->message('call-attr-with-expected-arg'))->toBe('She');
+    #[TestDox('with expected arguments, and with externals')]
+    public function testExpectedArgExt(): void
+    {
+        $this->assertTranslation('She', 'call-attr-with-expected-arg', ['style' => 'chicago']);
+    }
 
-test('with expected arguments, and with externals')
-    ->expect($bundle->message('call-attr-with-expected-arg', style: 'chicago'))->toBe('She');
+    #[TestDox('with other arguments, no externals')]
+    public function testOtherArgNoExt(): void
+    {
+        $this->assertTranslation('It', 'call-attr-with-other-arg');
+    }
 
-test('with other arguments, no externals')
-    ->expect($bundle->message('call-attr-with-other-arg'))->toBe('It');
-
-test('with other arguments, and with externals')
-    ->expect($bundle->message('call-attr-with-other-arg', style: 'chicago'))->toBe('It');
+    #[TestDox('with other arguments, and with externals')]
+    public function testOtherArgExt(): void
+    {
+        $this->assertTranslation('It', 'call-attr-with-other-arg', ['style' => 'chicago']);
+    }
+}

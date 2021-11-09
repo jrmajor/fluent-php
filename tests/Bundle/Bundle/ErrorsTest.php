@@ -1,38 +1,60 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Bundle;
+
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
-it('ignores syntax errors by default', function () {
-    (new FluentBundle('en-US'))->addFtl('syntax error');
-})->expect((bool) 'error has not been thrown')->toBeTrue();
+final class ErrorsTest extends TestCase
+{
+    #[TestDox('it ignores syntax errors by default')]
+    public function testSyntaxIgnore(): void
+    {
+        $this->expectNotToPerformAssertions();
 
-it('throws syntax errors in strict mode', function () {
-    (new FluentBundle('en-US', strict: true))->addFtl('syntax error');
-})->throws(ParserException::class, 'Expected token: "=" somewhere in "syntax error"');
+        (new FluentBundle('en-US'))->addFtl('syntax error');
+    }
 
-test('errors are ignored by default and can be obtained by popErrors method', function () {
-    $bundle = (new FluentBundle('en-US', useIsolating: false))
-        ->addFtl(<<<'ftl'
-            foo = { $one } and { $two }
-            ftl);
+    #[TestDox('it throws syntax errors in strict mode')]
+    public function testSyntaxThrow(): void
+    {
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessage('Expected token: "=" somewhere in "syntax error".');
 
-    expect($bundle->message('foo'))->toBe('{$one} and {$two}');
+        (new FluentBundle('en-US', strict: true))->addFtl('syntax error');
+    }
 
-    expect($errors = $bundle->popErrors())->toHaveCount(2);
-    expect($errors[0])->toBeException(ReferenceException::class, 'Unknown variable: $one.');
-    expect($errors[1])->toBeException(ReferenceException::class, 'Unknown variable: $two.');
+    #[TestDox('errors are ignored by default and can be obtained by popErrors method')]
+    public function testResolverIgnore(): void
+    {
+        $bundle = (new FluentBundle('en-US', useIsolating: false))
+            ->addFtl(<<<'ftl'
+                foo = { $one } and { $two }
+                ftl);
 
-    expect($bundle->message('foo'))->toBe('{$one} and {$two}');
+        $this->assertSame('{$one} and {$two}', $bundle->message('foo'));
 
-    expect($errors = $bundle->popErrors())->toHaveCount(2);
-    expect($errors[0])->toBeException(ReferenceException::class, 'Unknown variable: $one.');
-    expect($errors[1])->toBeException(ReferenceException::class, 'Unknown variable: $two.');
-});
+        $this->assertCount(2, $errors = $bundle->popErrors());
+        $this->assertExceptionMatches(ReferenceException::class, 'Unknown variable: $one.', $errors[0]);
+        $this->assertExceptionMatches(ReferenceException::class, 'Unknown variable: $two.', $errors[1]);
+        $this->assertCount(0, $bundle->popErrors());
 
-test('errors are thrown in strict mode', function () {
-    (new FluentBundle('en-US', strict: true))
-        ->addFtl('foo = { $one } and { $two }')
-        ->message('foo');
-})->throws(ReferenceException::class, 'Unknown variable: $one.');
+        $this->assertSame('{$one} and {$two}', $bundle->message('foo'));
+
+        $this->assertCount(2, $bundle->popErrors());
+    }
+
+    #[TestDox('errors are thrown in strict mode')]
+    public function testResolverThrow(): void
+    {
+        $this->expectException(ReferenceException::class);
+        $this->expectExceptionMessage('Unknown variable: $one.');
+
+        (new FluentBundle('en-US', strict: true))
+            ->addFtl('foo = { $one } and { $two }')
+            ->message('foo');
+    }
+}

@@ -1,72 +1,74 @@
 <?php
 
-$skips = [
-    // Broken Attributes break the entire Entry right now.
-    // https://github.com/projectfluent/fluent.js/issues/237
-    'leading_dots',
-];
+namespace Major\Fluent\Tests\Parser;
 
-beforeEach(function () use ($skips) {
-    $test = $this->getProvidedData()[0];
+use Generator;
+use Major\Fluent\Parser\FluentParser;
+use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
+use Psl\Filesystem;
+use Psl\Json;
+use Psl\Type;
 
-    if (in_array($test, $skips, strict: true)) {
-        $this->markTestSkipped();
+final class ReferenceTest extends TestCase
+{
+    private FluentParser $parser;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->parser = new FluentParser();
     }
 
-    $this->parser = new Major\Fluent\Parser\FluentParser();
-});
+    #[DataProvider('provideReferenceCases')]
+    #[TestDox('reference test')]
+    public function testReference(string $name, string $ftl, string $expectedAst): void
+    {
+        if ($name === 'leading_dots') {
+            // https://github.com/projectfluent/fluent.js/issues/237
+            $this->markTestSkipped('Broken Attributes break the entire Entry right now.');
+        }
 
-test('reference test', function (string $test) {
-    $source = file_get_contents(__DIR__ . "/../fixtures/reference/{$test}.ftl");
+        $expectedAst = Json\decode($expectedAst);
 
-    $expectedAst = json_decode(
-        file_get_contents(__DIR__ . "/../fixtures/reference/{$test}.json"),
-        associative: true,
-        flags: JSON_THROW_ON_ERROR,
-    );
+        $resource = $this->parser->parse($ftl);
 
-    $resource = $this->parser->parse($source);
+        $this->assertNodeEquals(
+            $expectedAst,
+            $resource,
+            spans: false,
+            annotations: false,
+        );
+    }
 
-    $this->assertNodeEquals(
-        $expectedAst, $resource,
-        spans: false,
-        annotations: false,
-    );
-})->with([
-    'any_char',
-    'astral',
-    'call_expressions',
-    'callee_expressions',
-    'comments',
-    'cr',
-    'crlf',
-    'eof_comment',
-    'eof_empty',
-    'eof_id',
-    'eof_id_equals',
-    'eof_junk',
-    'eof_value',
-    'escaped_characters',
-    'junk',
-    'leading_dots',
-    'literal_expressions',
-    'member_expressions',
-    'messages',
-    'mixed_entries',
-    'multiline_values',
-    'numbers',
-    'obsolete',
-    'placeables',
-    'reference_expressions',
-    'select_expressions',
-    'select_indent',
-    'sparse_entries',
-    'special_chars',
-    'tab',
-    'term_parameters',
-    'terms',
-    'variables',
-    'variant_keys',
-    'whitespace_in_value',
-    'zero_length',
-]);
+    /**
+     * @return Generator<array{string, string}>
+     */
+    public function provideReferenceCases(): Generator
+    {
+        $files = Filesystem\read_directory(__DIR__ . '/../fixtures/reference');
+
+        $cases = [];
+
+        foreach ($files as $file) {
+            $type = Filesystem\get_extension($file);
+            $name = Filesystem\get_basename($file, ".{$type}");
+
+            $cases[$name][$type] = $file;
+        }
+
+        Type\dict(Type\string(), Type\shape([
+            'ftl' => Type\string(),
+            'json' => Type\string(),
+        ]))->assert($cases);
+
+        foreach ($cases as $name => $files) {
+            $ftl = Filesystem\read_file($files['ftl']);
+            $json = Filesystem\read_file($files['json']);
+
+            yield $name => [$name, $ftl, $json];
+        }
+    }
+}

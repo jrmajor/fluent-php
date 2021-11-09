@@ -2,7 +2,9 @@
 
 namespace Major\Fluent\Tests;
 
+use Psl\Filesystem;
 use Psl\Hash;
+use Psl\Json;
 use Psl\Shell;
 use Psl\Str;
 
@@ -49,19 +51,21 @@ trait NodeAssertions
             return;
         }
 
-        if (! is_dir(dirname(self::$cachePath))) {
-            mkdir(dirname(self::$cachePath), recursive: true);
+        $dir = Filesystem\get_directory(self::$cachePath);
+
+        if (! Filesystem\is_directory($dir)) {
+            Filesystem\create_directory($dir);
         }
 
-        if (! file_exists(self::$cachePath)) {
-            file_put_contents(self::$cachePath, '{}');
+        if (! Filesystem\is_file(self::$cachePath)) {
+            Filesystem\write_file(self::$cachePath, '{}');
         }
 
-        self::$cache = json_decode(file_get_contents(self::$cachePath), true);
+        self::$cache = Json\decode(Filesystem\read_file(self::$cachePath));
     }
 
     private static function saveCache(): void
     {
-        file_put_contents(self::$cachePath, json_encode(self::$cache));
+        Filesystem\write_file(self::$cachePath, Json\encode(self::$cache));
     }
 }

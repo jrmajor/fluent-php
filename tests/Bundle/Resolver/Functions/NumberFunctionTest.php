@@ -29,22 +29,22 @@ class NumberFunctionTest extends TestCase
 
     public function testNumberFunctionWorks(): void
     {
-        $this->assertTranslation('1,234', $this->us, 'num', arg: 1234);
-        $this->assertTranslation('1234', $this->pl, 'num', arg: 1234);
+        $this->assertTranslation('1,234', 'num', ['arg' => 1234], $this->us);
+        $this->assertTranslation('1234', 'num', ['arg' => 1234], $this->pl);
     }
 
     public function testNumberFunctionAcceptsArguments(): void
     {
-        $this->assertTranslation('42.0', $this->us, 'option', arg: 42);
-        $this->assertTranslation('42,0', $this->pl, 'option', arg: 42);
+        $this->assertTranslation('42.0', 'option', ['arg' => 42], $this->us);
+        $this->assertTranslation('42,0', 'option', ['arg' => 42], $this->pl);
 
-        $this->assertTranslation('42%', $this->us, 'percent', arg: 0.42);
-        $this->assertTranslation('42%', $this->pl, 'percent', arg: 0.42);
+        $this->assertTranslation('42%', 'percent', ['arg' => 0.42], $this->us);
+        $this->assertTranslation('42%', 'percent', ['arg' => 0.42], $this->pl);
     }
 
     public function testItRetainsTrailingZeroes(): void
     {
-        $this->assertTranslation('1.00', $this->us, 'zeroes');
-        $this->assertTranslation('1,00', $this->pl, 'zeroes');
+        $this->assertTranslation('1.00', 'zeroes', [], $this->us);
+        $this->assertTranslation('1,00', 'zeroes', [], $this->pl);
     }
 }
