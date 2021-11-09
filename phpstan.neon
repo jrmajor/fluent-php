@@ -6,7 +6,6 @@ parameters:
         - src
         - tests
     excludePaths:
-        - tests/Bundle/Resolver
         - tests/Pest.php
     ignoreErrors:
         -
