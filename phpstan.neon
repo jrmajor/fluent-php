@@ -4,6 +4,10 @@ parameters:
         - dev
         - locales
         - src
+        - tests
+    excludePaths:
+        - tests/Bundle/Resolver
+        - tests/Pest.php
     ignoreErrors:
         -
             message: '#^Match expression does not handle remaining value: string$#'
@@ -17,3 +21,6 @@ parameters:
             message: '#^Match expression does not handle remaining value: int<min, -1>$#'
             count: 1
             path: src/Parser/FluentParser.php
+
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon

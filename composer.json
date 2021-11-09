@@ -40,7 +40,8 @@
         "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^5.3",
         "symfony/console": "^5.3",
-        "azjezz/psl": "^1.9"
+        "azjezz/psl": "^1.9",
+        "phpstan/phpstan-phpunit": "^0.12.22"
     },
     "autoload": {
         "psr-4": {
