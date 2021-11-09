@@ -6,10 +6,13 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
+/**
+ * @psalm-import-type O from NumberFormatterTestCase
+ */
 final class DecimalFormatterTest extends NumberFormatterTestCase
 {
     /**
-     * @param array<string, mixed> $options
+     * @param O $options
      */
     #[DataProvider('provideDecimalCases')]
     #[TestDox('it works for decimal patterns')]
@@ -20,7 +23,7 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, array<string, mixed>}>
+     * @return Generator<array{string, int|float, ?O}>
      */
     public function provideDecimalCases(): Generator
     {

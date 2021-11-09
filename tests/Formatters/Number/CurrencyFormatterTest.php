@@ -6,10 +6,13 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
+/**
+ * @psalm-import-type O from NumberFormatterTestCase
+ */
 final class CurrencyFormatterTest extends NumberFormatterTestCase
 {
     /**
-     * @param array<string, mixed> $options
+     * @param O $options
      */
     #[DataProvider('provideCodeDisplayCases')]
     #[TestDox('it works with code display')]
@@ -22,7 +25,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @param array<string, mixed> $options
+     * @param O $options
      */
     #[DataProvider('provideSymbolDisplayCases')]
     #[TestDox('it works with symbol display')]
@@ -35,7 +38,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @param array<string, mixed> $options
+     * @param O $options
      */
     #[DataProvider('provideNarrowSymbolDisplayCases')]
     #[TestDox('it works with narrow symbol display')]
@@ -48,7 +51,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @param array<string, mixed> $options
+     * @param O $options
      */
     #[DataProvider('provideNameDisplayCases')]
     #[TestDox('it works with name display')]
@@ -61,7 +64,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, array<string, mixed>}>
+     * @return Generator<array{string, int|float, ?O}>
      */
     public function provideCodeDisplayCases(): Generator
     {
@@ -80,7 +83,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, array<string, mixed>}>
+     * @return Generator<array{string, int|float, ?O}>
      */
     public function provideSymbolDisplayCases(): Generator
     {
@@ -99,7 +102,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, array<string, mixed>}>
+     * @return Generator<array{string, int|float, ?O}>
      */
     public function provideNarrowSymbolDisplayCases(): Generator
     {
@@ -118,7 +121,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, array<string, mixed>}>
+     * @return Generator<array{string, int|float, ?O}>
      */
     public function provideNameDisplayCases(): Generator
     {

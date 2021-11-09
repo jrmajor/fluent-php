@@ -308,7 +308,7 @@ final class NumberFormatter
             throw new ShouldNotHappen();
         }
 
-        /** @phpstan-ignore-next-line */
+        /** @var array{string, string, string} */
         return array_slice($matches, 1);
     }
 
@@ -317,11 +317,9 @@ final class NumberFormatter
      */
     private function splitNumber(int|float $number): array
     {
-        $number = (string) $number;
+        $number = explode('.', (string) $number, 2);
 
-        /** @phpstan-ignore-next-line */
-        return str_contains($number, '.')
-            ? explode('.', $number, 2)
-            : [$number, ''];
+        /** @var array{string, string} */
+        return count($number) === 2 ? $number : [$number[0], ''];
     }
 }
