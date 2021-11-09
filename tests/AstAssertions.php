@@ -111,6 +111,8 @@ trait AstAssertions
             "Expected optional subnode {$trace} to be null.",
         );
 
+        assert($expected !== null);
+
         if (! array_key_exists('type', $expected)) {
             throw new InvalidArgumentException("Expected node {$trace} should have specified type.");
         }
@@ -141,7 +143,7 @@ trait AstAssertions
         );
 
         foreach ($expected as $key => $expectedNode) {
-            if (! is_array($expectedNode) && ! is_null($expectedNode)) {
+            if (! is_array($expectedNode)) {
                 throw new InvalidArgumentException("Expected subnode {$trace}[{$key}] should be node, but it is scalar.");
             }
 
