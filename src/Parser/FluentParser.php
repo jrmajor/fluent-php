@@ -87,7 +87,7 @@ final class FluentParser
                 if ($entry instanceof Message || $entry instanceof Term) {
                     $entry->comment = $lastComment;
 
-                    /** @phpstan-ignore-next-line */
+                    assert($entry->span !== null && $entry->comment->span !== null);
                     $entry->span->start = $entry->comment->span->start;
                 } else {
                     $entries[] = $lastComment;
@@ -553,13 +553,16 @@ final class FluentParser
                 }
             }
 
+            assert($element instanceof TextElement || $element instanceof Indent);
+
             $prev = $trimmed[count($trimmed) - 1] ?? null;
 
-            if ($prev && $prev instanceof TextElement) {
+            if ($prev instanceof TextElement) {
                 // Join adjacent TextElements by replacing them with their sum.
-                /** @phpstan-ignore-next-line */
+                assert($prev->span !== null && $element->span !== null);
+
                 $sum = (new TextElement($prev->value . $element->value))
-                    ->addSpan($prev->span->start, $element->span->end); /** @phpstan-ignore-line */
+                    ->addSpan($prev->span->start, $element->span->end);
 
                 $trimmed[count($trimmed) - 1] = $sum;
 

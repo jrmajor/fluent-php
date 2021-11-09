@@ -479,10 +479,9 @@ final class FluentBundle
 
         $value = $this->resolveExpression($argument, $scope);
 
-        return match (get_debug_type($value)) {
-            FluentNone::class => null,
-            /** @phpstan-ignore-next-line */
-            FluentNumber::class => $number ? $value : $value->value(),
+        return match (true) {
+            $value instanceof FluentNone => null,
+            $value instanceof FluentNumber => $number ? $value : $value->value(),
             default => $value,
         };
     }
