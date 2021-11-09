@@ -7,6 +7,8 @@ use Generator;
 final class DecimalFormatterTest extends NumberFormatterTest
 {
     /**
+     * @param array<string, mixed> $options
+     *
      * @dataProvider provideDecimalCases
      * @testdox it works for decimal patterns
      */
@@ -16,6 +18,9 @@ final class DecimalFormatterTest extends NumberFormatterTest
         $this->assertNumberFormat($locale, $number, $options);
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideDecimalCases(): Generator
     {
         foreach ([

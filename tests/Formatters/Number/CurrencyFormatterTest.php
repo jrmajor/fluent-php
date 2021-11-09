@@ -7,6 +7,8 @@ use Generator;
 final class CurrencyFormatterTest extends NumberFormatterTest
 {
     /**
+     * @param array<string, mixed> $options
+     *
      * @dataProvider provideCodeDisplayCases
      * @testdox it works with code display
      */
@@ -19,6 +21,8 @@ final class CurrencyFormatterTest extends NumberFormatterTest
     }
 
     /**
+     * @param array<string, mixed> $options
+     *
      * @dataProvider provideSymbolDisplayCases
      * @testdox it works with symbol display
      */
@@ -31,6 +35,8 @@ final class CurrencyFormatterTest extends NumberFormatterTest
     }
 
     /**
+     * @param array<string, mixed> $options
+     *
      * @dataProvider provideNarrowSymbolDisplayCases
      * @testdox it works with narrow symbol display
      */
@@ -43,6 +49,8 @@ final class CurrencyFormatterTest extends NumberFormatterTest
     }
 
     /**
+     * @param array<string, mixed> $options
+     *
      * @dataProvider provideNameDisplayCases
      * @testdox it works with name display
      */
@@ -54,6 +62,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         $this->assertNumberFormat($locale, $number, $options);
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideCodeDisplayCases(): Generator
     {
         foreach ([
@@ -70,6 +81,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideSymbolDisplayCases(): Generator
     {
         foreach ([
@@ -86,6 +100,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideNarrowSymbolDisplayCases(): Generator
     {
         foreach ([
@@ -102,6 +119,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function provideNameDisplayCases(): Generator
     {
         foreach ([
@@ -118,6 +138,9 @@ final class CurrencyFormatterTest extends NumberFormatterTest
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 
+    /**
+     * @return Generator<string>
+     */
     private function provideLocales(): Generator
     {
         yield from [

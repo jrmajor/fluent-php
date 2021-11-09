@@ -7,6 +7,8 @@ use Generator;
 final class PercentFormatterTest extends NumberFormatterTest
 {
     /**
+     * @param array<string, mixed> $options
+     *
      * @dataProvider providePercentCases
      * @testdox it works for percent patterns
      */
@@ -18,6 +20,9 @@ final class PercentFormatterTest extends NumberFormatterTest
         $this->assertNumberFormat($locale, $number, $options);
     }
 
+    /**
+     * @return Generator<array{string, int|float, array<string, mixed>}>
+     */
     public function providePercentCases(): Generator
     {
         foreach ([

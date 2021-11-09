@@ -8,10 +8,11 @@ use Major\Fluent\Tests\TestCase;
 
 abstract class NumberFormatterTest extends TestCase
 {
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function assertNumberFormat(
-        string $locale,
-        int|float $number,
-        array $options = [],
+        string $locale, int|float $number, array $options = [],
     ): void {
         $jsonOptions = json_encode($options);
 
