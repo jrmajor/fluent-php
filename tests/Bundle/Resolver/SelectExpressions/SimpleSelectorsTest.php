@@ -36,7 +36,7 @@ final class SimpleSelectorsTest extends TestCase
     /**
      * @testdox it returns variant for matching string selector
      */
-    public function testStrubg(): void
+    public function testString(): void
     {
         $this->assertTranslation('A', 'string-selector', ['selector' => 'a']);
     }
