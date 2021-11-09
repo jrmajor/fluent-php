@@ -1,5 +1,8 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
+
+use Exception;
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))

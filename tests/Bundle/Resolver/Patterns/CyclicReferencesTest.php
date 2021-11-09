@@ -1,5 +1,7 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver\Patterns;
+
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
 

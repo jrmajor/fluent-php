@@ -1,8 +1,11 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver\Arguments;
+
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver\TypeException;
+use stdClass;
 
 $bundle = (new FluentBundle('en-US'))
     ->addFtl('foo = { $arg }');

@@ -1,9 +1,13 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
+
+use Exception;
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
+use stdClass;
 
 $bundle = (new FluentBundle('en-US', useIsolating: false))
     ->addFunctions([

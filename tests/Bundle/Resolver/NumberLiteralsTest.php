@@ -1,5 +1,7 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver;
+
 use Major\Fluent\Bundle\FluentBundle;
 
 $ftl = <<<'ftl'

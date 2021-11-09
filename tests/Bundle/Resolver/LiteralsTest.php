@@ -1,5 +1,7 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver;
+
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true, allowOverrides: true))

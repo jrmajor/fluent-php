@@ -1,5 +1,7 @@
 <?php
 
+namespace Major\Fluent\Tests\Bundle\Resolver;
+
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;

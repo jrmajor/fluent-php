@@ -6,6 +6,8 @@
  * PDI U+2069
  */
 
+namespace Major\Fluent\Tests\Bundle\Resolver;
+
 use Major\Fluent\Bundle\FluentBundle;
 
 $bundle = (new FluentBundle('en-US', strict: true))
