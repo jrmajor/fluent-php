@@ -2,20 +2,37 @@
 
 namespace Major\Fluent\Tests\Bundle\Resolver\Primitives;
 
-use Major\Fluent\Bundle\FluentBundle;
+use Major\Fluent\Tests\TestCase;
 
-$bundle = (new FluentBundle('en-US', strict: true, useIsolating: false))
-    ->addFtl(<<<'ftl'
-        one = { 1 }
+final class NumberTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-        select = { 1 ->
-           *[0] Zero
-            [1] One
-        }
-        ftl);
+        $this->bundle->addFtl(<<<'ftl'
+            one = { 1 }
 
-it('can be used in a placeable')
-    ->expect($bundle->message('one'))->toBe('1');
+            select = { 1 ->
+               *[0] Zero
+                [1] One
+            }
+            ftl);
+    }
 
-it('can be used as a selector')
-    ->expect($bundle->message('select'))->toBe('One');
+    /**
+     * @testdox it can be used in a placeable
+     */
+    public function testPlaceable(): void
+    {
+        $this->assertTranslation('1', 'one');
+    }
+
+    /**
+     * @testdox it can be used as a selector
+     */
+    public function testSelector(): void
+    {
+        $this->assertTranslation('One', 'select');
+    }
+}
