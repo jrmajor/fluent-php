@@ -5,8 +5,6 @@ parameters:
         - locales
         - src
         - tests
-    excludePaths:
-        - tests/Pest.php
     ignoreErrors:
         -
             message: '#^Match expression does not handle remaining value: string$#'
