@@ -5,58 +5,100 @@ namespace Major\Fluent\Tests\Bundle\Resolver\Arguments;
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver\TypeException;
+use Major\Fluent\Tests\TestCase;
 use stdClass;
 
-$bundle = (new FluentBundle('en-US'))
-    ->addFtl('foo = { $arg }');
+final class ArgumentTypesTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-$bundlePL = (new FluentBundle('pl-PL'))
-    ->addFtl('foo = { $arg }');
+        $this->bundle->addFtl('foo = { $arg }');
+    }
 
-it('can not be an array')
-    ->expect($bundle->message('foo', arg: [1, 2, 'key' => 3]))->toBe('{$arg}')
-    ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable $arg is of unsupported type array.',
-    );
+    /**
+     * @testdox it can not be an array
+     */
+    public function testArray(): void
+    {
+        $this->assertTranslationErrors('{$arg}', [
+            [TypeException::class, 'Variable $arg is of unsupported type array.'],
+        ], 'foo', ['arg' => [1, 2, 'key' => 3]]);
+    }
 
-it('can not be a boolean')
-    ->expect($bundle->message('foo', arg: true))->toBe('{$arg}')
-    ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable $arg is of unsupported type bool.',
-    );
+    /**
+     * @testdox it can not be a boolean
+     */
+    public function testBoolean(): void
+    {
+        $this->assertTranslationErrors('{$arg}', [
+            [TypeException::class, 'Variable $arg is of unsupported type bool.'],
+        ], 'foo', ['arg' => true]);
+    }
 
-it('can not be null')
-    ->expect($bundle->message('foo', arg: null))->toBe('{$arg}')
-    ->and($bundle->popErrors())->toHaveError(
-            TypeException::class, 'Variable $arg is of unsupported type null.',
-    );
+    /**
+     * @testdox it can not be null
+     */
+    public function testNull(): void
+    {
+        $this->assertTranslationErrors('{$arg}', [
+            [TypeException::class, 'Variable $arg is of unsupported type null.'],
+        ], 'foo', ['arg' => null]);
+    }
 
-it('can not be an object')
-    ->expect($bundle->message('foo', arg: new stdClass()))->toBe('{$arg}')
-    ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable $arg is of unsupported type stdClass.',
-    );
+    /**
+     * @testdox it can not be an object
+     */
+    public function testObject(): void
+    {
+        $this->assertTranslationErrors('{$arg}', [
+            [TypeException::class, 'Variable $arg is of unsupported type stdClass.'],
+        ], 'foo', ['arg' => new stdClass()]);
+    }
 
-it('can not be a closure')
-    ->expect($bundle->message('foo', arg: fn () => null))->toBe('{$arg}')
-    ->and($bundle->popErrors())->toHaveError(
-        TypeException::class, 'Variable $arg is of unsupported type Closure.',
-    );
+    /**
+     * @testdox it can not be a closure
+     */
+    public function testClosure(): void
+    {
+        $this->assertTranslationErrors('{$arg}', [
+            [TypeException::class, 'Variable $arg is of unsupported type Closure.'],
+        ], 'foo', ['arg' => fn () => null]);
+    }
 
-it('can be a string')
-    ->expect($bundle->message('foo', arg: 'Argument'))->toBe('Argument')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can be a string
+     */
+    public function testString(): void
+    {
+        $this->assertTranslation('Argument', 'foo', ['arg' => 'Argument']);
+    }
 
-it('can be an integer')
-    ->expect($bundle->message('foo', arg: 1))->toBe('1')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can be an integer
+     */
+    public function testInteger(): void
+    {
+        $this->assertTranslation('1', 'foo', ['arg' => 1]);
+    }
 
-it('can be a float')
-    ->expect($bundle->message('foo', arg: 1.5))->toBe('1.5')
-    ->and($bundle->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can be a float
+     */
+    public function testFloat(): void
+    {
+        $this->assertTranslation('1.5', 'foo', ['arg' => 1.5]);
+    }
 
-it('can be a FluentNumber')
-    ->expect($bundle->message('foo', arg: new FluentNumber(0.42)))->toBe('0.42')
-    ->and($bundle->popErrors())->toBeEmpty()
-    ->and($bundlePL->message('foo', arg: new FluentNumber(0.42)))->toBe('0,42')
-    ->and($bundlePL->popErrors())->toBeEmpty();
+    /**
+     * @testdox it can be a FluentNumber
+     */
+    public function testFluentNumber(): void
+    {
+        $pl = (new FluentBundle('pl'))->addFtl('foo = { $arg }');
+
+        $this->assertTranslation('0.42', 'foo', ['arg' => new FluentNumber(0.42)]);
+        $this->assertTranslation('0,42', 'foo', ['arg' => new FluentNumber(0.42)], $pl);
+    }
+}
