@@ -46,5 +46,5 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress --no-interaction
 
-      - name: Run PHPStan
+      - name: Run Psalm
         run: vendor/bin/psalm --output-format=github --no-progress
