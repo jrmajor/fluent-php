@@ -109,7 +109,7 @@ All resolver exceptions extend `ResolverException`. In strict mode they would be
 ## Testing
 
 ```sh
-vendor/bin/pest              # Tests
-vendor/bin/phpstan analyse   # Static analysis
-vendor/bin/php-cs-fixer fix  # Formatting
+vendor/bin/phpunit --testdox  # Tests
+vendor/bin/phpstan analyse    # Static analysis
+vendor/bin/php-cs-fixer fix   # Formatting
 ```
