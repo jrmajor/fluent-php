@@ -36,7 +36,6 @@ final class ArgumentsTest extends TestCase
         ], 'missing');
     }
 
-
     /**
      * @testdox it can be used in the message value
      */
