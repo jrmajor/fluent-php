@@ -6,12 +6,11 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
 use Major\Fluent\Exceptions\Bundle\TermExistsException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class AllowOverridesTest extends TestCase
 {
-    /**
-     * @testdox it throws an error when allowOverrides is false for bundle (message)
-     */
+    #[TestDox('it throws an error when allowOverrides is false for bundle (message)')]
     public function testMessageThrows(): void
     {
         $this->expectException(MessageExistsException::class);
@@ -22,9 +21,7 @@ final class AllowOverridesTest extends TestCase
             ->addFtl('key = Bar');
     }
 
-    /**
-     * @testdox it throws an error when allowOverrides arg is false (message)
-     */
+    #[TestDox('it throws an error when allowOverrides arg is false (message)')]
     public function testMessageThrowsArg(): void
     {
         $this->expectException(MessageExistsException::class);
@@ -35,9 +32,7 @@ final class AllowOverridesTest extends TestCase
             ->addFtl('key = Bar', allowOverrides: false);
     }
 
-    /**
-     * @testdox it adds message when allowOverrides is true for bundle
-     */
+    #[TestDox('it adds message when allowOverrides is true for bundle')]
     public function testMessageOk(): void
         {
         $bundle = (new FluentBundle('en-US', allowOverrides: true))
@@ -47,9 +42,7 @@ final class AllowOverridesTest extends TestCase
         $this->assertTranslation('Bar', 'key', [], $bundle);
     }
 
-    /**
-     * @testdox it adds message when allowOverrides arg is true
-     */
+    #[TestDox('it adds message when allowOverrides arg is true')]
     public function testMessageOkArg(): void
     {
         $bundle = (new FluentBundle('en-US', allowOverrides: false))
@@ -59,9 +52,7 @@ final class AllowOverridesTest extends TestCase
         $this->assertTranslation('Bar', 'key', [], $bundle);
     }
 
-    /**
-     * @testdox it throws an error when allowOverrides is false for bundle (term)
-     */
+    #[TestDox('it throws an error when allowOverrides is false for bundle (term)')]
     public function testTermThrows(): void
     {
         $this->expectException(TermExistsException::class);
@@ -72,9 +63,7 @@ final class AllowOverridesTest extends TestCase
             ->addFtl('-key = Bar');
     }
 
-    /**
-     * @testdox it throws an error when allowOverrides arg is false (term)
-     */
+    #[TestDox('it throws an error when allowOverrides arg is false (term)')]
     public function testTermThrowsArg(): void
     {
         $this->expectException(TermExistsException::class);
@@ -85,9 +74,7 @@ final class AllowOverridesTest extends TestCase
             ->addFtl('-key = Bar', allowOverrides: false);
     }
 
-    /**
-     * @testdox it adds term when allowOverrides is true for bundle
-     */
+    #[TestDox('it adds term when allowOverrides is true for bundle')]
     public function testTermOk(): void
     {
         $bundle = (new FluentBundle('en-US', allowOverrides: true))
@@ -98,9 +85,7 @@ final class AllowOverridesTest extends TestCase
         $this->assertTranslation('Bar', 'foo', [], $bundle);
     }
 
-    /**
-     * @testdox it adds term when allowOverrides arg is true
-     */
+    #[TestDox('it adds term when allowOverrides arg is true')]
     public function testTermOkArg(): void
     {
         $bundle = (new FluentBundle('en-US', allowOverrides: false))

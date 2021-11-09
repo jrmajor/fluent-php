@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Bundle\Bundle;
 
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class HasEntryTest extends TestCase
 {
@@ -40,41 +41,31 @@ final class HasEntryTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it returns true for existing messages
-     */
+    #[TestDox('it returns true for existing messages')]
     public function testExistingMessage(): void
     {
         $this->assertTrue($this->bundle->hasMessage('foo'));
     }
 
-    /**
-     * @testdox it returns true for existing terms
-     */
+    #[TestDox('it returns true for existing terms')]
     public function testExistingTerm(): void
     {
         $this->assertTrue($this->bundle->hasTerm('bar'));
     }
 
-    /**
-     * @testdox it returns false for missing messages
-     */
+    #[TestDox('it returns false for missing messages')]
     public function testMissingMessage(): void
     {
         $this->assertFalse($this->bundle->hasMessage('bar'));
     }
 
-    /**
-     * @testdox it returns false for missing terms
-     */
+    #[TestDox('it returns false for missing terms')]
     public function testMissingTerm(): void
     {
         $this->assertFalse($this->bundle->hasTerm('foo'));
     }
 
-    /**
-     * @testdox it returns false for broken messages
-     */
+    #[TestDox('it returns false for broken messages')]
     public function testBrokenMessage(): void
     {
         $this->assertFalse($this->bundle->hasMessage('err1'));
@@ -83,9 +74,7 @@ final class HasEntryTest extends TestCase
         $this->assertFalse($this->bundle->hasMessage('err4'));
     }
 
-    /**
-     * @testdox it returns false for broken terms
-     */
+    #[TestDox('it returns false for broken terms')]
     public function testBrokenTerm(): void
     {
         $this->assertFalse($this->bundle->hasTerm('err5'));

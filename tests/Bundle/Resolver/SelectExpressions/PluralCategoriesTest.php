@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver\SelectExpressions;
 
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class PluralCategoriesTest extends TestCase
 {
@@ -24,41 +25,31 @@ final class PluralCategoriesTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it returns variant for matching number selector
-     */
+    #[TestDox('it returns variant for matching number selector')]
     public function testNumber(): void
     {
         $this->assertTranslation('A', 'matching', ['selector' => 1]);
     }
 
-    /**
-     * @testdox it returns variant for matching string selector
-     */
+    #[TestDox('it returns variant for matching string selector')]
     public function testString(): void
     {
         $this->assertTranslation('A', 'matching', ['selector' => 'one']);
     }
 
-    /**
-     * @testdox it falls back to default variant for non-matching number selector
-     */
+    #[TestDox('it falls back to default variant for non-matching number selector')]
     public function testNumberFallback(): void
     {
         $this->assertTranslation('D', 'non-matching', ['selector' => 2]);
     }
 
-    /**
-     * @testdox it falls back to default variant for non-matching string selector
-     */
+    #[TestDox('it falls back to default variant for non-matching string selector')]
     public function testStringFallback(): void
     {
         $this->assertTranslation('D', 'non-matching', ['selector' => 'other']);
     }
 
-    /**
-     * @testdox plural categories in english
-     */
+    #[TestDox('plural categories in english')]
     public function testPluralEnglish(): void
     {
         $bundle = (new FluentBundle('en-EN', useIsolating: false))->addFtl(<<<'ftl'
@@ -75,9 +66,7 @@ final class PluralCategoriesTest extends TestCase
         $this->assertTranslation('examples', 'msg', ['arg' => 2.5], $bundle);
     }
 
-    /**
-     * @testdox plural categories in polish
-     */
+    #[TestDox('plural categories in polish')]
     public function testPluralPolish(): void
     {
         $bundle = (new FluentBundle('pl-PL', useIsolating: false))->addFtl(<<<'ftl'

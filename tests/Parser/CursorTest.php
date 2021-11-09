@@ -5,13 +5,12 @@ namespace Major\Fluent\Tests\Parser;
 use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Parser\Cursor;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 use Throwable;
 
 final class CursorTest extends TestCase
 {
-    /**
-     * @testdox next, currentChar and index methods
-     */
+    #[TestDox('next, currentChar and index methods')]
     public function testNextCurrentCharAndIndex(): void
     {
         $cursor = $this->cursor('abc🐠d');
@@ -36,9 +35,7 @@ final class CursorTest extends TestCase
         $this->assertSame(5, $cursor->index());
     }
 
-    /**
-     * @testdox peek, currentPeek and peekOffset methods work
-     */
+    #[TestDox('peek, currentPeek and peekOffset methods work')]
     public function testPeekCurrentPeekAndOffset(): void
     {
         $cursor = $this->cursor('abc🐬d');
@@ -63,9 +60,7 @@ final class CursorTest extends TestCase
         $this->assertSame(5, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox peek and next methods
-     */
+    #[TestDox('peek and next methods')]
     public function testPeekAndNext(): void
     {
         $cursor = $this->cursor('ab🦀d');
@@ -113,9 +108,7 @@ final class CursorTest extends TestCase
         $this->assertSame(4, $cursor->index());
     }
 
-    /**
-     * @testdox skipToPeek method works
-     */
+    #[TestDox('skipToPeek method works')]
     public function testSkipToPeek(): void
     {
         $cursor = $this->cursor('ab🦑d');
@@ -144,9 +137,7 @@ final class CursorTest extends TestCase
         $this->assertSame(3, $cursor->index());
     }
 
-    /**
-     * @testdox resetPeek method
-     */
+    #[TestDox('resetPeek method')]
     public function testResetPeek(): void
     {
         $cursor = $this->cursor('abcd');
@@ -185,9 +176,7 @@ final class CursorTest extends TestCase
         $this->assertNull($cursor->peek());
     }
 
-    /**
-     * @testdox it treats crlf as a single character
-     */
+    #[TestDox('it treats crlf as a single character')]
     public function testClRf(): void
     {
         $cursor = $this->cursor("a\r\nb\r\n");
@@ -206,9 +195,7 @@ final class CursorTest extends TestCase
         $this->assertSame("\n", $cursor->currentChar());
     }
 
-    /**
-     * @testdox slice method works
-     */
+    #[TestDox('slice method works')]
     public function testSlice(): void
     {
         $cursor = $this->cursor('🐙ab🐙cd');
@@ -216,9 +203,7 @@ final class CursorTest extends TestCase
         $this->assertSame('b🐙c', $cursor->slice(2, 5));
     }
 
-    /**
-     * @testdox it can peek blank inline
-     */
+    #[TestDox('it can peek blank inline')]
     public function testPeekBlankInline(): void
     {
         $cursor = $this->cursor("a   b     \r\n    \n");
@@ -244,9 +229,7 @@ final class CursorTest extends TestCase
         $this->assertSame(4, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox it can skip blank inline
-     */
+    #[TestDox('it can skip blank inline')]
     public function testSkipBlankInline(): void
     {
         $cursor = $this->cursor("a   b     \r\n    \n");
@@ -272,9 +255,7 @@ final class CursorTest extends TestCase
         $this->assertSame(0, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox it can peek blank block
-     */
+    #[TestDox('it can peek blank block')]
     public function testPeekBlankBlock(): void
     {
         $cursor = $this->cursor("a b     \r\n    \n  c  \n");
@@ -299,9 +280,7 @@ final class CursorTest extends TestCase
         $this->assertSame(3, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox it can skip blank block
-     */
+    #[TestDox('it can skip blank block')]
     public function testSkipBlankBlock(): void
     {
         $cursor = $this->cursor("a b     \r\n    \n  c  \n");
@@ -326,9 +305,7 @@ final class CursorTest extends TestCase
         $this->assertSame(0, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox it can peek blank
-     */
+    #[TestDox('it can peek blank')]
     public function testPeekBlank(): void
     {
         $cursor = $this->cursor("a b     \r\n    \n  c  \n");
@@ -354,9 +331,7 @@ final class CursorTest extends TestCase
         $this->assertSame(3, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox it can skip blank
-     */
+    #[TestDox('it can skip blank')]
     public function testSkipBlank(): void
     {
         $cursor = $this->cursor("a b     \r\n    \n  c  \n");
@@ -382,9 +357,7 @@ final class CursorTest extends TestCase
         $this->assertSame(0, $cursor->peekOffset());
     }
 
-    /**
-     * @testdox it advances when encounters expected character
-     */
+    #[TestDox('it advances when encounters expected character')]
     public function testExpectChar(): void
     {
         $cursor = $this->cursor("a🦓\r\nb");
@@ -402,9 +375,7 @@ final class CursorTest extends TestCase
         $this->assertSame(5, $cursor->index());
     }
 
-    /**
-     * @testdox it throws an error when does not encounter expected character
-     */
+    #[TestDox('it throws an error when does not encounter expected character')]
     public function testExpectedCharThrow(): void
     {
         $this->expectException(ParserException::class);
@@ -423,9 +394,7 @@ final class CursorTest extends TestCase
         }
     }
 
-    /**
-     * @testdox it advances when encounters expected line end
-     */
+    #[TestDox('it advances when encounters expected line end')]
     public function testExpectLineEnd(): void
     {
         $cursor = $this->cursor("\na\r\nb");
@@ -444,9 +413,7 @@ final class CursorTest extends TestCase
         $this->assertSame(5, $cursor->index());
     }
 
-    /**
-     * @testdox it throws an error when does not encounter expected line end
-     */
+    #[TestDox('it throws an error when does not encounter expected line end')]
     public function testExpectedLineEndThrow(): void
     {
         $this->expectException(ParserException::class);
@@ -463,9 +430,7 @@ final class CursorTest extends TestCase
         }
     }
 
-    /**
-     * @testdox it can take character described by closure
-     */
+    #[TestDox('it can take character described by closure')]
     public function testTake(): void
     {
         $cursor = $this->cursor('ac');

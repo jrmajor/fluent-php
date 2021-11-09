@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Bundle\Resolver;
 
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class StringLiteralsTest extends TestCase
 {
@@ -25,65 +26,49 @@ final class StringLiteralsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it can parse simple string
-     */
+    #[TestDox('it can parse simple string')]
     public function testSimple(): void
     {
         $this->assertTranslation('Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?', 'simple-string');
     }
 
-    /**
-     * @testdox it can escape backslash
-     */
+    #[TestDox('it can escape backslash')]
     public function testBackslash(): void
     {
         $this->assertTranslation('abc\\def', 'double-backslash');
     }
 
-    /**
-     * @testdox it can escape double quote
-     */
+    #[TestDox('it can escape double quote')]
     public function testQuote(): void
     {
         $this->assertTranslation('ab "cd" ef', 'double-quote');
     }
 
-    /**
-     * @testdox it can escape simple unicode characters
-     */
+    #[TestDox('it can escape simple unicode characters')]
     public function testUnicode(): void
     {
         $this->assertTranslation('ab ⁂ ef', 'simple-unicode');
     }
 
-    /**
-     * @testdox it can escape combining unicode characters
-     */
+    #[TestDox('it can escape combining unicode characters')]
     public function testCombiningUnicode(): void
     {
         $this->assertTranslation('Варша́ва', 'combining-unicode');
     }
 
-    /**
-     * @testdox it can escape unicode characters above U+FFFF
-     */
+    #[TestDox('it can escape unicode characters above U+FFFF')]
     public function testUnicodeAboveFFFF(): void
     {
         $this->assertTranslation('ab 🦄 ef', 'unicode');
     }
 
-    /**
-     * @testdox it does not allow escape sequences representing surrogate code points
-     */
+    #[TestDox('it does not allow escape sequences representing surrogate code points')]
     public function testSurrogates(): void
     {
         $this->assertTranslation('�� is 𐲃', 'surrogates');
     }
 
-    /**
-     * @testdox it can parse complex escape sequences
-     */
+    #[TestDox('it can parse complex escape sequences')]
     public function testComplexEscape(): void
     {
         $this->assertTranslation('\\ℷ\\"\\u3"\\', 'complex-escape');

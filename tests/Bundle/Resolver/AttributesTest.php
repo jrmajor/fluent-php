@@ -5,6 +5,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver;
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class AttributesTest extends TestCase
 {
@@ -74,9 +75,7 @@ final class AttributesTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it falls back to id.attribute for entities with string values and no attributes
-     */
+    #[TestDox('it falls back to id.attribute for entities with string values and no attributes')]
     public function testNoAttributes(): void
     {
         $this->assertTranslationErrors('{foo.missing}', [
@@ -84,9 +83,7 @@ final class AttributesTest extends TestCase
         ], 'ref-foo', [], $this->fallbacks);
     }
 
-    /**
-     * @testdox it falls back to id.attribute for entities with string values and other attributes
-     */
+    #[TestDox('it falls back to id.attribute for entities with string values and other attributes')]
     public function testOtherAttributes(): void
     {
         $this->assertTranslationErrors('{bar.missing}', [
@@ -94,9 +91,7 @@ final class AttributesTest extends TestCase
         ], 'ref-bar', [], $this->fallbacks);
     }
 
-    /**
-     * @testdox it falls back to id.attribute for entities with pattern values and no attributes
-     */
+    #[TestDox('it falls back to id.attribute for entities with pattern values and no attributes')]
     public function testPatternNoAttributes(): void
     {
         $this->assertTranslationErrors('{baz.missing}', [
@@ -104,9 +99,7 @@ final class AttributesTest extends TestCase
         ], 'ref-baz', [], $this->fallbacks);
     }
 
-    /**
-     * @testdox it falls back to id.attribute for entities with pattern values and other attributes
-     */
+    #[TestDox('it falls back to id.attribute for entities with pattern values and other attributes')]
     public function testPatternOtherAttributes(): void
     {
         $this->assertTranslationErrors('{qux.missing}', [
@@ -114,97 +107,73 @@ final class AttributesTest extends TestCase
         ], 'ref-qux', [], $this->fallbacks);
     }
 
-    /**
-     * @testdox attributes with string values can be referenced for entities with string values
-     */
+    #[TestDox('attributes with string values can be referenced for entities with string values')]
     public function testStringStrningRef(): void
     {
         $this->assertTranslation('Foo Attribute', 'ref-foo', [], $this->strings);
     }
 
-    /**
-     * @testdox attributes with string values can be formatted directly for entities with string values
-     */
+    #[TestDox('attributes with string values can be formatted directly for entities with string values')]
     public function testStringStrning(): void
     {
         $this->assertTranslation('Foo Attribute', 'foo.attr', [], $this->strings);
     }
 
-    /**
-     * @testdox attributes with string values can be referenced for entities with pattern values
-     */
+    #[TestDox('attributes with string values can be referenced for entities with pattern values')]
     public function testStringPatternRef(): void
     {
         $this->assertTranslation('Bar Attribute', 'ref-bar', [], $this->strings);
     }
 
-    /**
-     * @testdox attributes with string values can be formatted directly for entities with pattern values
-     */
+    #[TestDox('attributes with string values can be formatted directly for entities with pattern values')]
     public function testStringPattern(): void
     {
         $this->assertTranslation('Bar Attribute', 'bar.attr', [], $this->strings);
     }
 
-    /**
-     * @testdox attributes with simple pattern values can be referenced for entities with string values
-     */
+    #[TestDox('attributes with simple pattern values can be referenced for entities with string values')]
     public function testPatternStringRef(): void
     {
         $this->assertTranslation('Foo Attribute', 'ref-bar', [], $this->patterns);
     }
 
-    /**
-     * @testdox attributes with simple pattern values can be formatted directly for entities with string values
-     */
+    #[TestDox('attributes with simple pattern values can be formatted directly for entities with string values')]
     public function testPatternString(): void
     {
         $this->assertTranslation('Foo Attribute', 'bar.attr', [], $this->patterns);
     }
 
-    /**
-     * @testdox attributes with simple pattern values can be referenced for entities with simple pattern values
-     */
+    #[TestDox('attributes with simple pattern values can be referenced for entities with simple pattern values')]
     public function testPatternPatternRef(): void
     {
         $this->assertTranslation('Foo Attribute', 'ref-baz', [], $this->patterns);
     }
 
-    /**
-     * @testdox attributes with simple pattern values can be formatted directly for entities with simple pattern values
-     */
+    #[TestDox('attributes with simple pattern values can be formatted directly for entities with simple pattern values')]
     public function testPatternPattern(): void
     {
         $this->assertTranslation('Foo Attribute', 'baz.attr', [], $this->patterns);
     }
 
-    /**
-     * @testdox it works with self-references
-     */
+    #[TestDox('it works with self-references')]
     public function testSelfRef(): void
     {
         $this->assertTranslation('Qux Attribute', 'ref-qux', [], $this->patterns);
     }
 
-    /**
-     * @testdox it can be formatted directly when it uses a self-reference
-     */
+    #[TestDox('it can be formatted directly when it uses a self-reference')]
     public function testSelf(): void
     {
         $this->assertTranslation('Qux Attribute', 'qux.attr', [], $this->patterns);
     }
 
-    /**
-     * @testdox attributes containing select expressions can be referenced
-     */
+    #[TestDox('attributes containing select expressions can be referenced')]
     public function testSelectRef(): void
     {
         $this->assertTranslation('A', 'ref-foo', [], $this->select);
     }
 
-    /**
-     * @testdox attributes containing select expressions can be formatted directly
-     */
+    #[TestDox('attributes containing select expressions can be formatted directly')]
     public function testSelect(): void
     {
         $this->assertTranslation('A', 'foo.attr', [], $this->select);

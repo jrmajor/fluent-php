@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver;
 
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class NumberLiteralsTest extends TestCase
 {
@@ -30,9 +31,7 @@ final class NumberLiteralsTest extends TestCase
         $this->fr = (new FluentBundle('fr-CA'))->addFtl($ftl);
     }
 
-    /**
-     * @testdox it formats numbers in placeables according to current locale
-     */
+    #[TestDox('it formats numbers in placeables according to current locale')]
     public function testPlaceables(): void
     {
         $this->assertTranslation('332,035,625.33203', 'num-in-placeable', [], $this->en);
@@ -41,9 +40,7 @@ final class NumberLiteralsTest extends TestCase
         $this->assertTranslation("332\u{00A0}035\u{00A0}625,33203", 'num-in-placeable', [], $this->fr);
     }
 
-    /**
-     * @testdox it formats numbers in variables according to current locale
-     */
+    #[TestDox('it formats numbers in variables according to current locale')]
     public function testVariables(): void
     {
         $this->assertTranslation('332,035,625.332', 'num-in-var', ['number' => 332_035_625.332_03], $this->en);

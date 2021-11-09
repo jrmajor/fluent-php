@@ -5,6 +5,8 @@ namespace Major\Fluent\Tests\Parser;
 use Generator;
 use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 use Psl\Filesystem;
 use Psl\Json;
 use Psl\Type;
@@ -20,10 +22,8 @@ final class ReferenceTest extends TestCase
         $this->parser = new FluentParser();
     }
 
-    /**
-     * @dataProvider provideReferenceCases
-     * @testdox reference test
-     */
+    #[DataProvider('provideReferenceCases')]
+    #[TestDox('reference test')]
     public function testReference(string $name, string $ftl, string $expectedAst): void
     {
         if ($name === 'leading_dots') {

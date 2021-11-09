@@ -5,6 +5,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver\Patterns;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class PatternsTest extends TestCase
 {
@@ -32,33 +33,25 @@ final class PatternsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it returns the simple string value
-     */
+    #[TestDox('it returns the simple string value')]
     public function testSimple(): void
     {
         $this->assertTranslation('Simple', 'simple');
     }
 
-    /**
-     * @testdox it resolves the reference to a message
-     */
+    #[TestDox('it resolves the reference to a message')]
     public function testRefMessage(): void
     {
         $this->assertTranslation('Foo', 'ref-message');
     }
 
-    /**
-     * @testdox it resolves the reference to a term
-     */
+    #[TestDox('it resolves the reference to a term')]
     public function testRefTerm(): void
     {
         $this->assertTranslation('Bar', 'ref-term');
     }
 
-    /**
-     * @testdox it returns the id if the referenced message is missing
-     */
+    #[TestDox('it returns the id if the referenced message is missing')]
     public function testRefMessageMissing(): void
     {
         $this->assertTranslationErrors('{missing}', [
@@ -66,9 +59,7 @@ final class PatternsTest extends TestCase
         ], 'ref-missing-message');
     }
 
-    /**
-     * @testdox it returns the id if the referenced term is missing
-     */
+    #[TestDox('it returns the id if the referenced term is missing')]
     public function testRefTermMissing(): void
     {
         $this->assertTranslationErrors('{-missing}', [
@@ -76,9 +67,7 @@ final class PatternsTest extends TestCase
         ], 'ref-missing-term');
     }
 
-    /**
-     * @testdox it returns {???} when trying to format a message with null value
-     */
+    #[TestDox('it returns {???} when trying to format a message with null value')]
     public function testNullValue(): void
     {
         $this->assertTranslationErrors('{???}', [
@@ -86,17 +75,13 @@ final class PatternsTest extends TestCase
         ], 'msg-no-val');
     }
 
-    /**
-     * @testdox it formats the attribute of a message with null value
-     */
+    #[TestDox('it formats the attribute of a message with null value')]
     public function testNullValueAttribute(): void
     {
         $this->assertTranslation('Foo Attr', 'msg-no-val.attr');
     }
 
-    /**
-     * @testdox it falls back to id when the referenced message has no value
-     */
+    #[TestDox('it falls back to id when the referenced message has no value')]
     public function testNoValueFallback(): void
     {
         $this->assertTranslationErrors('{msg-no-val} Bar', [

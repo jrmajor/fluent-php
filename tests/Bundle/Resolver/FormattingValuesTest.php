@@ -5,6 +5,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class FormattingValuesTest extends TestCase
 {
@@ -29,17 +30,13 @@ final class FormattingValuesTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it returns the value
-     */
+    #[TestDox('it returns the value')]
     public function testValue(): void
     {
         $this->assertTranslation('Value 1', 'key1');
     }
 
-    /**
-     * @testdox it returns the default variant
-     */
+    #[TestDox('it returns the default variant')]
     public function testDefaultVariant(): void
     {
         $this->assertTranslationErrors('B2', [
@@ -47,17 +44,13 @@ final class FormattingValuesTest extends TestCase
         ], 'key2');
     }
 
-    /**
-     * @testdox it returns the value if it is a pattern
-     */
+    #[TestDox('it returns the value if it is a pattern')]
     public function testPattern(): void
     {
         $this->assertTranslation('Value 3', 'key3');
     }
 
-    /**
-     * @testdox it returns the default variant if it is a pattern
-     */
+    #[TestDox('it returns the default variant if it is a pattern')]
     public function testPatternVariant(): void
     {
         $this->assertTranslationErrors('B4', [
@@ -65,9 +58,7 @@ final class FormattingValuesTest extends TestCase
         ], 'key4');
     }
 
-    /**
-     * @testdox it returns {???} when trying to format a message with null value
-     */
+    #[TestDox('it returns {???} when trying to format a message with null value')]
     public function testNullValue(): void
     {
         $this->assertTranslationErrors('{???}', [
@@ -75,9 +66,7 @@ final class FormattingValuesTest extends TestCase
         ], 'key5');
     }
 
-    /**
-     * @testdox it supports dot notation for referencing message attributes
-     */
+    #[TestDox('it supports dot notation for referencing message attributes')]
     public function testAttributes(): void
     {
         $this->assertTranslation('A5', 'key5.a');

@@ -7,6 +7,7 @@ use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 use stdClass;
 
 final class RuntimeFunctionsTest extends TestCase
@@ -37,33 +38,25 @@ final class RuntimeFunctionsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it works for strings
-     */
+    #[TestDox('it works for strings')]
     public function testStrings(): void
     {
         $this->assertTranslation('FooBar', 'strings');
     }
 
-    /**
-     * @testdox it works for numbers
-     */
+    #[TestDox('it works for numbers')]
     public function testNumbers(): void
     {
         $this->assertTranslation('3.5', 'numbers');
     }
 
-    /**
-     * @testdox it works with named arguments
-     */
+    #[TestDox('it works with named arguments')]
     public function testNamedArguments(): void
     {
         $this->assertTranslation('["test","value",123]', 'named-args');
     }
 
-    /**
-     * @testdox it preserves int and float types
-     */
+    #[TestDox('it preserves int and float types')]
     public function testPreserveNumeric(): void
     {
         $this->assertTranslation('int', 'int');
@@ -71,9 +64,7 @@ final class RuntimeFunctionsTest extends TestCase
         $this->assertTranslation('float', 'float-trailing-zeroes');
     }
 
-    /**
-     * @testdox it preserves variable type when it's passed to function
-     */
+    #[TestDox("it preserves variable type when it's passed to function")]
     public function testPreserveAny(): void
     {
         $object = new class () {
@@ -83,9 +74,7 @@ final class RuntimeFunctionsTest extends TestCase
         $this->assertTranslation('{"prop":"Object property"}', 'objects', ['object' => $object]);
     }
 
-    /**
-     * @testdox it converts unknown variables to null
-     */
+    #[TestDox('it converts unknown variables to null')]
     public function testUnknownToNull(): void
     {
         $this->assertTranslationErrors('null', [
@@ -93,9 +82,7 @@ final class RuntimeFunctionsTest extends TestCase
         ], 'unknown');
     }
 
-    /**
-     * @testdox it throws a type error when function returns wrong type
-     */
+    #[TestDox('it throws a type error when function returns wrong type')]
     public function testReturnType(): void
     {
         $this->assertTranslationErrors('{WRONG_RETURN()}', [
@@ -103,9 +90,7 @@ final class RuntimeFunctionsTest extends TestCase
         ], 'wrong-return');
     }
 
-    /**
-     * @testdox it throws a function error when function throws
-     */
+    #[TestDox('it throws a function error when function throws')]
     public function testFunctionError(): void
     {
         $this->assertTranslationErrors('{THROWS()}', [

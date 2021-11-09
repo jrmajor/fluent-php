@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Bundle\Resolver\Terms;
 
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class NestingMessageReferencesTest extends TestCase
 {
@@ -19,49 +20,37 @@ final class NestingMessageReferencesTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox no parameterization, no externals
-     */
+    #[TestDox('no parameterization, no externals')]
     public function testNoParamNoExt(): void
     {
         $this->assertTranslation('Foo {$arg}', 'ref-bar');
     }
 
-    /**
-     * @testdox no parameterization, but with externals
-     */
+    #[TestDox('no parameterization, but with externals')]
     public function testNoParamExt(): void
     {
         $this->assertTranslation('Foo {$arg}', 'ref-bar', ['arg' => 5]);
     }
 
-    /**
-     * @testdox no arguments, no externals
-     */
+    #[TestDox('no arguments, no externals')]
     public function testNoArgNoExt(): void
     {
         $this->assertTranslation('Foo {$arg}', 'call-bar');
     }
 
-    /**
-     * @testdox no arguments, but with externals
-     */
+    #[TestDox('no arguments, but with externals')]
     public function testNoArgExt(): void
     {
         $this->assertTranslation('Foo {$arg}', 'call-bar', ['arg' => 5]);
     }
 
-    /**
-     * @testdox with arguments, no externals
-     */
+    #[TestDox('with arguments, no externals')]
     public function testArgNoExt(): void
     {
         $this->assertTranslation('Foo 1', 'call-bar-with-arg');
     }
 
-    /**
-     * @testdox with arguments and with externals
-     */
+    #[TestDox('with arguments and with externals')]
     public function testArgExt(): void
     {
         $this->assertTranslation('Foo 1', 'call-bar-with-arg', ['arg' => 5]);

@@ -3,15 +3,16 @@
 namespace Major\Fluent\Tests\Formatters\Number;
 
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class DecimalFormatterTest extends NumberFormatterTestCase
 {
     /**
      * @param array<string, mixed> $options
-     *
-     * @dataProvider provideDecimalCases
-     * @testdox it works for decimal patterns
      */
+    #[DataProvider('provideDecimalCases')]
+    #[TestDox('it works for decimal patterns')]
     public function testDecimal(
         string $locale, int|float $number, array $options = [],
     ): void {

@@ -3,15 +3,16 @@
 namespace Major\Fluent\Tests\Formatters\Number;
 
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class CurrencyFormatterTest extends NumberFormatterTestCase
 {
     /**
      * @param array<string, mixed> $options
-     *
-     * @dataProvider provideCodeDisplayCases
-     * @testdox it works with code display
      */
+    #[DataProvider('provideCodeDisplayCases')]
+    #[TestDox('it works with code display')]
     public function testCode(
         string $locale, int|float $number, array $options = [],
     ): void {
@@ -22,10 +23,9 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
 
     /**
      * @param array<string, mixed> $options
-     *
-     * @dataProvider provideSymbolDisplayCases
-     * @testdox it works with symbol display
      */
+    #[DataProvider('provideSymbolDisplayCases')]
+    #[TestDox('it works with symbol display')]
     public function testSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
@@ -36,10 +36,9 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
 
     /**
      * @param array<string, mixed> $options
-     *
-     * @dataProvider provideNarrowSymbolDisplayCases
-     * @testdox it works with narrow symbol display
      */
+    #[DataProvider('provideNarrowSymbolDisplayCases')]
+    #[TestDox('it works with narrow symbol display')]
     public function testNarrowSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
@@ -50,10 +49,9 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
 
     /**
      * @param array<string, mixed> $options
-     *
-     * @dataProvider provideNameDisplayCases
-     * @testdox it works with name display
      */
+    #[DataProvider('provideNameDisplayCases')]
+    #[TestDox('it works with name display')]
     public function testName(
         string $locale, int|float $number, array $options = [],
     ): void {

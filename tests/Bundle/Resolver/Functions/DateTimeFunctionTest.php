@@ -4,12 +4,11 @@ namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
 use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class DateTimeFunctionTest extends TestCase
 {
-    /**
-     * @testdox it throws exception
-     */
+    #[TestDox('it throws exception')]
     public function testThrow(): void
     {
         $this->bundle->addFtl('datetime = { DATETIME() }');

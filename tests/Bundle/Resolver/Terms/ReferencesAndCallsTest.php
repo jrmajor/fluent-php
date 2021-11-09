@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Bundle\Resolver\Terms;
 
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class ReferencesAndCallsTest extends TestCase
 {
@@ -17,17 +18,13 @@ final class ReferencesAndCallsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox terms can be referenced without parens
-     */
+    #[TestDox('terms can be referenced without parens')]
     public function testNoParams(): void
     {
         $this->assertTranslation('Bar', 'term-ref');
     }
 
-    /**
-     * @testdox terms can be parameterized
-     */
+    #[TestDox('terms can be parameterized')]
     public function testParams(): void
     {
         $this->assertTranslation('Bar', 'term-call');

@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver\SelectExpressions;
 
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class SimpleSelectorsTest extends TestCase
 {
@@ -23,9 +24,7 @@ final class SimpleSelectorsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it falls back to default variant when selector is missing
-     */
+    #[TestDox('it falls back to default variant when selector is missing')]
     public function testMissing(): void
     {
         $this->assertTranslationErrors('B', [
@@ -33,33 +32,25 @@ final class SimpleSelectorsTest extends TestCase
         ], 'string-selector');
     }
 
-    /**
-     * @testdox it returns variant for matching string selector
-     */
+    #[TestDox('it returns variant for matching string selector')]
     public function testString(): void
     {
         $this->assertTranslation('A', 'string-selector', ['selector' => 'a']);
     }
 
-    /**
-     * @testdox it falls back to default variant for non-matching string selector
-     */
+    #[TestDox('it falls back to default variant for non-matching string selector')]
     public function testStringFallback(): void
     {
         $this->assertTranslation('B', 'string-selector', ['selector' => 'c']);
     }
 
-    /**
-     * @testdox it returns variant for matching number selector
-     */
+    #[TestDox('it returns variant for matching number selector')]
     public function testNumber(): void
     {
         $this->assertTranslation('A', 'number-selector', ['selector' => 0]);
     }
 
-    /**
-     * @testdox it falls back to default variant for non-matching number selector
-     */
+    #[TestDox('it falls back to default variant for non-matching number selector')]
     public function testNumberFallback(): void
     {
         $this->assertTranslation('B', 'number-selector', ['selector' => 2]);

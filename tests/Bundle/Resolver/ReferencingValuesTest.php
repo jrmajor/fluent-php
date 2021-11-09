@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver;
 
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class ReferencingValuesTest extends TestCase
 {
@@ -52,41 +53,31 @@ final class ReferencingValuesTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it can reference the value
-     */
+    #[TestDox('it can reference the value')]
     public function testValue(): void
     {
         $this->assertTranslation('Value 1', 'ref1');
     }
 
-    /**
-     * @testdox it can reference the default variant
-     */
+    #[TestDox('it can reference the default variant')]
     public function testDefaultVariant(): void
     {
         $this->assertTranslation('B2', 'ref2');
     }
 
-    /**
-     * @testdox it can reference the value if it is a pattern
-     */
+    #[TestDox('it can reference the value if it is a pattern')]
     public function testPatternValue(): void
     {
         $this->assertTranslation('Value 3', 'ref3');
     }
 
-    /**
-     * @testdox it can reference the default variant if it is a pattern
-     */
+    #[TestDox('it can reference the default variant if it is a pattern')]
     public function testPatternDefaultVariant(): void
     {
         $this->assertTranslation('B4', 'ref4');
     }
 
-    /**
-     * @testdox it falls back to id if there is no value
-     */
+    #[TestDox('it falls back to id if there is no value')]
     public function testFallback(): void
     {
         $this->assertTranslationErrors('{key5}', [
@@ -94,27 +85,21 @@ final class ReferencingValuesTest extends TestCase
         ], 'ref5');
     }
 
-    /**
-     * @testdox it can reference variants
-     */
+    #[TestDox('it can reference variants')]
     public function testVariants(): void
     {
         $this->assertTranslation('A2', 'ref6');
         $this->assertTranslation('B2', 'ref7');
     }
 
-    /**
-     * @testdox it can reference variants which are patterns
-     */
+    #[TestDox('it can reference variants which are patterns')]
     public function testPatternVariants(): void
     {
         $this->assertTranslation('A4', 'ref8');
         $this->assertTranslation('B4', 'ref9');
     }
 
-    /**
-     * @testdox it can reference attributes
-     */
+    #[TestDox('it can reference attributes')]
     public function testAttributes(): void
     {
         $this->assertTranslation('A5', 'ref10');
@@ -124,9 +109,7 @@ final class ReferencingValuesTest extends TestCase
         ], 'ref12');
     }
 
-    /**
-     * @testdox missing message reference
-     */
+    #[TestDox('missing message reference')]
     public function testMissingMessage(): void
     {
         $this->assertTranslationErrors('{key6}', [
@@ -134,9 +117,7 @@ final class ReferencingValuesTest extends TestCase
         ], 'ref13');
     }
 
-    /**
-     * @testdox missing message attribute reference
-     */
+    #[TestDox('missing message attribute reference')]
     public function testMissingAttribute(): void
     {
         $this->assertTranslationErrors('{key6}', [
@@ -144,9 +125,7 @@ final class ReferencingValuesTest extends TestCase
         ], 'ref14');
     }
 
-    /**
-     * @testdox missing term reference
-     */
+    #[TestDox('missing term reference')]
     public function testMissingTerm(): void
     {
         $this->assertTranslationErrors('{-key6}', [
@@ -154,9 +133,7 @@ final class ReferencingValuesTest extends TestCase
         ], 'ref15');
     }
 
-    /**
-     * @testdox missing term attribute reference
-     */
+    #[TestDox('missing term attribute reference')]
     public function testMissingTermReference(): void
     {
         $this->assertTranslationErrors('A', [

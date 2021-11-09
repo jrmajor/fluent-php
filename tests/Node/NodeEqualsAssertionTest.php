@@ -7,12 +7,11 @@ use Major\Fluent\Node\Syntax\Entries\Message;
 use Major\Fluent\Node\Syntax\Identifier;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class NodeEqualsAssertionTest extends TestCase
 {
-    /**
-     * @testdox assertNodeEquals assertion works
-     */
+    #[TestDox('assertNodeEquals assertion works')]
     public function testAssertion(): void
     {
         $identifier = new Message(

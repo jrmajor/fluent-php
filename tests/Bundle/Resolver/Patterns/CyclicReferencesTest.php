@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver\Patterns;
 
 use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class CyclicReferencesTest extends TestCase
 {
@@ -40,9 +41,7 @@ final class CyclicReferencesTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it returns {???} for cyclic reference
-     */
+    #[TestDox('it returns {???} for cyclic reference')]
     public function testCyclic(): void
     {
         $this->assertTranslationErrors('{???}', [
@@ -50,9 +49,7 @@ final class CyclicReferencesTest extends TestCase
         ], 'cyclic');
     }
 
-    /**
-     * @testdox returns {???} for cyclic self-reference
-     */
+    #[TestDox('returns {???} for cyclic self-reference')]
     public function testSelf(): void
     {
             $this->assertTranslationErrors('{???}', [
@@ -60,9 +57,7 @@ final class CyclicReferencesTest extends TestCase
             ], 'self');
     }
 
-    /**
-     * @testdox it returns {???} for cyclic self-reference in a member
-     */
+    #[TestDox('it returns {???} for cyclic self-reference in a member')]
     public function testMember(): void
     {
         $this->assertTranslationErrors('{???}', [
@@ -70,17 +65,13 @@ final class CyclicReferencesTest extends TestCase
         ], 'member', ['sel' => 'a']);
     }
 
-    /**
-     * @testdox it returns the other member if requested
-     */
+    #[TestDox('it returns the other member if requested')]
     public function testOtherMember(): void
     {
         $this->assertTranslation('Bar', 'member', ['sel' => 'b']);
     }
 
-    /**
-     * @testdox it returns the default variant for cyclic reference in a selector
-     */
+    #[TestDox('it returns the default variant for cyclic reference in a selector')]
     public function testSelector(): void
     {
         $this->assertTranslationErrors('Foo', [
@@ -88,9 +79,7 @@ final class CyclicReferencesTest extends TestCase
         ], 'foo');
     }
 
-    /**
-     * @testdox it can reference an attribute
-     */
+    #[TestDox('it can reference an attribute')]
     public function testAttribute(): void
     {
         $this->assertTranslation('Bar', 'bar');

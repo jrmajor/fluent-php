@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class FunctionsTest extends TestCase
 {
@@ -27,9 +28,7 @@ final class FunctionsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it falls back to the name of the function
-     */
+    #[TestDox('it falls back to the name of the function')]
     public function testFallback(): void
     {
         $this->assertTranslationErrors('{MISSING()}', [
@@ -37,49 +36,37 @@ final class FunctionsTest extends TestCase
         ], 'missing');
     }
 
-    /**
-     * @testdox it accepts strings
-     */
+    #[TestDox('it accepts strings')]
     public function testStrings(): void
     {
         $this->assertTranslation('a', 'pass-string');
     }
 
-    /**
-     * @testdox it accepts numbers
-     */
+    #[TestDox('it accepts numbers')]
     public function testNumbers(): void
     {
         $this->assertTranslation('1', 'pass-number');
     }
 
-    /**
-     * @testdox it accepts message references
-     */
+    #[TestDox('it accepts message references')]
     public function testMessageReferences(): void
     {
         $this->assertTranslation('Foo', 'pass-message');
     }
 
-    /**
-     * @testdox it accepts attribute references
-     */
+    #[TestDox('it accepts attribute references')]
     public function testAttributeReferences(): void
     {
         $this->assertTranslation('Attribute', 'pass-attr');
     }
 
-    /**
-     * @testdox it accepts variables
-     */
+    #[TestDox('it accepts variables')]
     public function testVariables(): void
     {
         $this->assertTranslation('Variable', 'pass-variable', ['var' => 'Variable']);
     }
 
-    /**
-     * @testdox it accepts function calls
-     */
+    #[TestDox('it accepts function calls')]
     public function testFunctionCalls(): void
     {
         $this->assertTranslation('1', 'pass-function-call');

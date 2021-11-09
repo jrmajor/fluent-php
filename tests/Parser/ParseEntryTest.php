@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Parser;
 
 use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class ParseEntryTest extends TestCase
 {
@@ -16,9 +17,7 @@ final class ParseEntryTest extends TestCase
         $this->parser = new FluentParser(true);
     }
 
-    /**
-     * @testdox it can parse simple message
-     */
+    #[TestDox('it can parse simple message')]
     public function testMessage(): void
     {
         $expected = [
@@ -45,9 +44,7 @@ final class ParseEntryTest extends TestCase
         $this->assertNodeEquals($expected, $message);
     }
 
-    /**
-     * @testdox it ignores attached comment
-     */
+    #[TestDox('it ignores attached comment')]
     public function testAttachedComment(): void
     {
         $expected = [
@@ -74,9 +71,7 @@ final class ParseEntryTest extends TestCase
         $this->assertNodeEquals($expected, $message);
     }
 
-    /**
-     * @testdox it returns junk
-     */
+    #[TestDox('it returns junk')]
     public function testJunk(): void
     {
         $expected = [
@@ -97,9 +92,7 @@ final class ParseEntryTest extends TestCase
         $this->assertNodeEquals($expected, $junk);
     }
 
-    /**
-     * @testdox it ignores all valid comments
-     */
+    #[TestDox('it ignores all valid comments')]
     public function testValidComments(): void
     {
         $input = <<<'ftl'
@@ -133,9 +126,7 @@ final class ParseEntryTest extends TestCase
         $this->assertNodeEquals($expected, $message);
     }
 
-    /**
-     * @testdox it does not ignore invalid comments
-     */
+    #[TestDox('it does not ignore invalid comments')]
     public function testInvalidComments(): void
     {
         $expected = [

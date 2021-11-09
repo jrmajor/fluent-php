@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Bundle\Resolver;
 
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class LiteralsTest extends TestCase
 {
@@ -36,41 +37,31 @@ final class LiteralsTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox a matching string literal selector
-     */
+    #[TestDox('a matching string literal selector')]
     public function testString(): void
     {
         $this->assertTranslation('A', 'matching-string');
     }
 
-    /**
-     * @testdox a non-matching string literal selector
-     */
+    #[TestDox('a non-matching string literal selector')]
     public function testStringFallback(): void
     {
         $this->assertTranslation('B', 'non-matching-string');
     }
 
-    /**
-     * @testdox a matching number literal selector
-     */
+    #[TestDox('a matching number literal selector')]
     public function testNumber(): void
     {
         $this->assertTranslation('A', 'matching-number');
     }
 
-    /**
-     * @testdox a non-matching number literal selector
-     */
+    #[TestDox('a non-matching number literal selector')]
     public function testNumberFallback(): void
     {
         $this->assertTranslation('B', 'non-matching-number');
     }
 
-    /**
-     * @testdox a number literal selector matching a plural category
-     */
+    #[TestDox('a number literal selector matching a plural category')]
     public function testPlural(): void
     {
         $this->assertTranslation('A', 'number-matching-plural');

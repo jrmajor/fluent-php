@@ -6,6 +6,7 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 use stdClass;
 
 final class ArgumentTypesTest extends TestCase
@@ -17,9 +18,7 @@ final class ArgumentTypesTest extends TestCase
         $this->bundle->addFtl('foo = { $arg }');
     }
 
-    /**
-     * @testdox it can not be an array
-     */
+    #[TestDox('it can not be an array')]
     public function testArray(): void
     {
         $this->assertTranslationErrors('{$arg}', [
@@ -27,9 +26,7 @@ final class ArgumentTypesTest extends TestCase
         ], 'foo', ['arg' => [1, 2, 'key' => 3]]);
     }
 
-    /**
-     * @testdox it can not be a boolean
-     */
+    #[TestDox('it can not be a boolean')]
     public function testBoolean(): void
     {
         $this->assertTranslationErrors('{$arg}', [
@@ -37,9 +34,7 @@ final class ArgumentTypesTest extends TestCase
         ], 'foo', ['arg' => true]);
     }
 
-    /**
-     * @testdox it can not be null
-     */
+    #[TestDox('it can not be null')]
     public function testNull(): void
     {
         $this->assertTranslationErrors('{$arg}', [
@@ -47,9 +42,7 @@ final class ArgumentTypesTest extends TestCase
         ], 'foo', ['arg' => null]);
     }
 
-    /**
-     * @testdox it can not be an object
-     */
+    #[TestDox('it can not be an object')]
     public function testObject(): void
     {
         $this->assertTranslationErrors('{$arg}', [
@@ -57,9 +50,7 @@ final class ArgumentTypesTest extends TestCase
         ], 'foo', ['arg' => new stdClass()]);
     }
 
-    /**
-     * @testdox it can not be a closure
-     */
+    #[TestDox('it can not be a closure')]
     public function testClosure(): void
     {
         $this->assertTranslationErrors('{$arg}', [
@@ -67,33 +58,25 @@ final class ArgumentTypesTest extends TestCase
         ], 'foo', ['arg' => fn () => null]);
     }
 
-    /**
-     * @testdox it can be a string
-     */
+    #[TestDox('it can be a string')]
     public function testString(): void
     {
         $this->assertTranslation('Argument', 'foo', ['arg' => 'Argument']);
     }
 
-    /**
-     * @testdox it can be an integer
-     */
+    #[TestDox('it can be an integer')]
     public function testInteger(): void
     {
         $this->assertTranslation('1', 'foo', ['arg' => 1]);
     }
 
-    /**
-     * @testdox it can be a float
-     */
+    #[TestDox('it can be a float')]
     public function testFloat(): void
     {
         $this->assertTranslation('1.5', 'foo', ['arg' => 1.5]);
     }
 
-    /**
-     * @testdox it can be a FluentNumber
-     */
+    #[TestDox('it can be a FluentNumber')]
     public function testFluentNumber(): void
     {
         $pl = (new FluentBundle('pl'))->addFtl('foo = { $arg }');

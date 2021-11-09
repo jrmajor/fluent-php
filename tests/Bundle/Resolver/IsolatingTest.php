@@ -10,6 +10,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver;
 
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class IsolatingTest extends TestCase
 {
@@ -28,33 +29,25 @@ final class IsolatingTest extends TestCase
             ftl);
     }
 
-    /**
-     * @testdox it isolates interpolated message references
-     */
+    #[TestDox('it isolates interpolated message references')]
     public function testMessageRef(): void
     {
         $this->assertTranslation("\u{2068}Foo\u{2069} Bar", 'bar');
     }
 
-    /**
-     * @testdox it isolates interpolated string-typed variables
-     */
+    #[TestDox('it isolates interpolated string-typed variables')]
     public function testStringVar(): void
     {
         $this->assertTranslation("\u{2068}Arg\u{2069} Baz", 'baz', ['arg' => 'Arg']);
     }
 
-    /**
-     * @testdox it isolates interpolated number-typed variables
-     */
+    #[TestDox('it isolates interpolated number-typed variables')]
     public function testNumberVar(): void
     {
         $this->assertTranslation("\u{2068}1\u{2069} Baz", 'baz', ['arg' => 1]);
     }
 
-    /**
-     * @testdox it isolates complex interpolations
-     */
+    #[TestDox('it isolates complex interpolations')]
     public function testComplex(): void
     {
         $expected = "\u{2068}\u{2068}Foo\u{2069} Bar\u{2069} \u{2068}\u{2068}Arg\u{2069} Baz\u{2069}";
@@ -62,9 +55,7 @@ final class IsolatingTest extends TestCase
         $this->assertTranslation($expected, 'qux', ['arg' => 'Arg']);
     }
 
-    /**
-     * @testdox it skips isolation if the only element is a placeable
-     */
+    #[TestDox('it skips isolation if the only element is a placeable')]
     public function testOneElement(): void
     {
         $this->assertTranslation('Amaya', 'skip-isolation');

@@ -5,21 +5,18 @@ namespace Major\Fluent\Tests\Parser\Literals;
 use Major\Fluent\Node\LiteralValues\StringLiteralValue;
 use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 use Psl\Type;
 
 final class StringLiteralTest extends TestCase
 {
-    /**
-     * @testdox it can parse string literal with no escape sequences
-     */
+    #[TestDox('it can parse string literal with no escape sequences')]
     public function testString(): void
     {
         $this->assertValue('abc', 'x = {"abc"}');
     }
 
-    /**
-     * @testdox it properly escapes backslash and double quote
-     */
+    #[TestDox('it properly escapes backslash and double quote')]
     public function testEscapes(): void
     {
         $this->assertValue('\\', 'x = {"\\\\"}');
@@ -27,9 +24,7 @@ final class StringLiteralTest extends TestCase
         $this->assertValue('\\"', 'x = {"\\\\\\""}');
     }
 
-    /**
-     * @testdox it can parse unicode escapes
-     */
+    #[TestDox('it can parse unicode escapes')]
     public function testUnicode(): void
     {
         $this->assertValue('A', 'x = {"\\u0041"}');
@@ -38,18 +33,14 @@ final class StringLiteralTest extends TestCase
         $this->assertValue('\\U01F602', 'x = {"\\\\U01F602"}');
     }
 
-    /**
-     * @testdox trailing zeroes are not part unicode escapes
-     */
+    #[TestDox('trailing zeroes are not part unicode escapes')]
     public function testUnicodeTrailingZeroes(): void
     {
         $this->assertValue('A00', 'x = {"\\u004100"}');
         $this->assertValue('😂00', 'x = {"\\U01F60200"}');
     }
 
-    /**
-     * @testdox it properly parses literal braces
-     */
+    #[TestDox('it properly parses literal braces')]
     public function testBraces(): void
     {
         $this->assertValue('{', 'x = {"{"}');

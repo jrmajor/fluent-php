@@ -6,12 +6,11 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\ParserException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class ErrorsTest extends TestCase
 {
-    /**
-     * @testdox it ignores syntax errors by default
-     */
+    #[TestDox('it ignores syntax errors by default')]
     public function testSyntaxIgnore(): void
     {
         $this->expectNotToPerformAssertions();
@@ -19,9 +18,7 @@ final class ErrorsTest extends TestCase
         (new FluentBundle('en-US'))->addFtl('syntax error');
     }
 
-    /**
-     * @testdox it throws syntax errors in strict mode
-     */
+    #[TestDox('it throws syntax errors in strict mode')]
     public function testSyntaxThrow(): void
     {
         $this->expectException(ParserException::class);
@@ -30,9 +27,7 @@ final class ErrorsTest extends TestCase
         (new FluentBundle('en-US', strict: true))->addFtl('syntax error');
     }
 
-    /**
-     * @testdox errors are ignored by default and can be obtained by popErrors method
-     */
+    #[TestDox('errors are ignored by default and can be obtained by popErrors method')]
     public function testResolverIgnore(): void
     {
         $bundle = (new FluentBundle('en-US', useIsolating: false))
@@ -52,9 +47,7 @@ final class ErrorsTest extends TestCase
         $this->assertCount(2, $bundle->popErrors());
     }
 
-    /**
-     * @testdox errors are thrown in strict mode
-     */
+    #[TestDox('errors are thrown in strict mode')]
     public function testResolverThrow(): void
     {
         $this->expectException(ReferenceException::class);
