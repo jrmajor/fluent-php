@@ -15,11 +15,8 @@ trait AstAssertions
 
     private static bool $annotations;
 
-    /**
-     * @param array<mixed, mixed> $expected
-     */
     public static function assertNodeEquals(
-        array $expected,
+        mixed $expected,
         BaseNode $node,
         bool $spans = false,
         bool $annotations = false,
@@ -27,6 +24,10 @@ trait AstAssertions
         self::$spans = $spans;
 
         self::$annotations = $annotations;
+
+        if (! is_array($expected)) {
+            throw new InvalidArgumentException('Expected root node should be represented as an array.');
+        }
 
         if (! array_key_exists('type', $expected)) {
             throw new InvalidArgumentException('Expected root node should have specified type.');
@@ -41,11 +42,12 @@ trait AstAssertions
         self::compareNodeData($expected, $node, $node->getType());
     }
 
-    /**
-     * @param array<mixed, mixed> $expected
-     */
-    private static function compareNodeData(array $expected, BaseNode $node, string $trace): void
+    private static function compareNodeData(mixed $expected, BaseNode $node, string $trace): void
     {
+        if (! is_array($expected)) {
+            throw new InvalidArgumentException("Expected node {$trace} should be represented as an array.");
+        }
+
         foreach (self::scalarsToCompare($node) as $scalar) {
             if (! array_key_exists($scalar, $expected)) {
                 throw new InvalidArgumentException("Expected node {$trace} should contain scalar \${$scalar}.");
@@ -91,15 +93,16 @@ trait AstAssertions
         }
     }
 
-    /**
-     * @param ?array<mixed, mixed> $expected
-     */
-    private static function compareSubnode(?array $expected, ?BaseNode $node, string $trace): void
+    private static function compareSubnode(mixed $expected, ?BaseNode $node, string $trace): void
     {
         if ($expected === null) {
             self::assertNull($node, "Expected optional subnode {$trace} to be null.");
 
             return;
+        }
+
+        if (! is_array($expected)) {
+            throw new InvalidArgumentException("Expected node {$trace} should be represented as an array.");
         }
 
         if (! array_key_exists('type', $expected)) {
@@ -117,11 +120,14 @@ trait AstAssertions
     }
 
     /**
-     * @param list<mixed> $expected
      * @param list<BaseNode> $actual
      */
-    private static function compareArrayOfNodes(array $expected, array $actual, string $trace): void
+    private static function compareArrayOfNodes(mixed $expected, array $actual, string $trace): void
     {
+        if (! is_array($expected)) {
+            throw new InvalidArgumentException("Expected array {$trace} should be represented as an array.");
+        }
+
         self::assertSame(
             $expectedCount = count($expected),
             $actualCount = count($actual),
