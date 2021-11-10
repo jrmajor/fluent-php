@@ -11,11 +11,11 @@ final class FluentCursor extends Cursor
 {
     public function isIdentifierStart(): bool
     {
-        if ($this->currentChar() === null) {
+        if (($char = $this->currentChar()) === null) {
             return false;
         }
 
-        $cc = mb_ord($this->currentChar());
+        $cc = mb_ord($char);
 
         return ($cc >= 97 && $cc <= 122) // a-z
             || ($cc >= 65 && $cc <= 90); // A-Z

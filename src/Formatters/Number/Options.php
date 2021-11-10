@@ -71,6 +71,9 @@ final class Options
         $this->maximumSignificantDigits ??= 21;
     }
 
+    /**
+     * @psalm-suppress PossiblyNullPropertyFetch
+     */
     private function fillForOther(?Currency $currency): void
     {
         $this->minimumIntegerDigits ??= 1;

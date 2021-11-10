@@ -23,6 +23,7 @@ final class Locale
     ) {
         $path = debug_backtrace()[0]['file'];
 
+        /** @psalm-suppress PossiblyFalseOperand */
         $this->code = substr($path, strrpos($path, '/') + 1, -4);
     }
 

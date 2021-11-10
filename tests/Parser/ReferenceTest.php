@@ -53,7 +53,7 @@ final class ReferenceTest extends TestCase
         $cases = [];
 
         foreach ($files as $file) {
-            $type = Filesystem\get_extension($file);
+            $type = Type\string()->coerce(Filesystem\get_extension($file));
             $name = Filesystem\get_basename($file, ".{$type}");
 
             $cases[$name][$type] = $file;
