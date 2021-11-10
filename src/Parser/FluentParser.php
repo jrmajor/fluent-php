@@ -58,7 +58,7 @@ final class FluentParser
 
             if (
                 $entry instanceof Junk
-                && ! empty($entry->annotations)
+                && $entry->annotations
                 && $this->strict
             ) {
                 throw new ParserException(
