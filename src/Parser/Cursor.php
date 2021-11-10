@@ -196,6 +196,9 @@ abstract class Cursor
         throw new ParserException('E0003', ['token' => '␤']);
     }
 
+    /**
+     * @param Closure(string): bool $callback
+     */
     public function takeChar(Closure $callback): ?string
     {
         $char = $this->currentChar();
