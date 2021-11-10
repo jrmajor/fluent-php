@@ -69,7 +69,7 @@ final class FluentParser
             }
 
             // Comments may be attached to Messages or Terms if they are followed
-            // immediately by them. However they should parse as standalone when
+            // immediately by them. However, they should parse as standalone when
             // they're followed by Junk. Consequently, we only attach Comments once
             // we know that the Message or the Term parsed successfully.
             if (
@@ -148,7 +148,7 @@ final class FluentParser
             $nextEntryStart = $cursor->index();
 
             if ($nextEntryStart < $errorIndex) {
-                // The position of the error must be inside of the Junk's span.
+                // The position of the error must be inside the Junk's span.
                 $errorIndex = $nextEntryStart;
             }
 
