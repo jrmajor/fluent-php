@@ -37,6 +37,11 @@
                 <file name="tests/TranslationAssertions.php"/>
             </errorLevel>
         </MoreSpecificReturnType>
+        <Trace>
+            <errorLevel type="error">
+                <directory name="*"/>
+            </errorLevel>
+        </Trace>
         <UnresolvableInclude>
             <errorLevel type="suppress">
                 <directory name="*"/>
