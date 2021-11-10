@@ -48,7 +48,7 @@ trait NodeAssertions
 
     private static function loadCache(): void
     {
-        if (self::$cache === null) {
+        if (self::$cache !== null) {
             return;
         }
 
