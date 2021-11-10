@@ -117,7 +117,7 @@ trait AstAssertions
     }
 
     /**
-     * @param list<array<string, mixed>> $expected
+     * @param list<mixed> $expected
      * @param list<BaseNode> $actual
      */
     private static function compareArrayOfNodes(array $expected, array $actual, string $trace): void

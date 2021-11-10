@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="3"
+    errorLevel="2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
@@ -21,11 +21,26 @@
                 <directory name="locales"/>
             </errorLevel>
         </InternalMethod>
+        <MissingClosureParamType>
+            <errorLevel type="suppress">
+                <directory name="*"/>
+            </errorLevel>
+        </MissingClosureParamType>
+        <MissingClosureReturnType>
+            <errorLevel type="suppress">
+                <directory name="*"/>
+            </errorLevel>
+        </MissingClosureReturnType>
         <MoreSpecificReturnType>
             <errorLevel type="suppress">
                 <directory name="tests/Formatters/Number"/>
                 <file name="tests/TranslationAssertions.php"/>
             </errorLevel>
         </MoreSpecificReturnType>
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <directory name="*"/>
+            </errorLevel>
+        </UnresolvableInclude>
     </issueHandlers>
 </psalm>
