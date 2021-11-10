@@ -96,16 +96,11 @@ trait AstAssertions
      */
     private static function compareSubnode(?array $expected, ?BaseNode $node, string $trace): void
     {
-        if ($expected === null && $node === null) {
+        if ($expected === null) {
+            self::assertNull($node, "Expected optional subnode {$trace} to be null.");
+
             return;
         }
-
-        self::assertFalse(
-            $expected === null && $node !== null,
-            "Expected optional subnode {$trace} to be null.",
-        );
-
-        assert($expected !== null);
 
         if (! array_key_exists('type', $expected)) {
             throw new InvalidArgumentException("Expected node {$trace} should have specified type.");
@@ -159,7 +154,7 @@ trait AstAssertions
     }
 
     /**
-     * @return list<string>>
+     * @return list<string>
      */
     private static function subnodesToCompare(BaseNode $node): array
     {

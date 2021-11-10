@@ -59,10 +59,10 @@ final class ReferenceTest extends TestCase
             $cases[$name][$type] = $file;
         }
 
-        Type\dict(Type\string(), Type\shape([
+        $cases = Type\dict(Type\string(), Type\shape([
             'ftl' => Type\string(),
             'json' => Type\string(),
-        ]))->assert($cases);
+        ]))->coerce($cases);
 
         foreach ($cases as $name => $files) {
             $ftl = Filesystem\read_file($files['ftl']);

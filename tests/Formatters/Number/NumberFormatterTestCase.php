@@ -12,6 +12,8 @@ use Major\Fluent\Tests\TestCase;
 abstract class NumberFormatterTestCase extends TestCase
 {
     /**
+     * @psalm-suppress InvalidScalarArgument
+     *
      * @param O $options
      */
     public static function assertNumberFormat(

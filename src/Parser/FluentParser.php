@@ -482,7 +482,7 @@ final class FluentParser
                     $indent = $cursor->skipBlankInline();
 
                     $commonIndentLength = ! is_null($commonIndentLength)
-                        ? (int) min($commonIndentLength, mb_strlen($indent))
+                        ? min($commonIndentLength, mb_strlen($indent))
                         : mb_strlen($indent);
 
                     $elements[] = $this->getIndent($cursor, $blankLines . $indent, $blankStart);

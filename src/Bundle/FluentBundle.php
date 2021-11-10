@@ -314,7 +314,7 @@ final class FluentBundle
             return $argument;
         }
 
-        if (is_numeric($argument)) {
+        if (is_int($argument) || is_float($argument)) {
             return (new FluentNumber($argument))->setLocale($this->locale);
         }
 
@@ -428,7 +428,7 @@ final class FluentBundle
             return $output;
         }
 
-        if (is_numeric($output)) {
+        if (is_int($output) || is_float($output)) {
             return (new FluentNumber($output))->setLocale($this->locale);
         }
 
