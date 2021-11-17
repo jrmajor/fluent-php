@@ -49,6 +49,9 @@ abstract class Cursor
         return $this->charAt($this->index + $this->peekOffset);
     }
 
+    /**
+     * @impure
+     */
     public function next(int $chars = 1): ?string
     {
         $this->peekOffset = 0;
@@ -193,6 +196,9 @@ abstract class Cursor
         throw new ParserException('E0003', ['token' => '␤']);
     }
 
+    /**
+     * @param Closure(string): bool $callback
+     */
     public function takeChar(Closure $callback): ?string
     {
         $char = $this->currentChar();

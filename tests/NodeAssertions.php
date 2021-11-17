@@ -15,8 +15,8 @@ trait NodeAssertions
 {
     private static string $cachePath = __DIR__ . '/../.phpunit.cache/nodeAssertions.json';
 
-    /** @var array<string, string> */
-    private static array $cache;
+    /** @var ?array<string, string> */
+    private static ?array $cache = null;
 
     public static function assertEqualsNodeOutput(
         string $command, string $actual, string $message,
@@ -35,6 +35,7 @@ trait NodeAssertions
             self::saveCache();
         }
 
+        /** @var string */
         return self::$cache[$hash];
     }
 
@@ -47,7 +48,7 @@ trait NodeAssertions
 
     private static function loadCache(): void
     {
-        if (isset(self::$cache)) {
+        if (self::$cache !== null) {
             return;
         }
 

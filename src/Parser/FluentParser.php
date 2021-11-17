@@ -58,7 +58,7 @@ final class FluentParser
 
             if (
                 $entry instanceof Junk
-                && ! empty($entry->annotations)
+                && $entry->annotations
                 && $this->strict
             ) {
                 throw new ParserException(
@@ -69,7 +69,7 @@ final class FluentParser
             }
 
             // Comments may be attached to Messages or Terms if they are followed
-            // immediately by them. However they should parse as standalone when
+            // immediately by them. However, they should parse as standalone when
             // they're followed by Junk. Consequently, we only attach Comments once
             // we know that the Message or the Term parsed successfully.
             if (
@@ -87,7 +87,7 @@ final class FluentParser
                 if ($entry instanceof Message || $entry instanceof Term) {
                     $entry->comment = $lastComment;
 
-                    /** @phpstan-ignore-next-line */
+                    assert($entry->span !== null && $entry->comment->span !== null);
                     $entry->span->start = $entry->comment->span->start;
                 } else {
                     $entries[] = $lastComment;
@@ -148,7 +148,7 @@ final class FluentParser
             $nextEntryStart = $cursor->index();
 
             if ($nextEntryStart < $errorIndex) {
-                // The position of the error must be inside of the Junk's span.
+                // The position of the error must be inside the Junk's span.
                 $errorIndex = $nextEntryStart;
             }
 
@@ -482,7 +482,7 @@ final class FluentParser
                     $indent = $cursor->skipBlankInline();
 
                     $commonIndentLength = ! is_null($commonIndentLength)
-                        ? (int) min($commonIndentLength, mb_strlen($indent))
+                        ? min($commonIndentLength, mb_strlen($indent))
                         : mb_strlen($indent);
 
                     $elements[] = $this->getIndent($cursor, $blankLines . $indent, $blankStart);
@@ -553,13 +553,16 @@ final class FluentParser
                 }
             }
 
+            assert($element instanceof TextElement || $element instanceof Indent);
+
             $prev = $trimmed[count($trimmed) - 1] ?? null;
 
-            if ($prev && $prev instanceof TextElement) {
+            if ($prev instanceof TextElement) {
                 // Join adjacent TextElements by replacing them with their sum.
-                /** @phpstan-ignore-next-line */
+                assert($prev->span !== null && $element->span !== null);
+
                 $sum = (new TextElement($prev->value . $element->value))
-                    ->addSpan($prev->span->start, $element->span->end); /** @phpstan-ignore-line */
+                    ->addSpan($prev->span->start, $element->span->end);
 
                 $trimmed[count($trimmed) - 1] = $sum;
 
@@ -713,8 +716,6 @@ final class FluentParser
 
             $id = $this->getIdentifier($cursor);
 
-            // PHPStan does not understand, that the cursor has been moved
-            /** @phpstan-ignore-next-line */
             if ($cursor->currentChar() === '.') {
                 $cursor->next();
 

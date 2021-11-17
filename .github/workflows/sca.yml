@@ -3,8 +3,8 @@ name: Static analysis
 on: [push]
 
 jobs:
-  static-analysis:
-    name: PHP ${{ matrix.php }}
+  phpstan:
+    name: PHPStan — PHP ${{ matrix.php }}
 
     runs-on: ubuntu-latest
     strategy:
@@ -25,3 +25,26 @@ jobs:
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse --no-progress --no-interaction
+
+  psalm:
+    name: Psalm — PHP ${{ matrix.php }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.0']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install dependencies
+        run: composer install --no-progress --no-interaction
+
+      - name: Run Psalm
+        run: vendor/bin/psalm --output-format=github --no-progress

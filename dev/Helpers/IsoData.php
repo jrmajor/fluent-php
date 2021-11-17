@@ -8,12 +8,12 @@ use SimpleXMLElement;
 
 final class IsoData
 {
-    /** @var array<string, int> */
-    private static array $minorUnits;
+    /** @var ?array<string, int> */
+    private static ?array $minorUnits = null;
 
     public static function minorUnits(string $currency): int
     {
-        if (! isset(self::$minorUnits)) {
+        if (self::$minorUnits === null) {
             self::loadMinorUnits();
         }
 

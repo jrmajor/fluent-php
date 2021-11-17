@@ -21,6 +21,7 @@ final class ResolutionScope
         /** @var mixed[] */
         public array $arguments,
     ) {
+        /** @psalm-suppress PropertyTypeCoercion */
         $this->dirty = new WeakMap();
     }
 }

@@ -6,10 +6,13 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
+/**
+ * @psalm-import-type O from NumberFormatterTestCase
+ */
 final class PercentFormatterTest extends NumberFormatterTestCase
 {
     /**
-     * @param array<string, mixed> $options
+     * @param O $options
      */
     #[DataProvider('providePercentCases')]
     #[TestDox('it works for percent patterns')]
@@ -22,7 +25,7 @@ final class PercentFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, array<string, mixed>}>
+     * @return Generator<array{string, int|float, ?O}>
      */
     public function providePercentCases(): Generator
     {

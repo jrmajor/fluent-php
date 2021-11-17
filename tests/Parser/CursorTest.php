@@ -435,7 +435,7 @@ final class CursorTest extends TestCase
     {
         $cursor = $this->cursor('ac');
 
-        $callback = fn ($char) => $char === 'a' || $char === 'b';
+        $callback = fn (string $char): bool => $char === 'a' || $char === 'b';
 
         $this->assertSame('a', $cursor->takeChar($callback));
         $this->assertSame(1, $cursor->index());
@@ -451,6 +451,7 @@ final class CursorTest extends TestCase
 
     private function cursor(string $string): Cursor
     {
+        /** @psalm-suppress InternalClass */
         return new class ($string) extends Cursor {};
     }
 }

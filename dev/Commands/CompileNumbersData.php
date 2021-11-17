@@ -110,7 +110,7 @@ final class CompileNumbersData extends Command
             'symbols' => 'symbol set',
         ] as $key => $name) {
             $mostPopular = $this->escape((string) $this->mostPopular($key));
-            $default = $this->escape(LocaleDefaults::for($key));
+            $default = $this->escape((string) LocaleDefaults::for($key));
 
             if ($mostPopular !== $default) {
                 $output->writeln("Most popular {$name} is {$mostPopular}, but {$default} is used as a default.");

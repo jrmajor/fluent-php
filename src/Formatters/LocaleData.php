@@ -52,9 +52,12 @@ final class LocaleData
         $paths = [null, null];
 
         foreach ($files as $path) {
+            /** @psalm-suppress PossiblyFalseOperand */
             $fileLocale = strtolower(substr($path, strrpos($path, '/') + 1, -4));
 
-            if ($region !== null && $fileLocale === "{$language}-{$region}") {
+            /** @var non-empty-string $fileLocale */
+
+            if ($region !== null && ($fileLocale === "{$language}-{$region}")) {
                 $paths[1] = $path;
             } elseif ($fileLocale === $language) {
                 $paths[0] = $path;

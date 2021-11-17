@@ -314,7 +314,7 @@ final class FluentBundle
             return $argument;
         }
 
-        if (is_numeric($argument)) {
+        if (is_int($argument) || is_float($argument)) {
             return (new FluentNumber($argument))->setLocale($this->locale);
         }
 
@@ -428,7 +428,7 @@ final class FluentBundle
             return $output;
         }
 
-        if (is_numeric($output)) {
+        if (is_int($output) || is_float($output)) {
             return (new FluentNumber($output))->setLocale($this->locale);
         }
 
@@ -479,10 +479,9 @@ final class FluentBundle
 
         $value = $this->resolveExpression($argument, $scope);
 
-        return match (get_debug_type($value)) {
-            FluentNone::class => null,
-            /** @phpstan-ignore-next-line */
-            FluentNumber::class => $number ? $value : $value->value(),
+        return match (true) {
+            $value instanceof FluentNone => null,
+            $value instanceof FluentNumber => $number ? $value : $value->value(),
             default => $value,
         };
     }

@@ -12,7 +12,7 @@ abstract class TestCase extends BaseTestCase
     use NodeAssertions;
     use TranslationAssertions;
 
-    /** @readonly */
+    /** @psalm-suppress MissingConstructor */
     protected FluentBundle $bundle;
 
     protected function setUp(): void

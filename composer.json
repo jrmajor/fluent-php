@@ -33,14 +33,18 @@
     "require-dev": {
         "ext-json": "*",
         "ext-simplexml": "*",
+        "azjezz/psl": "^1.9",
         "jrmajor/cs": "^0.3.2",
         "nunomaduro/collision": "^5.10",
-        "phpstan/phpstan": "^0.12.99",
+        "php-standard-library/psalm-plugin": "^1.1",
+        "phpstan/phpstan": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "10.0.x-dev",
-        "symfony/var-dumper": "^5.3",
+        "psalm/plugin-phpunit": "^0.16.1",
+        "sebastian/diff": "5.0.x-dev as 4.0.4",
         "symfony/console": "^5.3",
-        "azjezz/psl": "^1.9",
-        "phpstan/phpstan-phpunit": "^0.12.22"
+        "symfony/var-dumper": "^5.3",
+        "vimeo/psalm": "^4.x-dev"
     },
     "autoload": {
         "psr-4": {

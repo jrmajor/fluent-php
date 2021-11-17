@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="dev"/>
+        <directory name="locales"/>
+        <directory name="tests"/>
+    </projectFiles>
+    <plugins>
+        <pluginClass class="Psl\Psalm\Plugin"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+    <issueHandlers>
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <directory name="locales"/>
+            </errorLevel>
+        </InternalMethod>
+        <MissingClosureParamType>
+            <errorLevel type="suppress">
+                <directory name="*"/>
+            </errorLevel>
+        </MissingClosureParamType>
+        <MissingClosureReturnType>
+            <errorLevel type="suppress">
+                <directory name="*"/>
+            </errorLevel>
+        </MissingClosureReturnType>
+        <MoreSpecificReturnType>
+            <errorLevel type="suppress">
+                <directory name="tests/Formatters/Number"/>
+                <file name="tests/TranslationAssertions.php"/>
+            </errorLevel>
+        </MoreSpecificReturnType>
+        <Trace>
+            <errorLevel type="error">
+                <directory name="*"/>
+            </errorLevel>
+        </Trace>
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <directory name="*"/>
+            </errorLevel>
+        </UnresolvableInclude>
+    </issueHandlers>
+</psalm>
