@@ -2,6 +2,7 @@
 /dev                   export-ignore
 /tests                 export-ignore
 /.editorconfig         export-ignore
+/.gitmodules           export-ignore
 /.php-cs-fixer.php     export-ignore
 /composer.lock         export-ignore
 /gen                   export-ignore

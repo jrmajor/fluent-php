@@ -1,2 +1,0 @@
-k = Value
-    .l = Foo

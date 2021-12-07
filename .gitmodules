@@ -1,0 +1,3 @@
+[submodule "fluent.js"]
+	path = tests/fluent.js
+	url = https://github.com/projectfluent/fluent.js
