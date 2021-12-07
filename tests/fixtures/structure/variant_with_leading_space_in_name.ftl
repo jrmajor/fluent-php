@@ -1,3 +1,0 @@
--term = { $sel ->
-        *[  one] Foo
-    }

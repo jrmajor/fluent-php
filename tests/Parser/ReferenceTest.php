@@ -48,7 +48,7 @@ final class ReferenceTest extends TestCase
      */
     public function provideReferenceCases(): Generator
     {
-        $files = Filesystem\read_directory(__DIR__ . '/../fixtures/reference');
+        $files = Filesystem\read_directory(__DIR__ . '/../fluent.js/fluent-syntax/test/fixtures_reference');
 
         $cases = [];
 

@@ -1,3 +1,0 @@
-key =
-    Foo { bar }
-    Baz
