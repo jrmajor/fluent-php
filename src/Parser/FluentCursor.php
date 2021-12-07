@@ -55,7 +55,7 @@ final class FluentCursor extends Cursor
 
     protected function isCharPatternContinuation(): bool
     {
-        return match($this->currentPeek()) {
+        return match ($this->currentPeek()) {
             null, '}', '.', '[', '*' => false,
             default => true,
         };

@@ -178,17 +178,19 @@ final class FluentParser
     {
         $spanStart = $cursor->index();
 
+        $level = 2;
         $content = '';
 
         while (true) {
             $i = -1;
 
-            while ($cursor->currentChar() === '#' && ($i < ($level ?? 2))) {
+            while ($cursor->currentChar() === '#' && ($i < $level)) {
                 $cursor->next();
 
                 $i++;
             }
 
+            /** @var int<0, 2> $level */
             $level = $i;
 
             if ($cursor->currentChar() !== "\n") {
@@ -199,13 +201,12 @@ final class FluentParser
                 }
             }
 
-            if ($cursor->nextLineIsComment($level)) {
-                $content .= $cursor->currentChar();
-
-                $cursor->next();
-            } else {
+            if (! $cursor->nextLineIsComment($level)) {
                 break;
             }
+
+            $content .= $cursor->currentChar();
+            $cursor->next();
         }
 
         return (match ($level) {
