@@ -55,15 +55,10 @@ final class FluentCursor extends Cursor
 
     protected function isCharPatternContinuation(): bool
     {
-        if ($this->currentPeek() === null) {
-            return false;
-        }
-
-        return ! in_array(
-            $this->currentPeek(),
-            ['}', '.', '[', '*'],
-            strict: true,
-        );
+        return match($this->currentPeek()) {
+            null, '}', '.', '[', '*' => false,
+            default => true,
+        };
     }
 
     public function isNumberStart(): bool
@@ -72,19 +67,15 @@ final class FluentCursor extends Cursor
             ? $this->peek()
             : $this->currentChar();
 
-        if ($char === null) {
-            $this->resetPeek();
+        $this->resetPeek();
 
+        if ($char === null) {
             return false;
         }
 
         $cc = mb_ord($char);
 
-        $isDigit = $cc >= 48 && $cc <= 57; // 0-9
-
-        $this->resetPeek();
-
-        return $isDigit;
+        return $cc >= 48 && $cc <= 57; // 0-9;
     }
 
     public function isVariantStart(): bool
@@ -95,15 +86,11 @@ final class FluentCursor extends Cursor
             $this->peek();
         }
 
-        if ($this->currentPeek() === '[') {
-            $this->resetPeek($currentPeekOffset);
-
-            return true;
-        }
+        $char = $this->currentPeek();
 
         $this->resetPeek($currentPeekOffset);
 
-        return false;
+        return $char === '[';
     }
 
     public function isAttributeStart(): bool
@@ -117,16 +104,12 @@ final class FluentCursor extends Cursor
             return false;
         }
 
-        $i = 0;
-
-        while ($i <= $level) {
+        for ($i = 0; $i <= $level; $i++) {
             if ($this->peek() !== '#') {
                 $this->resetPeek();
 
                 return false;
             }
-
-            $i++;
         }
 
         $charAfterHashes = $this->peek();
@@ -165,18 +148,18 @@ final class FluentCursor extends Cursor
 
     public function takeIdStart(): string
     {
-        if ($this->isIdentifierStart()) {
-            $idStart = $this->currentChar();
-
-            // If current char was null, charIsIdentifierStart would return false.
-            assert(is_string($idStart));
-
-            $this->next();
-
-            return $idStart;
+        if (! $this->isIdentifierStart()) {
+            throw new ParserException('E0004', ['range' => 'a-zA-Z']);
         }
 
-        throw new ParserException('E0004', ['range' => 'a-zA-Z']);
+        $idStart = $this->currentChar();
+
+        // If current char was null, charIsIdentifierStart would return false.
+        assert(is_string($idStart));
+
+        $this->next();
+
+        return $idStart;
     }
 
     public function takeIdChar(): ?string

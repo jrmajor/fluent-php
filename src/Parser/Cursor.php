@@ -218,7 +218,6 @@ abstract class Cursor
 
     protected function charAtOffsetIsCrLf(int $offset): bool
     {
-        return mb_substr($this->string, $offset, 1) === "\r"
-            && mb_substr($this->string, $offset + 1, 1) === "\n";
+        return mb_substr($this->string, $offset, 2) === "\r\n";
     }
 }

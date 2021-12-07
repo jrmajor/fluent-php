@@ -158,11 +158,7 @@ final class FluentParser
                 $error->getArguments(),
             ))->addSpan($errorIndex, $errorIndex);
 
-            $junk = new Junk(
-                $cursor->slice($entryStartPosition, $nextEntryStart),
-            );
-
-            return $junk
+            return (new Junk($cursor->slice($entryStartPosition, $nextEntryStart)))
                 ->addSpan($entryStartPosition, $nextEntryStart)
                 ->addAnnotation($annotation);
         }
@@ -170,19 +166,12 @@ final class FluentParser
 
     private function getEntry(FluentCursor $cursor): Entry
     {
-        if ($cursor->currentChar() === '#') {
-            return $this->getComment($cursor);
-        }
-
-        if ($cursor->currentChar() === '-') {
-            return $this->getTerm($cursor);
-        }
-
-        if ($cursor->isIdentifierStart()) {
-            return $this->getMessage($cursor);
-        }
-
-        throw new ParserException('E0002');
+        return match (true) {
+            $cursor->currentChar() === '#' => $this->getComment($cursor),
+            $cursor->currentChar() === '-' => $this->getTerm($cursor),
+            $cursor->isIdentifierStart() => $this->getMessage($cursor),
+            default => throw new ParserException('E0002'),
+        };
     }
 
     private function getComment(FluentCursor $cursor): BaseComment
@@ -319,11 +308,8 @@ final class FluentParser
 
         $cursor->expectChar('=');
 
-        $value = $this->maybeGetPattern($cursor);
-
-        if (! $value) {
-            throw new ParserException('E0012');
-        }
+        $value = $this->maybeGetPattern($cursor)
+            ?? throw new ParserException('E0012');
 
         return (new Attribute($key, $value))
             ->addSpan($spanStart, $cursor->index());
@@ -354,15 +340,11 @@ final class FluentParser
             $cursor->skipBlank();
         }
 
-        if (! count($variants)) {
-            throw new ParserException('E0011');
-        }
-
-        if (! $hasDefault) {
-            throw new ParserException('E0010');
-        }
-
-        return $variants;
+        return match (true) {
+            ! count($variants) => throw new ParserException('E0011'),
+            ! $hasDefault => throw new ParserException('E0010'),
+            default => $variants,
+        };
     }
 
     private function getVariant(FluentCursor $cursor, bool $hasDefault = false): Variant
@@ -411,14 +393,9 @@ final class FluentParser
 
         $cc = mb_ord($char);
 
-        if (
-            ($cc >= 48 && $cc <= 57) // 0-9
-            || $cc === 45 // -
-        ) {
-            return $this->getNumber($cursor);
-        }
-
-        return $this->getIdentifier($cursor);
+        return $cc >= 48 && $cc <= 57 || $cc === 45 // 0-9 or -
+            ? $this->getNumber($cursor)
+            : $this->getIdentifier($cursor);
     }
 
     /**
@@ -472,31 +449,6 @@ final class FluentParser
         }
 
         while (($char = $cursor->currentChar()) !== null) {
-            if ($char === "\n") {
-                $blankStart = $cursor->index();
-                $blankLines = $cursor->peekBlankBlock();
-
-                if ($cursor->isValueContinuation()) {
-                    $cursor->skipToPeek();
-
-                    $indent = $cursor->skipBlankInline();
-
-                    $commonIndentLength = ! is_null($commonIndentLength)
-                        ? min($commonIndentLength, mb_strlen($indent))
-                        : mb_strlen($indent);
-
-                    $elements[] = $this->getIndent($cursor, $blankLines . $indent, $blankStart);
-
-                    continue;
-                }
-
-                // The end condition for getPattern's while loop is a newline
-                // which is not followed by a valid pattern continuation.
-                $cursor->resetPeek();
-
-                break;
-            }
-
             if ($char === '{') {
                 $elements[] = $this->getPlaceable($cursor);
 
@@ -507,7 +459,32 @@ final class FluentParser
                 throw new ParserException('E0027');
             }
 
-            $elements[] = $this->getTextElement($cursor);
+            if ($char !== "\n") {
+                $elements[] = $this->getTextElement($cursor);
+
+                continue;
+            }
+
+            $blankStart = $cursor->index();
+            $blankLines = $cursor->peekBlankBlock();
+
+            if (! $cursor->isValueContinuation()) {
+                // The end condition for getPattern's while loop is a newline
+                // which is not followed by a valid pattern continuation.
+                $cursor->resetPeek();
+
+                break;
+            }
+
+            $cursor->skipToPeek();
+
+            $indent = $cursor->skipBlankInline();
+
+            $commonIndentLength = ! is_null($commonIndentLength)
+                ? min($commonIndentLength, mb_strlen($indent))
+                : mb_strlen($indent);
+
+            $elements[] = $this->getIndent($cursor, $blankLines . $indent, $blankStart);
         }
 
         $dedented = $this->dedent($elements, $commonIndentLength);
@@ -791,7 +768,7 @@ final class FluentParser
             $argument = $this->getCallArgument($cursor);
 
             if ($argument instanceof NamedArgument) {
-                if (in_array($argument->name->name, $argumentNames, strict: true)) {
+                if (in_array($argument->name->name, $argumentNames, true)) {
                     throw new ParserException('E0022');
                 }
 
@@ -877,12 +854,12 @@ final class FluentParser
         $value = '';
 
         if ($cursor->currentChar() === '-') {
-            $cursor->next();
+            $value .= '-';
 
-            $value .= '-' . $this->getDigits($cursor);
-        } else {
-            $value .= $this->getDigits($cursor);
+            $cursor->next();
         }
+
+        $value .= $this->getDigits($cursor);
 
         if ($cursor->currentChar() === '.') {
             $cursor->next();
@@ -918,11 +895,7 @@ final class FluentParser
         $value = '';
 
         while (($char = $cursor->takeChar(fn ($x) => $x !== '"' && $x !== "\n")) !== null) {
-            if ($char === '\\') {
-                $value .= $this->getEscapeSequence($cursor);
-            } else {
-                $value .= $char;
-            }
+            $value .= $char === '\\' ? $this->getEscapeSequence($cursor) : $char;
         }
 
         if ($cursor->currentChar() === "\n") {
@@ -955,22 +928,15 @@ final class FluentParser
         FluentCursor $cursor,
         string $u,
         int $digits,
-    ): string
-    {
+    ): string {
         $cursor->expectChar($u);
 
         $sequence = '';
 
         for ($i = 0; $i < $digits; $i++) {
-            $char = $cursor->takeHexDigit();
-
-            if ($char === null) {
-                throw new ParserException(
-                    'E0026', ['sequence' => '\\' . $u . $sequence . $cursor->currentChar()],
-                );
-            }
-
-            $sequence .= $char;
+            $sequence .= $cursor->takeHexDigit() ?? throw new ParserException('E0026', [
+                'sequence' => '\\' . $u . $sequence . $cursor->currentChar(),
+            ]);
         }
 
         return '\\' . $u . $sequence;

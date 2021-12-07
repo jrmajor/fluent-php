@@ -36,18 +36,18 @@ final class ParserException extends Exception
             'E0021' => 'Positional arguments must not follow named arguments',
             'E0022' => 'Named arguments must be unique',
             'E0024' => 'Cannot access variants of a message',
-            'E0025' => "Unknown escape sequence: \\{$arguments['char']}.",
-            'E0026' => "Invalid Unicode escape sequence: {$arguments['sequence']}.",
-            'E0027' => 'Unbalanced closing brace in TextElement.',
+            'E0025' => "Unknown escape sequence: \\{$arguments['char']}",
+            'E0026' => "Invalid Unicode escape sequence: {$arguments['sequence']}",
+            'E0027' => 'Unbalanced closing brace in TextElement',
             'E0028' => 'Expected an inline expression',
             'E0029' => 'Expected simple expression as selector',
         };
 
         if ($source !== null) {
-            $message .= " somewhere in \"{$source}\".";
+            $message .= " somewhere in \"{$source}\"";
         }
 
-        parent::__construct($message);
+        parent::__construct($message . '.');
     }
 
     public function getFluentErrorCode(): string
