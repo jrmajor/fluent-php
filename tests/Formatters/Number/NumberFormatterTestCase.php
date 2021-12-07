@@ -21,10 +21,12 @@ abstract class NumberFormatterTestCase extends TestCase
     ): void {
         $jsonOptions = json_encode($options);
 
+        /** @phpstan-ignore-next-line */ /** @psalm-suppress InvalidArgument */
+        $options = new Options(...$options);
+
         self::assertEqualsNodeOutput(
             "new Intl.NumberFormat('{$locale}', {$jsonOptions}).format({$number})",
-            /** @phpstan-ignore-next-line */
-            (new NumberFormatter($locale))->format($number, new Options(...$options)),
+            (new NumberFormatter($locale))->format($number, $options),
             "Failed asserting that formatting of {$number} for {$locale} with {$jsonOptions} is correct.",
         );
     }

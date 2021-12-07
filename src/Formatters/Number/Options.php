@@ -22,6 +22,7 @@ final class Options
         public ?string $currency = null,
         public string $currencyDisplay = 'symbol',
     ) {
+        /** @psalm-suppress DocblockTypeContradiction */
         if (! in_array($style, ['decimal', 'currency', 'percent'], true)) {
             throw new InvalidArgumentException('Allowed styles are decimal, currency and percent.');
         }
