@@ -20,7 +20,19 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
 
-      - name: Install dependencies
+      - name: Get Composer cache directory path
+        id: composer-cache-dir
+        run: |
+          echo "::set-output name=path::$(composer config cache-files-dir)"
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache-dir.outputs.path }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
         run: composer install --no-progress --no-interaction
 
       - name: Run PHPStan
@@ -43,7 +55,19 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
 
-      - name: Install dependencies
+      - name: Get Composer cache directory path
+        id: composer-cache-dir
+        run: |
+          echo "::set-output name=path::$(composer config cache-files-dir)"
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache-dir.outputs.path }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
         run: composer install --no-progress --no-interaction
 
       - name: Run Psalm
