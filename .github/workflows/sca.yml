@@ -5,41 +5,6 @@ on:
     branches-ignore: [master]
 
 jobs:
-  phpstan:
-    name: PHPStan — PHP ${{ matrix.php }}
-
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: ['8.0']
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-
-      - name: Get Composer cache directory path
-        id: composer-cache-dir
-        run: |
-          echo "::set-output name=path::$(composer config cache-files-dir)"
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache-dir.outputs.path }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
-      - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction
-
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --no-progress --no-interaction
-
   psalm:
     name: Psalm — PHP ${{ matrix.php }}
 
