@@ -30,12 +30,7 @@ final class StructureTest extends TestCase
 
         $resource = $this->parser->parse($ftl);
 
-        $this->assertNodeEquals(
-            $expectedAst,
-            $resource,
-            spans: false,
-            annotations: false,
-        );
+        $this->assertNodeEquals($expectedAst, $resource, true);
     }
 
     /**
@@ -59,9 +54,9 @@ final class StructureTest extends TestCase
             'json' => Type\string(),
         ]))->coerce($cases);
 
-        foreach ($cases as $name => $files) {
-            $ftl = Filesystem\read_file($files['ftl']);
-            $json = Filesystem\read_file($files['json']);
+        foreach ($cases as $name => ['ftl' => $ftl, 'json' => $json]) {
+            $ftl = Filesystem\read_file($ftl);
+            $json = Filesystem\read_file($json);
 
             yield $name => [$name, $ftl, $json];
         }

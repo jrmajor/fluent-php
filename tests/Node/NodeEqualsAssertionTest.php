@@ -54,10 +54,6 @@ final class NodeEqualsAssertionTest extends TestCase
             ],
         ];
 
-        $this->assertNodeEquals(
-            $expected, $identifier,
-            spans: true,
-            annotations: true,
-        );
+        $this->assertNodeEquals($expected, $identifier, true);
     }
 }
