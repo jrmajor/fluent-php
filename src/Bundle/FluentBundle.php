@@ -561,7 +561,6 @@ final class FluentBundle
             $number = new FluentNumber($number);
         }
 
-        /** @phpstan-ignore-next-line */
         return $number->setLocale($this->locale)->setOptions($options);
     }
 

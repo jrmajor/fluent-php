@@ -51,7 +51,7 @@ final class StringLiteralTest extends TestCase
     {
         $ast = (new FluentParser(true))->parseEntry($ftl);
 
-        /** @phpstan-ignore-next-line */ /** @psalm-suppress UndefinedPropertyFetch */
+        /** @psalm-suppress UndefinedPropertyFetch */
         $expr = $ast->value->elements[0]->expression;
 
         $parsed = Type\object(StringLiteralValue::class)->coerce($expr->parse());

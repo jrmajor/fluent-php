@@ -84,13 +84,11 @@ final class Options
 
         $this->minimumFractionDigits ??= match ($this->style) {
             'decimal', 'percent' => 0,
-            /** @phpstan-ignore-next-line */
             'currency' => $currency->minorUnits,
         };
 
         $this->maximumFractionDigits ??= match ($this->style) {
             'decimal' => max($this->minimumFractionDigits, 3),
-            /** @phpstan-ignore-next-line */
             'currency' => max($this->minimumFractionDigits, $currency->minorUnits),
             'percent' => max($this->minimumFractionDigits, 0),
         };
