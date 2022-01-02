@@ -10,6 +10,9 @@ use Major\Fluent\Formatters\Number\Locale\Currency;
  */
 final class Options
 {
+    /**
+     * @psalm-suppress DocblockTypeContradiction
+     */
     public function __construct(
         /** @var 'decimal'|'currency'|'percent' */
         public string $style = 'decimal',
