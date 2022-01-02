@@ -110,6 +110,6 @@ All resolver exceptions extend `ResolverException`. In strict mode they would be
 
 ```sh
 vendor/bin/phpunit --testdox  # Tests
-vendor/bin/phpstan analyse    # Static analysis
+vendor/bin/psalm              # Static analysis
 vendor/bin/php-cs-fixer fix   # Formatting
 ```
