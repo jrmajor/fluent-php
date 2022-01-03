@@ -30,7 +30,10 @@ final class NumbersLocaleCompiler
 
     public function make(): void
     {
-        $name = IntlLocale::getDisplayName($this->locale);
+        $name = Str\replace_every(
+            IntlLocale::getDisplayName($this->locale),
+            ['English (world)' => 'English (World)'],
+        );
 
         $compiled = "<?php\n\nreturn new Major\\Fluent\\Formatters\\Number\\Locale\\Locale('{$name}'";
 
