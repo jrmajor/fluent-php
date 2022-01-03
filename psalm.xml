@@ -42,10 +42,5 @@
                 <directory name="*"/>
             </errorLevel>
         </Trace>
-        <UnresolvableInclude>
-            <errorLevel type="suppress">
-                <directory name="*"/>
-            </errorLevel>
-        </UnresolvableInclude>
     </issueHandlers>
 </psalm>

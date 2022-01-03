@@ -3,7 +3,6 @@
 namespace Major\Fluent\Formatters;
 
 use InvalidArgumentException;
-use Major\Fluent\Exceptions\ShouldNotHappen;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 
@@ -14,30 +13,30 @@ final class LocaleData
 {
     private const PATH = __DIR__ . '/../../locales/';
 
+    /**
+     * @psalm-suppress UnresolvableInclude
+     */
     public static function loadNumbers(string $locale): Locale
     {
         [$language, $region] = self::getLangAndRegionPaths('numbers', $locale);
 
-        if ($region !== null) {
-            return require $region;
-        }
-
-        return require $language;
+        return require $region ?? $language;
     }
 
     /**
      * @return array<string, Currency>
+     *
+     * @psalm-suppress UnresolvableInclude
      */
     public static function loadCurrencies(string $locale): array
     {
-        $root = self::getRootPath('currencies');
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
-        if ($region === null) {
-            return array_merge(require $root, require $language);
-        }
-
-        return array_merge(require $root, require $language, require $region);
+        return array_merge(
+            require self::PATH . "currencies/root.php",
+            require $language,
+            $region !== null ? require $region : [],
+        );
     }
 
     /**
@@ -52,27 +51,20 @@ final class LocaleData
         $paths = [null, null];
 
         foreach ($files as $path) {
-            /** @psalm-suppress PossiblyFalseOperand */
-            $fileLocale = strtolower(substr($path, strrpos($path, '/') + 1, -4));
-
-            /** @var non-empty-string $fileLocale */
+            $fileLocale = self::fileLocale($path);
 
             if ($region !== null && ($fileLocale === "{$language}-{$region}")) {
                 $paths[1] = $path;
             } elseif ($fileLocale === $language) {
                 $paths[0] = $path;
             }
-
-            if ($paths[0] !== null && ($region === null && $paths[1] !== null)) {
-                return $paths;
-            }
         }
 
-        if ($paths[0] !== null) {
-            return $paths;
+        if ($paths[0] === null) {
+            throw new InvalidArgumentException("Unsupported locale: {$locale}.");
         }
 
-        throw new InvalidArgumentException("Unsupported locale: {$locale}.");
+        return $paths;
     }
 
     /**
@@ -86,21 +78,26 @@ final class LocaleData
     }
 
     /**
-     * @return string[]
+     * @return list<non-empty-string>
+     *
+     * @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType
      */
     private static function getFiles(string $type, string $language): array
     {
-        $files = glob(self::PATH . "{$type}/{$language}*.php");
-
-        if ($files === false) {
-            throw new ShouldNotHappen();
-        }
-
-        return $files;
+        /** @var list<non-empty-string> $files */
+        return glob(self::PATH . "{$type}/{$language}*.php");
     }
 
-    private static function getRootPath(string $type): string
+    /**
+     * @param non-empty-string $path
+     * @return non-empty-string
+     */
+    private static function fileLocale(string $path): string
     {
-        return self::PATH . "{$type}/root.php";
+        /** @var positive-int $slashPosition */
+        $slashPosition = strrpos($path, '/');
+
+        /** @var non-empty-string */
+        return strtolower(substr($path, $slashPosition + 1, -4));
     }
 }

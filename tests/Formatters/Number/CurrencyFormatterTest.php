@@ -147,7 +147,9 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
         yield from [
             'ar',
             'sw',
-            'en',
+            'en-US',
+            'en-GB',
+            'en-INVALID',
             'nl',
             'he',
             'km',
