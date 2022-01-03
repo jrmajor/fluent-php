@@ -1,0 +1,34 @@
+name: Integrity
+
+on:
+  push:
+    branches-ignore: [master]
+
+jobs:
+  integrity:
+    name: Integrity
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-interaction
+
+      - name: Install Yarn dependencies
+        run: yarn install
+
+      - name: Compile rules
+        run: |
+          php gen currencies
+          php gen numbers
+
+      - name: Check for uncommited changes
+        run: git add . && git diff --cached --exit-code
