@@ -2,7 +2,6 @@
 
 namespace Major\Fluent\Formatters;
 
-use InvalidArgumentException;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 
@@ -33,7 +32,7 @@ final class LocaleData
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
         return array_merge(
-            require self::PATH . "currencies/root.php",
+            require self::PATH . 'currencies/root.php',
             require $language,
             $region !== null ? require $region : [],
         );

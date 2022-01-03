@@ -2,8 +2,8 @@
 
 namespace Major\Fluent\Formatters\Number;
 
-use InvalidArgumentException;
 use Major\Fluent\Exceptions\ShouldNotHappen;
+use Major\Fluent\Formatters\InvalidArgumentException;
 use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
