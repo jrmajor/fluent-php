@@ -83,9 +83,7 @@ final class CompileNumbersData extends Command
             'currencyPatterns' => ['currency', 'Currency pattern'],
             'grouping' => ['grouping', 'Minimum grouping digits'],
             'symbols' => ['symbols', 'Symbol set'],
-        ] as $stat => $data) {
-            [$option, $title] = $data;
-
+        ] as $stat => [$option, $title]) {
             if (! $input->getOption('all') && ! $input->getOption($option)) {
                 continue;
             }
