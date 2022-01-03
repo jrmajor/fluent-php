@@ -1,6 +1,7 @@
 {
     "name": "jrmajor/fluent",
     "description": "Fluent localization system for PHP",
+    "license": "MIT",
     "keywords": [
         "translator",
         "translation",
@@ -17,14 +18,13 @@
         "ftl",
         "mozilla"
     ],
-    "homepage": "https://github.com/jrmajor/fluent-php",
-    "license": "MIT",
     "authors": [
         {
             "name": "Jeremiasz Major",
             "email": "jrh.mjr@gmail.com"
         }
     ],
+    "homepage": "https://github.com/jrmajor/fluent-php",
     "require": {
         "php": "~8.0.0 || ~8.1.0",
         "ext-intl": "*",
@@ -44,6 +44,8 @@
         "symfony/var-dumper": "^5.4",
         "vimeo/psalm": "^4.17"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Major\\Fluent\\": "src"
@@ -55,8 +57,6 @@
             "Major\\Fluent\\Tests\\": "tests"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true
