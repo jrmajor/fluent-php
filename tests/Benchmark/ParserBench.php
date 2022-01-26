@@ -17,6 +17,7 @@ final class ParserBench
     {
         $this->parser = new FluentParser(true);
 
+        // File obtained from https://hg.mozilla.org/l10n-central/pl/file/tip/browser/browser/preferences/preferences.ftl.
         $this->preferences = Filesystem\read_file(__DIR__ . '/preferences.ftl');
     }
 
