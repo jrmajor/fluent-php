@@ -11,7 +11,7 @@ final class FluentCursor extends Cursor
 {
     public function isIdentifierStart(): bool
     {
-        if (($char = $this->currentChar()) === null) {
+        if (null === $char = $this->currentChar()) {
             return false;
         }
 

@@ -51,7 +51,7 @@ final class FluentParser
         /** @var ?Comment */
         $lastComment = null;
 
-        while (($cursor->currentChar()) !== null) {
+        while ($cursor->currentChar() !== null) {
             $entry = $this->getEntryOrJunk($cursor);
 
             $blankLines = $cursor->skipBlankBlock();
@@ -184,7 +184,7 @@ final class FluentParser
         while (true) {
             $i = -1;
 
-            while ($cursor->currentChar() === '#' && ($i < $level)) {
+            while ($cursor->currentChar() === '#' && $i < $level) {
                 $cursor->next();
 
                 $i++;
@@ -196,7 +196,7 @@ final class FluentParser
             if ($cursor->currentChar() !== "\n") {
                 $cursor->expectChar(' ');
 
-                while (($char = $cursor->takeChar(fn ($x) => $x !== "\n")) !== null) {
+                while (null !== $char = $cursor->takeChar(fn ($x) => $x !== "\n")) {
                     $content .= $char;
                 }
             }
@@ -223,7 +223,6 @@ final class FluentParser
         $id = $this->getIdentifier($cursor);
 
         $cursor->skipBlankInline();
-
         $cursor->expectChar('=');
 
         $value = $this->maybeGetPattern($cursor);
@@ -247,7 +246,6 @@ final class FluentParser
         $id = $this->getIdentifier($cursor);
 
         $cursor->skipBlankInline();
-
         $cursor->expectChar('=');
 
         $value = $this->maybeGetPattern($cursor);
@@ -268,7 +266,7 @@ final class FluentParser
 
         $name = $cursor->takeIdStart();
 
-        while (($char = $cursor->takeIdChar()) !== null) {
+        while (null !== $char = $cursor->takeIdChar()) {
             $name .= $char;
         }
 
@@ -306,7 +304,6 @@ final class FluentParser
         $key = $this->getIdentifier($cursor);
 
         $cursor->skipBlankInline();
-
         $cursor->expectChar('=');
 
         $value = $this->maybeGetPattern($cursor)
@@ -337,7 +334,6 @@ final class FluentParser
             $variants[] = $variant;
 
             $cursor->expectLineEnd();
-
             $cursor->skipBlank();
         }
 
@@ -365,13 +361,11 @@ final class FluentParser
         }
 
         $cursor->expectChar('[');
-
         $cursor->skipBlank();
 
         $key = $this->getVariantKey($cursor);
 
         $cursor->skipBlank();
-
         $cursor->expectChar(']');
 
         $value = $this->maybeGetPattern($cursor);
@@ -439,7 +433,6 @@ final class FluentParser
             // A block pattern is a pattern which starts on a new line. Store and
             // measure the indent of this first line for the dedentation logic.
             $blankStart = $cursor->index();
-
             $firstIndent = $cursor->skipBlankInline();
 
             $elements[] = $this->getIndent($cursor, $firstIndent, $blankStart);
@@ -449,7 +442,7 @@ final class FluentParser
             $commonIndentLength = null;
         }
 
-        while (($char = $cursor->currentChar()) !== null) {
+        while (null !== $char = $cursor->currentChar()) {
             if ($char === '{') {
                 $elements[] = $this->getPlaceable($cursor);
 
@@ -481,7 +474,7 @@ final class FluentParser
 
             $indent = $cursor->skipBlankInline();
 
-            $commonIndentLength = ! is_null($commonIndentLength)
+            $commonIndentLength = $commonIndentLength !== null
                 ? min($commonIndentLength, mb_strlen($indent))
                 : mb_strlen($indent);
 
@@ -550,10 +543,8 @@ final class FluentParser
             if ($element instanceof Indent) {
                 // If the indent hasn't been merged into a preceding TextElement,
                 // convert it into a new TextElement.
-                $textElement = (new TextElement($element->value))
+                $element = (new TextElement($element->value))
                     ->addSpan($element->span->start, $element->span->end);
-
-                $element = $textElement;
             }
 
             $trimmed[] = $element;
@@ -579,7 +570,7 @@ final class FluentParser
 
         $buffer = '';
 
-        while (($char = $cursor->currentChar()) !== null) {
+        while (null !== $char = $cursor->currentChar()) {
             if ($char === '{' || $char === '}') {
                 return (new TextElement($buffer))
                     ->addSpan($spanStart, $cursor->index());
@@ -604,7 +595,6 @@ final class FluentParser
         $spanStart = $cursor->index();
 
         $cursor->expectChar('{');
-
         $cursor->skipBlank();
 
         $expression = $this->getExpression($cursor);
@@ -646,9 +636,7 @@ final class FluentParser
             }
 
             $cursor->next(2);
-
             $cursor->skipBlankInline();
-
             $cursor->expectLineEnd();
 
             $variants = $this->getVariants($cursor);
@@ -758,7 +746,6 @@ final class FluentParser
         $argumentNames = [];
 
         $cursor->expectChar('(');
-
         $cursor->skipBlank();
 
         while (true) {
@@ -786,7 +773,6 @@ final class FluentParser
 
             if ($cursor->currentChar() === ',') {
                 $cursor->next();
-
                 $cursor->skipBlank();
 
                 continue;
@@ -819,7 +805,6 @@ final class FluentParser
 
         if ($expression instanceof MessageReference && ! $expression->attribute) {
             $cursor->next();
-
             $cursor->skipBlank();
 
             $value = $this->getLiteral($cursor);
@@ -876,7 +861,7 @@ final class FluentParser
     {
         $number = '';
 
-        while (($char = $cursor->takeDigit()) !== null) {
+        while (null !== $char = $cursor->takeDigit()) {
             $number .= $char;
         }
 
@@ -895,7 +880,7 @@ final class FluentParser
 
         $value = '';
 
-        while (($char = $cursor->takeChar(fn ($x) => $x !== '"' && $x !== "\n")) !== null) {
+        while (null !== $char = $cursor->takeChar(fn ($x) => $x !== '"' && $x !== "\n")) {
             $value .= $char === '\\' ? $this->getEscapeSequence($cursor) : $char;
         }
 
