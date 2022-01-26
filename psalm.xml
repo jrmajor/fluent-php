@@ -33,7 +33,7 @@
         </MissingClosureReturnType>
         <MissingConstructor>
             <errorLevel type="suppress">
-                <directory name="tests/Benchmark"/>
+                <directory name="tests"/>
             </errorLevel>
         </MissingConstructor>
         <MoreSpecificReturnType>
