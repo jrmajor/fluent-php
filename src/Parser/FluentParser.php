@@ -158,7 +158,7 @@ final class FluentParser
                 $error->getArguments(),
             ))->addSpan($errorIndex, $errorIndex);
 
-            return (new Junk($cursor->slice($entryStartPosition, $nextEntryStart)))
+            return (new Junk($cursor->slice($entryStartPosition, $nextEntryStart - $entryStartPosition)))
                 ->addSpan($entryStartPosition, $nextEntryStart)
                 ->addAnnotation($annotation);
         }

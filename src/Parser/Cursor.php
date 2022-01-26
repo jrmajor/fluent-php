@@ -38,7 +38,7 @@ abstract class Cursor
             return "\n";
         }
 
-        $char = $this->slice($offset, $offset + 1);
+        $char = $this->slice($offset, 1);
 
         return mb_strlen($char) ? $char : null;
     }
@@ -92,11 +92,11 @@ abstract class Cursor
         $this->peekOffset = 0;
     }
 
-    public function slice(int $start, int $end): string
+    public function slice(int $start, int $length): string
     {
         return $start >= $this->index
-            ? mb_substr($this->stringFromIndex, $start - $this->index, $end - $start)
-            : mb_substr($this->string, $start, $end - $start);
+            ? mb_substr($this->stringFromIndex, $start - $this->index, $length)
+            : mb_substr($this->string, $start, $length);
     }
 
     public function peekBlankInline(): string
@@ -109,7 +109,7 @@ abstract class Cursor
 
         return $this->slice(
             $this->index + $start,
-            $this->index + $this->peekOffset,
+            $this->peekOffset - $start,
         );
     }
 
@@ -220,7 +220,7 @@ abstract class Cursor
 
     protected function charAtOffsetIsCrLf(int $offset): bool
     {
-        return $this->slice($offset, $offset + 2) === "\r\n";
+        return $this->slice($offset, 2) === "\r\n";
     }
 
     protected function setIndex(int $index): void

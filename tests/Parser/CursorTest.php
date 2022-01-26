@@ -200,11 +200,11 @@ final class CursorTest extends TestCase
     {
         $cursor = $this->cursor('🐙ab🐙cd');
 
-        $this->assertSame('b🐙c', $cursor->slice(2, 5));
+        $this->assertSame('b🐙c', $cursor->slice(2, 3));
 
         $cursor->next(5);
 
-        $this->assertSame('b🐙c', $cursor->slice(2, 5));
+        $this->assertSame('b🐙c', $cursor->slice(2, 3));
     }
 
     #[TestDox('it can peek blank inline')]
