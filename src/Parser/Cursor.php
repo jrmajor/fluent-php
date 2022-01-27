@@ -126,16 +126,18 @@ abstract class Cursor
 
             $this->peekBlankInline();
 
-            if ($this->currentPeek() === null) {
-                return $blank;
-            }
+            $currentPeek = $this->currentPeek();
 
-            if ($this->currentPeek() === "\n") {
+            if ($currentPeek === "\n") {
                 $blank .= "\n";
 
                 $this->peek();
 
                 continue;
+            }
+
+            if ($currentPeek === null) {
+                return $blank;
             }
 
             $this->resetPeek($lineStart);
@@ -155,8 +157,10 @@ abstract class Cursor
 
     public function peekBlank(): void
     {
-        while ($this->currentPeek() === ' ' || $this->currentPeek() === "\n") {
-            $this->peek();
+        $currentPeek = $this->currentPeek();
+
+        while ($currentPeek === ' ' || $currentPeek === "\n") {
+            $currentPeek = $this->peek();
         }
     }
 
@@ -180,13 +184,13 @@ abstract class Cursor
 
     public function expectLineEnd(): void
     {
-        if ($this->currentChar() === null) {
-            return;
-        }
-
         if ($this->currentChar() === "\n") {
             $this->next();
 
+            return;
+        }
+
+        if ($this->currentChar() === null) {
             return;
         }
 

@@ -74,7 +74,7 @@ final class FluentParser
             // we know that the Message or the Term parsed successfully.
             if (
                 $entry instanceof Comment
-                && ! mb_strlen($blankLines)
+                && $blankLines === ''
                 && $cursor->currentChar() !== null
             ) {
                 // Stash the comment and decide what to do with it in the next pass.
@@ -206,6 +206,7 @@ final class FluentParser
             }
 
             $content .= $cursor->currentChar();
+
             $cursor->next();
         }
 
@@ -380,9 +381,7 @@ final class FluentParser
 
     private function getVariantKey(FluentCursor $cursor): Identifier|NumberLiteral
     {
-        $char = $cursor->currentChar();
-
-        if ($char === null) {
+        if (null === $char = $cursor->currentChar()) {
             throw new ParserException('E0013');
         }
 
@@ -408,7 +407,7 @@ final class FluentParser
         if ($cursor->isValueStart()) {
             $cursor->skipToPeek();
 
-            return $this->getPattern($cursor, block: false);
+            return $this->getPattern($cursor, false);
         }
 
         $cursor->peekBlankBlock();
@@ -416,7 +415,7 @@ final class FluentParser
         if ($cursor->isValueContinuation()) {
             $cursor->skipToPeek();
 
-            return $this->getPattern($cursor, block: true);
+            return $this->getPattern($cursor, true);
         }
 
         return null;
@@ -437,7 +436,7 @@ final class FluentParser
 
             $elements[] = $this->getIndent($cursor, $firstIndent, $blankStart);
 
-            $commonIndentLength = mb_strlen($firstIndent);
+            $commonIndentLength = strlen($firstIndent);
         } else {
             $commonIndentLength = null;
         }
@@ -475,8 +474,8 @@ final class FluentParser
             $indent = $cursor->skipBlankInline();
 
             $commonIndentLength = $commonIndentLength !== null
-                ? min($commonIndentLength, mb_strlen($indent))
-                : mb_strlen($indent);
+                ? min($commonIndentLength, strlen($indent))
+                : strlen($indent);
 
             $elements[] = $this->getIndent($cursor, $blankLines . $indent, $blankStart);
         }
@@ -519,7 +518,7 @@ final class FluentParser
             if ($element instanceof Indent) {
                 $element->stripCommonIndent($commonIndent);
 
-                if (! mb_strlen($element->value)) {
+                if ($element->value === '') {
                     continue;
                 }
             }
@@ -556,7 +555,7 @@ final class FluentParser
         if ($lastElement instanceof TextElement) {
             $lastElement->value = rtrim($lastElement->value);
 
-            if (! mb_strlen($lastElement->value)) {
+            if ($lastElement->value === '') {
                 array_pop($trimmed);
             }
         }
@@ -865,7 +864,7 @@ final class FluentParser
             $number .= $char;
         }
 
-        if (! mb_strlen($number)) {
+        if ($number === '') {
             throw new ParserException('E0004', ['range' => '0-9']);
         }
 
