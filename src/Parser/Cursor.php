@@ -94,23 +94,22 @@ abstract class Cursor
             : mb_substr($this->string, $start, $length);
     }
 
-    public function peekBlankInline(): string
+    public function peekBlankInline(): void
     {
-        $start = $this->peekOffset;
+        $currentPeak = $this->currentPeek();
 
-        while ($this->currentPeek() === ' ') {
-            $this->peek();
+        while ($currentPeak === ' ') {
+            $currentPeak = $this->peek();
         }
-
-        return $this->slice(
-            $this->index + $start,
-            $this->peekOffset - $start,
-        );
     }
 
     public function skipBlankInline(): string
     {
-        $blank = $this->peekBlankInline();
+        $start = $this->peekOffset;
+
+        $this->peekBlankInline();
+
+        $blank = mb_substr($this->stringFromIndex, $start, $this->peekOffset - $start);
 
         $this->skipToPeek();
 

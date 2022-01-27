@@ -218,21 +218,21 @@ final class CursorTest extends TestCase
 
         $cursor->next();
 
-        $this->assertSame('   ', $cursor->peekBlankInline());
+        $cursor->peekBlankInline();
         $this->assertSame(1, $cursor->index());
         $this->assertSame(3, $cursor->peekOffset());
 
         $cursor->skipToPeek();
         $cursor->next();
 
-        $this->assertSame('     ', $cursor->peekBlankInline());
+        $cursor->peekBlankInline();
         $this->assertSame(5, $cursor->index());
         $this->assertSame(5, $cursor->peekOffset());
 
         $cursor->skipToPeek();
         $cursor->next();
 
-        $this->assertSame('    ', $cursor->peekBlankInline());
+        $cursor->peekBlankInline();
         $this->assertSame(12, $cursor->index());
         $this->assertSame(4, $cursor->peekOffset());
     }

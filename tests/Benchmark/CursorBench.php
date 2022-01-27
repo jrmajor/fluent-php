@@ -66,4 +66,36 @@ final class CursorBench
             }) ?? $this->cursor->next();
         }
     }
+
+    #[Revs(20), Iterations(10)]
+    public function benchPeekBlankInline(): void
+    {
+        $cursor = new FluentCursor("                    \n");
+
+        $cursor->peekBlankInline();
+    }
+
+    #[Revs(20), Iterations(10)]
+    public function benchSkipBlankInline(): void
+    {
+        $cursor = new FluentCursor("                    \n");
+
+        $cursor->skipBlankInline();
+    }
+
+    #[Revs(20), Iterations(10)]
+    public function benchPeekBlankBlock(): void
+    {
+        $cursor = new FluentCursor("     \r\n    \n    \n.");
+
+        $cursor->peekBlankBlock();
+    }
+
+    #[Revs(20), Iterations(10)]
+    public function benchSkipBlankBlock(): void
+    {
+        $cursor = new FluentCursor("     \r\n    \n    \n.");
+
+        $cursor->skipBlankBlock();
+    }
 }
