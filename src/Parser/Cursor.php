@@ -53,10 +53,7 @@ abstract class Cursor
         return $this->charAt($this->index + $this->peekOffset);
     }
 
-    /**
-     * @impure
-     */
-    public function next(int $chars = 1): ?string
+    public function next(int $chars = 1): void
     {
         $this->peekOffset = 0;
 
@@ -65,8 +62,6 @@ abstract class Cursor
 
             $this->incrementIndex($offset);
         }
-
-        return $this->currentChar();
     }
 
     public function peek(int $chars = 1): ?string

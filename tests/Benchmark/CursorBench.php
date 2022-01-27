@@ -22,8 +22,10 @@ final class CursorBench
     }
 
     #[Revs(20), Iterations(10)]
-    public function benchNext(): void
+    public function benchNextAndCurrentChar(): void
     {
-        while ($this->cursor->next() !== null);
+        while ($this->cursor->currentChar() !== null) {
+            $this->cursor->next();
+        }
     }
 }

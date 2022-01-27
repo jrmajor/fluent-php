@@ -136,7 +136,8 @@ final class FluentCursor extends Cursor
                 continue;
             }
 
-            $char = $this->next();
+            $this->next();
+            $char = $this->currentChar();
 
             if ($this->isIdentifierStart() || $char === '-' || $char === '#') {
                 break;
