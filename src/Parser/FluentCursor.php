@@ -63,11 +63,13 @@ final class FluentCursor extends Cursor
 
     public function isNumberStart(): bool
     {
-        $char = $this->currentChar() === '-'
-            ? $this->peek()
-            : $this->currentChar();
+        $char = $this->currentChar();
 
-        $this->resetPeek();
+        if ($char === '-') {
+            $char = $this->peek();
+
+            $this->resetPeek();
+        }
 
         if ($char === null) {
             return false;
@@ -91,11 +93,6 @@ final class FluentCursor extends Cursor
         $this->resetPeek($currentPeekOffset);
 
         return $char === '[';
-    }
-
-    public function isAttributeStart(): bool
-    {
-        return $this->currentPeek() === '.';
     }
 
     public function nextLineIsComment(int $level): bool
@@ -151,10 +148,8 @@ final class FluentCursor extends Cursor
             throw new ParserException('E0004', ['range' => 'a-zA-Z']);
         }
 
+        /** @var string $idStart If current char was null, isIdentifierStart would return false. */
         $idStart = $this->currentChar();
-
-        // If current char was null, isIdentifierStart would return false.
-        assert(is_string($idStart));
 
         $this->next();
 

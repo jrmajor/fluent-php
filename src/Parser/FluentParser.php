@@ -285,7 +285,7 @@ final class FluentParser
 
         $cursor->peekBlank();
 
-        while ($cursor->isAttributeStart()) {
+        while ($cursor->currentPeek() === '.') {
             $cursor->skipToPeek();
 
             $attributes[] = $this->getAttribute($cursor);
