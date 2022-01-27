@@ -32,11 +32,11 @@ abstract class Cursor
         return $this->peekOffset;
     }
 
-    protected function charAt(int $offset): ?string
+    private function charFromIndex(int $offset = 0): ?string
     {
-        $char = $this->slice($offset);
+        $char = mb_substr($this->stringFromIndex, $offset, 1);
 
-        if ($char === "\r" && $this->slice($offset + 1) === "\n") {
+        if ($char === "\r" && mb_substr($this->stringFromIndex, $offset + 1, 1) === "\n") {
             return "\n";
         }
 
@@ -45,18 +45,12 @@ abstract class Cursor
 
     public function currentChar(): ?string
     {
-        $char = mb_substr($this->stringFromIndex, 0, 1);
-
-        if ($char === "\r" && mb_substr($this->stringFromIndex, 1, 1) === "\n") {
-            return "\n";
-        }
-
-        return $char !== '' ? $char : null;
+        return $this->charFromIndex();
     }
 
     public function currentPeek(): ?string
     {
-        return $this->charAt($this->index + $this->peekOffset);
+        return $this->charFromIndex($this->peekOffset);
     }
 
     public function next(int $chars = 1): void
