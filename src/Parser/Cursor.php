@@ -200,17 +200,13 @@ abstract class Cursor
     {
         $char = $this->currentChar();
 
-        if ($char === null) {
+        if ($char === null || ! $callback($char)) {
             return null;
         }
 
-        if ($callback($char)) {
-            $this->next();
+        $this->next();
 
-            return $char;
-        }
-
-        return null;
+        return $char;
     }
 
     protected function charAtOffsetIsCrLf(int $offset): bool
