@@ -212,11 +212,6 @@ abstract class Cursor
         return $char;
     }
 
-    protected function charAtOffsetIsCrLf(int $offset): bool
-    {
-        return $this->slice($offset, 2) === "\r\n";
-    }
-
     protected function setIndex(int $index): void
     {
         $this->index = $index;
