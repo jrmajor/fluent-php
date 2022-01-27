@@ -45,7 +45,13 @@ abstract class Cursor
 
     public function currentChar(): ?string
     {
-        return $this->charAt($this->index);
+        $char = mb_substr($this->stringFromIndex, 0, 1);
+
+        if ($char === "\r" && mb_substr($this->stringFromIndex, 1, 1) === "\n") {
+            return "\n";
+        }
+
+        return $char !== '' ? $char : null;
     }
 
     public function currentPeek(): ?string
