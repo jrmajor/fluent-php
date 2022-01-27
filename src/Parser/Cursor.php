@@ -58,18 +58,18 @@ abstract class Cursor
         $this->peekOffset = 0;
 
         for ($i = 0; $i < $chars; $i++) {
-            $offset = $this->charAtOffsetIsCrLf($this->index) ? 2 : 1;
+            $isClRf = str_starts_with($this->stringFromIndex, "\r\n");
 
-            $this->incrementIndex($offset);
+            $this->incrementIndex($isClRf ? 2 : 1);
         }
     }
 
     public function peek(int $chars = 1): ?string
     {
         for ($i = 0; $i < $chars; $i++) {
-            $peekIndex = $this->index + $this->peekOffset;
+            $currentPeek = mb_substr($this->stringFromIndex, $this->peekOffset, 2);
 
-            $this->peekOffset += $this->charAtOffsetIsCrLf($peekIndex) ? 2 : 1;
+            $this->peekOffset += $currentPeek === "\r\n" ? 2 : 1;
         }
 
         return $this->currentPeek();
