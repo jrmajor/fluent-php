@@ -34,13 +34,13 @@ abstract class Cursor
 
     protected function charAt(int $offset): ?string
     {
-        if ($this->charAtOffsetIsCrLf($offset)) {
+        $char = $this->slice($offset);
+
+        if ($char === "\r" && $this->slice($offset + 1) === "\n") {
             return "\n";
         }
 
-        $char = $this->slice($offset, 1);
-
-        return mb_strlen($char) ? $char : null;
+        return $char !== '' ? $char : null;
     }
 
     public function currentChar(): ?string
@@ -92,7 +92,7 @@ abstract class Cursor
         $this->peekOffset = 0;
     }
 
-    public function slice(int $start, int $length): string
+    public function slice(int $start, int $length = 1): string
     {
         return $start >= $this->index
             ? mb_substr($this->stringFromIndex, $start - $this->index, $length)
