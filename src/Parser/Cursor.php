@@ -14,9 +14,13 @@ abstract class Cursor
 
     protected int $peekOffset = 0;
 
+    private string $stringFromIndex;
+
     public function __construct(
-        protected string $string,
-    ) { }
+        private string $string,
+    ) {
+        $this->stringFromIndex = $string;
+    }
 
     public function index(): int
     {
@@ -28,53 +32,44 @@ abstract class Cursor
         return $this->peekOffset;
     }
 
-    protected function charAt(int $offset): ?string
+    private function charFromIndex(int $offset = 0): ?string
     {
-        if ($this->charAtOffsetIsCrLf($offset)) {
+        $char = mb_substr($this->stringFromIndex, $offset, 1);
+
+        if ($char === "\r" && mb_substr($this->stringFromIndex, $offset + 1, 1) === "\n") {
             return "\n";
         }
 
-        $char = mb_substr($this->string, $offset, 1);
-
-        return mb_strlen($char) ? $char : null;
+        return $char !== '' ? $char : null;
     }
 
     public function currentChar(): ?string
     {
-        return $this->charAt($this->index);
+        return $this->charFromIndex();
     }
 
     public function currentPeek(): ?string
     {
-        return $this->charAt($this->index + $this->peekOffset);
+        return $this->charFromIndex($this->peekOffset);
     }
 
-    /**
-     * @impure
-     */
-    public function next(int $chars = 1): ?string
+    public function next(int $chars = 1): void
     {
         $this->peekOffset = 0;
 
         for ($i = 0; $i < $chars; $i++) {
-            if ($this->charAtOffsetIsCrLf($this->index)) {
-                $this->index++;
-            }
+            $isClRf = str_starts_with($this->stringFromIndex, "\r\n");
 
-            $this->index++;
+            $this->incrementIndex($isClRf ? 2 : 1);
         }
-
-        return $this->currentChar();
     }
 
     public function peek(int $chars = 1): ?string
     {
         for ($i = 0; $i < $chars; $i++) {
-            if ($this->charAtOffsetIsCrLf($this->index + $this->peekOffset)) {
-                $this->peekOffset++;
-            }
+            $currentPeek = mb_substr($this->stringFromIndex, $this->peekOffset, 2);
 
-            $this->peekOffset++;
+            $this->peekOffset += $currentPeek === "\r\n" ? 2 : 1;
         }
 
         return $this->currentPeek();
@@ -87,33 +82,34 @@ abstract class Cursor
 
     public function skipToPeek(): void
     {
-        $this->index += $this->peekOffset;
+        $this->incrementIndex($this->peekOffset);
 
         $this->peekOffset = 0;
     }
 
-    public function slice(int $start, int $end): string
+    public function slice(int $start, int $length = 1): string
     {
-        return mb_substr($this->string, $start, $end - $start);
+        return $start >= $this->index
+            ? mb_substr($this->stringFromIndex, $start - $this->index, $length)
+            : mb_substr($this->string, $start, $length);
     }
 
-    public function peekBlankInline(): string
+    public function peekBlankInline(): void
     {
-        $start = $this->index + $this->peekOffset;
+        $currentPeak = $this->currentPeek();
 
-        while ($this->currentPeek() === ' ') {
-            $this->peek();
+        while ($currentPeak === ' ') {
+            $currentPeak = $this->peek();
         }
-
-        return mb_substr(
-            $this->string, $start,
-            $this->index + $this->peekOffset - $start,
-        );
     }
 
     public function skipBlankInline(): string
     {
-        $blank = $this->peekBlankInline();
+        $start = $this->peekOffset;
+
+        $this->peekBlankInline();
+
+        $blank = mb_substr($this->stringFromIndex, $start, $this->peekOffset - $start);
 
         $this->skipToPeek();
 
@@ -129,16 +125,18 @@ abstract class Cursor
 
             $this->peekBlankInline();
 
-            if ($this->currentPeek() === null) {
-                return $blank;
-            }
+            $currentPeek = $this->currentPeek();
 
-            if ($this->currentPeek() === "\n") {
+            if ($currentPeek === "\n") {
                 $blank .= "\n";
 
                 $this->peek();
 
                 continue;
+            }
+
+            if ($currentPeek === null) {
+                return $blank;
             }
 
             $this->resetPeek($lineStart);
@@ -158,8 +156,10 @@ abstract class Cursor
 
     public function peekBlank(): void
     {
-        while ($this->currentPeek() === ' ' || $this->currentPeek() === "\n") {
-            $this->peek();
+        $currentPeek = $this->currentPeek();
+
+        while ($currentPeek === ' ' || $currentPeek === "\n") {
+            $currentPeek = $this->peek();
         }
     }
 
@@ -183,13 +183,13 @@ abstract class Cursor
 
     public function expectLineEnd(): void
     {
-        if ($this->currentChar() === null) {
-            return;
-        }
-
         if ($this->currentChar() === "\n") {
             $this->next();
 
+            return;
+        }
+
+        if ($this->currentChar() === null) {
             return;
         }
 
@@ -203,21 +203,26 @@ abstract class Cursor
     {
         $char = $this->currentChar();
 
-        if ($char === null) {
+        if ($char === null || ! $callback($char)) {
             return null;
         }
 
-        if ($callback($char)) {
-            $this->next();
+        $this->next();
 
-            return $char;
-        }
-
-        return null;
+        return $char;
     }
 
-    protected function charAtOffsetIsCrLf(int $offset): bool
+    protected function setIndex(int $index): void
     {
-        return mb_substr($this->string, $offset, 2) === "\r\n";
+        $this->index = $index;
+
+        $this->stringFromIndex = mb_substr($this->string, $index);
+    }
+
+    protected function incrementIndex(int $offset = 1): void
+    {
+        $this->index += $offset;
+
+        $this->stringFromIndex = mb_substr($this->stringFromIndex, $offset);
     }
 }

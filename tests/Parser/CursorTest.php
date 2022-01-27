@@ -18,19 +18,19 @@ final class CursorTest extends TestCase
         $this->assertSame('a', $cursor->currentChar());
         $this->assertSame(0, $cursor->index());
 
-        $this->assertSame('c', $cursor->next(2));
+        $cursor->next(2);
         $this->assertSame('c', $cursor->currentChar());
         $this->assertSame(2, $cursor->index());
 
-        $this->assertSame('🐠', $cursor->next());
+        $cursor->next();
         $this->assertSame('🐠', $cursor->currentChar());
         $this->assertSame(3, $cursor->index());
 
-        $this->assertSame('d', $cursor->next());
+        $cursor->next();
         $this->assertSame('d', $cursor->currentChar());
         $this->assertSame(4, $cursor->index());
 
-        $this->assertNull($cursor->next());
+        $cursor->next();
         $this->assertNull($cursor->currentChar());
         $this->assertSame(5, $cursor->index());
     }
@@ -69,7 +69,8 @@ final class CursorTest extends TestCase
         $this->assertSame(1, $cursor->peekOffset());
         $this->assertSame(0, $cursor->index());
 
-        $this->assertSame('b', $cursor->next());
+        $cursor->next();
+        $this->assertSame('b', $cursor->currentChar());
         $this->assertSame(0, $cursor->peekOffset());
         $this->assertSame(1, $cursor->index());
 
@@ -77,7 +78,8 @@ final class CursorTest extends TestCase
         $this->assertSame(1, $cursor->peekOffset());
         $this->assertSame(1, $cursor->index());
 
-        $this->assertSame('🦀', $cursor->next());
+        $cursor->next();
+        $this->assertSame('🦀', $cursor->currentChar());
         $this->assertSame(0, $cursor->peekOffset());
         $this->assertSame(2, $cursor->index());
         $this->assertSame('🦀', $cursor->currentChar());
@@ -87,7 +89,8 @@ final class CursorTest extends TestCase
         $this->assertSame(1, $cursor->peekOffset());
         $this->assertSame(2, $cursor->index());
 
-        $this->assertSame('d', $cursor->next());
+        $cursor->next();
+        $this->assertSame('d', $cursor->currentChar());
         $this->assertSame(0, $cursor->peekOffset());
         $this->assertSame(3, $cursor->index());
         $this->assertSame('d', $cursor->currentChar());
@@ -103,7 +106,8 @@ final class CursorTest extends TestCase
         $this->assertSame(2, $cursor->peekOffset());
         $this->assertSame(3, $cursor->index());
 
-        $this->assertNull($cursor->next());
+        $cursor->next();
+        $this->assertNull($cursor->currentChar());
         $this->assertSame(0, $cursor->peekOffset());
         $this->assertSame(4, $cursor->index());
     }
@@ -183,7 +187,7 @@ final class CursorTest extends TestCase
 
         $this->assertSame('a', $cursor->currentChar());
 
-        $this->assertSame("\n", $cursor->next());
+        $cursor->next();
         $this->assertSame("\n", $cursor->currentChar());
 
         $cursor->peek(2);
@@ -200,7 +204,11 @@ final class CursorTest extends TestCase
     {
         $cursor = $this->cursor('🐙ab🐙cd');
 
-        $this->assertSame('b🐙c', $cursor->slice(2, 5));
+        $this->assertSame('b🐙c', $cursor->slice(2, 3));
+
+        $cursor->next(5);
+
+        $this->assertSame('b🐙c', $cursor->slice(2, 3));
     }
 
     #[TestDox('it can peek blank inline')]
@@ -210,21 +218,21 @@ final class CursorTest extends TestCase
 
         $cursor->next();
 
-        $this->assertSame('   ', $cursor->peekBlankInline());
+        $cursor->peekBlankInline();
         $this->assertSame(1, $cursor->index());
         $this->assertSame(3, $cursor->peekOffset());
 
         $cursor->skipToPeek();
         $cursor->next();
 
-        $this->assertSame('     ', $cursor->peekBlankInline());
+        $cursor->peekBlankInline();
         $this->assertSame(5, $cursor->index());
         $this->assertSame(5, $cursor->peekOffset());
 
         $cursor->skipToPeek();
         $cursor->next();
 
-        $this->assertSame('    ', $cursor->peekBlankInline());
+        $cursor->peekBlankInline();
         $this->assertSame(12, $cursor->index());
         $this->assertSame(4, $cursor->peekOffset());
     }
