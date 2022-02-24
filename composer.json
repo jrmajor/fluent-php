@@ -43,7 +43,7 @@
         "sebastian/diff": "5.0.x-dev as 4.0.4",
         "symfony/console": "^5.4",
         "symfony/var-dumper": "^5.4",
-        "vimeo/psalm": "^4.17"
+        "vimeo/psalm": "^4.21"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
