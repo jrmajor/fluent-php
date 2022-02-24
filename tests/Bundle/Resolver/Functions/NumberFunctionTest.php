@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
 use Major\Fluent\Bundle\FluentBundle;
+use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
 
@@ -50,5 +51,13 @@ class NumberFunctionTest extends TestCase
     {
         $this->assertTranslation('1.00', 'zeroes', [], $this->us);
         $this->assertTranslation('1,00', 'zeroes', [], $this->pl);
+    }
+
+    #[TestDox('it accepts partially formatted numbers')]
+    public function testPartiallyFormatted(): void
+    {
+        $this->assertTranslation('12345.0', 'option', [
+            'arg' => (new FluentNumber(12345))->setOptions(['useGrouping' => false]),
+        ], $this->us);
     }
 }
