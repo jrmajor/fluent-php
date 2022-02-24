@@ -195,7 +195,7 @@ return [
     'RON' => new C('RON', 'Rumıniya Leyi', narrow: 'ley', plurals: ['one' => 'Rumıniya leyi', 'other' => 'Rumıniya leyi']),
     'RSD' => new C('RSD', 'Serbiya Dinarı', plurals: ['one' => 'Serbiya dinarı', 'other' => 'Serbiya dinarı']),
     'RUB' => new C('RUB', 'Rusiya Rublu', narrow: '₽', plurals: ['one' => 'Rusiya rublu', 'other' => 'Rusiya rublu']),
-    'RUR' => new C('RUR', 'Rusiya Rublu (1991–1998)', narrow: 'р.', plurals: ['one' => 'Rusiya rublu (1991–1998)', 'other' => 'Rusiya rublu (1991–1998)']),
+    'RUR' => new C('RUR', 'Rusiya Rublu (1991–1998)', plurals: ['one' => 'Rusiya rublu (1991–1998)', 'other' => 'Rusiya rublu (1991–1998)']),
     'RWF' => new C('RWF', 'Ruanda Frankı', narrow: 'RF', plurals: ['one' => 'Ruanda frankı', 'other' => 'Ruanda frankı'], minorUnits: 0),
     'SAR' => new C('SAR', 'Səudiyyə Riyalı', plurals: ['one' => 'Səudiyyə riyalı', 'other' => 'Səudiyyə riyalı']),
     'SBD' => new C('SBD', 'Solomon Adaları Dolları', narrow: '$', plurals: ['one' => 'Solomon Adaları dolları', 'other' => 'Solomon Adaları dolları']),

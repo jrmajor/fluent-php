@@ -32,7 +32,7 @@ final class LocaleData
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
         return array_merge(
-            require self::PATH . 'currencies/root.php',
+            require self::PATH . 'currencies/und.php',
             require $language,
             $region !== null ? require $region : [],
         );

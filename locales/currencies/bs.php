@@ -213,7 +213,7 @@ return [
     'RON' => new C('RON', 'Rumunski lej', narrow: 'lei', plurals: ['one' => 'rumunski lej', 'few' => 'rumunska leja', 'other' => 'rumunskih leja']),
     'RSD' => new C('RSD', 'Srpski dinar', 'din.', plurals: ['one' => 'srpski dinar', 'few' => 'srpska dinara', 'other' => 'srpskih dinara']),
     'RUB' => new C('RUB', 'Ruska rublja', narrow: '₽', plurals: ['one' => 'ruska rublja', 'few' => 'ruske rublje', 'other' => 'ruskih rubalja']),
-    'RUR' => new C('RUR', 'Ruska rublja (1991–1998)', narrow: 'р.', plurals: ['one' => 'ruska rublja (1991–1998)', 'few' => 'ruske rublje (1991–1998)', 'other' => 'ruskih rublji (1991–1998)']),
+    'RUR' => new C('RUR', 'Ruska rublja (1991–1998)', plurals: ['one' => 'ruska rublja (1991–1998)', 'few' => 'ruske rublje (1991–1998)', 'other' => 'ruskih rublji (1991–1998)']),
     'RWF' => new C('RWF', 'Ruandski franak', narrow: 'RF', plurals: ['one' => 'ruandski franak', 'few' => 'ruandska franka', 'other' => 'ruandskih franaka'], minorUnits: 0),
     'SAR' => new C('SAR', 'Saudijski rijal', plurals: ['one' => 'saudijski rijal', 'few' => 'saudijska rijala', 'other' => 'saudijskih rijala']),
     'SBD' => new C('SBD', 'Solomonski dolar', narrow: '$', plurals: ['one' => 'solomonski dolar', 'few' => 'solomonska dolara', 'other' => 'solomonskih dolara']),

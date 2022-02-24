@@ -31,7 +31,7 @@ final class LocaleFiles
             return Vec\values(Vec\filter($c, fn (string $region) => $region !== $lang));
         });
 
-        unset($files['root']);
+        unset($files['und']);
 
         return $files;
     }

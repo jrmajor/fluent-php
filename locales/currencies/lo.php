@@ -209,7 +209,7 @@ return [
     'RON' => new C('RON', 'ໂຣ​ມາ​ນຽນ ເລ​ອູ', narrow: 'lei', plurals: ['other' => 'ໂຣ​ມາ​ນຽນ ເລ​ອູ']),
     'RSD' => new C('RSD', 'ເຊີ​ບຽນ ດິ​ນາ', plurals: ['other' => 'ເຊີ​ບຽນ ດິ​ນາ']),
     'RUB' => new C('RUB', 'ຣັສ​ຊຽນ ຣູ​ເບິນ', narrow: '₽', plurals: ['other' => 'ຣັສ​ຊຽນ ຣູ​ເບິນ']),
-    'RUR' => new C('RUR', 'ຣູໂບ ຣັດເຊຍ (1991–1998)', narrow: 'р.'),
+    'RUR' => new C('RUR', 'ຣູໂບ ຣັດເຊຍ (1991–1998)'),
     'RWF' => new C('RWF', 'ຣະ​ວັນ​ດັນ ຟຣັງ', narrow: 'RF', plurals: ['other' => 'ຣະ​ວັນ​ດັນ ຟຣັງ'], minorUnits: 0),
     'SAR' => new C('SAR', 'ຊາ​ອູ​ດິ ຣິ​ຢອນ', plurals: ['other' => 'ຊາ​ອູ​ດິ ຣິ​ຢອນ']),
     'SBD' => new C('SBD', 'ໂຊ​ໂລມອນ ໄອ​ແລນ ໂດ​ລ່າ', narrow: '$', plurals: ['other' => 'ໂຊ​ໂລມອນ ໄອ​ແລນ ໂດ​ລ່າ']),

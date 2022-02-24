@@ -89,7 +89,7 @@ return [
     'LBP' => new C('LBP', 'Pound ng Lebanon', narrow: 'L£', plurals: ['one' => 'pound ng Lebanon', 'other' => 'pounds ng Lebanon']),
     'LKR' => new C('LKR', 'Sri Lankan Rupee', narrow: 'Rs', plurals: ['one' => 'Sri Lankan rupee', 'other' => 'Sri Lankan rupees']),
     'LRD' => new C('LRD', 'Dolyar ng Liberia', narrow: '$', plurals: ['one' => 'dolyar ng Liberia', 'other' => 'dolyares ng Liberia']),
-    'LSL' => new C('LSL', 'Lesotho Loti'),
+    'LSL' => new C('LSL', 'Lesotho Loti', plurals: ['one' => 'Lesotho loti', 'other' => 'Lesotho lotis']),
     'LTL' => new C('LTL', 'Lithuanian Litas', narrow: 'Lt', plurals: ['one' => 'Lithuanian litas', 'other' => 'Lithuanian litai']),
     'LVL' => new C('LVL', 'Latvian Lats', narrow: 'Ls', plurals: ['one' => 'Latvian lats', 'other' => 'Latvian lati']),
     'LYD' => new C('LYD', 'Libyan Dinar', plurals: ['one' => 'Libyan dinar', 'other' => 'Libyan dinars'], minorUnits: 3),

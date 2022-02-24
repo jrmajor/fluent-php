@@ -88,7 +88,7 @@ return [
     'LBP' => new C('LBP', 'لبنانی پونڈ', narrow: 'L£', plurals: ['one' => 'لبنانی پونڈ', 'other' => 'لبنانی پونڈ']),
     'LKR' => new C('LKR', 'سری لنکائی روپیہ', narrow: 'Rs', plurals: ['one' => 'سری لنکائی روپیہ', 'other' => 'سری لنکائی روپیہ']),
     'LRD' => new C('LRD', 'لائبریائی ڈالر', narrow: '$', plurals: ['one' => 'لائبریائی ڈالر', 'other' => 'لائبریائی ڈالر']),
-    'LSL' => new C('LSL', 'لیسوتھو لوٹی'),
+    'LSL' => new C('LSL', 'لیسوتھو لوتی', plurals: ['one' => 'لیسوتھو لوتی', 'other' => 'لیسوتھو لوتی']),
     'LTL' => new C('LTL', 'لیتھوینیائی لیٹاس', narrow: 'Lt', plurals: ['one' => 'لیتھوینیائی لیٹاس', 'other' => 'لیتھوینیائی لیٹاس']),
     'LVL' => new C('LVL', 'لاتویائی لیٹس', narrow: 'Ls', plurals: ['one' => 'لاتویائی لیٹس', 'other' => 'لاتویائی لیٹس']),
     'LYD' => new C('LYD', 'لیبیائی دینار', plurals: ['one' => 'لیبیائی دینار', 'other' => 'لیبیائی دینار'], minorUnits: 3),

@@ -151,7 +151,7 @@ return [
     'LBP' => new C('LBP', 'Lübnan Lirası', narrow: 'L£', plurals: ['one' => 'Lübnan lirası', 'other' => 'Lübnan lirası']),
     'LKR' => new C('LKR', 'Sri Lanka Rupisi', narrow: 'Rs', plurals: ['one' => 'Sri Lanka rupisi', 'other' => 'Sri Lanka rupisi']),
     'LRD' => new C('LRD', 'Liberya Doları', narrow: '$', plurals: ['one' => 'Liberya doları', 'other' => 'Liberya doları']),
-    'LSL' => new C('LSL', 'Lesotho Lotisi'),
+    'LSL' => new C('LSL', 'Lesotho Lotisi', plurals: ['one' => 'Lesotho lotisi', 'other' => 'Lesotho lotisi']),
     'LTL' => new C('LTL', 'Litvanya Litası', narrow: 'Lt', plurals: ['one' => 'Litvanya litası', 'other' => 'Litvanya litası']),
     'LTT' => new C('LTT', 'Litvanya Talonu', plurals: ['one' => 'Litvanya Talonu', 'other' => 'Litvanya Talonu']),
     'LUC' => new C('LUC', 'Konvertibl Lüksemburg Frangı', plurals: ['one' => 'Konvertibl Lüksemburg Frangı', 'other' => 'Konvertibl Lüksemburg Frangı']),

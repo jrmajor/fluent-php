@@ -10,7 +10,7 @@ return [
     'BND' => new C('BND', 'dollar brunéien', narrow: '$', plurals: ['one' => 'dollar brunéien', 'other' => 'dollars brunéiens']),
     'BYN' => new C('BYN', 'rouble biélorusse', narrow: 'Br', plurals: ['one' => 'rouble biélorusse', 'other' => 'roubles biélorusses']),
     'BZD' => new C('BZD', 'dollar bélizéen', narrow: '$', plurals: ['one' => 'dollar bélizéen', 'other' => 'dollars bélizéens']),
-    'CAD' => new C('CAD', 'dollar canadien', '$ CA', narrow: '$', plurals: ['one' => 'dollar canadien', 'other' => 'dollars canadiens']),
+    'CAD' => new C('CAD', 'dollar canadien', '$', narrow: '$', plurals: ['one' => 'dollar canadien', 'other' => 'dollars canadiens']),
     'CLP' => new C('CLP', 'peso chilien', narrow: '$', plurals: ['one' => 'peso chilien', 'other' => 'pesos chiliens'], minorUnits: 0),
     'CNY' => new C('CNY', 'yuan renminbi chinois', 'CN¥', narrow: '¥', plurals: ['one' => 'yuan renminbi chinois', 'other' => 'yuans renminbi chinois']),
     'COP' => new C('COP', 'peso colombien', narrow: '$', plurals: ['one' => 'peso colombien', 'other' => 'pesos colombiens']),

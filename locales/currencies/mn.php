@@ -86,6 +86,7 @@ return [
     'LBP' => new C('LBP', 'Ливаны фунт', narrow: 'L£', plurals: ['one' => 'Ливаны фунт', 'other' => 'Ливаны фунт']),
     'LKR' => new C('LKR', 'Шри-Ланкийн рупи', narrow: 'Rs', plurals: ['one' => 'Шри-Ланкийн рупи', 'other' => 'Шри-Ланкийн рупи']),
     'LRD' => new C('LRD', 'Либерийн доллар', narrow: '$', plurals: ['one' => 'Либерийн доллар', 'other' => 'Либерийн доллар']),
+    'LSL' => new C('LSL', 'Лесото лоти', plurals: ['one' => 'Лесото лоти', 'other' => 'Лесото лоти']),
     'LTL' => new C('LTL', 'литвийн литас', narrow: 'Lt', plurals: ['one' => 'литвийн литас', 'other' => 'литвийн литас']),
     'LVL' => new C('LVL', 'латвийн лац', narrow: 'Ls', plurals: ['one' => 'латвийн лац', 'other' => 'латвийн лац']),
     'LYD' => new C('LYD', 'Ливийн доллар', plurals: ['one' => 'Ливийн доллар', 'other' => 'Ливийн доллар'], minorUnits: 3),

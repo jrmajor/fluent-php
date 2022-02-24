@@ -19,29 +19,29 @@ final class CurrenciesOptimizer
 
     public function optimize(): void
     {
-        $rootData = $this->readLocaleData('root');
+        $undData = $this->readLocaleData('und');
 
-        $this->optimizeRegion($this->language, $rootData);
+        $this->optimizeRegion($this->language, $undData);
 
         $languageData = $this->readLocaleData($this->language);
 
         foreach ($this->regions as $region) {
-            $this->optimizeRegion($region, $rootData, $languageData);
+            $this->optimizeRegion($region, $undData, $languageData);
         }
     }
 
     /**
-     * @param array<string, string> $rootData
+     * @param array<string, string> $undData
      * @param array<string, string> $baseData
      */
-    private function optimizeRegion(string $region, array $rootData, array $baseData = []): void
+    private function optimizeRegion(string $region, array $undData, array $baseData = []): void
     {
         $currencies = $this->readLocaleData($region);
 
         $currenciesToRemove = [];
 
         foreach ($currencies as $currency => $data) {
-            if (($baseData[$currency] ?? $rootData[$currency]) === $data) {
+            if (($baseData[$currency] ?? $undData[$currency]) === $data) {
                 $currenciesToRemove[] = $currency;
             }
         }

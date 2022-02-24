@@ -209,7 +209,7 @@ return [
     'RON' => new C('RON', 'ลิวโรมาเนีย', narrow: 'lei', plurals: ['other' => 'ลิวโรมาเนีย']),
     'RSD' => new C('RSD', 'ดีนาร์เซอร์เบีย', plurals: ['other' => 'ดีนาร์เซอร์เบีย']),
     'RUB' => new C('RUB', 'รูเบิลรัสเซีย', narrow: '₽', plurals: ['other' => 'รูเบิลรัสเซีย']),
-    'RUR' => new C('RUR', 'รูเบิลรัสเซีย (1991–1998)', narrow: 'р.'),
+    'RUR' => new C('RUR', 'รูเบิลรัสเซีย (1991–1998)'),
     'RWF' => new C('RWF', 'ฟรังก์รวันดา', narrow: 'RF', plurals: ['other' => 'ฟรังก์รวันดา'], minorUnits: 0),
     'SAR' => new C('SAR', 'ริยัลซาอุดีอาระเบีย', plurals: ['other' => 'ริยัลซาอุดีอาระเบีย']),
     'SBD' => new C('SBD', 'ดอลลาร์หมู่เกาะโซโลมอน', narrow: '$', plurals: ['other' => 'ดอลลาร์หมู่เกาะโซโลมอน']),

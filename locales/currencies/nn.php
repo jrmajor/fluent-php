@@ -214,7 +214,7 @@ return [
     'RON' => new C('RON', 'rumenske leuar', narrow: 'lei', plurals: ['one' => 'rumensk leu', 'other' => 'rumenske leuar']),
     'RSD' => new C('RSD', 'serbiske dinarar', plurals: ['one' => 'serbisk dinar', 'other' => 'serbiske dinarar']),
     'RUB' => new C('RUB', 'russiske rublar', narrow: '₽', plurals: ['one' => 'russisk rubel', 'other' => 'russiske rublar']),
-    'RUR' => new C('RUR', 'russiske rublar (1991–1998)', narrow: 'р.', plurals: ['one' => 'russisk rubel (RUR)', 'other' => 'russiske rublar (RUR)']),
+    'RUR' => new C('RUR', 'russiske rublar (1991–1998)', plurals: ['one' => 'russisk rubel (RUR)', 'other' => 'russiske rublar (RUR)']),
     'RWF' => new C('RWF', 'rwandiske franc', narrow: 'RF', plurals: ['one' => 'rwandisk franc', 'other' => 'rwandiske franc'], minorUnits: 0),
     'SAR' => new C('SAR', 'saudiarabiske rial', plurals: ['one' => 'saudiarabisk rial', 'other' => 'saudiarabiske rial']),
     'SBD' => new C('SBD', 'salomonske dollar', narrow: '$', plurals: ['one' => 'salomonsk dollar', 'other' => 'salomonske dollar']),
