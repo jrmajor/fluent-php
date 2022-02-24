@@ -4,6 +4,7 @@ namespace Major\Fluent\Tests\Bundle\Resolver\Functions;
 
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class NumberFunctionTest extends TestCase
 {
@@ -27,13 +28,15 @@ class NumberFunctionTest extends TestCase
         $this->pl = (new FluentBundle('pl', useIsolating: false))->addFtl($ftl);
     }
 
-    public function testNumberFunctionWorks(): void
+    #[TestDox('it works')]
+    public function testWorks(): void
     {
         $this->assertTranslation('1,234', 'num', ['arg' => 1234], $this->us);
         $this->assertTranslation('1234', 'num', ['arg' => 1234], $this->pl);
     }
 
-    public function testNumberFunctionAcceptsArguments(): void
+    #[TestDox('it accepts arguments')]
+    public function testArguments(): void
     {
         $this->assertTranslation('42.0', 'option', ['arg' => 42], $this->us);
         $this->assertTranslation('42,0', 'option', ['arg' => 42], $this->pl);
@@ -42,7 +45,8 @@ class NumberFunctionTest extends TestCase
         $this->assertTranslation('42%', 'percent', ['arg' => 0.42], $this->pl);
     }
 
-    public function testItRetainsTrailingZeroes(): void
+    #[TestDox('it retains trailing zeroes')]
+    public function testTrailingZeroes(): void
     {
         $this->assertTranslation('1.00', 'zeroes', [], $this->us);
         $this->assertTranslation('1,00', 'zeroes', [], $this->pl);
