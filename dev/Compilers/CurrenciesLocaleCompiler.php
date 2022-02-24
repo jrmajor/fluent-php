@@ -21,9 +21,7 @@ final class CurrenciesLocaleCompiler
     public function __construct(
         public string $locale,
     ) {
-        $this->currencies = CldrData::get(
-            'numbers', $locale, "currencies.main.{$locale}.numbers.currencies",
-        );
+        $this->currencies = CldrData::get('numbers', $locale, 'currencies.*.*.numbers.*');
     }
 
     public function make(): void

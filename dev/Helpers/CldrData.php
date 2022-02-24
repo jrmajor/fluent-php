@@ -2,7 +2,9 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
+use InvalidArgumentException;
 use Psl\Filesystem;
+use Psl\Iter;
 use Psl\Json;
 use Psl\Str;
 use Psl\Vec;
@@ -31,7 +33,17 @@ final class CldrData
         $data = Json\decode(Filesystem\read_file($path), true);
 
         foreach (Str\split($keys, '.') as $key) {
-            $data = $data[$key];
+            if ($key !== '*') {
+                $data = $data[$key];
+
+                continue;
+            }
+
+            if (Iter\count($data) !== 1) {
+                throw new InvalidArgumentException('Can not use wildcard if array contains more than one element.');
+            }
+
+            $data = Iter\first($data);
         }
 
         return $data;
