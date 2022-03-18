@@ -67,7 +67,7 @@ final class RuntimeFunctionsTest extends TestCase
     #[TestDox("it preserves variable type when it's passed to function")]
     public function testPreserveAny(): void
     {
-        $object = new class () {
+        $object = new class {
             public string $prop = 'Object property';
         };
 
