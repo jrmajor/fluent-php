@@ -34,7 +34,7 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "azjezz/psl": "^1.9",
-        "jrmajor/cs": "^0.3.3",
+        "jrmajor/cs": "^0.3.4",
         "nunomaduro/collision": "^6.1",
         "php-standard-library/psalm-plugin": "^1.1",
         "phpbench/phpbench": "^1.2",
@@ -43,7 +43,7 @@
         "sebastian/diff": "5.0.x-dev as 4.0.4",
         "symfony/console": "^6.0",
         "symfony/var-dumper": "^6.0",
-        "vimeo/psalm": "^4.21"
+        "vimeo/psalm": "^4.22"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
