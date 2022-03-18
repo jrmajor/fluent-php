@@ -13,7 +13,7 @@ use Psl\Str;
  */
 trait NodeAssertions
 {
-    private static string $cachePath = __DIR__ . '/../.phpunit.cache/nodeAssertions.json';
+    private static string $cachePath = __DIR__ . '/../.cache/phpunit/nodeAssertions.json';
 
     /** @var ?array<string, string> */
     private static ?array $cache = null;
