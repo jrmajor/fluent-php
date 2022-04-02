@@ -32,6 +32,13 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
+      - name: PHP-CS-Fixer cache
+        uses: actions/cache@v2
+        with:
+          path: .cache/.php-cs-fixer.cache
+          key: php-cs-fixer-${{ github.sha }}
+          restore-keys: php-cs-fixer-
+
       - name: Install Composer dependencies
         run: composer install --no-progress --no-interaction
 

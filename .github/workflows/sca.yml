@@ -35,6 +35,13 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
+      - name: Psalm cache
+        uses: actions/cache@v2
+        with:
+          path: .cache/psalm
+          key: psalm-${{ github.sha }}
+          restore-keys: psalm-
+
       - name: Install Composer dependencies
         run: composer install --no-progress --no-interaction
 
