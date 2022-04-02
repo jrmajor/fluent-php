@@ -54,9 +54,7 @@ trait NodeAssertions
 
         $dir = Filesystem\get_directory(self::$cachePath);
 
-        if (! Filesystem\is_directory($dir)) {
-            Filesystem\create_directory($dir);
-        }
+        Filesystem\create_directory($dir);
 
         if (! Filesystem\is_file(self::$cachePath)) {
             Filesystem\write_file(self::$cachePath, '{}');
