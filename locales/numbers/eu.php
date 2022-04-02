@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Basque', percent: "%\u{00A0}#,##0", symbols: [',', '.', '−', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Basque', percent: "%\u{A0}#,##0", symbols: [',', '.', '−', '%']);

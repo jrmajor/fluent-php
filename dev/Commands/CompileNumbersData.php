@@ -165,7 +165,7 @@ final class CompileNumbersData extends Command
     private function escape(string $value): string
     {
         return Str\replace_every($value, [
-            "\u{00A0}" => '\\u{00A0}',
+            "\u{A0}" => '\\u{A0}',
             "\u{200E}" => '\\u{200E}',
             "\u{200F}" => '\\u{200F}',
             "\u{202F}" => '\\u{202F}',

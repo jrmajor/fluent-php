@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Mongolian', currency: "¤\u{00A0}#,##0.00");
+return new Major\Fluent\Formatters\Number\Locale\Locale('Mongolian', currency: "¤\u{A0}#,##0.00");

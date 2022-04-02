@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Belarusian', percent: "#,##0\u{00A0}%", grouping: 2, symbols: [',', "\u{00A0}", '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Belarusian', percent: "#,##0\u{A0}%", grouping: 2, symbols: [',', "\u{A0}", '-', '%']);

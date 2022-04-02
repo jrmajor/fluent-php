@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Urdu (India)', system: 'arabext', currency: "¤\u{00A0}#,##,##0.00", symbols: ['٫', '٬', "\u{200E}-\u{200E}", '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Urdu (India)', system: 'arabext', currency: "¤\u{A0}#,##,##0.00", symbols: ['٫', '٬', "\u{200E}-\u{200E}", '%']);
