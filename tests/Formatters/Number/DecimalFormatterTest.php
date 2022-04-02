@@ -40,7 +40,7 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
             [12345, ['maximumSignificantDigits' => 4]],
             [45.67, ['maximumSignificantDigits' => 2]],
         ] as $case) {
-            foreach (['pl', 'en-US', 'ar', 'mr', 'bn', 'my', 'nl'] as $locale) {
+            foreach (['pl', 'en-US', 'ar', 'mr', 'bn', 'my', 'nl', 'fr'] as $locale) {
                 yield [$locale, ...$case];
             }
         }

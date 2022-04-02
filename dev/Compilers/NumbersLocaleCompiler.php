@@ -168,6 +168,7 @@ final class NumbersLocaleCompiler
             "\u{00A0}" => '\\u{00A0}',
             "\u{200E}" => '\\u{200E}',
             "\u{200F}" => '\\u{200F}',
+            "\u{202F}" => '\\u{202F}',
         ]);
     }
 }
