@@ -31,5 +31,5 @@ jobs:
           php gen currencies
           php gen numbers
 
-      - name: Check for uncommited changes
+      - name: Check for uncommitted changes
         run: git add . && git diff --cached --exit-code
