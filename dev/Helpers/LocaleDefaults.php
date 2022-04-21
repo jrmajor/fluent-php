@@ -5,7 +5,6 @@ namespace Major\Fluent\Dev\Helpers;
 use Exception;
 use InvalidArgumentException;
 use Major\Fluent\Formatters\Number\Locale\Locale;
-use Psl\Str;
 use ReflectionClass;
 
 final class LocaleDefaults
@@ -14,9 +13,9 @@ final class LocaleDefaults
      * @template T of string
      *
      * @param T $key
-     * @psalm-return (T is 'grouping' ? int : string)
+     * @psalm-return (T is 'grouping' ? int : (T is 'symbols' ? list<string> : string))
      */
-    public static function for(string $key): string|int
+    public static function for(string $key): string|int|array
     {
         $parameters = (new ReflectionClass(Locale::class))
             ->getConstructor()
@@ -25,11 +24,11 @@ final class LocaleDefaults
 
         return match ($key) {
             'system' => $parameters[1]->getDefaultValue(),
-            'decimalPattern' => $parameters[2]->getDefaultValue(),
-            'percentPattern' => $parameters[3]->getDefaultValue(),
-            'currencyPattern' => $parameters[4]->getDefaultValue(),
+            'decimal' => $parameters[2]->getDefaultValue(),
+            'percent' => $parameters[3]->getDefaultValue(),
+            'currency' => $parameters[4]->getDefaultValue(),
             'grouping' => $parameters[5]->getDefaultValue(),
-            'symbols' => "['" . Str\join($parameters[6]->getDefaultValue(), "', '") . "']",
+            'symbols' => $parameters[6]->getDefaultValue(),
             default => throw new InvalidArgumentException("Property {$key} does not exist."),
         };
     }

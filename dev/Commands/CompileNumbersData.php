@@ -2,12 +2,12 @@
 
 namespace Major\Fluent\Dev\Commands;
 
+use Major\Exporter as E;
 use Major\Fluent\Dev\Compilers\NumbersLocaleCompiler as Compiler;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\LocaleDefaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
 use Psl\Dict;
-use Psl\Str;
 use Psl\Type;
 use Psl\Vec;
 use Symfony\Component\Console\Command\Command;
@@ -101,14 +101,18 @@ final class CompileNumbersData extends Command
     {
         foreach ([
             'system' => 'numeral system',
-            'decimalPattern' => 'decimal pattern',
-            'percentPattern' => 'percent pattern',
-            'currencyPattern' => 'currency pattern',
+            'decimal' => 'decimal pattern',
+            'percent' => 'percent pattern',
+            'currency' => 'currency pattern',
             'grouping' => 'minimum grouping digits value',
             'symbols' => 'symbol set',
         ] as $key => $name) {
-            $mostPopular = $this->escape((string) $this->mostPopular($key));
-            $default = $this->escape((string) LocaleDefaults::for($key));
+            $mostPopular = $this->mostPopular($key);
+            $default = (string) E\guess(LocaleDefaults::for($key));
+
+            if ($key === 'grouping') {
+                $default = LocaleDefaults::for($key);
+            }
 
             if ($mostPopular !== $default) {
                 $output->writeln("Most popular {$name} is {$mostPopular}, but {$default} is used as a default.");
@@ -118,12 +122,12 @@ final class CompileNumbersData extends Command
 
     private function addToStats(Compiler $compiler): void
     {
-        $this->systems[$compiler->system()][] = $compiler->locale;
-        $this->decimalPatterns[$compiler->pattern('decimal')][] = $compiler->locale;
-        $this->percentPatterns[$compiler->pattern('percent')][] = $compiler->locale;
-        $this->currencyPatterns[$compiler->pattern('currency')][] = $compiler->locale;
+        $this->systems[(string) E\guess($compiler->system())][] = $compiler->locale;
+        $this->decimalPatterns[(string) E\guess($compiler->pattern('decimal'))][] = $compiler->locale;
+        $this->percentPatterns[(string) E\guess($compiler->pattern('percent'))][] = $compiler->locale;
+        $this->currencyPatterns[(string) E\guess($compiler->pattern('currency'))][] = $compiler->locale;
         $this->grouping[$compiler->grouping()][] = $compiler->locale;
-        $this->symbols[$compiler->symbols()][] = $compiler->locale;
+        $this->symbols[(string) E\guess($compiler->symbols())][] = $compiler->locale;
     }
 
     /**
@@ -148,27 +152,15 @@ final class CompileNumbersData extends Command
      */
     private function rowsForStatTable(string $stat): array
     {
-        return Vec\enumerate(Dict\map_keys(
-            $this->stat($stat),
-            fn ($key) => $this->escape((string) $key),
-        ));
+        return Vec\enumerate($this->stat($stat));
     }
 
     private function mostPopular(string $stat): string|int
     {
         return Vec\keys($this->stat(match ($stat) {
             'grouping', 'symbols' => $stat,
-            default => $stat . 's',
+            'decimal', 'percent', 'currency' => "{$stat}Patterns",
+            default => "{$stat}s",
         }))[0];
-    }
-
-    private function escape(string $value): string
-    {
-        return Str\replace_every($value, [
-            "\u{A0}" => '\\u{A0}',
-            "\u{200E}" => '\\u{200E}',
-            "\u{200F}" => '\\u{200F}',
-            "\u{202F}" => '\\u{202F}',
-        ]);
     }
 }

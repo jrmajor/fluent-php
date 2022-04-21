@@ -6,16 +6,17 @@ namespace Major\Fluent\Dev\Compilers;
 
 use Exception;
 use Locale as IntlLocale;
+use Major\Exporter as E;
 use Major\Fluent\Dev\Exceptions\InvalidCurrencySpacing;
+use Major\Fluent\Dev\Exporters\LocaleExporter;
 use Major\Fluent\Dev\Helpers\CldrData;
-use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Formatters\Number\NumberFormatter;
 use Psl\Dict;
 use Psl\Regex;
 use Psl\Str;
 use Psl\Type;
-use Psl\Vec;
 
 final class NumbersLocaleCompiler
 {
@@ -35,37 +36,16 @@ final class NumbersLocaleCompiler
             ['English (world)' => 'English (World)'],
         );
 
-        $compiled = "<?php\n\nreturn new Major\\Fluent\\Formatters\\Number\\Locale\\Locale('{$name}'";
-
-        if ($this->system() !== Defaults::for('system')) {
-            $compiled .= ", system: '{$this->system()}'";
-        }
-
-        if ($this->pattern('decimal') !== Defaults::for('decimalPattern')) {
-            $compiled .= ', decimal: ' . $this->encodedPattern('decimal');
-        }
-
-        if ($this->pattern('percent') !== Defaults::for('percentPattern')) {
-            $compiled .= ', percent: ' . $this->encodedPattern('percent');
-        }
-
-        if ($this->pattern('currency') !== Defaults::for('currencyPattern')) {
-            $compiled .= ', currency: ' . $this->encodedPattern('currency');
-        }
-
-        if ($this->grouping() !== Defaults::for('grouping')) {
-            $compiled .= ", grouping: {$this->grouping()}";
-        }
-
-        if ($this->symbols() !== Defaults::for('symbols')) {
-            $compiled .= ", symbols: {$this->symbols()}";
-        }
-
-        if ($this->unitPatterns()) {
-            $compiled .= ", unitPatterns: {$this->unitPatterns()}";
-        }
-
-        $compiled .= ");\n";
+        $compiled = E\to_file(new LocaleExporter(new Locale(
+            $name,
+            $this->system(),
+            $this->pattern('decimal'),
+            $this->pattern('percent'),
+            $this->pattern('currency'),
+            $this->grouping(),
+            $this->symbols(),
+            $this->unitPatterns(),
+        )));
 
         LocaleFiles::write('numbers', $this->locale, $compiled);
 
@@ -93,13 +73,6 @@ final class NumbersLocaleCompiler
         return $pattern;
     }
 
-    private function encodedPattern(string $type): string
-    {
-        $pattern = $this->escape($this->pattern($type));
-
-        return Str\contains($pattern, '\\') ? "\"{$pattern}\"" : "'{$pattern}'";
-    }
-
     public function grouping(): int
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
@@ -107,22 +80,22 @@ final class NumbersLocaleCompiler
         return Type\int()->coerce($grouping);
     }
 
-    public function symbols(): string
+    /**
+     * @return array{string, string, string, string}
+     */
+    public function symbols(): array
     {
         $all = $this->numbers["symbols-numberSystem-{$this->system()}"];
 
-        $escaper = function ($type) use ($all): string {
-            $type = $this->escape($all[$type]);
+        Type\dict(Type\string(), Type\string())->assert($all);
 
-            return Str\contains($type, '\\') ? "\"{$type}\"" : "'{$type}'";
-        };
-
-        $symbols = Vec\map(['decimal', 'group', 'minusSign', 'percentSign'], $escaper);
-
-        return '[' . Str\join($symbols, ', ') . ']';
+        return [$all['decimal'], $all['group'], $all['minusSign'], $all['percentSign']];
     }
 
-    private function unitPatterns(): ?string
+    /**
+     * @return array<string, string>
+     */
+    private function unitPatterns(): array
     {
         $data = $this->numbers["currencyFormats-numberSystem-{$this->system()}"];
 
@@ -132,15 +105,12 @@ final class NumbersLocaleCompiler
         $data = Dict\filter($data, fn ($value) => $value !== '{0} {1}');
 
         if (! $data) {
-            return null;
+            return [];
         }
 
-        $data = Dict\map_keys($data, function ($key) {
-            return Type\string()->coerce(Str\after($key, 'unitPattern-count-'));
+        return Dict\map_keys($data, function ($key) {
+            return Str\strip_prefix($key, 'unitPattern-count-');
         });
-        $data = Dict\map_with_key($data, fn ($category, $pattern) => "'{$category}' => '{$pattern}'");
-
-        return '[' . Str\join(Vec\values($data), ', ') . ']';
     }
 
     public function checkCurrencySpacing(): void
@@ -160,15 +130,5 @@ final class NumbersLocaleCompiler
                 throw new InvalidCurrencySpacing($this->locale, 'afterCurrency', $key);
             }
         }
-    }
-
-    public function escape(string $value): string
-    {
-        return Str\replace_every($value, [
-            "\u{A0}" => '\\u{A0}',
-            "\u{200E}" => '\\u{200E}',
-            "\u{200F}" => '\\u{200F}',
-            "\u{202F}" => '\\u{202F}',
-        ]);
     }
 }

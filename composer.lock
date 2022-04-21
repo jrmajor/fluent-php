@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "596d70006a57cf89b443f5d27d3f0840",
+    "content-hash": "358ae59e29beb1237a73d241b25d7d77",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -1217,6 +1217,71 @@
                 "source": "https://github.com/jrmajor/php-cs/tree/v0.3.4"
             },
             "time": "2022-03-11T21:27:08+00:00"
+        },
+        {
+            "name": "jrmajor/exporter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jrmajor/exporter.git",
+                "reference": "85d3fa2ef7895ee24b80dc4334174d551555ca52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/85d3fa2ef7895ee24b80dc4334174d551555ca52",
+                "reference": "85d3fa2ef7895ee24b80dc4334174d551555ca52",
+                "shasum": ""
+            },
+            "require": {
+                "azjezz/psl": "^1.9 || ^2.0",
+                "php": "~8.1.0"
+            },
+            "require-dev": {
+                "jrmajor/cs": "^0.4.0",
+                "php-standard-library/psalm-plugin": "^1.1 || ^2.0",
+                "phpunit/phpunit": "10.0.x-dev",
+                "psalm/plugin-phpunit": "^0.16.1",
+                "sebastian/diff": "5.0.x-dev as 4.0.4",
+                "symfony/var-dumper": "^6.0",
+                "vimeo/psalm": "5.0.0-alpha1 as 4.22.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Major\\Exporter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremiasz Major",
+                    "email": "jrh.mjr@gmail.com"
+                }
+            ],
+            "description": "Like var_export, but unstable and you shouldn't use it",
+            "homepage": "https://github.com/jrmajor/exporter",
+            "keywords": [
+                "serializer",
+                "var_export"
+            ],
+            "support": {
+                "issues": "https://github.com/jrmajor/exporter/issues",
+                "source": "https://github.com/jrmajor/exporter/tree/develop"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jrmajor",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-21T08:32:50+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
@@ -5468,6 +5533,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "jrmajor/exporter": 20,
         "phpunit/phpunit": 20,
         "sebastian/diff": 20
     },
