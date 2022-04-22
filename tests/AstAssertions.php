@@ -61,7 +61,7 @@ trait AstAssertions
                 throw new InvalidArgumentException("Expected node {$trace} should contain subnode \${$subnode}.");
             }
 
-            if (! is_array($expected[$subnode]) && ! is_null($expected[$subnode])) {
+            if (! is_array($expected[$subnode]) && $expected[$subnode] !== null) {
                 throw new InvalidArgumentException("Expected property {$trace}::\${$subnode} should be node, but it is scalar.");
             }
 

@@ -17,7 +17,7 @@ final class RuntimeFunctionsTest extends TestCase
         parent::setUp();
 
         $this->bundle->addFunctions([
-            'CONCAT' => fn (...$args) => implode($args),
+            'CONCAT' => fn (...$args) => implode('', $args),
             'SUM' => fn (...$args) => array_sum($args),
             'JSON' => fn ($arg, $key, $another) => json_encode(func_get_args()),
             'TYPE' => fn ($arg) => get_debug_type($arg),

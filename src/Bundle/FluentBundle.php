@@ -192,7 +192,7 @@ final class FluentBundle
 
         $attributeId = $messageId[1] ?? null;
 
-        if (is_null($attributeId)) {
+        if ($attributeId === null) {
             return $this->resolvePattern($message->value, new ResolutionScope($arguments));
         }
 
@@ -286,7 +286,7 @@ final class FluentBundle
     ): string|Stringable {
         $id = $reference->id->name;
 
-        if (! is_null($scope->parameters)) {
+        if ($scope->parameters !== null) {
             // We're inside a TermReference. It's OK to reference undefined parameters.
             foreach ($scope->parameters as $argument) {
                 if ($argument->name->name === $id) {
