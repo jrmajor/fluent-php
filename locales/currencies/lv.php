@@ -200,7 +200,7 @@ return [
     'XEU' => new C('XEU', 'Eiropas norēķinu vienība'),
     'XFO' => new C('XFO', 'Francijas zelta franks'),
     'XFU' => new C('XFU', 'Francijas UIC franks'),
-    'XOF' => new C('XOF', 'Rietumāfrikas CFA franks', 'F CFA', plurals: ['zero' => 'Rietumāfrikas CFA franki', 'one' => 'Rietumāfrikas CFA franks', 'other' => 'Rietumāfrikas CFA franki'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Rietumāfrikas CFA franks', "F\u{202F}CFA", plurals: ['zero' => 'Rietumāfrikas CFA franki', 'one' => 'Rietumāfrikas CFA franks', 'other' => 'Rietumāfrikas CFA franki'], minorUnits: 0),
     'XPD' => new C('XPD', 'pallādijs'),
     'XPF' => new C('XPF', 'CFP franks', 'CFPF', plurals: ['zero' => 'CFP franki', 'one' => 'CFP franks', 'other' => 'CFP franki'], minorUnits: 0),
     'XPT' => new C('XPT', 'platīns'),

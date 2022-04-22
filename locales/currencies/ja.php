@@ -281,7 +281,7 @@ return [
     'XEU' => new C('XEU', 'ヨーロッパ通貨単位', plurals: ['other' => 'ヨーロッパ通貨単位']),
     'XFO' => new C('XFO', 'フランス金フラン', plurals: ['other' => 'フランス金フラン']),
     'XFU' => new C('XFU', 'フランス フラン (UIC)', plurals: ['other' => 'フランス フラン (UIC)']),
-    'XOF' => new C('XOF', '西アフリカ CFA フラン', 'F CFA', plurals: ['other' => '西アフリカ CFA フラン'], minorUnits: 0),
+    'XOF' => new C('XOF', '西アフリカ CFA フラン', "F\u{202F}CFA", plurals: ['other' => '西アフリカ CFA フラン'], minorUnits: 0),
     'XPD' => new C('XPD', 'パラジウム', plurals: ['other' => 'パラジウム']),
     'XPF' => new C('XPF', 'CFP フラン', 'CFPF', plurals: ['other' => 'CFP フラン'], minorUnits: 0),
     'XPT' => new C('XPT', 'プラチナ', plurals: ['other' => 'プラチナ']),

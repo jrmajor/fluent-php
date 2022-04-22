@@ -160,7 +160,7 @@ return [
     'WST' => new C('WST', 'Samoa talasi', plurals: ['one' => 'Samoa talasi', 'other' => 'Samoa talasi']),
     'XAF' => new C('XAF', 'Markaziy Afrika CFA franki', 'FCFA', plurals: ['one' => 'Markaziy Afrika CFA franki', 'other' => 'Markaziy Afrika CFA franki'], minorUnits: 0),
     'XCD' => new C('XCD', 'Sharqiy Karib dollari', 'EC$', narrow: '$', plurals: ['one' => 'Sharqiy Karib dollari', 'other' => 'Sharqiy Karib dollari']),
-    'XOF' => new C('XOF', 'G‘arbiy Afrika CFA franki', 'F CFA', plurals: ['one' => 'G‘arbiy Afrika CFA franki', 'other' => 'G‘arbiy Afrika CFA franki'], minorUnits: 0),
+    'XOF' => new C('XOF', 'G‘arbiy Afrika CFA franki', "F\u{202F}CFA", plurals: ['one' => 'G‘arbiy Afrika CFA franki', 'other' => 'G‘arbiy Afrika CFA franki'], minorUnits: 0),
     'XPF' => new C('XPF', 'Fransuz Polineziyasi franki', 'CFPF', plurals: ['one' => 'Fransuz Polineziyasi franki', 'other' => 'Fransuz Polineziyasi franki'], minorUnits: 0),
     'XXX' => new C('XXX', 'Noma’lum valyuta', '¤', plurals: ['one' => '(noma’lum valyuta)', 'other' => '(noma’lum valyuta)']),
     'YER' => new C('YER', 'Yaman riyoli', plurals: ['one' => 'Yaman riyoli', 'other' => 'Yaman riyoli']),

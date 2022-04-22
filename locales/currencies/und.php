@@ -282,7 +282,7 @@ return [
     'XEU' => new C('XEU'),
     'XFO' => new C('XFO'),
     'XFU' => new C('XFU'),
-    'XOF' => new C('XOF', symbol: 'F CFA', minorUnits: 0),
+    'XOF' => new C('XOF', symbol: "F\u{202F}CFA", minorUnits: 0),
     'XPD' => new C('XPD'),
     'XPF' => new C('XPF', symbol: 'CFPF', minorUnits: 0),
     'XPT' => new C('XPT'),

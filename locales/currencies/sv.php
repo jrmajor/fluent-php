@@ -282,7 +282,7 @@ return [
     'XEU' => new C('XEU', 'europeisk valutaenhet', plurals: ['one' => 'europeisk valutaenhet', 'other' => 'europeiska valutaenheter']),
     'XFO' => new C('XFO', 'fransk guldfranc', plurals: ['one' => 'fransk guldfranc', 'other' => 'franska guldfranc']),
     'XFU' => new C('XFU', 'internationella järnvägsunionens franc', plurals: ['one' => 'internationella järnvägsunionens franc', 'other' => 'internationella järnvägsunionens franc']),
-    'XOF' => new C('XOF', 'västafrikansk franc', 'F CFA', plurals: ['one' => 'västafrikansk franc', 'other' => 'västafrikanska franc'], minorUnits: 0),
+    'XOF' => new C('XOF', 'västafrikansk franc', "F\u{202F}CFA", plurals: ['one' => 'västafrikansk franc', 'other' => 'västafrikanska franc'], minorUnits: 0),
     'XPD' => new C('XPD', 'palladium', plurals: ['one' => 'uns palladium', 'other' => 'palladium']),
     'XPF' => new C('XPF', 'CFP-franc', 'CFPF', plurals: ['one' => 'CFP-franc', 'other' => 'CFP-franc'], minorUnits: 0),
     'XPT' => new C('XPT', 'platina', plurals: ['one' => 'uns platina', 'other' => 'platina']),

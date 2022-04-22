@@ -280,7 +280,7 @@ return [
     'XEU' => new C('XEU', '歐洲貨幣單位 (XEU)', plurals: ['other' => '歐洲貨幣單位 (XEU)']),
     'XFO' => new C('XFO', '法國金法郎', plurals: ['other' => '法國金法郎']),
     'XFU' => new C('XFU', '法國法郎 (UIC)', plurals: ['other' => '法國法郎 (UIC)']),
-    'XOF' => new C('XOF', '法郎 (CFA–BCEAO)', 'F CFA', plurals: ['other' => '法郎 (CFA–BCEAO)'], minorUnits: 0),
+    'XOF' => new C('XOF', '法郎 (CFA–BCEAO)', "F\u{202F}CFA", plurals: ['other' => '法郎 (CFA–BCEAO)'], minorUnits: 0),
     'XPD' => new C('XPD', '帕拉狄昂', plurals: ['other' => '帕拉狄昂']),
     'XPF' => new C('XPF', '法郎 (CFP)', 'CFPF', plurals: ['other' => '法郎 (CFP)'], minorUnits: 0),
     'XPT' => new C('XPT', '白金', plurals: ['other' => '白金']),

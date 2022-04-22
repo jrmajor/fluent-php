@@ -204,7 +204,7 @@ return [
     'XAG' => new C('XAG', 'Prata'),
     'XAU' => new C('XAU', 'Ouro'),
     'XCD' => new C('XCD', 'dólar do Caribe Oriental', narrow: '$', plurals: ['one' => 'dólar do Caribe Oriental', 'other' => 'dólares do Caribe Oriental']),
-    'XOF' => new C('XOF', 'franco CFA (BCEAO)', 'F CFA', plurals: ['one' => 'franco CFA (BCEAO)', 'other' => 'francos CFA (BCEAO)'], minorUnits: 0),
+    'XOF' => new C('XOF', 'franco CFA (BCEAO)', "F\u{202F}CFA", plurals: ['one' => 'franco CFA (BCEAO)', 'other' => 'francos CFA (BCEAO)'], minorUnits: 0),
     'XPD' => new C('XPD', 'Paladio'),
     'XPF' => new C('XPF', 'franco CFP', 'CFPF', plurals: ['one' => 'franco CFP', 'other' => 'francos CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'Platino'),

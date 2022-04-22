@@ -164,7 +164,7 @@ return [
     'WST' => new C('WST', 'Tala ya Samoa', plurals: ['one' => 'tala ya Samoa', 'other' => 'tala za Samoa']),
     'XAF' => new C('XAF', 'Faranga ya Afrika ya Kati CFA', 'FCFA', plurals: ['one' => 'faranga ya Afrika ya Kati CFA', 'other' => 'faranga za Afrika ya Kati CFA'], minorUnits: 0),
     'XCD' => new C('XCD', 'Dola ya Karibi Mashariki', 'EC$', narrow: '$', plurals: ['one' => 'dola ya Karibi Mashariki', 'other' => 'dola za Karibi Mashariki']),
-    'XOF' => new C('XOF', 'Faranga ya Afrika Magharibi CFA', 'F CFA', plurals: ['one' => 'faranga ya Afrika Magharibi CFA', 'other' => 'faranga za Afrika Magharibi CFA'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Faranga ya Afrika Magharibi CFA', "F\u{202F}CFA", plurals: ['one' => 'faranga ya Afrika Magharibi CFA', 'other' => 'faranga za Afrika Magharibi CFA'], minorUnits: 0),
     'XPF' => new C('XPF', 'Faranga ya CFP', 'CFPF', plurals: ['one' => 'faranga ya CFP', 'other' => 'faranga za CFP'], minorUnits: 0),
     'XXX' => new C('XXX', 'Sarafu isiyojulikana', '¤', plurals: ['one' => '(sarafu isiyojulikana)', 'other' => '(sarafu isiyojulikana)']),
     'YER' => new C('YER', 'Rial ya Yemen', plurals: ['one' => 'rial ya Yemen', 'other' => 'rial za Yemen']),

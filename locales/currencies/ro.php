@@ -235,7 +235,7 @@ return [
     'XEU' => new C('XEU', 'unitate de monedă europeană'),
     'XFO' => new C('XFO', 'franc francez de aur', plurals: ['one' => 'franc francez de aur', 'few' => 'franci francezi de aur', 'other' => 'franci francezi de aur']),
     'XFU' => new C('XFU', 'franc UIC francez'),
-    'XOF' => new C('XOF', 'franc CFA BCEAO', 'F CFA', plurals: ['one' => 'franc CFA BCEAO', 'few' => 'franci CFA BCEAO', 'other' => 'franci CFA BCEAO'], minorUnits: 0),
+    'XOF' => new C('XOF', 'franc CFA BCEAO', "F\u{202F}CFA", plurals: ['one' => 'franc CFA BCEAO', 'few' => 'franci CFA BCEAO', 'other' => 'franci CFA BCEAO'], minorUnits: 0),
     'XPD' => new C('XPD', 'paladiu'),
     'XPF' => new C('XPF', 'franc CFP', 'CFPF', plurals: ['one' => 'franc CFP', 'few' => 'franci CFP', 'other' => 'franci CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'platină'),

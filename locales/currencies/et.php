@@ -260,7 +260,7 @@ return [
     'XEU' => new C('XEU', 'eküü', plurals: ['one' => 'eküü', 'other' => 'eküüd']),
     'XFO' => new C('XFO', 'Prantsuse kuldfrank', plurals: ['one' => 'Prantsuse kuldfrank', 'other' => 'Prantsuse kuldfranki']),
     'XFU' => new C('XFU', 'Prantsuse UIC-frank'),
-    'XOF' => new C('XOF', 'Lääne-Aafrika CFA frank', 'F CFA', plurals: ['one' => 'Lääne-Aafrika CFA frank', 'other' => 'Lääne-Aafrika CFA franki'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Lääne-Aafrika CFA frank', "F\u{202F}CFA", plurals: ['one' => 'Lääne-Aafrika CFA frank', 'other' => 'Lääne-Aafrika CFA franki'], minorUnits: 0),
     'XPD' => new C('XPD', 'pallaadium', plurals: ['one' => 'troiunts pallaadiumit', 'other' => 'troiuntsi pallaadiumit']),
     'XPF' => new C('XPF', 'CFP frank', 'CFPF', plurals: ['one' => 'CFP frank', 'other' => 'CFP franki'], minorUnits: 0),
     'XPT' => new C('XPT', 'plaatina', plurals: ['one' => 'troiunts plaatinat', 'other' => 'troiuntsi plaatinat']),

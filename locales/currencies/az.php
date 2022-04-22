@@ -253,7 +253,7 @@ return [
     'XCD' => new C('XCD', 'Şərqi Karib Dolları', 'EC$', narrow: '$', plurals: ['one' => 'Şərqi Karib dolları', 'other' => 'Şərqi Karib dolları']),
     'XFO' => new C('XFO', 'Fransız Gızıl Frankı', plurals: ['one' => 'Fransız gızıl frankı', 'other' => 'Fransız gızıl frankı']),
     'XFU' => new C('XFU', 'Fransız UİC Frankı', plurals: ['one' => 'Fransız UİC frankı', 'other' => 'Fransız UİC frankı']),
-    'XOF' => new C('XOF', 'Fil Dişi Sahili Frankı', 'F CFA', plurals: ['one' => 'Fil Dişi Sahili frankı', 'other' => 'Fil Dişi Sahili frankı'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Fil Dişi Sahili Frankı', "F\u{202F}CFA", plurals: ['one' => 'Fil Dişi Sahili frankı', 'other' => 'Fil Dişi Sahili frankı'], minorUnits: 0),
     'XPD' => new C('XPD', 'Palladium', plurals: ['one' => 'Palladium', 'other' => 'Palladium']),
     'XPF' => new C('XPF', 'Fransız Polineziyası Frankı', 'CFPF', plurals: ['one' => 'Fransız Polineziyası frankı', 'other' => 'Fransız Polineziyası frankı'], minorUnits: 0),
     'XPT' => new C('XPT', 'Platinum', plurals: ['one' => 'platinum', 'other' => 'platinum']),

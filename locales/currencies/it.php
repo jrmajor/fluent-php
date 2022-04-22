@@ -257,7 +257,7 @@ return [
     'XDR' => new C('XDR', 'diritti speciali di incasso'),
     'XFO' => new C('XFO', 'franco oro francese'),
     'XFU' => new C('XFU', 'franco UIC francese'),
-    'XOF' => new C('XOF', 'franco CFA BCEAO', 'F CFA', plurals: ['one' => 'franco CFA BCEAO', 'other' => 'franchi CFA BCEAO'], minorUnits: 0),
+    'XOF' => new C('XOF', 'franco CFA BCEAO', "F\u{202F}CFA", plurals: ['one' => 'franco CFA BCEAO', 'other' => 'franchi CFA BCEAO'], minorUnits: 0),
     'XPD' => new C('XPD', 'palladio'),
     'XPF' => new C('XPF', 'franco CFP', 'CFPF', plurals: ['one' => 'franco CFP', 'other' => 'franchi CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'platino'),

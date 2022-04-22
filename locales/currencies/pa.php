@@ -185,7 +185,7 @@ return [
     'XBB' => new C('XBB', 'ਯੂਰਪੀ ਵਿੱਤੀ ਇਕਾਈ', plurals: ['one' => 'ਯੂਰਪੀ ਵਿੱਤੀ ਇਕਾਈ', 'other' => 'ਯੂਰਪੀ ਵਿੱਤੀ ਇਕਾਈ']),
     'XCD' => new C('XCD', 'ਪੂਰਬੀ ਕੈਰੇਬੀਅਨ ਡਾਲਰ', 'EC$', narrow: '$', plurals: ['one' => 'ਪੂਰਬੀ ਕੈਰੇਬੀਅਨ ਡਾਲਰ', 'other' => 'ਪੂਰਬੀ ਕੈਰੇਬੀਅਨ ਡਾਲਰ']),
     'XEU' => new C('XEU', 'ਯੂਰਪੀ ਮੁਦਰਾ ਇਕਾਈ', plurals: ['one' => 'ਯੂਰਪੀਅਨ ਮੁਦਰਾ ਇਕਾਈ', 'other' => 'ਯੂਰਪੀ ਮੁਦਰਾ ਇਕਾਈ']),
-    'XOF' => new C('XOF', 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ', 'F CFA', plurals: ['one' => 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ', 'other' => 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ'], minorUnits: 0),
+    'XOF' => new C('XOF', 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ', "F\u{202F}CFA", plurals: ['one' => 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ', 'other' => 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ'], minorUnits: 0),
     'XPF' => new C('XPF', 'ਫ੍ਰੈਂਕ (CFP)', 'CFPF', plurals: ['one' => 'ਫ੍ਰੈਂਕ (CFP)', 'other' => 'ਫ੍ਰੈਂਕ (CFP)'], minorUnits: 0),
     'XXX' => new C('XXX', 'ਅਗਿਆਤ ਮੁਦਰਾ', plurals: ['one' => '(ਮੁਦਰਾ ਦੀ ਅਗਿਆਤ ਇਕਾਈ)', 'other' => '(ਅਗਿਆਤ ਮੁਦਰਾ)']),
     'YER' => new C('YER', 'ਯਮਨੀ ਰਿਆਲ', plurals: ['one' => 'ਯਮਨੀ ਰਿਆਲ', 'other' => 'ਯਮਨੀ ਰਿਆਲ']),

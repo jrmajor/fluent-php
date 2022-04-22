@@ -160,7 +160,7 @@ return [
     'WST' => new C('WST', 'सामोअन टाला', plurals: ['one' => 'सामोअन टाला', 'other' => 'सामोअन टाला']),
     'XAF' => new C('XAF', 'मध्य आफ्रिकन [CFA] फ्रँक', 'FCFA', plurals: ['one' => 'मध्य आफ्रिकन [CFA] फ्रँक', 'other' => 'मध्य आफ्रिकन [CFA] फ्रँक'], minorUnits: 0),
     'XCD' => new C('XCD', 'पूर्व कॅरीबियन डॉलर', 'EC$', narrow: '$', plurals: ['one' => 'पूर्व कॅरीबियन डॉलर', 'other' => 'पूर्व कॅरीबियन डॉलर्स']),
-    'XOF' => new C('XOF', 'पश्चिम आफ्रिकन [CFA] फ्रँक', 'F CFA', plurals: ['one' => 'पश्चिम आफ्रिकन [CFA] फ्रँक', 'other' => 'पश्चिम आफ्रिकन [CFA] फ्रँक्स'], minorUnits: 0),
+    'XOF' => new C('XOF', 'पश्चिम आफ्रिकन [CFA] फ्रँक', "F\u{202F}CFA", plurals: ['one' => 'पश्चिम आफ्रिकन [CFA] फ्रँक', 'other' => 'पश्चिम आफ्रिकन [CFA] फ्रँक्स'], minorUnits: 0),
     'XPF' => new C('XPF', '[CFP] फ्रँक', 'CFPF', plurals: ['one' => '[CFP] फ्रँक', 'other' => '[CFP] फ्रँक्स'], minorUnits: 0),
     'XXX' => new C('XXX', 'अज्ञात चलन', '¤', plurals: ['one' => '(चलनाचे अज्ञात एकक)', 'other' => '(अज्ञात चलन)']),
     'YER' => new C('YER', 'येमेनी रियाल', plurals: ['one' => 'येमेनी रियाल', 'other' => 'येमेनी रियाल']),

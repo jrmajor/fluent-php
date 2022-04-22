@@ -156,7 +156,7 @@ return [
     'WST' => new C('WST', 'Tala Samoa', plurals: ['other' => 'Tala Samoa']),
     'XAF' => new C('XAF', 'CFA Franc Afrika Tengah', 'FCFA', plurals: ['other' => 'CFA Franc Afrika Tengah'], minorUnits: 0),
     'XCD' => new C('XCD', 'Dolar Karibia Wetan', 'EC$', narrow: '$', plurals: ['other' => 'Dolar Karibia Wetan']),
-    'XOF' => new C('XOF', 'CFA Franc Afrika Kulon', 'F CFA', plurals: ['other' => 'CFA Franc Afrika Kulon'], minorUnits: 0),
+    'XOF' => new C('XOF', 'CFA Franc Afrika Kulon', "F\u{202F}CFA", plurals: ['other' => 'CFA Franc Afrika Kulon'], minorUnits: 0),
     'XPF' => new C('XPF', 'Franc CFP', 'CFPF', plurals: ['other' => 'Franc CFP'], minorUnits: 0),
     'XXX' => new C('XXX', 'Dhuwit Ora Dikenali', '¤', plurals: ['other' => 'Dhuwit Ora Dikenali']),
     'YER' => new C('YER', 'Rial Yaman', plurals: ['other' => 'Rial Yaman']),

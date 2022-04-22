@@ -276,7 +276,7 @@ return [
     'XEU' => new C('XEU', 'Đơn vị Tiền Châu Âu'),
     'XFO' => new C('XFO', 'Đồng France Pháp Vàng'),
     'XFU' => new C('XFU', 'Đồng UIC-Franc Pháp'),
-    'XOF' => new C('XOF', 'Franc CFA Tây Phi', 'F CFA', plurals: ['other' => 'franc CFA Tây Phi'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Franc CFA Tây Phi', "F\u{202F}CFA", plurals: ['other' => 'franc CFA Tây Phi'], minorUnits: 0),
     'XPD' => new C('XPD', 'Paladi'),
     'XPF' => new C('XPF', 'Franc CFP', 'CFPF', plurals: ['other' => 'Franc CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'Bạch kim'),

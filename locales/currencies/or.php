@@ -157,7 +157,7 @@ return [
     'WST' => new C('WST', 'ସାମୋୟିୟ ତାଲା', plurals: ['one' => 'ସାମୋୟିୟ ତାଲା', 'other' => 'ସାମୋୟିୟ ତାଲା']),
     'XAF' => new C('XAF', 'ମଧ୍ୟ ଆଫ୍ରିକୀ CFA ଫ୍ରାଙ୍କ୍', 'FCFA', plurals: ['one' => 'ମଧ୍ୟ ଆଫ୍ରିକୀ CFA ଫ୍ରାଙ୍କ୍', 'other' => 'ମଧ୍ୟ ଆଫ୍ରିକୀ CFA ଫ୍ରାଙ୍କ୍'], minorUnits: 0),
     'XCD' => new C('XCD', 'ପୂର୍ବ କାରିବୀୟ ଡଲାର୍', 'EC$', narrow: '$', plurals: ['one' => 'ପୂର୍ବ କାରିବୀୟ ଡଲାର୍', 'other' => 'ପୂର୍ବ କାରିବୀୟ ଡଲାର୍']),
-    'XOF' => new C('XOF', 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍', 'F CFA', plurals: ['one' => 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍', 'other' => 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍'], minorUnits: 0),
+    'XOF' => new C('XOF', 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍', "F\u{202F}CFA", plurals: ['one' => 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍', 'other' => 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP ଫ୍ରାଙ୍କ୍', 'CFPF', plurals: ['one' => 'CFP ଫ୍ରାଙ୍କ୍', 'other' => 'CFP ଫ୍ରାଙ୍କ୍'], minorUnits: 0),
     'XXX' => new C('XXX', 'ଅଜଣା ମୁଦ୍ରା', '¤', plurals: ['one' => '(ମୁଦ୍ରାର ଅଜଣା ଏକକ)', 'other' => '(ଅଜଣା ମୁଦ୍ରା)']),
     'YER' => new C('YER', 'ୟେମେନି ରିଆଲ୍', plurals: ['one' => 'ୟେମେନି ରିଆଲ୍', 'other' => 'ୟେମେନି ରିଆଲ୍']),

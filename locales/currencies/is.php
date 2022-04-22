@@ -219,7 +219,7 @@ return [
     'XDR' => new C('XDR', 'Sérstök dráttarréttindi'),
     'XFO' => new C('XFO', 'Franskur gullfranki'),
     'XFU' => new C('XFU', 'Franskur franki, UIC'),
-    'XOF' => new C('XOF', 'vesturafrískur franki', 'F CFA', plurals: ['one' => 'vesturafrískur franki', 'other' => 'vesturafrískir frankar'], minorUnits: 0),
+    'XOF' => new C('XOF', 'vesturafrískur franki', "F\u{202F}CFA", plurals: ['one' => 'vesturafrískur franki', 'other' => 'vesturafrískir frankar'], minorUnits: 0),
     'XPF' => new C('XPF', 'pólinesískur franki', 'CFPF', plurals: ['one' => 'pólinesískur franki', 'other' => 'pólinesískir frankar'], minorUnits: 0),
     'XXX' => new C('XXX', 'óþekktur gjaldmiðill', '¤', plurals: ['one' => '(óþekkt mynteining gjaldmiðils)', 'other' => '(óþekktur gjaldmiðill)']),
     'YDD' => new C('YDD', 'Jemenskur denari'),

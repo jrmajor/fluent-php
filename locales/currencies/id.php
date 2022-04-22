@@ -279,7 +279,7 @@ return [
     'XEU' => new C('XEU', 'Satuan Mata Uang Eropa'),
     'XFO' => new C('XFO', 'Franc Gold Perancis'),
     'XFU' => new C('XFU', 'Franc UIC Perancis'),
-    'XOF' => new C('XOF', 'Franc CFA Afrika Barat', 'F CFA', plurals: ['other' => 'Franc CFA Afrika Barat'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Franc CFA Afrika Barat', "F\u{202F}CFA", plurals: ['other' => 'Franc CFA Afrika Barat'], minorUnits: 0),
     'XPD' => new C('XPD', 'Palladium'),
     'XPF' => new C('XPF', 'Franc CFP', 'CFPF', plurals: ['other' => 'Franc CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'Platinum'),

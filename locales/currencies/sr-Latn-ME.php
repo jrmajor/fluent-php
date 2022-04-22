@@ -265,7 +265,7 @@ return [
     'XEU' => new C('XEU', 'Evropska valutna jedinica', plurals: ['one' => 'evropska novčana jedinica (XEU)', 'few' => 'evropske novčane jedinice (XEU)', 'other' => 'evropskih novčanih jedinica']),
     'XFO' => new C('XFO', 'Francuski zlatni franak', plurals: ['one' => 'francuski zlatni franak', 'few' => 'francuska zlatna franka', 'other' => 'francuskih zlatnih franaka']),
     'XFU' => new C('XFU', 'Francuski UIC-franak', plurals: ['one' => 'francuski UIC-franak', 'few' => 'francuska UIC-franka', 'other' => 'francuskih UIC-franaka']),
-    'XOF' => new C('XOF', 'zapadnoafrički franak', 'F CFA', plurals: ['one' => 'zapadnoafrički franak', 'few' => 'zapadnoafrička franka', 'other' => 'zapadnoafričkih franaka'], minorUnits: 0),
+    'XOF' => new C('XOF', 'zapadnoafrički franak', "F\u{202F}CFA", plurals: ['one' => 'zapadnoafrički franak', 'few' => 'zapadnoafrička franka', 'other' => 'zapadnoafričkih franaka'], minorUnits: 0),
     'XPD' => new C('XPD', 'Paladijum', plurals: ['one' => 'paladijum', 'few' => 'paladijuma', 'other' => 'paladijuma']),
     'XPF' => new C('XPF', 'CFP franak', 'CFPF', plurals: ['one' => 'CFP franak', 'few' => 'CFP franka', 'other' => 'CFP franaka'], minorUnits: 0),
     'XPT' => new C('XPT', 'Platina', plurals: ['one' => 'platina', 'few' => 'platine', 'other' => 'platina']),

@@ -162,7 +162,7 @@ return [
     'WST' => new C('WST', 'ሳሞአን ታላ', plurals: ['one' => 'ሳሞአን ታላ', 'other' => 'ሳሞአን ታላ']),
     'XAF' => new C('XAF', 'የመካከለኛው አፍሪካ ሴፋ ፍራንክ', 'FCFA', plurals: ['one' => 'የመካከለኛው አፍሪካ ሴፋ ፍራንክ', 'other' => 'የመካከለኛው አፍሪካ ሴፋ ፍራንክ'], minorUnits: 0),
     'XCD' => new C('XCD', 'የምዕራብ ካሪብያን ዶላር', 'EC$', narrow: '$', plurals: ['one' => 'የምዕራብ ካሪብያን ዶላር', 'other' => 'የምዕራብ ካሪብያን ዶላር']),
-    'XOF' => new C('XOF', 'የምዕራብ አፍሪካ ሴፋ ፍራንክ', 'F CFA', plurals: ['one' => 'የምዕራብ አፍሪካ ሴፋ ፍራንክ', 'other' => 'የምዕራብ አፍሪካ ሴፋ ፍራንክ'], minorUnits: 0),
+    'XOF' => new C('XOF', 'የምዕራብ አፍሪካ ሴፋ ፍራንክ', "F\u{202F}CFA", plurals: ['one' => 'የምዕራብ አፍሪካ ሴፋ ፍራንክ', 'other' => 'የምዕራብ አፍሪካ ሴፋ ፍራንክ'], minorUnits: 0),
     'XPF' => new C('XPF', 'ሲ ኤፍ ፒ ፍራንክ', 'CFPF', plurals: ['one' => 'ሲ ኤፍ ፒ ፍራንክ', 'other' => 'ሲ ኤፍ ፒ ፍራንክ'], minorUnits: 0),
     'XXX' => new C('XXX', 'ያልታወቀ ገንዘብ', '¤', plurals: ['one' => 'ያልታወቀ ገንዘብ', 'other' => 'ያልታወቀ ገንዘብ']),
     'YER' => new C('YER', 'የየመን ሪአል', plurals: ['one' => 'የየመን ሪአል', 'other' => 'የየመን ሪአል']),

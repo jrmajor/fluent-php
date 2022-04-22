@@ -261,7 +261,7 @@ return [
     'XEU' => new C('XEU', 'evropska denarna enota'),
     'XFO' => new C('XFO', 'zlati frank'),
     'XFU' => new C('XFU', 'frank UIC'),
-    'XOF' => new C('XOF', 'zahodnoafriški frank CFA', 'F CFA', plurals: ['one' => 'zahodnoafriški frank CFA', 'two' => 'zahodnoafriška franka CFA', 'few' => 'zahodnoafriški franki CFA', 'other' => 'zahodnoafriških frankov CFA'], minorUnits: 0),
+    'XOF' => new C('XOF', 'zahodnoafriški frank CFA', "F\u{202F}CFA", plurals: ['one' => 'zahodnoafriški frank CFA', 'two' => 'zahodnoafriška franka CFA', 'few' => 'zahodnoafriški franki CFA', 'other' => 'zahodnoafriških frankov CFA'], minorUnits: 0),
     'XPD' => new C('XPD', 'paladij'),
     'XPF' => new C('XPF', 'CFP frank', 'CFPF', plurals: ['one' => 'CFP frank', 'two' => 'franka CFP', 'few' => 'franki CFP', 'other' => 'frankov CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'platina'),

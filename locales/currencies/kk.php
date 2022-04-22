@@ -160,7 +160,7 @@ return [
     'WST' => new C('WST', 'Самоа таласы', plurals: ['one' => 'Самоа таласы', 'other' => 'Самоа таласы']),
     'XAF' => new C('XAF', 'КФА ВЕАС франкі', 'FCFA', plurals: ['one' => 'КФА ВЕАС франкі', 'other' => 'КФА ВЕАС франкі'], minorUnits: 0),
     'XCD' => new C('XCD', 'Шығыс Кариб доллары', 'EC$', narrow: '$', plurals: ['one' => 'Шығыс Кариб доллары', 'other' => 'Шығыс Кариб доллары']),
-    'XOF' => new C('XOF', 'КФА ВСЕАО франкі', 'F CFA', plurals: ['one' => 'КФА ВСЕАО франкі', 'other' => 'КФА ВСЕАО франкі'], minorUnits: 0),
+    'XOF' => new C('XOF', 'КФА ВСЕАО франкі', "F\u{202F}CFA", plurals: ['one' => 'КФА ВСЕАО франкі', 'other' => 'КФА ВСЕАО франкі'], minorUnits: 0),
     'XPF' => new C('XPF', 'КФП франкі', 'CFPF', plurals: ['one' => 'КФП франкі', 'other' => 'КФП франкі'], minorUnits: 0),
     'XXX' => new C('XXX', 'Белгісіз валюта', '¤', plurals: ['one' => '(белгісіз валюта бірлігі)', 'other' => '(белгісіз валюта)']),
     'YER' => new C('YER', 'Йемен риалы', plurals: ['one' => 'Йемен риалы', 'other' => 'Йемен риалы']),

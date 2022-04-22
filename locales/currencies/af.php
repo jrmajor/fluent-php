@@ -166,7 +166,7 @@ return [
     'WST' => new C('WST', 'Samoaanse tala', plurals: ['one' => 'Samoaanse tala', 'other' => 'Samoaanse tala']),
     'XAF' => new C('XAF', 'Sentraal Afrikaanse CFA-frank', 'FCFA', plurals: ['one' => 'Sentraal Afrikaanse CFA-frank', 'other' => 'Sentraal Afrikaanse CFA-frank'], minorUnits: 0),
     'XCD' => new C('XCD', 'Oos-Karibiese dollar', 'EC$', narrow: '$', plurals: ['one' => 'Oos-Karibiese dollar', 'other' => 'Oos-Karibiese dollar']),
-    'XOF' => new C('XOF', 'Wes-Afrikaanse CFA-frank', 'F CFA', plurals: ['one' => 'Wes-Afrikaanse CFA-frank', 'other' => 'Wes-Afrikaanse CFA-frank'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Wes-Afrikaanse CFA-frank', "F\u{202F}CFA", plurals: ['one' => 'Wes-Afrikaanse CFA-frank', 'other' => 'Wes-Afrikaanse CFA-frank'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP-frank', 'CFPF', plurals: ['one' => 'CFP-frank', 'other' => 'CFP-frank'], minorUnits: 0),
     'XXX' => new C('XXX', 'Onbekende geldeenheid', '¤', plurals: ['one' => '(onbekende geldeenheid)', 'other' => '(onbekende geldeenheid)']),
     'YER' => new C('YER', 'Jemenitiese rial', plurals: ['one' => 'Jemenitiese rial', 'other' => 'Jemenitiese rial']),

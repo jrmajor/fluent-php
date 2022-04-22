@@ -155,7 +155,7 @@ return [
     'WST' => new C('WST', 'سموون تالا', plurals: ['one' => 'سموون تالا', 'other' => 'سموون تالا']),
     'XAF' => new C('XAF', 'مرکزي افريقايي CFA فرانک', 'FCFA', plurals: ['one' => 'مرکزي افريقايي CFA فرانک', 'other' => 'مرکزي افريقايي CFA فرانکس'], minorUnits: 0),
     'XCD' => new C('XCD', 'ختيځ کربين ډالر', 'EC$', narrow: '$', plurals: ['one' => 'ختيځ کربين ډالر', 'other' => 'ختيځ کربين ډالرې']),
-    'XOF' => new C('XOF', 'ختيځ افريقايي CFA فرانک', 'F CFA', plurals: ['one' => 'ختيځ افريقايي CFA فرانک', 'other' => 'ختيځ افريقايي CFA فرانکس'], minorUnits: 0),
+    'XOF' => new C('XOF', 'ختيځ افريقايي CFA فرانک', "F\u{202F}CFA", plurals: ['one' => 'ختيځ افريقايي CFA فرانک', 'other' => 'ختيځ افريقايي CFA فرانکس'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP فرانک', 'CFPF', plurals: ['one' => 'CFP فرانک', 'other' => 'CFP فرانکس'], minorUnits: 0),
     'XXX' => new C('XXX', 'نامعلومه مروجه پېسې', '¤', plurals: ['one' => '(د نامعلومه مروجه پېسو واحد)', 'other' => '(نامعلومه مروجه پېسې)']),
     'YER' => new C('YER', 'يمني ريال', plurals: ['one' => 'يمني ريال', 'other' => 'يمني ريالونه']),

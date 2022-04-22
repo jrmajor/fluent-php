@@ -156,7 +156,7 @@ return [
     'WST' => new C('WST', 'ساموآن ٽالا', plurals: ['one' => 'ساموآن ٽالا', 'other' => 'ساموآن ٽالا']),
     'XAF' => new C('XAF', 'وچ آفريڪا فرينڪ', 'FCFA', plurals: ['one' => 'وچ آفريڪا فرينڪ', 'other' => 'وچ آفريڪا فرينڪ'], minorUnits: 0),
     'XCD' => new C('XCD', 'اوڀر ڪيريبين ڊالر', 'EC$', narrow: '$', plurals: ['one' => 'اوڀر ڪيريبين ڊالر', 'other' => 'اوڀر ڪيريبين ڊالر']),
-    'XOF' => new C('XOF', 'اولهه آفريڪا فرينڪ', 'F CFA', plurals: ['one' => 'اولهه آفريڪا فرينڪ', 'other' => 'اولهه آفريڪا فرينڪ'], minorUnits: 0),
+    'XOF' => new C('XOF', 'اولهه آفريڪا فرينڪ', "F\u{202F}CFA", plurals: ['one' => 'اولهه آفريڪا فرينڪ', 'other' => 'اولهه آفريڪا فرينڪ'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP فرينڪ', 'CFPF', plurals: ['one' => 'CFP فرينڪ', 'other' => 'CFP فرينڪ'], minorUnits: 0),
     'XXX' => new C('XXX', 'اڻڄاتل سڪو', '¤', plurals: ['one' => 'اڻڄاتل سڪو', 'other' => 'اڻڄاتل سڪو']),
     'YER' => new C('YER', 'يمني ريال', plurals: ['one' => 'يمني ريال', 'other' => 'يمني ريال']),

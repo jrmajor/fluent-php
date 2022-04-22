@@ -160,7 +160,7 @@ return [
     'WST' => new C('WST', 'ಸಮೋನ್ ತಲಾ', plurals: ['one' => 'ಸಮೋನ್ ತಲಾ', 'other' => 'ಸಮೋನ್ ತಲಾ']),
     'XAF' => new C('XAF', 'ಮಧ್ಯ ಆಫ್ರಿಕನ್ CFA ಫ್ರಾಂಕ್', 'FCFA', plurals: ['one' => 'ಮಧ್ಯ ಆಫ್ರಿಕನ್ CFA ಫ್ರಾಂಕ್', 'other' => 'ಮಧ್ಯ ಆಫ್ರಿಕನ್ CFA ಫ್ರಾಂಕ್‌ಗಳು'], minorUnits: 0),
     'XCD' => new C('XCD', 'ಪೂರ್ವ ಕೆರೀಬಿಯನ್ ಡಾಲರ್', 'EC$', narrow: '$', plurals: ['one' => 'ಪೂರ್ವ ಕೆರೀಬಿಯನ್ ಡಾಲರ್', 'other' => 'ಪೂರ್ವ ಕೆರೀಬಿಯನ್ ಡಾಲರ್‌ಗಳು']),
-    'XOF' => new C('XOF', 'ಪಶ್ಚಿಮ ಆಫ್ರಿಕಾದ CFA ಫ್ರಾಂಕ್', 'F CFA', plurals: ['one' => 'ಪಶ್ಚಿಮ ಆಫ್ರಿಕಾದ CFA ಫ್ರಾಂಕ್', 'other' => 'ಪಶ್ಚಿಮ ಆಫ್ರಿಕಾದ CFA ಫ್ರಾಂಕ್‌ಗಳು'], minorUnits: 0),
+    'XOF' => new C('XOF', 'ಪಶ್ಚಿಮ ಆಫ್ರಿಕಾದ CFA ಫ್ರಾಂಕ್', "F\u{202F}CFA", plurals: ['one' => 'ಪಶ್ಚಿಮ ಆಫ್ರಿಕಾದ CFA ಫ್ರಾಂಕ್', 'other' => 'ಪಶ್ಚಿಮ ಆಫ್ರಿಕಾದ CFA ಫ್ರಾಂಕ್‌ಗಳು'], minorUnits: 0),
     'XPF' => new C('XPF', '[CFP] ಫ್ರಾಂಕ್', 'CFPF', plurals: ['one' => '[CFP] ಫ್ರಾಂಕ್', 'other' => '[CFP] ಫ್ರಾಂಕ್‌ಗಳು'], minorUnits: 0),
     'XXX' => new C('XXX', 'ಅಪರಿಚಿತ ಕರೆನ್ಸಿ', '¤', plurals: ['one' => '(ಅಪರಿಚಿತ ಕರೆನ್ಸಿ ಯುನಿಟ್)', 'other' => '(ಅಪರಿಚಿತ ಕರೆನ್ಸಿ)']),
     'YER' => new C('YER', 'ಯೆಮೆನಿ ರಿಯಲ್', plurals: ['one' => 'ಯೆಮೆನಿ ರಿಯಲ್', 'other' => 'ಯೆಮೆನಿ ರಿಯಲ್‍ಗಳು']),

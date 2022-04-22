@@ -282,7 +282,7 @@ return [
     'XEU' => new C('XEU', 'Euroopan valuuttayksikkö (ECU)', plurals: ['one' => 'Euroopan valuuttayksikkö (ECU)', 'other' => 'Euroopan valuuttayksikköä (ECU)']),
     'XFO' => new C('XFO', 'Ranskan kultafrangi', plurals: ['one' => 'Ranskan kultafrangi', 'other' => 'Ranskan kultafrangia']),
     'XFU' => new C('XFU', 'Ranskan UIC-frangi', plurals: ['one' => 'Ranskan UIC-frangi', 'other' => 'Ranskan UIC-frangia']),
-    'XOF' => new C('XOF', 'CFA-frangi BCEAO', 'F CFA', plurals: ['one' => 'CFA-frangi BCEAO', 'other' => 'CFA-frangia BCEAO'], minorUnits: 0),
+    'XOF' => new C('XOF', 'CFA-frangi BCEAO', "F\u{202F}CFA", plurals: ['one' => 'CFA-frangi BCEAO', 'other' => 'CFA-frangia BCEAO'], minorUnits: 0),
     'XPD' => new C('XPD', 'palladium', plurals: ['one' => 'troy-unssi palladiumia', 'other' => 'troy-unssia palladiumia']),
     'XPF' => new C('XPF', 'CFP-frangi', plurals: ['one' => 'CFP-frangi', 'other' => 'CFP-frangia'], minorUnits: 0),
     'XPT' => new C('XPT', 'platina', plurals: ['one' => 'troy-unssi platinaa', 'other' => 'troy-unssia platinaa']),

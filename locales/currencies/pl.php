@@ -251,7 +251,7 @@ return [
     'XEU' => new C('XEU', 'ECU'),
     'XFO' => new C('XFO', 'frank złoty francuski'),
     'XFU' => new C('XFU', 'UIC-frank francuski'),
-    'XOF' => new C('XOF', 'frank CFA', 'F CFA', plurals: ['one' => 'frank CFA', 'few' => 'franki CFA', 'many' => 'franków CFA', 'other' => 'franka CFA'], minorUnits: 0),
+    'XOF' => new C('XOF', 'frank CFA', "F\u{202F}CFA", plurals: ['one' => 'frank CFA', 'few' => 'franki CFA', 'many' => 'franków CFA', 'other' => 'franka CFA'], minorUnits: 0),
     'XPD' => new C('XPD', 'pallad'),
     'XPF' => new C('XPF', 'frank CFP', 'CFPF', plurals: ['one' => 'frank CFP', 'few' => 'franki CFP', 'many' => 'franków CFP', 'other' => 'franka CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'platyna'),

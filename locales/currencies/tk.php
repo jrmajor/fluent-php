@@ -158,7 +158,7 @@ return [
     'WST' => new C('WST', 'Samoa talasy', plurals: ['one' => 'samoa talasy', 'other' => 'samoa talasy']),
     'XAF' => new C('XAF', 'KFA BEAC franky', 'FCFA', plurals: ['one' => 'KFA BEAC franky', 'other' => 'KFA BEAC franky'], minorUnits: 0),
     'XCD' => new C('XCD', 'Gündogar karib dollary', 'EC$', narrow: '$', plurals: ['one' => 'gündogar karib dollary', 'other' => 'gündogar karib dollary']),
-    'XOF' => new C('XOF', 'KFA BCEAO franky', 'F CFA', plurals: ['one' => 'KFA BCEAO franky', 'other' => 'KFA BCEAO franky'], minorUnits: 0),
+    'XOF' => new C('XOF', 'KFA BCEAO franky', "F\u{202F}CFA", plurals: ['one' => 'KFA BCEAO franky', 'other' => 'KFA BCEAO franky'], minorUnits: 0),
     'XPF' => new C('XPF', 'Fransuz ýuwaş umman franky', 'CFPF', plurals: ['one' => 'fransuz ýuwaş umman franky', 'other' => 'fransuz ýuwaş umman franky'], minorUnits: 0),
     'XXX' => new C('XXX', 'Näbelli pul birligi', '¤', plurals: ['one' => 'näbelli pul birligi', 'other' => 'näbelli pul birligi']),
     'YER' => new C('YER', 'Ýemen rialy', plurals: ['one' => 'ýemen rialy', 'other' => 'ýemen rialy']),

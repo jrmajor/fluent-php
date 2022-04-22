@@ -160,7 +160,7 @@ return [
     'WST' => new C('WST', 'Tala samoane', plurals: ['one' => 'talë samoane', 'other' => 'tala samoane']),
     'XAF' => new C('XAF', 'Franga kamerunase', 'FCFA', plurals: ['one' => 'frangë kamerunase', 'other' => 'franga kamerunase'], minorUnits: 0),
     'XCD' => new C('XCD', 'Dollari i Karaibeve Lindore', 'EC$', plurals: ['one' => 'dollar i Karaibeve Lindore', 'other' => 'dollarë të Karaibeve Lindore']),
-    'XOF' => new C('XOF', 'Franga e Bregut të Fildishtë', 'F CFA', plurals: ['one' => 'frangë e Bregut të Fildishtë', 'other' => 'franga të Bregut të Fildishtë'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Franga e Bregut të Fildishtë', "F\u{202F}CFA", plurals: ['one' => 'frangë e Bregut të Fildishtë', 'other' => 'franga të Bregut të Fildishtë'], minorUnits: 0),
     'XPF' => new C('XPF', 'Franga franceze e Polinezisë', 'CFPF', plurals: ['one' => 'frangë franceze e Polinezisë', 'other' => 'franga franceze të Polinezisë'], minorUnits: 0),
     'XXX' => new C('XXX', 'Valutë e panjohur', '¤', plurals: ['one' => '(njësi e panjohur valutore)', 'other' => '(njësi të panjohura valutore)']),
     'YER' => new C('YER', 'Riali i Jemenit', plurals: ['one' => 'rial jemeni', 'other' => 'rialë jemeni']),

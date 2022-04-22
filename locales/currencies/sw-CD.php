@@ -12,5 +12,5 @@ return [
     'MRU' => new C('MRU', 'Ugwiya ya Moritania', plurals: ['one' => 'ouguiya ya Moritania', 'other' => 'ouguiya za Moritania']),
     'SCR' => new C('SCR', 'Rupia ya Shelisheli', plurals: ['one' => 'rupia ya Ushelisheli', 'other' => 'rupia za Ushelisheli']),
     'XAF' => new C('XAF', 'Faranga CFA BEAC', 'FCFA', plurals: ['one' => 'faranga ya Afrika ya Kati CFA', 'other' => 'faranga za Afrika ya Kati CFA'], minorUnits: 0),
-    'XOF' => new C('XOF', 'Faranga CFA BCEAO', 'F CFA', plurals: ['one' => 'faranga ya Afrika Magharibi CFA', 'other' => 'faranga za Afrika Magharibi CFA'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Faranga CFA BCEAO', "F\u{202F}CFA", plurals: ['one' => 'faranga ya Afrika Magharibi CFA', 'other' => 'faranga za Afrika Magharibi CFA'], minorUnits: 0),
 ];

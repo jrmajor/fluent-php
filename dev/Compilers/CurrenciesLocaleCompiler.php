@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Major\Fluent\Dev\Compilers;
 
 use Exception;
+use Major\Exporter as E;
+use Major\Fluent\Dev\Exporters\CurrencyExporter;
 use Major\Fluent\Dev\Helpers\CldrData;
 use Major\Fluent\Dev\Helpers\IsoData;
 use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Formatters\Number\Locale\Currency;
 use Psl\Dict;
 use Psl\Str;
-use Psl\Type;
-use Psl\Vec;
+
+use function stripslashes as ss;
 
 final class CurrenciesLocaleCompiler
 {
@@ -26,28 +29,17 @@ final class CurrenciesLocaleCompiler
 
     public function make(): void
     {
-        $c = Dict\map_with_key($this->currencies, fn ($code, $data) => $this->makeCurrency($code, $data));
-        $c = Dict\map_with_key($c, fn ($code, $data) => "'{$code}' => {$data}");
-        $currencies = Str\join(Vec\values($c), ",\n    ");
+        $currencies = Dict\map_with_key($this->currencies, $this->makeCurrency(...));
+        $currencies = Dict\map($currencies, fn ($c) => new CurrencyExporter($c));
+        $currencies = E\dict($currencies)->multiline();
 
-        $compiled = <<<PHP
-            <?php
-
-            use Major\\Fluent\\Formatters\\Number\\Locale\\Currency as C;
-
-            return [
-                {$currencies},
-            ];
-
-            PHP;
-
-        LocaleFiles::write('currencies', $this->locale, $compiled);
+        LocaleFiles::write('currencies', $this->locale, E\to_file($currencies));
     }
 
     /**
      * @param array<string, string> $data
      */
-    private function makeCurrency(string $code, array $data): string
+    private function makeCurrency(string $code, array $data): Currency
     {
         $name = $data['displayName']
             ?? throw new Exception("No display name for {$code} in {$this->locale}.");
@@ -55,50 +47,23 @@ final class CurrenciesLocaleCompiler
         $symbol = $data['symbol']
             ?? throw new Exception("No symbol for {$code} in {$this->locale}.");
 
-        $name = Str\replace($name, '\\"', '"');
+        $narrow = $data['symbol-alt-narrow'] ?? null;
+        $minorUnits = IsoData::minorUnits($code);
+        $plurals = $this->makePlurals($data);
 
-        $compiled = "new C('{$code}'";
-
-        if ($name !== $code && $symbol !== $code) {
-            $compiled .= ", '{$name}', '{$symbol}'";
-        } elseif ($name !== $code) {
-            $compiled .= ", '{$name}'";
-        } elseif ($symbol !== $code) {
-            $compiled .= ", symbol: '{$symbol}'";
-        }
-
-        if (($data['symbol-alt-narrow'] ?? $code) !== $code) {
-            $compiled .= ", narrow: '{$data['symbol-alt-narrow']}'";
-        }
-
-        if ($plurals = $this->makePlurals($data)) {
-            $compiled .= ", plurals: {$plurals}";
-        }
-
-        if (IsoData::minorUnits($code) !== 2) {
-            $compiled .= ', minorUnits: ' . IsoData::minorUnits($code);
-        }
-
-        return $compiled . ')';
+        return new Currency($code, ss($name), $symbol, $narrow, $plurals, $minorUnits);
     }
 
     /**
      * @param array<string, string> $data
+     * @return ?array<string, string>
      */
-    private function makePlurals(array $data): ?string
+    private function makePlurals(array $data): ?array
     {
         $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, 'displayName-count-'));
+        $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, 'displayName-count-'));
+        $data = Dict\map($data, fn ($value) => ss($value));
 
-        if (! $data) {
-            return null;
-        }
-
-        $data = Dict\map_keys($data, function ($key) {
-            return Type\string()->coerce(Str\after($key, 'displayName-count-'));
-        });
-        $data = Dict\map($data, fn ($value) => Str\replace($value, '\\"', '"'));
-        $data = Dict\map_with_key($data, fn ($category, $pattern) => "'{$category}' => '{$pattern}'");
-
-        return '[' . Str\join(Vec\values($data), ', ') . ']';
+        return $data ?: null;
     }
 }

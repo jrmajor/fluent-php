@@ -282,7 +282,7 @@ return [
     'XEU' => new C('XEU', 'Europako dibisa-unitatea', plurals: ['one' => 'Europako dibisa-unitate', 'other' => 'Europako dibisa-unitate']),
     'XFO' => new C('XFO', 'urrezko libera frantsesa', plurals: ['one' => 'urrezko libera frantses', 'other' => 'urrezko libera frantses']),
     'XFU' => new C('XFU', 'UIC libera frantsesa', plurals: ['one' => 'UIC libera frantses', 'other' => 'UIC libera frantses']),
-    'XOF' => new C('XOF', 'Afrika mendebaldeko CFA frankoa', 'F CFA', plurals: ['one' => 'Afrika mendebaldeko CFA franko', 'other' => 'Afrika mendebaldeko CFA franko'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Afrika mendebaldeko CFA frankoa', "F\u{202F}CFA", plurals: ['one' => 'Afrika mendebaldeko CFA franko', 'other' => 'Afrika mendebaldeko CFA franko'], minorUnits: 0),
     'XPD' => new C('XPD', 'paladioa', plurals: ['one' => 'paladiozko troy ontza', 'other' => 'paladiozko troy ontza']),
     'XPF' => new C('XPF', 'CFP frankoa', 'CFPF', plurals: ['one' => 'CFP franko', 'other' => 'CFP franko'], minorUnits: 0),
     'XPT' => new C('XPT', 'platinozko troy ontza', plurals: ['one' => 'platinozko troy ontza', 'other' => 'platinozko troy ontza']),

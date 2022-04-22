@@ -253,7 +253,7 @@ return [
     'XDR' => new C('XDR', 'Специални права на тираж'),
     'XEU' => new C('XEU', 'Еку на ЕИО'),
     'XFO' => new C('XFO', 'Френски златен франк', plurals: ['one' => 'френски златен франк', 'other' => 'френски златна франка']),
-    'XOF' => new C('XOF', 'Западноафрикански франк', 'F CFA', plurals: ['one' => 'западноафрикански франк', 'other' => 'западноафрикански франка'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Западноафрикански франк', "F\u{202F}CFA", plurals: ['one' => 'западноафрикански франк', 'other' => 'западноафрикански франка'], minorUnits: 0),
     'XPD' => new C('XPD', 'Паладий'),
     'XPF' => new C('XPF', 'CFP франк', 'CFPF', plurals: ['one' => 'CFP франк', 'other' => 'CFP франка'], minorUnits: 0),
     'XPT' => new C('XPT', 'Платина'),

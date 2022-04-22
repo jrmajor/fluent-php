@@ -280,7 +280,7 @@ return [
     'XEU' => new C('XEU', 'Unidade de Moeda Europeia', plurals: ['one' => 'Unidade de moeda europeia', 'other' => 'Unidades de moedas europeias']),
     'XFO' => new C('XFO', 'Franco-ouro francês', plurals: ['one' => 'Franco de ouro francês', 'other' => 'Francos de ouro franceses']),
     'XFU' => new C('XFU', 'Franco UIC francês', plurals: ['one' => 'Franco UIC francês', 'other' => 'Francos UIC franceses']),
-    'XOF' => new C('XOF', 'Franco CFA de BCEAO', 'F CFA', plurals: ['one' => 'Franco CFA de BCEAO', 'other' => 'Francos CFA de BCEAO'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Franco CFA de BCEAO', "F\u{202F}CFA", plurals: ['one' => 'Franco CFA de BCEAO', 'other' => 'Francos CFA de BCEAO'], minorUnits: 0),
     'XPD' => new C('XPD', 'Paládio', plurals: ['one' => 'Paládio', 'other' => 'Paládios']),
     'XPF' => new C('XPF', 'Franco CFP', 'CFPF', plurals: ['one' => 'Franco CFP', 'other' => 'Francos CFP'], minorUnits: 0),
     'XPT' => new C('XPT', 'Platina', plurals: ['one' => 'Platina', 'other' => 'Platinas']),

@@ -185,7 +185,7 @@ return [
     'XAF' => new C('XAF', 'केंद्रीय अफ़्रीकी CFA फ़्रैंक', 'FCFA', plurals: ['one' => 'केंद्रीय अफ़्रीकी CFA फ़्रैंक', 'other' => 'केंद्रीय अफ़्रीकी CFA फ़्रैंक'], minorUnits: 0),
     'XCD' => new C('XCD', 'पूर्वी कैरिबियाई डॉलर', 'EC$', narrow: '$', plurals: ['one' => 'पूर्वी कैरिबियाई डॉलर', 'other' => 'पूर्वी कैरिबियाई डॉलर']),
     'XEU' => new C('XEU', 'यूरोपीय मुद्रा इकाई', plurals: ['one' => 'यूरोपीय मुद्रा इकाई', 'other' => 'यूरोपीय मुद्रा इकाई']),
-    'XOF' => new C('XOF', 'पश्चिमी अफ़्रीकी CFA फ़्रैंक', 'F CFA', plurals: ['one' => 'पश्चिमी अफ़्रीकी CFA फ़्रैंक', 'other' => 'पश्चिमी अफ़्रीकी CFA फ़्रैंक'], minorUnits: 0),
+    'XOF' => new C('XOF', 'पश्चिमी अफ़्रीकी CFA फ़्रैंक', "F\u{202F}CFA", plurals: ['one' => 'पश्चिमी अफ़्रीकी CFA फ़्रैंक', 'other' => 'पश्चिमी अफ़्रीकी CFA फ़्रैंक'], minorUnits: 0),
     'XPF' => new C('XPF', '[CFP] फ़्रैंक', 'CFPF', plurals: ['one' => '[CFP] फ़्रैंक', 'other' => '[CFP] फ़्रैंक'], minorUnits: 0),
     'XXX' => new C('XXX', 'अज्ञात मुद्रा', '¤', plurals: ['one' => '(मुद्रा की अज्ञात इकाई)', 'other' => '(अज्ञात मुद्रा)']),
     'YER' => new C('YER', 'यमनी रियाल', plurals: ['one' => 'यमनी रियाल', 'other' => 'यमनी रियाल']),

@@ -73,7 +73,7 @@ return [
     'VES' => new C('VES', 'Boliva ya Venezuela', plurals: ['one' => 'boliva ya Venezuele', 'other' => 'boliva za Venezuela']),
     'VND' => new C('VND', 'Dong ya Vietnamu', '₫', narrow: '₫', plurals: ['one' => 'dong ya Vietnamu', 'other' => 'Dong za Vietnamu'], minorUnits: 0),
     'XAF' => new C('XAF', 'Faranga ya CFA ya Afrika ya Kati', 'FCFA', plurals: ['one' => 'faranga ya CFA ya Afrika ya Kati', 'other' => 'faranga ya CFA ya Afrika ya Kati'], minorUnits: 0),
-    'XOF' => new C('XOF', 'Faranga ya CFA ya Afrika Magharibi', 'F CFA', plurals: ['one' => 'faranga ya CFA ya Afrika Magharibi', 'other' => 'faranga za CFA ya Afrika Magharibi'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Faranga ya CFA ya Afrika Magharibi', "F\u{202F}CFA", plurals: ['one' => 'faranga ya CFA ya Afrika Magharibi', 'other' => 'faranga za CFA ya Afrika Magharibi'], minorUnits: 0),
     'XXX' => new C('XXX', 'Sarafu Isiyojulikana', '¤', plurals: ['one' => '(sarafu isiyojulikana)', 'other' => '(sarafu isiyojulikana)']),
     'YER' => new C('YER', 'Riali ya Yemeni', plurals: ['one' => 'riali ya Yemeni', 'other' => 'riali za Yemeni']),
 ];

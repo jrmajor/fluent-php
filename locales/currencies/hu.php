@@ -269,7 +269,7 @@ return [
     'XEU' => new C('XEU', 'európai pénznemegység', plurals: ['one' => 'Európai pénznemegység', 'other' => 'Európai pénznemegység']),
     'XFO' => new C('XFO', 'Francia arany frank'),
     'XFU' => new C('XFU', 'Francia UIC-frank'),
-    'XOF' => new C('XOF', 'CFA frank BCEAO', 'F CFA', plurals: ['one' => 'CFA frank BCEAO', 'other' => 'CFA frank BCEAO'], minorUnits: 0),
+    'XOF' => new C('XOF', 'CFA frank BCEAO', "F\u{202F}CFA", plurals: ['one' => 'CFA frank BCEAO', 'other' => 'CFA frank BCEAO'], minorUnits: 0),
     'XPD' => new C('XPD', 'palládium', plurals: ['one' => 'Palládium', 'other' => 'Palládium']),
     'XPF' => new C('XPF', 'csendes-óceáni valutaközösségi frank', 'CFPF', plurals: ['one' => 'csendes-óceáni valutaközösségi frank', 'other' => 'csendes-óceáni valutaközösségi frank'], minorUnits: 0),
     'XPT' => new C('XPT', 'platina', plurals: ['one' => 'Platina', 'other' => 'Platina']),

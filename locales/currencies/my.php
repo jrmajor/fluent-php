@@ -180,7 +180,7 @@ return [
     'XBB' => new C('XBB', 'ဥရောပငွေကြေးစံနစ်'),
     'XCD' => new C('XCD', 'အရှေ့ကာရစ်ဘီယံ ဒေါ်လာ', 'EC$', narrow: '$', plurals: ['other' => 'အရှေ့ကာရစ်ဘီယံ ဒေါ်လာ']),
     'XDR' => new C('XDR', 'အထူးထုတ်ယူခွင့်'),
-    'XOF' => new C('XOF', 'အနောက် အာဖရိက [CFA ]ဖရန့်', 'F CFA', plurals: ['other' => 'အနောက် အာဖရိက [CFA] ဖရန့်'], minorUnits: 0),
+    'XOF' => new C('XOF', 'အနောက် အာဖရိက [CFA ]ဖရန့်', "F\u{202F}CFA", plurals: ['other' => 'အနောက် အာဖရိက [CFA] ဖရန့်'], minorUnits: 0),
     'XPF' => new C('XPF', '[CFP] ဖရန့်', 'CFPF', plurals: ['other' => '[CFP] ဖရန့်'], minorUnits: 0),
     'XPT' => new C('XPT', 'ပလက်တီနမ်'),
     'XTS' => new C('XTS', 'စမ်းသပ် ငွေကြေး ကုဒ်'),

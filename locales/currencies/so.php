@@ -167,7 +167,7 @@ return [
     'WST' => new C('WST', 'Tala Samao', plurals: ['one' => 'tala Samao', 'other' => 'tala Samao']),
     'XAF' => new C('XAF', 'Faranka CFA ee Bartamaha Afrika', 'FCFA', plurals: ['one' => 'faranka CFA ee Bartamaha Afrika', 'other' => 'faranka CFA ee Bartamaha Afrika'], minorUnits: 0),
     'XCD' => new C('XCD', 'Doolarka Iist Kaaribyan', 'EC$', narrow: '$', plurals: ['one' => 'doolarka Iist Kaaribyan', 'other' => 'doolarada Iist Kaaribyan']),
-    'XOF' => new C('XOF', 'Faranka CFA Galbeedka Afrika', 'F CFA', plurals: ['one' => 'faranka CFA Galbeedka Afrika', 'other' => 'faranka CFA Galbeedka Afrika'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Faranka CFA Galbeedka Afrika', "F\u{202F}CFA", plurals: ['one' => 'faranka CFA Galbeedka Afrika', 'other' => 'faranka CFA Galbeedka Afrika'], minorUnits: 0),
     'XPF' => new C('XPF', 'Faranka CFP', 'CFPF', plurals: ['one' => 'Faranka CFP', 'other' => 'Faranka CFP'], minorUnits: 0),
     'XXX' => new C('XXX', 'Lacag aan la aqoon', '¤', plurals: ['one' => '(halbeeg lacag aan la aqoon)', 'other' => '(Lacag aan la aqoon)']),
     'YER' => new C('YER', 'Riyaalka Yemen', plurals: ['one' => 'riyaalka Yemen', 'other' => 'riyaalka Yemen']),

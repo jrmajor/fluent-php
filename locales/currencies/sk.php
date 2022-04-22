@@ -281,7 +281,7 @@ return [
     'XEU' => new C('XEU', 'európska menová jednotka', plurals: ['one' => 'európska menová jednotka', 'few' => 'európske menové jednotky', 'many' => 'európskej menovej jednotky', 'other' => 'európskych menových jednotiek']),
     'XFO' => new C('XFO', 'francúzsky zlatý frank', plurals: ['one' => 'francúzsky zlatý frank', 'few' => 'francúzske zlaté franky', 'many' => 'francúzskeho zlatého franku', 'other' => 'francúzskych zlatých frankov']),
     'XFU' => new C('XFU', 'francúzsky UIC frank', plurals: ['one' => 'francúzsky UIC frank', 'few' => 'francúzske UIC franky', 'many' => 'francúzskeho UIC franku', 'other' => 'francúzskych UIC frankov']),
-    'XOF' => new C('XOF', 'západoafrický frank', 'F CFA', plurals: ['one' => 'západoafrický frank', 'few' => 'západoafrické franky', 'many' => 'západoafrického franku', 'other' => 'západoafrických frankov'], minorUnits: 0),
+    'XOF' => new C('XOF', 'západoafrický frank', "F\u{202F}CFA", plurals: ['one' => 'západoafrický frank', 'few' => 'západoafrické franky', 'many' => 'západoafrického franku', 'other' => 'západoafrických frankov'], minorUnits: 0),
     'XPD' => new C('XPD', 'paládium', plurals: ['one' => 'trójska unca paládia', 'few' => 'trójske unce paládia', 'many' => 'trójskej unce paládia', 'other' => 'trójskych uncí paládia']),
     'XPF' => new C('XPF', 'CFP frank', 'CFPF', plurals: ['one' => 'CFP frank', 'few' => 'CFP franky', 'many' => 'CFP franku', 'other' => 'CFP frankov'], minorUnits: 0),
     'XPT' => new C('XPT', 'platina', plurals: ['one' => 'trójska unca platiny', 'few' => 'trójske unce platiny', 'many' => 'trójskej unce platiny', 'other' => 'trójskej unce platiny']),

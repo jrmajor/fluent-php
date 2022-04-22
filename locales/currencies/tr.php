@@ -281,7 +281,7 @@ return [
     'XEU' => new C('XEU', 'Avrupa Para Birimi', plurals: ['one' => 'Avrupa Para Birimi', 'other' => 'Avrupa Para Birimi']),
     'XFO' => new C('XFO', 'Fransız Altın Frangı'),
     'XFU' => new C('XFU', 'Fransız UIC-Frangı'),
-    'XOF' => new C('XOF', 'Batı Afrika CFA Frangı', 'F CFA', plurals: ['one' => 'Batı Afrika CFA frangı', 'other' => 'Batı Afrika CFA frangı'], minorUnits: 0),
+    'XOF' => new C('XOF', 'Batı Afrika CFA Frangı', "F\u{202F}CFA", plurals: ['one' => 'Batı Afrika CFA frangı', 'other' => 'Batı Afrika CFA frangı'], minorUnits: 0),
     'XPD' => new C('XPD', 'Paladyum'),
     'XPF' => new C('XPF', 'CFP Frangı', 'CFPF', plurals: ['one' => 'CFP frangı', 'other' => 'CFP frangı'], minorUnits: 0),
     'XPT' => new C('XPT', 'Platin'),

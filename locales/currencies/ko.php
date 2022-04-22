@@ -274,7 +274,7 @@ return [
     'XEU' => new C('XEU', '유럽 환율 단위'),
     'XFO' => new C('XFO', '프랑스 프랑 (Gold)'),
     'XFU' => new C('XFU', '프랑스 프랑 (UIC)'),
-    'XOF' => new C('XOF', '서아프리카 CFA 프랑', 'F CFA', plurals: ['other' => '서아프리카 CFA 프랑'], minorUnits: 0),
+    'XOF' => new C('XOF', '서아프리카 CFA 프랑', "F\u{202F}CFA", plurals: ['other' => '서아프리카 CFA 프랑'], minorUnits: 0),
     'XPD' => new C('XPD', '팔라듐'),
     'XPF' => new C('XPF', 'CFP 프랑', 'CFPF', plurals: ['other' => 'CFP 프랑'], minorUnits: 0),
     'XPT' => new C('XPT', '백금'),
