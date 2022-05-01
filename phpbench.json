@@ -3,5 +3,6 @@
     "runner.annotations": false,
     "runner.bootstrap": "vendor/autoload.php",
     "runner.path": "tests/Benchmark",
-    "runner.retry_threshold": 3
+    "runner.retry_threshold": 3,
+    "storage.xml_storage_path": ".cache/phpbench"
 }
