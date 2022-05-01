@@ -1,8 +1,8 @@
 <?php
 
-namespace Major\Fluent\Dev\Compilers;
+namespace Major\Fluent\Dev\Currencies;
 
-use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Exceptions\ShouldNotHappen;
 use Psl\Dict;
 use Psl\Regex;
@@ -46,7 +46,7 @@ final class CurrenciesOptimizer
             }
         }
 
-        $rawData = LocaleFiles::read('currencies', $region);
+        $rawData = H\LocaleFiles::read('currencies', $region);
 
         foreach ($currenciesToRemove as $currency) {
             $rawData = Regex\replace($rawData, "/\\s+'{$currency}' => .*/", '');
@@ -57,9 +57,9 @@ final class CurrenciesOptimizer
                 throw new ShouldNotHappen();
             }
 
-            LocaleFiles::delete('currencies', $region);
+            H\LocaleFiles::delete('currencies', $region);
         } else {
-            LocaleFiles::write('currencies', $region, $rawData);
+            H\LocaleFiles::write('currencies', $region, $rawData);
         }
     }
 
@@ -68,7 +68,7 @@ final class CurrenciesOptimizer
      */
     private function readLocaleData(string $locale): array
     {
-        $data = LocaleFiles::read('currencies', $locale);
+        $data = H\LocaleFiles::read('currencies', $locale);
 
         $data = (string) Str\after($data, "return [\n    '");
         $data = (string) Str\before($data, "),\n];");

@@ -1225,12 +1225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/exporter.git",
-                "reference": "85d3fa2ef7895ee24b80dc4334174d551555ca52"
+                "reference": "e7b7cf34299bc19df896ba809e4bbe0b1d342996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/85d3fa2ef7895ee24b80dc4334174d551555ca52",
-                "reference": "85d3fa2ef7895ee24b80dc4334174d551555ca52",
+                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/e7b7cf34299bc19df896ba809e4bbe0b1d342996",
+                "reference": "e7b7cf34299bc19df896ba809e4bbe0b1d342996",
                 "shasum": ""
             },
             "require": {
@@ -1240,6 +1240,7 @@
             "require-dev": {
                 "jrmajor/cs": "^0.4.0",
                 "php-standard-library/psalm-plugin": "^1.1 || ^2.0",
+                "phpbench/phpbench": "^1.2",
                 "phpunit/phpunit": "10.0.x-dev",
                 "psalm/plugin-phpunit": "^0.16.1",
                 "sebastian/diff": "5.0.x-dev as 4.0.4",
@@ -1282,7 +1283,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-21T08:32:50+00:00"
+            "time": "2022-04-30T21:30:15+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",

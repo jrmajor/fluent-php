@@ -1,12 +1,9 @@
 <?php
 
-namespace Major\Fluent\Dev\Commands;
+namespace Major\Fluent\Dev\Locales;
 
 use Major\Exporter as E;
-use Major\Fluent\Dev\Compilers\NumbersLocaleCompiler as Compiler;
-use Major\Fluent\Dev\Helpers\CldrData;
-use Major\Fluent\Dev\Helpers\LocaleDefaults;
-use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Dev\Helpers as H;
 use Psl\Dict;
 use Psl\Type;
 use Psl\Vec;
@@ -16,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class CompileNumbersData extends Command
+final class CompileLocalesCommand extends Command
 {
     protected static $defaultName = 'numbers';
 
@@ -56,10 +53,10 @@ final class CompileNumbersData extends Command
     {
         $start = microtime(true);
 
-        LocaleFiles::prepareDirectory('numbers');
+        H\LocaleFiles::prepareDirectory('numbers');
 
-        foreach (CldrData::locales('numbers') as $locale) {
-            $compiler = new Compiler($locale);
+        foreach (H\CldrData::locales('numbers') as $locale) {
+            $compiler = new LocaleCompiler($locale);
 
             $compiler->make();
             $this->addToStats($compiler);
@@ -108,10 +105,10 @@ final class CompileNumbersData extends Command
             'symbols' => 'symbol set',
         ] as $key => $name) {
             $mostPopular = $this->mostPopular($key);
-            $default = (string) E\guess(LocaleDefaults::for($key));
+            $default = (string) E\guess(H\LocaleDefaults::for($key));
 
             if ($key === 'grouping') {
-                $default = LocaleDefaults::for($key);
+                $default = H\LocaleDefaults::for($key);
             }
 
             if ($mostPopular !== $default) {
@@ -120,7 +117,7 @@ final class CompileNumbersData extends Command
         }
     }
 
-    private function addToStats(Compiler $compiler): void
+    private function addToStats(LocaleCompiler $compiler): void
     {
         $this->systems[(string) E\guess($compiler->system())][] = $compiler->locale;
         $this->decimalPatterns[(string) E\guess($compiler->pattern('decimal'))][] = $compiler->locale;

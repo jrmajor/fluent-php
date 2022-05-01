@@ -1,13 +1,13 @@
 <?php
 
-namespace Major\Fluent\Dev\Exporters;
+namespace Major\Fluent\Dev\Locales;
 
 use Major\Exporter as E;
 use Major\Exporter\Exported;
 use Major\Exporter\Exporters\Exporter;
 use Major\Exporter\Exporters\Traits\IgnoresIndentation;
 use Major\Exporter\Exporters\Traits\IsStringable;
-use Major\Fluent\Dev\Helpers\LocaleDefaults as Defaults;
+use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 
 final class LocaleExporter implements Exporter
@@ -25,27 +25,27 @@ final class LocaleExporter implements Exporter
 
         $args = [E\string($l->name)->export()];
 
-        if ($l->system !== Defaults::for('system')) {
+        if ($l->system !== H\LocaleDefaults::for('system')) {
             $args[] = E\join(['system: ', E\guess($l->system)->export()]);
         }
 
-        if ($l->decimal !== Defaults::for('decimal')) {
+        if ($l->decimal !== H\LocaleDefaults::for('decimal')) {
             $args[] = E\join(['decimal: ', E\guess($l->decimal)->export()]);
         }
 
-        if ($l->percent !== Defaults::for('percent')) {
+        if ($l->percent !== H\LocaleDefaults::for('percent')) {
             $args[] = E\join(['percent: ', E\guess($l->percent)->export()]);
         }
 
-        if ($l->currency !== Defaults::for('currency')) {
+        if ($l->currency !== H\LocaleDefaults::for('currency')) {
             $args[] = E\join(['currency: ', E\guess($l->currency)->export()]);
         }
 
-        if ($l->grouping !== Defaults::for('grouping')) {
+        if ($l->grouping !== H\LocaleDefaults::for('grouping')) {
             $args[] = E\join(['grouping: ', E\guess($l->grouping)->export()]);
         }
 
-        if ($l->symbols !== Defaults::for('symbols')) {
+        if ($l->symbols !== H\LocaleDefaults::for('symbols')) {
             $args[] = E\join(['symbols: ', E\guess($l->symbols)->export()]);
         }
 

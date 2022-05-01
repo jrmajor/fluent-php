@@ -1,6 +1,6 @@
 <?php
 
-namespace Major\Fluent\Dev\Exceptions;
+namespace Major\Fluent\Dev\Locales;
 
 use Exception;
 

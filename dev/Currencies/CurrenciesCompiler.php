@@ -2,21 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Major\Fluent\Dev\Compilers;
+namespace Major\Fluent\Dev\Currencies;
 
 use Exception;
 use Major\Exporter as E;
-use Major\Fluent\Dev\Exporters\CurrencyExporter;
-use Major\Fluent\Dev\Helpers\CldrData;
-use Major\Fluent\Dev\Helpers\IsoData;
-use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Psl\Dict;
 use Psl\Str;
 
 use function stripslashes as ss;
 
-final class CurrenciesLocaleCompiler
+final class CurrenciesCompiler
 {
     /** @var array<string, array<string, string>> */
     private array $currencies;
@@ -24,7 +21,7 @@ final class CurrenciesLocaleCompiler
     public function __construct(
         public string $locale,
     ) {
-        $this->currencies = CldrData::get('numbers', $locale, 'currencies.*.*.numbers.*');
+        $this->currencies = H\CldrData::get('numbers', $locale, 'currencies.*.*.numbers.*');
     }
 
     public function make(): void
@@ -33,7 +30,7 @@ final class CurrenciesLocaleCompiler
         $currencies = Dict\map($currencies, fn ($c) => new CurrencyExporter($c));
         $currencies = E\dict($currencies)->multiline();
 
-        LocaleFiles::write('currencies', $this->locale, E\to_file($currencies));
+        H\LocaleFiles::write('currencies', $this->locale, E\to_file($currencies));
     }
 
     /**
@@ -48,7 +45,7 @@ final class CurrenciesLocaleCompiler
             ?? throw new Exception("No symbol for {$code} in {$this->locale}.");
 
         $narrow = $data['symbol-alt-narrow'] ?? null;
-        $minorUnits = IsoData::minorUnits($code);
+        $minorUnits = H\IsoData::minorUnits($code);
         $plurals = $this->makePlurals($data);
 
         return new Currency($code, ss($name), $symbol, $narrow, $plurals, $minorUnits);

@@ -32,7 +32,7 @@ final class CldrData
 
         $data = Json\decode(Filesystem\read_file($path), true);
 
-        foreach (Str\split($keys, '.') as $key) {
+        foreach (Str\Byte\split($keys, '.') as $key) {
             if ($key !== '*') {
                 $data = $data[$key];
 
@@ -51,7 +51,8 @@ final class CldrData
 
     private static function path(string $package, string $path = ''): string
     {
-        return __DIR__ . "/../../node_modules/cldr-{$package}-modern/main"
-            . ($path !== '' ? "/{$path}" : '');
+        $path = "node_modules/cldr-{$package}-modern/main/{$path}";
+
+        return Str\Byte\trim_right(__DIR__ . "/../../{$path}", '/');
     }
 }

@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Major\Fluent\Dev\Compilers;
+namespace Major\Fluent\Dev\Locales;
 
 use Exception;
 use Locale as IntlLocale;
 use Major\Exporter as E;
-use Major\Fluent\Dev\Exceptions\InvalidCurrencySpacing;
-use Major\Fluent\Dev\Exporters\LocaleExporter;
-use Major\Fluent\Dev\Helpers\CldrData;
-use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Formatters\Number\NumberFormatter;
 use Psl\Dict;
@@ -18,7 +15,7 @@ use Psl\Regex;
 use Psl\Str;
 use Psl\Type;
 
-final class NumbersLocaleCompiler
+final class LocaleCompiler
 {
     /** @var array<mixed> */
     private array $numbers;
@@ -26,7 +23,7 @@ final class NumbersLocaleCompiler
     public function __construct(
         public string $locale,
     ) {
-        $this->numbers = CldrData::get('numbers', $locale, 'numbers.*.*.numbers');
+        $this->numbers = H\CldrData::get('numbers', $locale, 'numbers.*.*.numbers');
     }
 
     public function make(): void
@@ -47,7 +44,7 @@ final class NumbersLocaleCompiler
             $this->unitPatterns(),
         )));
 
-        LocaleFiles::write('numbers', $this->locale, $compiled);
+        H\LocaleFiles::write('numbers', $this->locale, $compiled);
 
         $this->checkCurrencySpacing();
     }

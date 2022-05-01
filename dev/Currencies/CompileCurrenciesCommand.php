@@ -1,18 +1,15 @@
 <?php
 
-namespace Major\Fluent\Dev\Commands;
+namespace Major\Fluent\Dev\Currencies;
 
 use InvalidArgumentException;
-use Major\Fluent\Dev\Compilers\CurrenciesLocaleCompiler as Compiler;
-use Major\Fluent\Dev\Compilers\CurrenciesOptimizer;
-use Major\Fluent\Dev\Helpers\CldrData;
-use Major\Fluent\Dev\Helpers\LocaleFiles;
+use Major\Fluent\Dev\Helpers as H;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class CompileCurrenciesData extends Command
+final class CompileCurrenciesCommand extends Command
 {
     protected static $defaultName = 'currencies';
 
@@ -46,10 +43,10 @@ final class CompileCurrenciesData extends Command
     {
         $start = microtime(true);
 
-        LocaleFiles::prepareDirectory('currencies');
+        H\LocaleFiles::prepareDirectory('currencies');
 
-        foreach (CldrData::locales('numbers') as $locale) {
-            (new Compiler($locale))->make();
+        foreach (H\CldrData::locales('numbers') as $locale) {
+            (new CurrenciesCompiler($locale))->make();
         }
 
         $output->writeln('<info>Compiled in ' . round(microtime(true) - $start, 2) . 's</info>');
@@ -59,7 +56,7 @@ final class CompileCurrenciesData extends Command
     {
         $start = microtime(true);
 
-        foreach (LocaleFiles::regions() as $language => $regions) {
+        foreach (H\LocaleFiles::regions() as $language => $regions) {
             (new CurrenciesOptimizer($language, $regions))->optimize();
         }
 

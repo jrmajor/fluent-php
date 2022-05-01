@@ -1,6 +1,6 @@
 <?php
 
-namespace Major\Fluent\Dev\Exporters;
+namespace Major\Fluent\Dev\Currencies;
 
 use Major\Exporter as E;
 use Major\Exporter\Exported;

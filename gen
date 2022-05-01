@@ -3,7 +3,7 @@
 
 use NunoMaduro\Collision\Provider;
 use Symfony\Component\Console\Application;
-use Major\Fluent\Dev\Commands;
+use Major\Fluent\Dev;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -12,8 +12,8 @@ require __DIR__ . '/vendor/autoload.php';
 $application = new Application('fluent-php locale data compiler');
 
 $application->addCommands([
-    new Commands\CompileCurrenciesData(),
-    new Commands\CompileNumbersData(),
+    new Dev\Currencies\CompileCurrenciesCommand(),
+    new Dev\Locales\CompileLocalesCommand(),
 ]);
 
 $application->run();
