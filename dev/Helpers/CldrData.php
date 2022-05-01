@@ -3,6 +3,7 @@
 namespace Major\Fluent\Dev\Helpers;
 
 use InvalidArgumentException;
+use Psl\Dict;
 use Psl\Filesystem;
 use Psl\Iter;
 use Psl\Json;
@@ -17,8 +18,28 @@ final class CldrData
     public static function locales(string $package): array
     {
         $locales = Filesystem\read_directory(self::path($package));
+        $locales = Vec\map($locales, fn ($l) => Filesystem\get_filename($l));
 
-        return Vec\map($locales, fn ($l) => Filesystem\get_filename($l));
+        return Vec\sort($locales);
+    }
+
+    /**
+     * @return array<string, list<string>> List of regions grouped by language locale.
+     */
+    public static function regions(string $package): array
+    {
+        $regions = Dict\group_by(
+            self::locales($package),
+            fn (string $locale) => Str\before($locale, '-') ?? $locale,
+        );
+
+        $regions = Dict\map_with_key($regions, function (string $lang, array $c) {
+            return Vec\filter($c, fn (string $region) => $region !== $lang);
+        });
+
+        unset($regions['und']);
+
+        return $regions;
     }
 
     /**
@@ -30,7 +51,7 @@ final class CldrData
 
         $path = self::path($package, "{$locale}/{$filename}.json");
 
-        $data = Json\decode(Filesystem\read_file($path), true);
+        $data = Json\decode(Filesystem\read_file($path));
 
         foreach (Str\Byte\split($keys, '.') as $key) {
             if ($key !== '*') {

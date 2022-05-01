@@ -26,4 +26,14 @@ final class Currency
         $this->symbol = $symbol ?? $code;
         $this->narrow = $narrow ?? $code;
     }
+
+    public function isIdentical(self $other): bool
+    {
+        return $this->code === $other->code
+            && $this->name === $other->name
+            && $this->symbol === $other->symbol
+            && $this->narrow === $other->narrow
+            && $this->plurals === $other->plurals
+            && $this->minorUnits === $other->minorUnits;
+    }
 }
