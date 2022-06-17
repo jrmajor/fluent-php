@@ -3,11 +3,33 @@
 <a href="https://packagist.org/packages/jrmajor/fluent"><img src="https://img.shields.io/packagist/v/jrmajor/fluent.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/jrmajor/fluent"><img src="https://img.shields.io/packagist/php-v/jrmajor/fluent.svg" alt="Required PHP Version"></a>
 
-A PHP implementation of [Project Fluent](https://projectfluent.org), a localization system by Mozilla.
+A PHP implementation of the [Project Fluent](https://projectfluent.org), a localization system designed by Mozilla to unleash the expressive power of the natural language.
 
-You may install it via Composer: `composer require jrmajor/fluent`.
+Read the [Fluent Syntax Guide](https://projectfluent.org/fluent/guide/) or try it out in the [Fluent Playground](https://projectfluent.org/play/) to learn more about the syntax.
 
-Use [jrmajor/laravel-fluent](https://github.com/jrmajor/laravel-fluent) package to integrate Fluent translations into your Laravel application.
+```ftl
+shared-photos =
+    { $userName } { $photoCount ->
+        [one] added a new photo
+       *[other] added { $photoCount } new photos
+    } to { $userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.
+```
+
+```php
+$bundle->message('stream.shared-photos', [
+    'userName' => 'jrmajor',
+    'photoCount' => 2,
+    'userGender' => 'male',
+]); // jrmajor added 2 new photos to his stream.
+```
+
+You may install this package via Composer: `composer require jrmajor/fluent`.
+
+Use [jrmajor/laravel-fluent](https://github.com/jrmajor/laravel-fluent) to integrate Fluent translations into your Laravel application.
 
 ## Usage
 
