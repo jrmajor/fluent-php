@@ -14,9 +14,9 @@ use Major\PluralRules\PluralRules;
  */
 final class NumberFormatter
 {
-    public const PATTERN_REGEX = "([¤\\-%\u{00A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{00A0}]*)";
+    public const PatternRegEx = "([¤\\-%\u{00A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{00A0}]*)";
 
-    private const NUMERAL_SYSTEMS = [
+    private const NumeralSystems = [
         'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
         'arabext' => ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
         'beng' => ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
@@ -219,7 +219,7 @@ final class NumberFormatter
 
         return str_replace(
             range(0, 9),
-            self::NUMERAL_SYSTEMS[$this->locale->system],
+            self::NumeralSystems[$this->locale->system],
             $string,
         );
     }
@@ -275,7 +275,7 @@ final class NumberFormatter
 
     private function isDigit(string $c): bool
     {
-        return in_array($c, self::NUMERAL_SYSTEMS[$this->locale->system], true);
+        return in_array($c, self::NumeralSystems[$this->locale->system], true);
     }
 
     private function loadLocaleData(string $locale): void
@@ -304,7 +304,7 @@ final class NumberFormatter
     {
         $matches = [];
 
-        if (! preg_match('/^' . self::PATTERN_REGEX . '$/', $pattern, $matches)) {
+        if (! preg_match('/^' . self::PatternRegEx . '$/', $pattern, $matches)) {
             throw new ShouldNotHappen();
         }
 

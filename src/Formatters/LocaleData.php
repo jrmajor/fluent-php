@@ -10,7 +10,7 @@ use Major\Fluent\Formatters\Number\Locale\Locale;
  */
 final class LocaleData
 {
-    private const PATH = __DIR__ . '/../../locales/';
+    private const Path = __DIR__ . '/../../locales/';
 
     /**
      * @psalm-suppress UnresolvableInclude
@@ -32,7 +32,7 @@ final class LocaleData
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
         return array_merge(
-            require self::PATH . 'currencies/und.php',
+            require self::Path . 'currencies/und.php',
             require $language,
             $region !== null ? require $region : [],
         );
@@ -84,7 +84,7 @@ final class LocaleData
     private static function getFiles(string $type, string $language): array
     {
         /** @var list<non-empty-string> $files */
-        return glob(self::PATH . "{$type}/{$language}*.php");
+        return glob(self::Path . "{$type}/{$language}*.php");
     }
 
     /**

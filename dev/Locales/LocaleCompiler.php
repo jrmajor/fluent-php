@@ -61,7 +61,7 @@ final class LocaleCompiler
 
         Type\string()->assert($pattern);
 
-        $regex = NumberFormatter::PATTERN_REGEX;
+        $regex = NumberFormatter::PatternRegEx;
 
         if (! Regex\matches($pattern, "/^{$regex}(;{$regex})?$/")) {
             throw new Exception("Pattern {$pattern} is invalid.");

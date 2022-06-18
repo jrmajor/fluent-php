@@ -8,7 +8,7 @@ use Major\Fluent\Node\LiteralValues\StringLiteralValue;
 final class StringLiteral extends Literal
 {
     // backslash backslash, backslash double quote, uHHHH, UHHHHHH
-    protected const KNOWN_ESCAPES = '/(?:\\\\\\\\|\\\\"|\\\\[u]([0-9a-fA-F]{4})|\\\\[U]([0-9a-fA-F]{6}))/';
+    protected const KnownEscapes = '/(?:\\\\\\\\|\\\\"|\\\\[u]([0-9a-fA-F]{4})|\\\\[U]([0-9a-fA-F]{6}))/';
 
     public function parse(): StringLiteralValue
     {
@@ -35,7 +35,7 @@ final class StringLiteral extends Literal
         };
 
         $value = preg_replace_callback(
-            self::KNOWN_ESCAPES,
+            self::KnownEscapes,
             $callback,
             $this->value,
         );
