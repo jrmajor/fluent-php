@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+use Major\Fluent\Dev;
 use NunoMaduro\Collision\Provider;
 use Symfony\Component\Console\Application;
-use Major\Fluent\Dev;
 
 require __DIR__ . '/vendor/autoload.php';
 
