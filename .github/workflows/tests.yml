@@ -39,7 +39,7 @@ jobs:
           restore-keys: composer-
 
       - name: Install Composer dependencies
-        run: composer update --${{ matrix.stability }} --no-progress --no-interaction
+        run: composer update --${{ matrix.stability }}
 
       - name: Execute tests
         run: vendor/bin/phpunit

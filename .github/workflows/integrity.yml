@@ -22,7 +22,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction
+        run: composer install
 
       - name: Install Yarn dependencies
         run: yarn install

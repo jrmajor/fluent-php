@@ -43,7 +43,7 @@ jobs:
           restore-keys: psalm-
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction
+        run: composer install
 
       - name: Run Psalm
         run: vendor/bin/psalm --output-format=github --no-progress

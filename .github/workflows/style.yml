@@ -40,7 +40,7 @@ jobs:
           restore-keys: php-cs-fixer-
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction
+        run: composer install
 
       - name: Run PHP-CS-Fixer
         run: vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction
