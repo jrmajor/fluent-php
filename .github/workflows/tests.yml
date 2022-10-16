@@ -38,13 +38,6 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
-      - name: PHPUnit cache
-        uses: actions/cache@v2
-        with:
-          path: .cache/phpunit
-          key: phpunit-${{ github.sha }}
-          restore-keys: phpunit-
-
       - name: Install Composer dependencies
         run: composer update --${{ matrix.stability }} --no-progress --no-interaction
 
