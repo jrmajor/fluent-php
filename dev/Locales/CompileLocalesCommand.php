@@ -7,18 +7,16 @@ use Major\Fluent\Dev\Helpers as H;
 use Psl\Dict;
 use Psl\Type;
 use Psl\Vec;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand('numbers', 'Compiles numbers data for all locales')]
 final class CompileLocalesCommand extends Command
 {
-    protected static $defaultName = 'numbers';
-
-    protected static $defaultDescription = 'Compiles numbers data for all locales';
-
     /** @var array<string, list<string>> */
     private array $systems = [];
 

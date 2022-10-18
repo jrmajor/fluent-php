@@ -5,16 +5,14 @@ namespace Major\Fluent\Dev\Currencies;
 use Major\Exporter as E;
 use Major\Fluent\Dev\Helpers as H;
 use Psl\Dict;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand('currencies', 'Compiles currencies data for all locales')]
 final class CompileCurrenciesCommand extends Command
 {
-    protected static $defaultName = 'currencies';
-
-    protected static $defaultDescription = 'Compiles currencies data for all locales';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $start = microtime(true);
