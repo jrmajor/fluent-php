@@ -52,9 +52,9 @@ final class CyclicReferencesTest extends TestCase
     #[TestDox('returns {???} for cyclic self-reference')]
     public function testSelf(): void
     {
-            $this->assertTranslationErrors('{???}', [
-                [CyclicReferenceException::class, 'Placeable contains cyclic reference.'],
-            ], 'self');
+        $this->assertTranslationErrors('{???}', [
+            [CyclicReferenceException::class, 'Placeable contains cyclic reference.'],
+        ], 'self');
     }
 
     #[TestDox('it returns {???} for cyclic self-reference in a member')]

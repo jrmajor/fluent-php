@@ -230,7 +230,7 @@ final class FluentParser
 
         $attributes = $this->getAttributes($cursor);
 
-        if (! $value && ! count($attributes)) {
+        if (! $value && $attributes === []) {
             throw new ParserException('E0005', ['id' => $id->name]);
         }
 
@@ -339,7 +339,7 @@ final class FluentParser
         }
 
         return match (true) {
-            ! count($variants) => throw new ParserException('E0011'),
+            $variants === [] => throw new ParserException('E0011'),
             ! $hasDefault => throw new ParserException('E0010'),
             default => $variants,
         };
@@ -763,7 +763,7 @@ final class FluentParser
                 $named[] = $argument;
 
                 $argumentNames[] = $argument->name->name;
-            } elseif (count($argumentNames)) {
+            } elseif ($argumentNames !== []) {
                 throw new ParserException('E0021');
             } else {
                 $positional[] = $argument;

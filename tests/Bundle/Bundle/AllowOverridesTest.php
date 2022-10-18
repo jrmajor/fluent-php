@@ -34,7 +34,7 @@ final class AllowOverridesTest extends TestCase
 
     #[TestDox('it adds message when allowOverrides is true for bundle')]
     public function testMessageOk(): void
-        {
+    {
         $bundle = (new FluentBundle('en-US', allowOverrides: true))
             ->addFtl('key = Foo')
             ->addFtl('key = Bar');
