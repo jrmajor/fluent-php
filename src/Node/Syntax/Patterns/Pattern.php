@@ -7,7 +7,7 @@ use Major\Fluent\Node\Syntax\SyntaxNode;
 final class Pattern extends SyntaxNode
 {
     public function __construct(
-        /** @var PatternElement[] */
+        /** @var list<PatternElement> */
         public array $elements,
     ) { }
 }

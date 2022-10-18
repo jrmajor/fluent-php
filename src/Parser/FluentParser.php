@@ -276,11 +276,11 @@ final class FluentParser
     }
 
     /**
-     * @return Attribute[]
+     * @return list<Attribute>
      */
     private function getAttributes(FluentCursor $cursor): array
     {
-        /** @var Attribute[] */
+        /** @var list<Attribute> */
         $attributes = [];
 
         $cursor->peekBlank();
@@ -315,11 +315,11 @@ final class FluentParser
     }
 
     /**
-     * @return Variant[]
+     * @return list<Variant>
      */
     private function getVariants(FluentCursor $cursor): array
     {
-        /** @var Variant[] */
+        /** @var list<Variant> */
         $variants = [];
         $hasDefault = false;
 
@@ -425,7 +425,7 @@ final class FluentParser
     {
         $spanStart = $cursor->index();
 
-        /** @var array<PatternElement|Indent> */
+        /** @var list<PatternElement|Indent> */
         $elements = [];
 
         if ($block) {
@@ -500,12 +500,12 @@ final class FluentParser
      * Dedent a list of elements by removing the maximum common indent from the
      * beginning of text lines. The common indent is calculated in getPattern.
      *
-     * @param array<PatternElement|Indent> $elements
-     * @return PatternElement[]
+     * @param list<PatternElement|Indent> $elements
+     * @return list<PatternElement>
      */
     private function dedent(array $elements, ?int $commonIndent): array
     {
-        /** @var PatternElement[] */
+        /** @var list<PatternElement> */
         $trimmed = [];
 
         foreach ($elements as $element) {
@@ -560,6 +560,7 @@ final class FluentParser
             }
         }
 
+        /** @var list<PatternElement> */
         return $trimmed;
     }
 
@@ -735,13 +736,13 @@ final class FluentParser
     {
         $spanStart = $cursor->index();
 
-        /** @var Expression[] */
+        /** @var list<Expression> */
         $positional = [];
 
-        /** @var NamedArgument[] */
+        /** @var list<NamedArgument> */
         $named = [];
 
-        /** @var string[] */
+        /** @var list<string> */
         $argumentNames = [];
 
         $cursor->expectChar('(');

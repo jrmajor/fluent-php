@@ -54,7 +54,7 @@ final class FluentBundle
     /** @var array<string, Closure> */
     private array $functions = [];
 
-    /** @var ResolverException[] */
+    /** @var list<ResolverException> */
     private array $errors = [];
 
     public function __construct(
@@ -161,7 +161,7 @@ final class FluentBundle
     }
 
     /**
-     * @return ResolverException[]
+     * @return list<ResolverException>
      */
     public function popErrors(): array
     {
@@ -512,7 +512,7 @@ final class FluentBundle
     }
 
     /**
-     * @param Variant[] $variants
+     * @param list<Variant> $variants
      */
     private function getDefaultVariant(
         array $variants,

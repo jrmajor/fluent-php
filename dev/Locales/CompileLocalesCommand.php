@@ -19,22 +19,22 @@ final class CompileLocalesCommand extends Command
 
     protected static $defaultDescription = 'Compiles numbers data for all locales';
 
-    /** @var array<string, string[]> */
+    /** @var array<string, list<string>> */
     private array $systems = [];
 
-    /** @var array<string, string[]> */
+    /** @var array<string, list<string>> */
     private array $decimalPatterns = [];
 
-    /** @var array<string, string[]> */
+    /** @var array<string, list<string>> */
     private array $percentPatterns = [];
 
-    /** @var array<string, string[]> */
+    /** @var array<string, list<string>> */
     private array $currencyPatterns = [];
 
-    /** @var array<int, string[]> */
+    /** @var array<int, list<string>> */
     private array $grouping = [];
 
-    /** @var array<string, string[]> */
+    /** @var array<string, list<string>> */
     private array $symbols = [];
 
     protected function configure(): void

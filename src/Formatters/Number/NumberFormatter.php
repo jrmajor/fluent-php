@@ -27,7 +27,7 @@ final class NumberFormatter
 
     private Locale $locale;
 
-    /** @var Currency[] */
+    /** @var array<string, Currency> */
     private array $currencies = [];
 
     public function __construct(string $locale)

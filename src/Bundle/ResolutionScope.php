@@ -14,11 +14,11 @@ final class ResolutionScope
     /** @var WeakMap<Pattern, true> */
     public WeakMap $dirty;
 
-    /** @var NamedArgument[] */
+    /** @var ?list<NamedArgument> */
     public ?array $parameters = null;
 
     public function __construct(
-        /** @var mixed[] */
+        /** @var array<string, mixed> */
         public array $arguments,
     ) {
         /** @psalm-suppress PropertyTypeCoercion */

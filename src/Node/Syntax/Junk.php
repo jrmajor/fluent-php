@@ -4,7 +4,7 @@ namespace Major\Fluent\Node\Syntax;
 
 final class Junk extends SyntaxNode
 {
-    /** @var Annotation[] */
+    /** @var list<Annotation> */
     public array $annotations = [];
 
     public function __construct(

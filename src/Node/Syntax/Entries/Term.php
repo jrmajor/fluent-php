@@ -12,7 +12,7 @@ final class Term extends Entry
     public function __construct(
         public Identifier $id,
         public Pattern $value,
-        /** @var Attribute[] $attributes */
+        /** @var list<Attribute> $attributes */
         public array $attributes = [],
         public ?Comment $comment = null,
     ) { }

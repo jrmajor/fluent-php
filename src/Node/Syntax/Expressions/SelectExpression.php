@@ -8,7 +8,7 @@ final class SelectExpression extends Expression
 {
     public function __construct(
         public Expression $selector,
-        /** @var Variant[] */
+        /** @var list<Variant> */
         public array $variants,
     ) { }
 }

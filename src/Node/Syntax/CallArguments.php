@@ -7,9 +7,9 @@ use Major\Fluent\Node\Syntax\Expressions\Expression;
 final class CallArguments extends SyntaxNode
 {
     public function __construct(
-        /** @var Expression[] */
+        /** @var list<Expression> */
         public array $positional = [],
-        /** @var NamedArgument[] */
+        /** @var list<NamedArgument> */
         public array $named = [],
     ) { }
 }
