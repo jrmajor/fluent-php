@@ -6,7 +6,7 @@ use Major\Fluent\Parser\FluentParser;
 use PhpBench\Attributes\BeforeMethods;
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
-use Psl\Filesystem;
+use Psl\File;
 
 #[BeforeMethods('setUp')]
 final class ParserBench
@@ -20,7 +20,7 @@ final class ParserBench
         $this->parser = new FluentParser(true);
 
         // File obtained from https://hg.mozilla.org/l10n-central/pl/file/tip/browser/browser/preferences/preferences.ftl.
-        $this->preferences = Filesystem\read_file(__DIR__ . '/preferences.ftl');
+        $this->preferences = File\read(__DIR__ . '/preferences.ftl');
     }
 
     #[Revs(10), Iterations(5)]

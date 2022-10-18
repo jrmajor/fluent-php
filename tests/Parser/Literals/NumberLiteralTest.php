@@ -65,7 +65,7 @@ final class NumberLiteralTest extends TestCase
         /** @psalm-suppress UndefinedPropertyFetch */
         $expr = $ast->value->elements[0]->expression;
 
-        $parsed = Type\object(NumberLiteralValue::class)->coerce($expr->parse());
+        $parsed = Type\instance_of(NumberLiteralValue::class)->coerce($expr->parse());
 
         self::assertSame($value, $parsed->value);
         self::assertSame($precision, $parsed->precision);

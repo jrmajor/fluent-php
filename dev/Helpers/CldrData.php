@@ -4,6 +4,7 @@ namespace Major\Fluent\Dev\Helpers;
 
 use InvalidArgumentException;
 use Psl\Dict;
+use Psl\File;
 use Psl\Filesystem;
 use Psl\Iter;
 use Psl\Json;
@@ -51,7 +52,7 @@ final class CldrData
 
         $path = self::path($package, "{$locale}/{$filename}.json");
 
-        $data = Json\decode(Filesystem\read_file($path));
+        $data = Json\decode(File\read($path));
 
         foreach (Str\Byte\split($keys, '.') as $key) {
             if ($key !== '*') {
@@ -70,10 +71,14 @@ final class CldrData
         return $data;
     }
 
+    /**
+     * @return non-empty-string
+     */
     private static function path(string $package, string $path = ''): string
     {
         $path = "node_modules/cldr-{$package}-modern/main/{$path}";
 
+        /** @var non-empty-string */
         return Str\Byte\trim_right(__DIR__ . "/../../{$path}", '/');
     }
 }

@@ -54,7 +54,7 @@ final class StringLiteralTest extends TestCase
         /** @psalm-suppress UndefinedPropertyFetch */
         $expr = $ast->value->elements[0]->expression;
 
-        $parsed = Type\object(StringLiteralValue::class)->coerce($expr->parse());
+        $parsed = Type\instance_of(StringLiteralValue::class)->coerce($expr->parse());
 
         self::assertSame($value, $parsed->value);
     }

@@ -2,7 +2,7 @@
 
 namespace Major\Fluent\Dev\Helpers;
 
-use Psl\Filesystem;
+use Psl\File;
 use Psl\Str;
 use SimpleXMLElement;
 
@@ -22,7 +22,7 @@ final class IsoData
 
     private static function loadMinorUnits(): void
     {
-        $xml = Filesystem\read_file(__DIR__ . '/../ISO4217.xml');
+        $xml = File\read(__DIR__ . '/../ISO4217.xml');
 
         $xml = new SimpleXMLElement($xml);
 

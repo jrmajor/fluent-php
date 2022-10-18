@@ -7,6 +7,7 @@ use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use Psl\File;
 use Psl\Filesystem;
 use Psl\Json;
 use Psl\Type;
@@ -55,13 +56,13 @@ final class ReferenceTest extends TestCase
         }
 
         $cases = Type\dict(Type\string(), Type\shape([
-            'ftl' => Type\string(),
-            'json' => Type\string(),
+            'ftl' => Type\non_empty_string(),
+            'json' => Type\non_empty_string(),
         ]))->coerce($cases);
 
         foreach ($cases as $name => ['ftl' => $ftl, 'json' => $json]) {
-            $ftl = Filesystem\read_file($ftl);
-            $json = Filesystem\read_file($json);
+            $ftl = File\read($ftl);
+            $json = File\read($json);
 
             yield $name => [$name, $ftl, $json];
         }

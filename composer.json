@@ -33,11 +33,11 @@
     "require-dev": {
         "ext-json": "*",
         "ext-simplexml": "*",
-        "azjezz/psl": "^1.9",
+        "azjezz/psl": "^2.0",
         "jrmajor/cs": "^0.4.0",
         "jrmajor/exporter": "dev-master",
         "nunomaduro/collision": "^6.2",
-        "php-standard-library/psalm-plugin": "^1.1",
+        "php-standard-library/psalm-plugin": "^2.0",
         "phpbench/phpbench": "^1.2",
         "phpunit/phpunit": "10.0.x-dev",
         "psalm/plugin-phpunit": "^0.16.1",

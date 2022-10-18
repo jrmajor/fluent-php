@@ -2,6 +2,7 @@
 
 namespace Major\Fluent\Tests;
 
+use Psl\File;
 use Psl\Filesystem;
 use Psl\Hash;
 use Psl\Json;
@@ -13,6 +14,7 @@ use Psl\Str;
  */
 trait NodeAssertions
 {
+    /** @var non-empty-string */
     private static string $cachePath = __DIR__ . '/../.cache/phpunit/nodeAssertions.json';
 
     /** @var ?array<string, string> */
@@ -28,7 +30,7 @@ trait NodeAssertions
     {
         self::loadCache();
 
-        $hash = Hash\hash($command, 'sha1');
+        $hash = Hash\hash($command, Hash\Algorithm::SHA1);
 
         if (! isset(self::$cache[$hash])) {
             self::$cache[$hash] = self::freshNodeOutput($command);
@@ -57,14 +59,14 @@ trait NodeAssertions
         Filesystem\create_directory($dir);
 
         if (! Filesystem\is_file(self::$cachePath)) {
-            Filesystem\write_file(self::$cachePath, '{}');
+            File\write(self::$cachePath, '{}');
         }
 
-        self::$cache = Json\decode(Filesystem\read_file(self::$cachePath));
+        self::$cache = Json\decode(File\read(self::$cachePath));
     }
 
     private static function saveCache(): void
     {
-        Filesystem\write_file(self::$cachePath, Json\encode(self::$cache));
+        File\write(self::$cachePath, Json\encode(self::$cache), File\WriteMode::TRUNCATE);
     }
 }

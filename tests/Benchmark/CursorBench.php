@@ -6,7 +6,7 @@ use Major\Fluent\Parser\FluentCursor;
 use PhpBench\Attributes\BeforeMethods;
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
-use Psl\Filesystem;
+use Psl\File;
 
 #[BeforeMethods('setUp')]
 final class CursorBench
@@ -18,7 +18,7 @@ final class CursorBench
     public function setUp(): void
     {
         // File obtained from https://hg.mozilla.org/l10n-central/pl/file/tip/browser/browser/preferences/preferences.ftl.
-        $preferences = Filesystem\read_file(__DIR__ . '/preferences.ftl');
+        $preferences = File\read(__DIR__ . '/preferences.ftl');
 
         $this->cursor = new FluentCursor($preferences);
         $this->length = mb_strlen($preferences);
