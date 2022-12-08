@@ -64,7 +64,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, ?O}>
+     * @return Generator<array{string, int|float, O}>
      */
     public static function provideCodeDisplayCases(): Generator
     {
@@ -83,7 +83,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, ?O}>
+     * @return Generator<array{string, int|float, O}>
      */
     public static function provideSymbolDisplayCases(): Generator
     {
@@ -102,7 +102,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, ?O}>
+     * @return Generator<array{string, int|float, O}>
      */
     public static function provideNarrowSymbolDisplayCases(): Generator
     {
@@ -121,7 +121,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, ?O}>
+     * @return Generator<array{string, int|float, O}>
      */
     public static function provideNameDisplayCases(): Generator
     {

@@ -25,7 +25,7 @@ final class PercentFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{string, int|float, ?O}>
+     * @return Generator<array{0: string, 1: int|float, 2?: O}>
      */
     public static function providePercentCases(): Generator
     {

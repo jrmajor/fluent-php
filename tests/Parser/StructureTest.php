@@ -35,7 +35,7 @@ final class StructureTest extends TestCase
     }
 
     /**
-     * @return Generator<array{string, string}>
+     * @return Generator<array{string, string, string}>
      */
     public static function provideStructureCases(): Generator
     {

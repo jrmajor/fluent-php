@@ -40,7 +40,7 @@ final class ReferenceTest extends TestCase
     }
 
     /**
-     * @return Generator<array{string, string}>
+     * @return Generator<array{string, string, string}>
      */
     public static function provideReferenceCases(): Generator
     {
