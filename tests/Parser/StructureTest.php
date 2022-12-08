@@ -37,7 +37,7 @@ final class StructureTest extends TestCase
     /**
      * @return Generator<array{string, string}>
      */
-    public function provideStructureCases(): Generator
+    public static function provideStructureCases(): Generator
     {
         $files = Filesystem\read_directory(__DIR__ . '/../fluent.js/fluent-syntax/test/fixtures_structure');
 

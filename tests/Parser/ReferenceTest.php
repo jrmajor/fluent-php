@@ -42,7 +42,7 @@ final class ReferenceTest extends TestCase
     /**
      * @return Generator<array{string, string}>
      */
-    public function provideReferenceCases(): Generator
+    public static function provideReferenceCases(): Generator
     {
         $files = Filesystem\read_directory(__DIR__ . '/../fluent.js/fluent-syntax/test/fixtures_reference');
 

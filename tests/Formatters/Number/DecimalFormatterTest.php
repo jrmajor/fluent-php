@@ -25,7 +25,7 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
     /**
      * @return Generator<array{string, int|float, ?O}>
      */
-    public function provideDecimalCases(): Generator
+    public static function provideDecimalCases(): Generator
     {
         foreach ([
             [1234.5678],

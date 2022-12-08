@@ -66,7 +66,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     /**
      * @return Generator<array{string, int|float, ?O}>
      */
-    public function provideCodeDisplayCases(): Generator
+    public static function provideCodeDisplayCases(): Generator
     {
         foreach ([
             [69, ['currency' => 'PLN']],
@@ -74,7 +74,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach ($this->provideLocales() as $locale) {
+            foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -85,7 +85,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     /**
      * @return Generator<array{string, int|float, ?O}>
      */
-    public function provideSymbolDisplayCases(): Generator
+    public static function provideSymbolDisplayCases(): Generator
     {
         foreach ([
             [69, ['currency' => 'PLN']],
@@ -93,7 +93,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach ($this->provideLocales() as $locale) {
+            foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -104,7 +104,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     /**
      * @return Generator<array{string, int|float, ?O}>
      */
-    public function provideNarrowSymbolDisplayCases(): Generator
+    public static function provideNarrowSymbolDisplayCases(): Generator
     {
         foreach ([
             [69, ['currency' => 'PLN']],
@@ -112,7 +112,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach ($this->provideLocales() as $locale) {
+            foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -123,7 +123,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     /**
      * @return Generator<array{string, int|float, ?O}>
      */
-    public function provideNameDisplayCases(): Generator
+    public static function provideNameDisplayCases(): Generator
     {
         foreach ([
             [69, ['currency' => 'PLN']],
@@ -131,7 +131,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach ($this->provideLocales() as $locale) {
+            foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -142,7 +142,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     /**
      * @return Generator<string>
      */
-    private function provideLocales(): Generator
+    private static function provideLocales(): Generator
     {
         yield from [
             'ar',
