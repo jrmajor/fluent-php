@@ -15,7 +15,6 @@ return [
     'MGA' => new C('MGA', 'Malagasy Ariary', narrow: 'Ar', plurals: ['one' => 'Malagasy ariary', 'other' => 'Malagasy ariary']),
     'MVR' => new C('MVR', 'Maldivian Rufiyaa', plurals: ['one' => 'Maldivian rufiyaa', 'other' => 'Maldivian rufiyaa']),
     'NAD' => new C('NAD', 'Namibian Dollar', '$', narrow: '$', plurals: ['one' => 'Namibian dollar', 'other' => 'Namibian dollars']),
-    'PHP' => new C('PHP', 'Philippine Peso', '₱', narrow: '₱', plurals: ['one' => 'Philippine peso', 'other' => 'Philippine pesos']),
     'RUB' => new C('RUB', 'Russian Rouble', narrow: '₽', plurals: ['one' => 'Russian rouble', 'other' => 'Russian roubles']),
     'RUR' => new C('RUR', 'Russian Rouble (1991–1998)', plurals: ['one' => 'Russian rouble (1991–1998)', 'other' => 'Russian roubles (1991–1998)']),
     'SHP' => new C('SHP', 'St Helena Pound', narrow: '£', plurals: ['one' => 'St Helena pound', 'other' => 'St Helena pounds']),

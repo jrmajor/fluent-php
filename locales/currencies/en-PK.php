@@ -14,7 +14,6 @@ return [
     'LVR' => new C('LVR', 'Latvian Rouble', plurals: ['one' => 'Latvian rouble', 'other' => 'Latvian roubles']),
     'MGA' => new C('MGA', 'Malagasy Ariary', narrow: 'Ar', plurals: ['one' => 'Malagasy ariary', 'other' => 'Malagasy ariary']),
     'MVR' => new C('MVR', 'Maldivian Rufiyaa', plurals: ['one' => 'Maldivian rufiyaa', 'other' => 'Maldivian rufiyaa']),
-    'PHP' => new C('PHP', 'Philippine Peso', '₱', narrow: '₱', plurals: ['one' => 'Philippine peso', 'other' => 'Philippine pesos']),
     'PKR' => new C('PKR', 'Pakistani Rupee', 'Rs', narrow: 'Rs', plurals: ['one' => 'Pakistani rupee', 'other' => 'Pakistani rupees']),
     'RUB' => new C('RUB', 'Russian Rouble', narrow: '₽', plurals: ['one' => 'Russian rouble', 'other' => 'Russian roubles']),
     'RUR' => new C('RUR', 'Russian Rouble (1991–1998)', plurals: ['one' => 'Russian rouble (1991–1998)', 'other' => 'Russian roubles (1991–1998)']),

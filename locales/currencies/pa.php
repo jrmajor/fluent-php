@@ -139,7 +139,6 @@ return [
     'RON' => new C('RON', 'ਰੋਮਾਨੀਆਈ ਲੇਉ', narrow: 'lei', plurals: ['one' => 'ਰੋਮਾਨੀਆਈ ਲੇਉ', 'other' => 'ਰੋਮਾਨੀਆਈ ਲੇਉ']),
     'RSD' => new C('RSD', 'ਸਰਬੀਆਈ ਦਿਨਾਰ', plurals: ['one' => 'ਸਰਬੀਆਈ ਦਿਨਾਰ', 'other' => 'ਸਰਬੀਆਈ ਦਿਨਾਰ']),
     'RUB' => new C('RUB', 'ਰੂਸੀ ਰੂਬਲ', narrow: '₽', plurals: ['one' => 'ਰੂਸੀ ਰੂਬਲ', 'other' => 'ਰੂਸੀ ਰੂਬਲ']),
-    'RUR' => new C('RUR', narrow: 'р.'),
     'RWF' => new C('RWF', 'ਰਵਾਂਡਨ ਫ੍ਰੈਂਕ', narrow: 'RF', plurals: ['one' => 'ਰਵਾਂਡਨ ਫ੍ਰੈਂਕ', 'other' => 'ਰਵਾਂਡਨ ਫ੍ਰੈਂਕ'], minorUnits: 0),
     'SAR' => new C('SAR', 'ਸਾਊਦੀ ਰਿਆਲ', plurals: ['one' => 'ਸਾਊਦੀ ਰਿਆਲ', 'other' => 'ਸਾਊਦੀ ਰਿਆਲ']),
     'SBD' => new C('SBD', 'ਸੋਲੋਮਨ ਆਈਲੈਂਡਸ ਡਾਲਰ', narrow: '$', plurals: ['one' => 'ਸੋਲੋਮਨ ਆਈਲੈਂਡਸ ਡਾਲਰ', 'other' => 'ਸੋਲੋਮਨ ਆਈਲੈਂਡਸ ਡਾਲਰ']),

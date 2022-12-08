@@ -48,7 +48,7 @@ return [
     'EGP' => new C('EGP', 'Sterlina egjiptiane', plurals: ['one' => 'sterlinë egjiptiane', 'other' => 'sterlina egjiptiane']),
     'ERN' => new C('ERN', 'Nakfa e Eritresë', plurals: ['one' => 'nakfë eritreje', 'other' => 'nakfa eritreje']),
     'ETB' => new C('ETB', 'Bira etiopiane', plurals: ['one' => 'birë etiopiane', 'other' => 'bira etiopiane']),
-    'EUR' => new C('EUR', 'Euroja', '€', plurals: ['one' => 'euro', 'other' => 'euro']),
+    'EUR' => new C('EUR', 'Euroja', '€', narrow: '€', plurals: ['one' => 'euro', 'other' => 'euro']),
     'FJD' => new C('FJD', 'Dollari i Fixhit', plurals: ['one' => 'dollar fixhi', 'other' => 'dollarë fixhi']),
     'FKP' => new C('FKP', 'Stërlina e Ishujve Falkland', plurals: ['one' => 'stërlinë e Ishujve Falkland', 'other' => 'stërlina të Ishujve Falkland']),
     'GBP' => new C('GBP', 'Sterlina britanike', '£', plurals: ['one' => 'sterlinë britanike', 'other' => 'sterlina britanike']),
