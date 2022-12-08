@@ -37,14 +37,14 @@
         "jrmajor/cs": "^0.4.6",
         "jrmajor/exporter": "dev-master#16ec60c",
         "nunomaduro/collision": "^6.3",
-        "php-standard-library/psalm-plugin": "^2.0",
+        "php-standard-library/psalm-plugin": "^2.2",
         "phpbench/phpbench": "^1.2",
         "phpunit/phpunit": "10.0.x-dev#9c0e694",
         "psalm/plugin-phpunit": "^0.18.0",
         "sebastian/diff": "5.0.x-dev#7d8cf26 as 4.0.4",
         "symfony/console": "^6.2",
         "symfony/var-dumper": "^6.2",
-        "vimeo/psalm": "^4.30"
+        "vimeo/psalm": "^5.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
