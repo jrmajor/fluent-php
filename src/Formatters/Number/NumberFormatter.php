@@ -14,7 +14,7 @@ use Major\PluralRules\PluralRules;
  */
 final class NumberFormatter
 {
-    public const PatternRegEx = "([¤\\-%\u{00A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{00A0}]*)";
+    public const PatternRegEx = "([¤\\-%\u{A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{A0}]*)";
 
     private const NumeralSystems = [
         'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
@@ -270,7 +270,7 @@ final class NumberFormatter
             return $prefix . ($before ? $symbol . $formatted : $formatted . $symbol);
         }
 
-        return $prefix . ($before ? "{$symbol}\u{00A0}{$formatted}" : "{$formatted}\u{00A0}{$symbol}");
+        return $prefix . ($before ? "{$symbol}\u{A0}{$formatted}" : "{$formatted}\u{A0}{$symbol}");
     }
 
     private function isDigit(string $c): bool

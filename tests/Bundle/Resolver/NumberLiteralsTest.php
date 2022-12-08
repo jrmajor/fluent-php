@@ -35,17 +35,17 @@ final class NumberLiteralsTest extends TestCase
     public function testPlaceables(): void
     {
         $this->assertTranslation('332,035,625.33203', 'num-in-placeable', [], $this->en);
-        $this->assertTranslation("332\u{00A0}035\u{00A0}625,33203", 'num-in-placeable', [], $this->pl);
+        $this->assertTranslation("332\u{A0}035\u{A0}625,33203", 'num-in-placeable', [], $this->pl);
         $this->assertTranslation('332,035,625.33203', 'num-in-placeable', [], $this->zh);
-        $this->assertTranslation("332\u{00A0}035\u{00A0}625,33203", 'num-in-placeable', [], $this->fr);
+        $this->assertTranslation("332\u{A0}035\u{A0}625,33203", 'num-in-placeable', [], $this->fr);
     }
 
     #[TestDox('it formats numbers in variables according to current locale')]
     public function testVariables(): void
     {
         $this->assertTranslation('332,035,625.332', 'num-in-var', ['number' => 332_035_625.332_03], $this->en);
-        $this->assertTranslation("37\u{00A0}824\u{00A0}787,378", 'num-in-var', ['number' => 37_824_787.378_24], $this->pl);
+        $this->assertTranslation("37\u{A0}824\u{A0}787,378", 'num-in-var', ['number' => 37_824_787.378_24], $this->pl);
         $this->assertTranslation('37,824,787.378', 'num-in-var', ['number' => 37_824_787.378_24], $this->zh);
-        $this->assertTranslation("37\u{00A0}824\u{00A0}787,378", 'num-in-var', ['number' => 37_824_787.378_24], $this->fr);
+        $this->assertTranslation("37\u{A0}824\u{A0}787,378", 'num-in-var', ['number' => 37_824_787.378_24], $this->fr);
     }
 }

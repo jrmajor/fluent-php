@@ -117,7 +117,7 @@ final class LocaleCompiler
         foreach ([
             'currencyMatch' => '[[:^S:]&[:^Z:]]',
             'surroundingMatch' => '[:digit:]',
-            'insertBetween' => "\u{00A0}",
+            'insertBetween' => "\u{A0}",
         ] as $key => $value) {
             if ($spacing['beforeCurrency'][$key] !== $value) {
                 throw new InvalidCurrencySpacing($this->locale, 'beforeCurrency', $key);
