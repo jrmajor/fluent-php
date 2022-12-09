@@ -36,7 +36,7 @@ use Major\Fluent\Node\Syntax\Variant;
 final class FluentParser
 {
     public function __construct(
-        protected bool $strict = false,
+        private bool $strict = false,
     ) { }
 
     public function parse(string $source): FluentResource

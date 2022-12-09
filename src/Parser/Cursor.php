@@ -219,7 +219,7 @@ abstract class Cursor
         $this->stringFromIndex = mb_substr($this->string, $index);
     }
 
-    protected function incrementIndex(int $offset = 1): void
+    private function incrementIndex(int $offset = 1): void
     {
         $this->index += $offset;
 

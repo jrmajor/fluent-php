@@ -7,7 +7,7 @@ use Stringable;
 final class FluentNone implements Stringable
 {
     public function __construct(
-        protected string $value = '???',
+        private string $value = '???',
     ) { }
 
     public function __toString(): string

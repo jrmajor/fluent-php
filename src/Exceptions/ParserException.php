@@ -7,9 +7,9 @@ use Exception;
 final class ParserException extends Exception
 {
     public function __construct(
-        protected string $fluentErrorCode = 'E0001',
+        private string $fluentErrorCode = 'E0001',
         /** @var array<string, string> */
-        protected array $arguments = [],
+        private array $arguments = [],
         ?string $source = null,
     ) {
         $message = match ($fluentErrorCode) {

@@ -58,10 +58,10 @@ final class FluentBundle
     private array $errors = [];
 
     public function __construct(
-        protected string $locale,
-        protected bool $strict = false,
-        protected bool $useIsolating = true,
-        protected bool $allowOverrides = false,
+        private string $locale,
+        private bool $strict = false,
+        private bool $useIsolating = true,
+        private bool $allowOverrides = false,
     ) {
         $this->functions = [
             'NUMBER' => Closure::fromCallable([$this, 'numberFunction']),

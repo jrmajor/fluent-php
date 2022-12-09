@@ -53,7 +53,7 @@ final class FluentCursor extends Cursor
         return false;
     }
 
-    protected function isCharPatternContinuation(): bool
+    private function isCharPatternContinuation(): bool
     {
         return match ($this->currentPeek()) {
             null, '}', '.', '[', '*' => false,
