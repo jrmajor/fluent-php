@@ -20,7 +20,7 @@ final class MostPopularTest extends TestCase
     /**
      * @return Generator<array{mixed, list<mixed>}>
      */
-    public function provideOkCases(): Generator
+    public static function provideOkCases(): Generator
     {
         yield from [
             'integers 1' => [1, [1, 1, 2]],

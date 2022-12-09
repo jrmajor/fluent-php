@@ -20,7 +20,7 @@ final class CountValuesTest extends TestCase
     /**
      * @return Generator<array{list<array{value: mixed, count: int}>, list<mixed>}>
      */
-    public function provideOkCases(): Generator
+    public static function provideOkCases(): Generator
     {
         yield 'integers' => [
             [['value' => 1, 'count' => 2], ['value' => 2, 'count' => 1]],
