@@ -39,8 +39,20 @@ abstract class NumberFormatterTestCase extends TestCase
     final protected static function provideLocales(array $except = []): Generator
     {
         $locales = Vec\values(Dict\unique([
+            // all patterns
             ...Vec\keys(static::patternsToTest()),
+            // all numbering systems
+            ...[
+                'ar', // arab
+                'fa', // arabext
+                'bn', // beng
+                'ne', // deva
+                'uk', // latn
+                'my', // mymr
+            ],
+            // english
             ...['en', 'en-AU', 'en-GB', 'en-INVALID', 'en-US'],
+            // random
             ...['ar', 'es', 'nl', 'no', 'pl', 'ru', 'sw'],
         ]));
 

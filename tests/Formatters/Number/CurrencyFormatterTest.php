@@ -156,7 +156,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach (self::provideLocales(['ne', 'pl', 'ru']) as $locale) {
+            foreach (self::provideLocales(['my', 'ne', 'pl', 'ru', 'uk']) as $locale) {
                 yield [$locale, ...$case];
             }
         }
