@@ -28,7 +28,7 @@ final class LocaleKnownValuesTest extends TestCase
             self::$locales[] = require $localeFile;
         }
 
-        self::assertCount(377, self::$locales);
+        self::assertCount(394, self::$locales);
     }
 
     #[TestDox('there are no unknown numeric systems')]
@@ -37,7 +37,7 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->system);
 
         $this->assertSame([
-            ['value' => 'latn', 'count' => 341],
+            ['value' => 'latn', 'count' => 358],
             ['value' => 'arab', 'count' => 24],
             ['value' => 'arabext', 'count' => 5],
             ['value' => 'beng', 'count' => 3],
@@ -52,7 +52,7 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->decimal);
 
         $this->assertSame([
-            ['value' => '#,##0.###', 'count' => 360],
+            ['value' => '#,##0.###', 'count' => 377],
             ['value' => '#,##,##0.###', 'count' => 17],
         ], H\count_values($values));
     }
@@ -63,8 +63,8 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->percent);
 
         $this->assertSame([
-            ['value' => '#,##0%', 'count' => 249],
-            ['value' => "#,##0\u{A0}%", 'count' => 114],
+            ['value' => '#,##0%', 'count' => 257],
+            ['value' => "#,##0\u{A0}%", 'count' => 123],
             ['value' => '#,##,##0%', 'count' => 11],
             ['value' => '%#,##0', 'count' => 2],
             ['value' => "%\u{A0}#,##0", 'count' => 1],
@@ -77,19 +77,20 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->currency);
 
         $this->assertSame([
-            ['value' => "#,##0.00\u{A0}¤", 'count' => 165],
-            ['value' => '¤#,##0.00', 'count' => 147],
-            ['value' => "¤\u{A0}#,##0.00", 'count' => 27],
+            ['value' => '¤#,##0.00', 'count' => 155],
+            ['value' => "#,##0.00\u{A0}¤", 'count' => 144],
+            ['value' => "¤\u{A0}#,##0.00", 'count' => 30],
+            ['value' => "\u{200F}#,##0.00\u{A0}¤", 'count' => 22],
             ['value' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00", 'count' => 12],
-            ['value' => "¤\u{A0}#,##,##0.00", 'count' => 8],
-            ['value' => '¤#,##,##0.00', 'count' => 5],
+            ['value' => '¤#,##,##0.00', 'count' => 10],
+            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 6],
             ['value' => '¤#,##0.00;¤-#,##0.00', 'count' => 4],
+            ['value' => "¤\u{A0}#,##,##0.00", 'count' => 4],
             ['value' => "¤\u{A0}#,##0.00;¤-#,##0.00", 'count' => 3],
-            ['value' => '#,##,##0.00¤', 'count' => 2],
+            ['value' => '#,##,##0.00¤', 'count' => 1],
             ['value' => '#,##0.00¤', 'count' => 1],
-            ['value' => "0.00\u{A0}¤", 'count' => 1],
             ['value' => "\u{200E}¤#,##0.00", 'count' => 1],
-            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 1],
+            ['value' => "\u{200F}#,##0.00\u{A0}\u{200F}¤;\u{200F}-#,##0.00\u{A0}\u{200F}¤", 'count' => 1],
         ], H\count_values($values));
     }
 
@@ -99,7 +100,7 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->grouping);
 
         $this->assertSame([
-            ['value' => 1, 'count' => 351],
+            ['value' => 1, 'count' => 368],
             ['value' => 2, 'count' => 26],
         ], H\count_values($values));
     }
@@ -110,8 +111,8 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->symbols);
 
         $this->assertSame([
-            ['value' => ['.', ',', '-', '%'], 'count' => 162],
-            ['value' => [',', '.', '-', '%'], 'count' => 73],
+            ['value' => ['.', ',', '-', '%'], 'count' => 176],
+            ['value' => [',', '.', '-', '%'], 'count' => 76],
             ['value' => [',', "\u{A0}", '-', '%'], 'count' => 44],
             ['value' => [',', "\u{202F}", '-', '%'], 'count' => 43],
             ['value' => ['٫', '٬', "\u{061C}-", "٪\u{061C}"], 'count' => 24],

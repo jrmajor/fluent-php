@@ -28,7 +28,7 @@ final class LocaleDefaultsTest extends TestCase
             self::$locales[] = require $localeFile;
         }
 
-        self::assertCount(377, self::$locales);
+        self::assertCount(394, self::$locales);
     }
 
     #[TestDox('default numeric system is the most popular one')]
