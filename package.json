@@ -1,6 +1,6 @@
 {
   "private": true,
   "dependencies": {
-    "cldr-numbers-modern": "^41.0"
+    "cldr-numbers-modern": "^42.0"
   }
 }

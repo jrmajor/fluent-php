@@ -183,7 +183,7 @@ return [
     'PGK' => new C('PGK', 'kina papuana', plurals: ['one' => 'kina papuana', 'other' => 'kina papuane']),
     'PHP' => new C('PHP', 'peso filippino', '₱', narrow: '₱', plurals: ['one' => 'peso filippino', 'other' => 'pesos filippini']),
     'PKR' => new C('PKR', 'rupia pakistana', narrow: 'Rs', plurals: ['one' => 'rupia pakistana', 'other' => 'rupie pakistane']),
-    'PLN' => new C('PLN', 'złoty polacco', narrow: 'zł', plurals: ['one' => 'złoty polacco', 'other' => 'złoty polacchi']),
+    'PLN' => new C('PLN', 'zloty polacco', narrow: 'zł', plurals: ['one' => 'zloty polacco', 'other' => 'zloty polacchi']),
     'PLZ' => new C('PLZ', 'złoty Polacco (1950–1995)', plurals: ['one' => 'złoty polacco (1950–1995)', 'other' => 'złoty polacchi (1950–1995)']),
     'PTE' => new C('PTE', 'escudo portoghese'),
     'PYG' => new C('PYG', 'guaraní paraguayano', narrow: '₲', plurals: ['one' => 'guaraní paraguayano', 'other' => 'guaraní paraguayani'], minorUnits: 0),

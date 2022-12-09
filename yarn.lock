@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-cldr-numbers-modern@^41.0:
-  version "41.0.0"
-  resolved "https://registry.yarnpkg.com/cldr-numbers-modern/-/cldr-numbers-modern-41.0.0.tgz#2169ea91f1cf868de5ab450f2d6bf4770b8d1754"
-  integrity sha512-cKgeC4j53C68oPbwX2X4RWQVoBjo5UfEiewh6NqxHW+B2tn6sMHRMZnvV/EOk0TrHe+hkE7ISTZyswq9X1rtyg==
+cldr-numbers-modern@^42.0:
+  version "42.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-numbers-modern/-/cldr-numbers-modern-42.0.0.tgz#cbf514368a5120ef5062c8c8d0ad65671db7fbb4"
+  integrity sha512-jS7mly/5ajwodCqaMKMbgzT5TeM7hT60OxtTHvf4wVf2ibSWm0SZzuquUQ/b0/XNeVWlPVK8x+nNJUwy8ifAnA==
