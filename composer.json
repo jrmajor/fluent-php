@@ -57,7 +57,10 @@
         "psr-4": {
             "Major\\Fluent\\Dev\\": "dev",
             "Major\\Fluent\\Tests\\": "tests"
-        }
+        },
+        "files": [
+            "tests/Helpers/helpers.php"
+        ]
     },
     "config": {
         "allow-plugins": {
