@@ -11,6 +11,31 @@ use PHPUnit\Framework\Attributes\TestDox;
  */
 final class CurrencyFormatterTest extends NumberFormatterTestCase
 {
+    protected static function patternType(): string
+    {
+        return 'currency';
+    }
+
+    protected static function patternsToTest(): array
+    {
+        return [
+            'en-US' => '¤#,##0.00',
+            'pl' => "#,##0.00\u{A0}¤",
+            'mn' => "¤\u{A0}#,##0.00",
+            'ar' => "\u{200F}#,##0.00\u{A0}¤",
+            'nl' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00",
+            'hi' => '¤#,##,##0.00',
+            'ar-TN' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤",
+            'es-CL' => '¤#,##0.00;¤-#,##0.00',
+            'ne' => "¤\u{A0}#,##,##0.00",
+            'de-CH' => "¤\u{A0}#,##0.00;¤-#,##0.00",
+            'bn' => '#,##,##0.00¤',
+            'km' => '#,##0.00¤',
+            'fa' => "\u{200E}¤#,##0.00",
+            'he' => "\u{200F}#,##0.00\u{A0}\u{200F}¤;\u{200F}-#,##0.00\u{A0}\u{200F}¤",
+        ];
+    }
+
     /**
      * @param O $options
      */
@@ -74,7 +99,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach (self::provideLocales() as $locale) {
+            foreach (self::provideLocales(['ar', 'ar-TN', 'he']) as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -93,7 +118,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach (self::provideLocales() as $locale) {
+            foreach (self::provideLocales(['ar', 'ar-TN', 'he']) as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -112,7 +137,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach (self::provideLocales() as $locale) {
+            foreach (self::provideLocales(['ar', 'ar-TN', 'he']) as $locale) {
                 yield [$locale, ...$case];
             }
         }
@@ -131,34 +156,11 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             [-123456789, ['currency' => 'AUD']],
             [18.3, ['currency' => 'KHR', 'maximumSignificantDigits' => 3]],
         ] as $case) {
-            foreach (self::provideLocales() as $locale) {
+            foreach (self::provideLocales(['ne', 'pl', 'ru']) as $locale) {
                 yield [$locale, ...$case];
             }
         }
 
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
-    }
-
-    /**
-     * @return Generator<string>
-     */
-    private static function provideLocales(): Generator
-    {
-        yield from [
-            // 'ar',
-            'sw',
-            'en-US',
-            'en-GB',
-            'en-INVALID',
-            'nl',
-            // 'he',
-            'km',
-            'as',
-            'hi',
-            'lo',
-            'bn',
-            'es',
-            'fa',
-        ];
     }
 }

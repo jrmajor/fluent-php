@@ -11,6 +11,22 @@ use PHPUnit\Framework\Attributes\TestDox;
  */
 final class PercentFormatterTest extends NumberFormatterTestCase
 {
+    protected static function patternType(): string
+    {
+        return 'percent';
+    }
+
+    protected static function patternsToTest(): array
+    {
+        return [
+            'en' => '#,##0%',
+            'es' => "#,##0\u{A0}%",
+            'hi' => '#,##,##0%',
+            'tr' => '%#,##0',
+            'eu' => "%\u{A0}#,##0",
+        ];
+    }
+
     /**
      * @param O $options
      */
@@ -36,7 +52,7 @@ final class PercentFormatterTest extends NumberFormatterTestCase
             [0.2137, ['maximumFractionDigits' => 2]],
             [2.137, ['maximumSignificantDigits' => 4]],
         ] as $case) {
-            foreach (['pl', 'ru', 'ar', 'tr', 'ne', 'eu'] as $locale) {
+            foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
         }
