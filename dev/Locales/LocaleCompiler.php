@@ -49,12 +49,12 @@ final class LocaleCompiler
         $this->checkCurrencySpacing();
     }
 
-    public function system(): string
+    private function system(): string
     {
         return $this->numbers['defaultNumberingSystem'];
     }
 
-    public function pattern(string $type): string
+    private function pattern(string $type): string
     {
         $key = "{$type}Formats-numberSystem-{$this->system()}";
         $pattern = $this->numbers[$key]['standard'];
@@ -70,7 +70,7 @@ final class LocaleCompiler
         return $pattern;
     }
 
-    public function grouping(): int
+    private function grouping(): int
     {
         $grouping = $this->numbers['minimumGroupingDigits'];
 
@@ -80,7 +80,7 @@ final class LocaleCompiler
     /**
      * @return array{string, string, string, string}
      */
-    public function symbols(): array
+    private function symbols(): array
     {
         $all = $this->numbers["symbols-numberSystem-{$this->system()}"];
 
@@ -110,7 +110,7 @@ final class LocaleCompiler
         });
     }
 
-    public function checkCurrencySpacing(): void
+    private function checkCurrencySpacing(): void
     {
         $spacing = $this->numbers["currencyFormats-numberSystem-{$this->system()}"]['currencySpacing'];
 
