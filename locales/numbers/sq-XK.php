@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Albanian (Kosovo)', grouping: 2, symbols: [',', "\u{A0}", '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Albanian (Kosovo)', currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%']);

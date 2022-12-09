@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Greek (Cyprus)', symbols: [',', '.', '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Greek (Cyprus)', currency: "#,##0.00\u{A0}¤", symbols: [',', '.', '-', '%']);

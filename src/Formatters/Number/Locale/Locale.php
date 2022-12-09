@@ -14,7 +14,7 @@ final class Locale
         public string $system = 'latn',
         public string $decimal = '#,##0.###',
         public string $percent = '#,##0%',
-        public string $currency = "#,##0.00\u{A0}¤",
+        public string $currency = "¤#,##0.00",
         public int $grouping = 1,
         /** @var array{string, string, string, string} */
         public array $symbols = ['.', ',', '-', '%'],

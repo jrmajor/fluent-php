@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (United Arab Emirates)', currency: '¤#,##0.00');
+return new Major\Fluent\Formatters\Number\Locale\Locale('English (United Arab Emirates)');
