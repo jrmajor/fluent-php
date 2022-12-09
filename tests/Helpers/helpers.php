@@ -27,9 +27,13 @@ function count_values(array $values): array
         $counts[] = ['value' => $value, 'count' => 1];
     }
 
-    $counts = Vec\sort_by($counts, fn (array $c) => $c['count']);
+    // sort by counts descending, by value ascending
+    return Vec\sort($counts, function ($a, $b) {
+        $primary = $b['count'] <=> $a['count'];
+        $secondary = $a['value'] <=> $b['value'];
 
-    return array_reverse($counts);
+        return $primary ?: $secondary;
+    });
 }
 
 /**

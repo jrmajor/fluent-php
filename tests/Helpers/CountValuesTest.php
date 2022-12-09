@@ -39,8 +39,8 @@ final class CountValuesTest extends TestCase
         yield 'floats' => [
             [
                 ['value' => 1.5, 'count' => 2],
-                ['value' => 1.6, 'count' => 1],
                 ['value' => 1.4, 'count' => 1],
+                ['value' => 1.6, 'count' => 1],
             ],
             [1.4, 1.6, 1.5, 1.5],
         ];
@@ -48,8 +48,8 @@ final class CountValuesTest extends TestCase
         yield 'arrays' => [
             [
                 ['value' => ['foo', 'bar'], 'count' => 2],
-                ['value' => ['foo', 'baz'], 'count' => 1],
                 ['value' => ['bar', 'baz'], 'count' => 1],
+                ['value' => ['foo', 'baz'], 'count' => 1],
             ],
             [['bar', 'baz'], ['foo', 'baz'], ['foo', 'bar'], ['foo', 'bar']],
         ];
@@ -59,6 +59,15 @@ final class CountValuesTest extends TestCase
         yield 'objects' => [
             [['value' => $objects[0], 'count' => 2], ['value' => $objects[1], 'count' => 1]],
             [$objects[1], $objects[0], $objects[0]],
+        ];
+
+        yield 'secondary sorting' => [
+            [
+                ['value' => 'a', 'count' => 1],
+                ['value' => 'b', 'count' => 1],
+                ['value' => 'c', 'count' => 1],
+            ],
+            ['b', 'c', 'a'],
         ];
     }
 }

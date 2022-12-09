@@ -86,10 +86,10 @@ final class LocaleKnownValuesTest extends TestCase
             ['value' => '¤#,##0.00;¤-#,##0.00', 'count' => 4],
             ['value' => "¤\u{A0}#,##0.00;¤-#,##0.00", 'count' => 3],
             ['value' => '#,##,##0.00¤', 'count' => 2],
-            ['value' => "0.00\u{A0}¤", 'count' => 1],
-            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 1],
             ['value' => '#,##0.00¤', 'count' => 1],
+            ['value' => "0.00\u{A0}¤", 'count' => 1],
             ['value' => "\u{200E}¤#,##0.00", 'count' => 1],
+            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 1],
         ], H\count_values($values));
     }
 
@@ -119,10 +119,10 @@ final class LocaleKnownValuesTest extends TestCase
             ['value' => [',', '.', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 4],
             ['value' => [',', '.', '−', '%'], 'count' => 4],
             ['value' => ['.', '’', '-', '%'], 'count' => 4],
+            ['value' => ['.', ',', "\u{200E}-", '%'], 'count' => 2],
             ['value' => ['.', ',', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 2],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '٪'], 'count' => 2],
             ['value' => ['٫', '٬', "\u{200E}−", '٪'], 'count' => 2],
-            ['value' => ['.', ',', "\u{200E}-", '%'], 'count' => 2],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '%'], 'count' => 1],
         ], H\count_values($values));
     }
