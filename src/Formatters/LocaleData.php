@@ -7,14 +7,13 @@ use Major\Fluent\Formatters\Number\Locale\Locale;
 
 /**
  * @internal
+ *
+ * @psalm-suppress UnresolvableInclude
  */
 final class LocaleData
 {
     private const Path = __DIR__ . '/../../locales/';
 
-    /**
-     * @psalm-suppress UnresolvableInclude
-     */
     public static function loadNumbers(string $locale): Locale
     {
         [$language, $region] = self::getLangAndRegionPaths('numbers', $locale);
@@ -24,8 +23,6 @@ final class LocaleData
 
     /**
      * @return array<string, Currency>
-     *
-     * @psalm-suppress UnresolvableInclude
      */
     public static function loadCurrencies(string $locale): array
     {
@@ -98,5 +95,16 @@ final class LocaleData
 
         /** @var non-empty-string */
         return strtolower(substr($path, $slashPosition + 1, -4));
+    }
+
+    /**
+     * @return list<Locale>
+     */
+    public static function all(): array
+    {
+        return array_map(
+            fn (string $f): Locale => require $f,
+            glob(self::Path . 'numbers/*.php'),
+        );
     }
 }

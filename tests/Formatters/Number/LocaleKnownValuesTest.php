@@ -2,6 +2,7 @@
 
 namespace Major\Fluent\Tests\Formatters\Number;
 
+use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Tests\Helpers as H;
 use Major\Fluent\Tests\TestCase;
