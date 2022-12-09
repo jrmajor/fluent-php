@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f0087902c732e6e0d9a5b8b82ddd3d2",
+    "content-hash": "e33340f36c4956547c59f6556cda798a",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -1127,12 +1127,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/exporter.git",
-                "reference": "16ec60c"
+                "reference": "6ada458"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/16ec60c",
-                "reference": "16ec60c",
+                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/6ada458",
+                "reference": "6ada458",
                 "shasum": ""
             },
             "require": {
@@ -1185,7 +1185,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-17T13:38:38+00:00"
+            "time": "2022-12-09T17:04:16+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
@@ -1296,16 +1296,16 @@
         },
         {
             "name": "netresearch/jsonmapper",
-            "version": "v4.0.0",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cweiske/jsonmapper.git",
-                "reference": "8bbc021a8edb2e4a7ea2f8ad4fa9ec9dce2fcb8d"
+                "reference": "cfa81ea1d35294d64adb9c68aa4cb9e92400e53f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/8bbc021a8edb2e4a7ea2f8ad4fa9ec9dce2fcb8d",
-                "reference": "8bbc021a8edb2e4a7ea2f8ad4fa9ec9dce2fcb8d",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/cfa81ea1d35294d64adb9c68aa4cb9e92400e53f",
+                "reference": "cfa81ea1d35294d64adb9c68aa4cb9e92400e53f",
                 "shasum": ""
             },
             "require": {
@@ -1341,9 +1341,9 @@
             "support": {
                 "email": "cweiske@cweiske.de",
                 "issues": "https://github.com/cweiske/jsonmapper/issues",
-                "source": "https://github.com/cweiske/jsonmapper/tree/v4.0.0"
+                "source": "https://github.com/cweiske/jsonmapper/tree/v4.1.0"
             },
-            "time": "2020-12-01T19:48:11+00:00"
+            "time": "2022-12-08T20:46:14+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2393,12 +2393,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9c0e694"
+                "reference": "74bdbf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9c0e694",
-                "reference": "9c0e694",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/74bdbf5",
+                "reference": "74bdbf5",
                 "shasum": ""
             },
             "require": {
@@ -2485,7 +2485,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-03T06:17:15+00:00"
+            "time": "2022-12-09T07:20:00+00:00"
         },
         {
             "name": "psalm/plugin-phpunit",
