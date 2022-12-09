@@ -10,8 +10,6 @@ use Major\Fluent\Formatters\Number\Locale\Currency;
 use Psl\Dict;
 use Psl\Str;
 
-use function stripslashes as ss;
-
 final class CurrenciesFactory
 {
     /**
@@ -41,7 +39,7 @@ final class CurrenciesFactory
         $minorUnits = H\IsoData::minorUnits($code);
         $plurals = self::makePlurals($data);
 
-        return new Currency($code, ss($name), $symbol, $narrow, $plurals, $minorUnits);
+        return new Currency($code, $name, $symbol, $narrow, $plurals, $minorUnits);
     }
 
     /**
@@ -52,7 +50,6 @@ final class CurrenciesFactory
     {
         $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, 'displayName-count-'));
         $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, 'displayName-count-'));
-        $data = Dict\map($data, fn ($value) => ss($value));
 
         return $data ?: null;
     }
