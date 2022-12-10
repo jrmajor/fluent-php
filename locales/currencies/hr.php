@@ -95,7 +95,7 @@ return [
     'ESB' => new C('ESB', 'španjolska pezeta (konvertibilni račun)', plurals: ['one' => 'španjolska pezeta (konvertibilan račun)', 'few' => 'španjolske pezete (konvertibilan račun)', 'other' => 'španjolskih pezeta (konvertibilan račun)']),
     'ESP' => new C('ESP', 'španjolska pezeta', narrow: '₧', plurals: ['one' => 'španjolska pezeta', 'few' => 'španjolske pezete', 'other' => 'španjolskih pezeta']),
     'ETB' => new C('ETB', 'etiopski bir', plurals: ['one' => 'etiopski bir', 'few' => 'etiopska bira', 'other' => 'etiopskih bira']),
-    'EUR' => new C('EUR', 'euro', narrow: '€', plurals: ['one' => 'euro', 'few' => 'eura', 'other' => 'eura']),
+    'EUR' => new C('EUR', 'euro', '€', narrow: '€', plurals: ['one' => 'euro', 'few' => 'eura', 'other' => 'eura']),
     'FIM' => new C('FIM', 'finska marka', plurals: ['one' => 'finska marka', 'few' => 'finske marke', 'other' => 'finskih marki']),
     'FJD' => new C('FJD', 'fidžijski dolar', narrow: '$', plurals: ['one' => 'fidžijski dolar', 'few' => 'fidžijska dolara', 'other' => 'fidžijskih dolara']),
     'FKP' => new C('FKP', 'falklandska funta', narrow: '£', plurals: ['one' => 'falklandska funta', 'few' => 'falklandske funte', 'other' => 'falklandskih funti']),

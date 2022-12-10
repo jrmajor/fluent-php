@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Slovak', percent: "#,##0\u{A0}%", symbols: [',', "\u{A0}", '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale('Slovak', percent: "#,##0\u{A0}%", currency: "#,##0.00\u{A0}¤", symbols: [',', "\u{A0}", '-', '%']);

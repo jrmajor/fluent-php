@@ -17,7 +17,7 @@ return [
     'RUB' => new C('RUB', 'Russian Rouble', narrow: '₽', plurals: ['one' => 'Russian rouble', 'other' => 'Russian roubles']),
     'RUR' => new C('RUR', 'Russian Rouble (1991–1998)', plurals: ['one' => 'Russian rouble (1991–1998)', 'other' => 'Russian roubles (1991–1998)']),
     'SHP' => new C('SHP', 'St Helena Pound', narrow: '£', plurals: ['one' => 'St Helena pound', 'other' => 'St Helena pounds']),
-    'SLL' => new C('SLL', 'Sierra Leonean Leone', 'Le', plurals: ['one' => 'Sierra Leonean leone', 'other' => 'Sierra Leonean leones']),
+    'SLE' => new C('SLE', 'Sierra Leonean Leone', 'Le', plurals: ['one' => 'Sierra Leonean leone', 'other' => 'Sierra Leonean leones']),
     'TJR' => new C('TJR', 'Tajikistani Rouble', plurals: ['one' => 'Tajikistani rouble', 'other' => 'Tajikistani roubles']),
     'USD' => new C('USD', 'US Dollar', 'US$', narrow: '$', plurals: ['one' => 'US dollar', 'other' => 'US dollars']),
     'VUV' => new C('VUV', 'Vanuatu Vatu', plurals: ['one' => 'Vanuatu vatu', 'other' => 'Vanuatu vatu'], minorUnits: 0),

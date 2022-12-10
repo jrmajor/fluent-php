@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Korean (North Korea)', currency: '¤#,##0.00');
+return new Major\Fluent\Formatters\Number\Locale\Locale('Korean (North Korea)');

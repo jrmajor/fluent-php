@@ -14,7 +14,7 @@ use Major\PluralRules\PluralRules;
  */
 final class NumberFormatter
 {
-    public const PatternRegEx = "([¤\\-%\u{A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{A0}]*)";
+    public const PatternRegEx = "([¤\\-%\u{A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{A0}\u{200F}]*)";
 
     private const NumeralSystems = [
         'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],

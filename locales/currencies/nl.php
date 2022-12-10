@@ -101,7 +101,7 @@ return [
     'FJD' => new C('FJD', 'Fiji-dollar', 'FJ$', narrow: '$', plurals: ['one' => 'Fiji-dollar', 'other' => 'Fiji-dollar']),
     'FKP' => new C('FKP', 'Falklandeilands pond', narrow: '£', plurals: ['one' => 'Falklandeilands pond', 'other' => 'Falklandeilands pond']),
     'FRF' => new C('FRF', 'Franse franc', plurals: ['one' => 'Franse franc', 'other' => 'Franse franc']),
-    'GBP' => new C('GBP', 'Brits pond', '£', narrow: '£', plurals: ['one' => 'Brits pond', 'other' => 'Brits pond']),
+    'GBP' => new C('GBP', 'Britse pond', '£', narrow: '£', plurals: ['one' => 'Britse pond', 'other' => 'Britse pond']),
     'GEK' => new C('GEK', 'Georgische kupon larit', plurals: ['one' => 'Georgische kupon larit', 'other' => 'Georgische kupon larit']),
     'GEL' => new C('GEL', 'Georgische lari', narrow: '₾', plurals: ['one' => 'Georgische lari', 'other' => 'Georgische lari']),
     'GHC' => new C('GHC', 'Ghanese cedi (1979–2007)', plurals: ['one' => 'Ghanese cedi (1979–2007)', 'other' => 'Ghanese cedi (1979–2007)']),

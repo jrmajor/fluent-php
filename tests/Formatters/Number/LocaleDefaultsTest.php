@@ -28,7 +28,7 @@ final class LocaleDefaultsTest extends TestCase
             self::$locales[] = require $localeFile;
         }
 
-        self::assertCount(377, self::$locales);
+        self::assertCount(394, self::$locales);
     }
 
     #[TestDox('default numeric system is the most popular one')]
@@ -67,7 +67,7 @@ final class LocaleDefaultsTest extends TestCase
     #[TestDox('default currency pattern is the most popular one')]
     public function testCurrency(): void
     {
-        $expected = "#,##0.00\u{A0}¤";
+        $expected = '¤#,##0.00';
 
         $values = Vec\map(self::$locales, fn (Locale $l) => $l->currency);
 

@@ -85,6 +85,7 @@ return [
     'LBP' => new C('LBP', 'لبناني پائونڊ', narrow: 'L£', plurals: ['one' => 'لبناني پائونڊ', 'other' => 'لبناني پائونڊ']),
     'LKR' => new C('LKR', 'سري لنڪن رپي', narrow: 'Rs', plurals: ['one' => 'سري لنڪن رپي', 'other' => 'سري لنڪن رپي']),
     'LRD' => new C('LRD', 'لائبیریائی ڊالر', narrow: '$', plurals: ['one' => 'لائبیریائی ڊالر', 'other' => 'لائبیریائی ڊالر']),
+    'LSL' => new C('LSL', 'ليسوٿو لوٽي', plurals: ['one' => 'ليسوٿو لوٽي', 'other' => 'ليسوٿو لوٽي']),
     'LYD' => new C('LYD', 'لبيائي دينار', plurals: ['one' => 'لبيائي دينار', 'other' => 'لبيائي دينار'], minorUnits: 3),
     'MAD' => new C('MAD', 'موروڪيائي درهم', plurals: ['one' => 'موروڪيائي درهم', 'other' => 'موروڪيائي درهم']),
     'MDL' => new C('MDL', 'مالديپ ليو', plurals: ['one' => 'مالديپ ليو', 'other' => 'مالديپ ليو']),
