@@ -2,7 +2,6 @@
 
 namespace Major\Fluent\Tests\Helpers;
 
-use PHPUnit\Framework\Assert as PU;
 use Psl\File;
 use Psl\Filesystem;
 use Psl\Hash;
@@ -10,7 +9,7 @@ use Psl\Json;
 use Psl\Shell;
 use Psl\Type;
 
-final class NodeAssertions
+final class Node
 {
     private const CacheDir = __DIR__ . '/../../.cache/node-assertions';
 
@@ -29,29 +28,24 @@ final class NodeAssertions
         $this->loadCache();
     }
 
-    public static function assertEqualsNodeOutput(
-        string $command, string $actual, string $message,
-    ): void {
-        self::$instance ??= new self();
-
-        $expected = self::$instance->cachedNodeOutput($command);
-
-        PU::assertSame($expected, $actual, $message);
+    public static function instance(): self
+    {
+        return self::$instance ??= new self();
     }
 
-    private function cachedNodeOutput(string $command): string
+    public function cachedOutput(string $command): string
     {
         $hash = Hash\hash($command, Hash\Algorithm::SHA1);
 
         if (! array_key_exists($hash, $this->cache)) {
-            $this->cache[$hash] = $this->freshNodeOutput($command);
+            $this->cache[$hash] = $this->freshOutput($command);
             $this->saveCache();
         }
 
         return $this->cache[$hash];
     }
 
-    private function freshNodeOutput(string $command): mixed
+    public function freshOutput(string $command): mixed
     {
         $nodeArgs = ['-e', "console.log(JSON.stringify({$command}))"];
 
@@ -78,7 +72,7 @@ final class NodeAssertions
     {
         $type = Type\shape(['cldr' => Type\string(), 'icu' => Type\string()]);
 
-        $versions = $type->coerce($this->freshNodeOutput('process.versions'));
+        $versions = $type->coerce($this->freshOutput('process.versions'));
 
         return Hash\hash(Json\encode(['self' => 1, ...$versions]), Hash\Algorithm::SHA1);
     }

@@ -118,10 +118,13 @@ abstract class NumberFormatterTestCase extends TestCase
 
         $jsonOptions = Json\encode($options);
 
-        H\NodeAssertions::assertEqualsNodeOutput(
-            "new Intl.NumberFormat('{$locale}', {$jsonOptions}).format({$number})",
-            (new NumberFormatter($locale))->format($number, new Options(...$options)),
-            "Failed asserting that formatting of {$number} for {$locale} with {$jsonOptions} is correct.",
-        );
+        $command = "new Intl.NumberFormat('{$locale}', {$jsonOptions}).format({$number})";
+
+        $expected = H\Node::instance()->cachedOutput($command);
+        $actual = (new NumberFormatter($locale))->format($number, new Options(...$options));
+
+        $message = "Failed asserting that formatting of {$number} for {$locale} with {$jsonOptions} is correct.";
+
+        self::assertSame($expected, $actual, $message);
     }
 }
