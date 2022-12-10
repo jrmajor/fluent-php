@@ -35,7 +35,7 @@ final class PercentFormatterTest extends NumberFormatterTestCase
     public function testPercent(
         string $locale, int|float $number, array $options = [],
     ): void {
-        $options = array_merge($options, ['style' => 'percent']);
+        $options = [...$options, 'style' => 'percent'];
 
         $this->assertNumberFormat($locale, $number, $options);
     }

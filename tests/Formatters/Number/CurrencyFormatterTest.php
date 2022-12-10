@@ -44,7 +44,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     public function testCode(
         string $locale, int|float $number, array $options = [],
     ): void {
-        $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'code']);
+        $options = [...$options, 'style' => 'currency', 'currencyDisplay' => 'code'];
 
         $this->assertNumberFormat($locale, $number, $options);
     }
@@ -57,7 +57,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     public function testSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
-        $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'symbol']);
+        $options = [...$options, 'style' => 'currency', 'currencyDisplay' => 'symbol'];
 
         $this->assertNumberFormat($locale, $number, $options);
     }
@@ -70,7 +70,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     public function testNarrowSymbol(
         string $locale, int|float $number, array $options = [],
     ): void {
-        $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'narrowSymbol']);
+        $options = [...$options, 'style' => 'currency', 'currencyDisplay' => 'narrowSymbol'];
 
         $this->assertNumberFormat($locale, $number, $options);
     }
@@ -83,7 +83,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
     public function testName(
         string $locale, int|float $number, array $options = [],
     ): void {
-        $options = array_merge($options, ['style' => 'currency', 'currencyDisplay' => 'name']);
+        $options = [...$options, 'style' => 'currency', 'currencyDisplay' => 'name'];
 
         $this->assertNumberFormat($locale, $number, $options);
     }
