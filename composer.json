@@ -26,9 +26,9 @@
     ],
     "homepage": "https://github.com/jrmajor/fluent-php",
     "require": {
-        "php": "~8.1.0",
+        "php": "8.1 - 8.2",
         "ext-intl": "*",
-        "jrmajor/pluralrules": "^1.0"
+        "jrmajor/pluralrules": "^1.1"
     },
     "require-dev": {
         "ext-json": "*",
