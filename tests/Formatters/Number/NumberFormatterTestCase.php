@@ -118,7 +118,7 @@ abstract class NumberFormatterTestCase extends TestCase
 
         $jsonOptions = Json\encode($options);
 
-        self::assertEqualsNodeOutput(
+        H\NodeAssertions::assertEqualsNodeOutput(
             "new Intl.NumberFormat('{$locale}', {$jsonOptions}).format({$number})",
             (new NumberFormatter($locale))->format($number, new Options(...$options)),
             "Failed asserting that formatting of {$number} for {$locale} with {$jsonOptions} is correct.",

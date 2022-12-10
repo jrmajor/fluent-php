@@ -1,7 +1,8 @@
 <?php
 
-namespace Major\Fluent\Tests;
+namespace Major\Fluent\Tests\Helpers;
 
+use PHPUnit\Framework\Assert as PU;
 use Psl\File;
 use Psl\Filesystem;
 use Psl\Hash;
@@ -9,13 +10,10 @@ use Psl\Json;
 use Psl\Shell;
 use Psl\Str;
 
-/**
- * @mixin TestCase
- */
-trait NodeAssertions
+final class NodeAssertions
 {
     /** @var non-empty-string */
-    private static string $cachePath = __DIR__ . '/../.cache/phpunit/nodeAssertions.json';
+    private static string $cachePath = __DIR__ . '/../../.cache/phpunit/nodeAssertions.json';
 
     /** @var ?array<string, string> */
     private static ?array $cache = null;
@@ -23,10 +21,10 @@ trait NodeAssertions
     public static function assertEqualsNodeOutput(
         string $command, string $actual, string $message,
     ): void {
-        self::assertSame(self::getNodeOutput($command), $actual, $message);
+        PU::assertSame(self::cachedNodeOutput($command), $actual, $message);
     }
 
-    private static function getNodeOutput(string $command): string
+    private static function cachedNodeOutput(string $command): string
     {
         self::loadCache();
 

@@ -9,7 +9,6 @@ use Throwable;
 abstract class TestCase extends BaseTestCase
 {
     use AstAssertions;
-    use NodeAssertions;
     use TranslationAssertions;
 
     /** @psalm-suppress MissingConstructor */
