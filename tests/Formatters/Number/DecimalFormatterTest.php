@@ -11,6 +11,19 @@ use PHPUnit\Framework\Attributes\TestDox;
  */
 final class DecimalFormatterTest extends NumberFormatterTestCase
 {
+    protected static function patternType(): string
+    {
+        return 'decimal';
+    }
+
+    protected static function patternsToTest(): array
+    {
+        return [
+            'pl' => '#,##0.###',
+            'ne' => '#,##,##0.###',
+        ];
+    }
+
     /**
      * @param O $options
      */
@@ -40,7 +53,7 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
             [12345, ['maximumSignificantDigits' => 4]],
             [45.67, ['maximumSignificantDigits' => 2]],
         ] as $case) {
-            foreach (['pl', 'en-US', 'ar', 'mr', 'bn', 'my', 'nl', 'fr'] as $locale) {
+            foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
         }

@@ -27,6 +27,11 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '19.2'
+
       - name: Get Composer cache directory path
         id: composer-cache-dir
         run: echo "::set-output name=path::$(composer config cache-files-dir)"
@@ -37,6 +42,13 @@ jobs:
           path: ${{ steps.composer-cache-dir.outputs.path }}
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
+
+      - name: Node assertions cache
+        uses: actions/cache@v3
+        with:
+          path: .cache/node-assertions
+          key: node-assertions-${{ github.sha }}
+          restore-keys: node-assertions-
 
       - name: Install Composer dependencies
         run: composer update --${{ matrix.stability }}

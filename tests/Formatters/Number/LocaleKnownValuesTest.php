@@ -2,12 +2,11 @@
 
 namespace Major\Fluent\Tests\Formatters\Number;
 
+use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Tests\Helpers as H;
 use Major\Fluent\Tests\TestCase;
-use PHPUnit\Framework\Attributes\BeforeClass;
 use PHPUnit\Framework\Attributes\TestDox;
-use Psl\Filesystem;
 use Psl\Iter;
 use Psl\Vec;
 use ReflectionClass;
@@ -15,26 +14,10 @@ use ReflectionParameter;
 
 final class LocaleKnownValuesTest extends TestCase
 {
-    /** @var list<Locale> */
-    private static array $locales;
-
-    #[BeforeClass]
-    public static function gatherLocaleData(): void
-    {
-        $localeFiles = Filesystem\read_directory(__DIR__ . '/../../../locales/numbers');
-
-        foreach ($localeFiles as $localeFile) {
-            /** @psalm-suppress UnresolvableInclude */
-            self::$locales[] = require $localeFile;
-        }
-
-        self::assertCount(394, self::$locales);
-    }
-
     #[TestDox('there are no unknown numeric systems')]
     public function testSystem(): void
     {
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->system);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
         $this->assertSame([
             ['value' => 'latn', 'count' => 358],
@@ -49,7 +32,7 @@ final class LocaleKnownValuesTest extends TestCase
     #[TestDox('there are no unknown decimal patterns')]
     public function testDecimal(): void
     {
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->decimal);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
         $this->assertSame([
             ['value' => '#,##0.###', 'count' => 377],
@@ -60,7 +43,7 @@ final class LocaleKnownValuesTest extends TestCase
     #[TestDox('there are no unknown percent patterns')]
     public function testPercent(): void
     {
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->percent);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent);
 
         $this->assertSame([
             ['value' => '#,##0%', 'count' => 257],
@@ -74,7 +57,7 @@ final class LocaleKnownValuesTest extends TestCase
     #[TestDox('there are no unknown currency patterns')]
     public function testCurrency(): void
     {
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->currency);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 
         $this->assertSame([
             ['value' => '¤#,##0.00', 'count' => 155],
@@ -97,7 +80,7 @@ final class LocaleKnownValuesTest extends TestCase
     #[TestDox('there are no unknown groupings')]
     public function testGrouping(): void
     {
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->grouping);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping);
 
         $this->assertSame([
             ['value' => 1, 'count' => 368],
@@ -108,7 +91,7 @@ final class LocaleKnownValuesTest extends TestCase
     #[TestDox('there are no unknown symbols')]
     public function testSymbols(): void
     {
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->symbols);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
         $this->assertSame([
             ['value' => ['.', ',', '-', '%'], 'count' => 176],

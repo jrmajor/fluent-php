@@ -2,12 +2,11 @@
 
 namespace Major\Fluent\Tests\Formatters\Number;
 
+use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Tests\Helpers as H;
 use Major\Fluent\Tests\TestCase;
-use PHPUnit\Framework\Attributes\BeforeClass;
 use PHPUnit\Framework\Attributes\TestDox;
-use Psl\Filesystem;
 use Psl\Iter;
 use Psl\Vec;
 use ReflectionClass;
@@ -15,28 +14,12 @@ use ReflectionParameter;
 
 final class LocaleDefaultsTest extends TestCase
 {
-    /** @var list<Locale> */
-    private static array $locales;
-
-    #[BeforeClass]
-    public static function gatherLocaleData(): void
-    {
-        $localeFiles = Filesystem\read_directory(__DIR__ . '/../../../locales/numbers');
-
-        foreach ($localeFiles as $localeFile) {
-            /** @psalm-suppress UnresolvableInclude */
-            self::$locales[] = require $localeFile;
-        }
-
-        self::assertCount(394, self::$locales);
-    }
-
     #[TestDox('default numeric system is the most popular one')]
     public function testSystem(): void
     {
         $expected = 'latn';
 
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->system);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
         $this->assertSame($expected, $this->getDefaultValueFor('system'));
         $this->assertSame($expected, H\most_popular($values));
@@ -47,7 +30,7 @@ final class LocaleDefaultsTest extends TestCase
     {
         $expected = '#,##0.###';
 
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->decimal);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
         $this->assertSame($expected, $this->getDefaultValueFor('decimal'));
         $this->assertSame($expected, H\most_popular($values));
@@ -58,7 +41,7 @@ final class LocaleDefaultsTest extends TestCase
     {
         $expected = '#,##0%';
 
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->percent);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent);
 
         $this->assertSame($expected, $this->getDefaultValueFor('percent'));
         $this->assertSame($expected, H\most_popular($values));
@@ -69,7 +52,7 @@ final class LocaleDefaultsTest extends TestCase
     {
         $expected = '¤#,##0.00';
 
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->currency);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 
         $this->assertSame($expected, $this->getDefaultValueFor('currency'));
         $this->assertSame($expected, H\most_popular($values));
@@ -80,7 +63,7 @@ final class LocaleDefaultsTest extends TestCase
     {
         $expected = 1;
 
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->grouping);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping);
 
         $this->assertSame($expected, $this->getDefaultValueFor('grouping'));
         $this->assertSame($expected, H\most_popular($values));
@@ -91,7 +74,7 @@ final class LocaleDefaultsTest extends TestCase
     {
         $expected = ['.', ',', '-', '%'];
 
-        $values = Vec\map(self::$locales, fn (Locale $l) => $l->symbols);
+        $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
         $this->assertSame($expected, $this->getDefaultValueFor('symbols'));
         $this->assertSame($expected, H\most_popular($values));
