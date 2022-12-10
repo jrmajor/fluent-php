@@ -27,6 +27,11 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '19.2'
+
       - name: Get Composer cache directory path
         id: composer-cache-dir
         run: echo "::set-output name=path::$(composer config cache-files-dir)"

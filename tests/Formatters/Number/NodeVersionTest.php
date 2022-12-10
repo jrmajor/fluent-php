@@ -11,16 +11,17 @@ final class NodeVersionTest extends TestCase
     #[TestDox('local node uses correct icu version')]
     public function testIcu(): void
     {
-        $node = Node::instance();
-
-        $this->assertSame('71.1', $node->freshOutput('process.versions.icu'));
+        $this->assertSame('72.1', $this->versionOf('icu'));
     }
 
     #[TestDox('local node uses correct cldr version')]
     public function testCldr(): void
     {
-        $node = Node::instance();
+        $this->assertSame('42.0', $this->versionOf('cldr'));
+    }
 
-        $this->assertSame('41.0', $node->freshOutput('process.versions.cldr'));
+    private function versionOf(string $library): string
+    {
+        return Node::instance()->freshOutput("process.versions.{$library}");
     }
 }
