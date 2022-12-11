@@ -1,6 +1,6 @@
 <?php
 
-namespace Major\Fluent\Bundle;
+namespace Major\Fluent\Resolver;
 
 use Major\Fluent\Node\Syntax\NamedArgument;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
