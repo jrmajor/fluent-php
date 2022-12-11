@@ -19,11 +19,6 @@ use Major\Fluent\Resolver\PatternResolver;
 
 final class FluentBundle
 {
-    /** Unicode BiDi isolation characters. */
-    public const FSI = "\u{2068}";
-
-    public const PDI = "\u{2069}";
-
     /** @var array<string, Message> */
     private array $messages = [];
 
