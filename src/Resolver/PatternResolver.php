@@ -23,7 +23,6 @@ use Major\Fluent\Node\Syntax\Identifier;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
-use Major\PluralRules\PluralRules;
 use Stringable;
 use Throwable;
 use WeakMap;
@@ -44,6 +43,8 @@ final class PatternResolver
 
     private ?TermReference $currentTerm = null;
 
+    private VariantMatcher $variantMatcher;
+
     public function __construct(
         private FluentBundle $bundle,
         /** @var array<string, mixed> */
@@ -51,6 +52,8 @@ final class PatternResolver
     ) {
         /** @psalm-suppress PropertyTypeCoercion */
         $this->dirty = new WeakMap();
+
+        $this->variantMatcher = new VariantMatcher($this->bundle->getLocale());
     }
 
     public function resolvePattern(?Pattern $pattern): string
@@ -304,37 +307,11 @@ final class PatternResolver
                 ? $variant->key->name
                 : $this->resolveExpression($variant->key);
 
-            if ($this->matchVariant($selector, $key)) {
+            if ($this->variantMatcher->match($selector, $key)) {
                 return $this->resolvePattern($variant->value);
             }
         }
 
         return $this->resolvePattern($expression->getDefaultVariant()->value);
-    }
-
-    private function matchVariant(
-        string|Stringable|FluentNumber $selector,
-        string|Stringable|FluentNumber $key,
-    ): bool {
-        if ($key === $selector) {
-            return true;
-        }
-
-        if (
-            $key instanceof FluentNumber
-            && $selector instanceof FluentNumber
-            && (float) $key->value() === (float) $selector->value()
-        ) {
-            return true;
-        }
-
-        if (
-            $selector instanceof FluentNumber
-            && $key === PluralRules::select($this->bundle->getLocale(), $selector->original())
-        ) {
-            return true;
-        }
-
-        return false;
     }
 }
