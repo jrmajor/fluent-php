@@ -36,10 +36,11 @@ use WeakMap;
  */
 final class PatternResolver
 {
-    /** Unicode BiDi isolation characters. */
-    public const FSI = "\u{2068}";
+    /** Unicode BiDi control character - first-string isolate. */
+    private const FSI = "\u{2068}";
 
-    public const PDI = "\u{2069}";
+    /** Unicode BiDi control character - pop directional isolate. */
+    private const PDI = "\u{2069}";
 
     /** @var WeakMap<Pattern, true> */
     private WeakMap $dirty;
