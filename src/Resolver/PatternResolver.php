@@ -9,6 +9,7 @@ use Major\Fluent\Exceptions\Resolver\CyclicReferenceException;
 use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
+use Major\Fluent\Exceptions\Resolver\ResolverException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
 use Major\Fluent\Node\Syntax\CallArguments;
 use Major\Fluent\Node\Syntax\Expressions\Expression;
@@ -59,11 +60,11 @@ final class PatternResolver
     public function resolvePattern(?Pattern $pattern): string
     {
         if (! $pattern) {
-            return (string) $this->bundle->reportError(new NullPatternException());
+            return (string) $this->error(new NullPatternException());
         }
 
         if (isset($this->dirty[$pattern])) {
-            return (string) $this->bundle->reportError(new CyclicReferenceException());
+            return (string) $this->error(new CyclicReferenceException());
         }
 
         $this->dirty[$pattern] = true;
@@ -143,7 +144,7 @@ final class PatternResolver
         // We're in the top-level Pattern or inside a MessageReference.
         // Missing variables references produce ReferenceExceptions.
         if (! array_key_exists($id, $this->arguments)) {
-            return $this->bundle->reportError(new ReferenceException("Unknown variable: \${$id}."), "\${$id}");
+            return $this->error(new ReferenceException("Unknown variable: \${$id}."), "\${$id}");
         }
 
         $argument = $this->arguments[$id];
@@ -163,7 +164,7 @@ final class PatternResolver
 
         $type = get_debug_type($argument);
 
-        return $this->bundle->reportError(new TypeException("Variable \${$id} is of unsupported type {$type}."), "\${$id}");
+        return $this->error(new TypeException("Variable \${$id} is of unsupported type {$type}."), "\${$id}");
     }
 
     private function resolveMessageReference(MessageReference $reference): string|Stringable
@@ -171,7 +172,7 @@ final class PatternResolver
         $id = $reference->id->name;
 
         if (! $message = $this->bundle->getMessage($id)) {
-            return $this->bundle->reportError(new ReferenceException("Unknown message: {$id}."), $id);
+            return $this->error(new ReferenceException("Unknown message: {$id}."), $id);
         }
 
         if ($attributeName = $reference->attribute?->name) {
@@ -179,7 +180,7 @@ final class PatternResolver
                 return $this->resolvePattern($attribute->value);
             }
 
-            return $this->bundle->reportError(
+            return $this->error(
                 new ReferenceException("Unknown attribute: {$id}.{$attributeName}."),
                 "{$id}.{$attributeName}",
             );
@@ -188,8 +189,8 @@ final class PatternResolver
         if ($message->value) {
             return $this->resolvePattern($message->value);
         }
-
-        return $this->bundle->reportError(new ReferenceException("No value: {$id}."), $id);
+        // null pattern?
+        return $this->error(new ReferenceException("No value: {$id}."), $id);
     }
 
     private function resolveTermReference(TermReference $reference): string|Stringable
@@ -197,7 +198,7 @@ final class PatternResolver
         $id = $reference->id->name;
 
         if (! $term = $this->bundle->getTerm($id)) {
-            return $this->bundle->reportError(new ReferenceException("Unknown term: -{$id}."), "-{$id}");
+            return $this->error(new ReferenceException("Unknown term: -{$id}."), "-{$id}");
         }
 
         if ($attributeName = $reference->attribute?->name) {
@@ -214,7 +215,7 @@ final class PatternResolver
             return $resolved;
         }
 
-        return $this->bundle->reportError(
+        return $this->error(
             new ReferenceException("Unknown attribute: -{$id}.{$attributeName}."),
             "-{$id}.{$attributeName}",
         );
@@ -225,7 +226,7 @@ final class PatternResolver
         $name = $reference->id->name;
 
         if (! $function = $this->bundle->getFunction($name)) {
-            return $this->bundle->reportError(new ReferenceException("Unknown function: {$name}()."), "{$name}()");
+            return $this->error(new ReferenceException("Unknown function: {$name}()."), "{$name}()");
         }
 
         $arguments = $this->getFunctionArguments($reference->arguments, $name === 'NUMBER');
@@ -233,7 +234,7 @@ final class PatternResolver
         try {
             $output = $function(...$arguments);
         } catch (Throwable $e) {
-            return $this->bundle->reportError(new FunctionException($name, $e), "{$name}()");
+            return $this->error(new FunctionException($name, $e), "{$name}()");
         }
 
         if (is_string($output) || $output instanceof Stringable) {
@@ -246,7 +247,7 @@ final class PatternResolver
 
         $type = get_debug_type($output);
 
-        return $this->bundle->reportError(new TypeException("Return value of {$name}() must be of type string|Stringable, {$type} returned."), "{$name}()");
+        return $this->error(new TypeException("Return value of {$name}() must be of type string|Stringable, {$type} returned."), "{$name}()");
     }
 
     /**
@@ -313,5 +314,12 @@ final class PatternResolver
         }
 
         return $this->resolvePattern($expression->getDefaultVariant()->value);
+    }
+
+    private function error(ResolverException $error, string $value = '???'): FluentNone
+    {
+        $this->bundle->reportError($error);
+
+        return new FluentNone($value);
     }
 }

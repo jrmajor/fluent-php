@@ -4,7 +4,6 @@ namespace Major\Fluent\Bundle;
 
 use Closure;
 use Exception;
-use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Bundle\FunctionExistsException;
 use Major\Fluent\Exceptions\Bundle\MessageExistsException;
@@ -130,11 +129,9 @@ final class FluentBundle
     /**
      * @internal
      */
-    public function reportError(ResolverException $error, string $value = '???'): FluentNone
+    public function reportError(ResolverException $error): void
     {
         $this->errors[] = $this->strict ? throw $error : $error;
-
-        return new FluentNone($value);
     }
 
     /**
