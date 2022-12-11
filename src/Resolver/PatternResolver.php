@@ -101,11 +101,17 @@ final class PatternResolver
             : $this->resolveExpression($element->expression);
     }
 
-    private function resolveExpression(Expression $expression): string|Stringable
+    private function resolveExpression(Expression $e): string|Stringable
     {
-        $method = 'resolve' . $expression->getType();
-
-        return $this->{$method}($expression);
+        return match (true) {
+            $e instanceof SelectExpression => $this->resolveSelectExpression($e),
+            $e instanceof NumberLiteral => $this->resolveNumberLiteral($e),
+            $e instanceof StringLiteral => $this->resolveStringLiteral($e),
+            $e instanceof FunctionReference => $this->resolveFunctionReference($e),
+            $e instanceof MessageReference => $this->resolveMessageReference($e),
+            $e instanceof TermReference => $this->resolveTermReference($e),
+            $e instanceof VariableReference => $this->resolveVariableReference($e),
+        };
     }
 
     private function resolveStringLiteral(StringLiteral $literal): string
