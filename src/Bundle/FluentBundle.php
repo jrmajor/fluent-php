@@ -16,7 +16,6 @@ use Major\Fluent\Node\Syntax\FluentResource;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\Resolver\PatternResolver;
-use Major\Fluent\Resolver\ResolutionScope;
 
 final class FluentBundle
 {
@@ -190,9 +189,9 @@ final class FluentBundle
 
     private function resolvePattern(?Pattern $pattern, array $arguments): string
     {
-        $resolver = new PatternResolver($this);
+        $resolver = new PatternResolver($this, $arguments);
 
-        return $resolver->resolvePattern($pattern, new ResolutionScope($arguments));
+        return $resolver->resolvePattern($pattern);
     }
 
     /**

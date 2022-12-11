@@ -21,6 +21,7 @@ use Major\Fluent\Node\Syntax\Expressions\SelectExpression;
 use Major\Fluent\Node\Syntax\Expressions\TermReference;
 use Major\Fluent\Node\Syntax\Expressions\VariableReference;
 use Major\Fluent\Node\Syntax\Identifier;
+use Major\Fluent\Node\Syntax\NamedArgument;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
@@ -28,6 +29,7 @@ use Major\Fluent\Node\Syntax\Variant;
 use Major\PluralRules\PluralRules;
 use Stringable;
 use Throwable;
+use WeakMap;
 
 /**
  * @internal
@@ -39,23 +41,32 @@ final class PatternResolver
 
     public const PDI = "\u{2069}";
 
+    /** @var WeakMap<Pattern, true> */
+    private WeakMap $dirty;
+
+    /** @var ?list<NamedArgument> */
+    private ?array $parameters = null;
+
     public function __construct(
         private FluentBundle $bundle,
-    ) { }
+        /** @var array<string, mixed> */
+        private array $arguments,
+    ) {
+        /** @psalm-suppress PropertyTypeCoercion */
+        $this->dirty = new WeakMap();
+    }
 
-    public function resolvePattern(
-        ?Pattern $pattern,
-        ResolutionScope $scope,
-    ): string {
+    public function resolvePattern(?Pattern $pattern): string
+    {
         if (! $pattern) {
             return (string) $this->bundle->reportError(new NullPatternException());
         }
 
-        if (isset($scope->dirty[$pattern])) {
+        if (isset($this->dirty[$pattern])) {
             return (string) $this->bundle->reportError(new CyclicReferenceException());
         }
 
-        $scope->dirty[$pattern] = true;
+        $this->dirty[$pattern] = true;
 
         $result = '';
 
@@ -74,7 +85,7 @@ final class PatternResolver
 
             $result .= $useIsolating ? self::FSI : '';
 
-            $result .= $this->resolvePlaceable($element, $scope);
+            $result .= $this->resolvePlaceable($element);
 
             $result .= $useIsolating ? self::PDI : '';
         }
@@ -82,35 +93,27 @@ final class PatternResolver
         return $result;
     }
 
-    private function resolvePlaceable(
-        Placeable $element,
-        ResolutionScope $scope,
-    ): string|Stringable {
+    private function resolvePlaceable(Placeable $element): string|Stringable
+    {
         return $element->expression instanceof Placeable
-            ? $this->resolvePlaceable($element->expression, $scope)
-            : $this->resolveExpression($element->expression, $scope);
+            ? $this->resolvePlaceable($element->expression)
+            : $this->resolveExpression($element->expression);
     }
 
-    private function resolveExpression(
-        Expression $expression,
-        ResolutionScope $scope,
-    ): string|Stringable {
+    private function resolveExpression(Expression $expression): string|Stringable
+    {
         $method = 'resolve' . $expression->getType();
 
-        return $this->{$method}($expression, $scope);
+        return $this->{$method}($expression);
     }
 
-    private function resolveStringLiteral(
-        StringLiteral $literal,
-        ResolutionScope $scope,
-    ): string {
+    private function resolveStringLiteral(StringLiteral $literal): string
+    {
         return $literal->parse()->value;
     }
 
-    private function resolveNumberLiteral(
-        NumberLiteral $literal,
-        ResolutionScope $scope,
-    ): FluentNumber {
+    private function resolveNumberLiteral(NumberLiteral $literal): FluentNumber
+    {
         $parsed = $literal->parse();
 
         return (new FluentNumber($parsed->value, $literal->value))
@@ -118,27 +121,25 @@ final class PatternResolver
             ->setOptions(['minimumFractionDigits' => $parsed->precision]);
     }
 
-    private function resolveVariableReference(
-        VariableReference $reference,
-        ResolutionScope $scope,
-    ): string|Stringable {
+    private function resolveVariableReference(VariableReference $reference): string|Stringable
+    {
         $id = $reference->id->name;
 
-        if ($scope->parameters !== null) {
+        if ($this->parameters !== null) {
             // We're inside a TermReference. It's OK to reference undefined parameters.
-            foreach ($scope->parameters as $argument) {
+            foreach ($this->parameters as $argument) {
                 if ($argument->name->name === $id) {
-                    return $this->resolveExpression($argument->value, $scope);
+                    return $this->resolveExpression($argument->value);
                 }
             }
 
             return new FluentNone("\${$id}");
         }
 
-        if (array_key_exists($id, $scope->arguments)) {
+        if (array_key_exists($id, $this->arguments)) {
             // We're in the top-level Pattern or inside a MessageReference.
             // Missing variables references produce ReferenceExceptions.
-            $argument = $scope->arguments[$id];
+            $argument = $this->arguments[$id];
         } else {
             return $this->bundle->reportError(new ReferenceException("Unknown variable: \${$id}."), "\${$id}");
         }
@@ -161,10 +162,8 @@ final class PatternResolver
         return $this->bundle->reportError(new TypeException("Variable \${$id} is of unsupported type {$type}."), "\${$id}");
     }
 
-    private function resolveMessageReference(
-        MessageReference $reference,
-        ResolutionScope $scope,
-    ): string|Stringable {
+    private function resolveMessageReference(MessageReference $reference): string|Stringable
+    {
         $id = $reference->id->name;
 
         if (! $message = $this->bundle->getMessage($id)) {
@@ -179,7 +178,7 @@ final class PatternResolver
             }
 
             if (isset($attribute)) {
-                return $this->resolvePattern($attribute->value, $scope);
+                return $this->resolvePattern($attribute->value);
             }
 
             return $this->bundle->reportError(
@@ -189,16 +188,14 @@ final class PatternResolver
         }
 
         if ($message->value) {
-            return $this->resolvePattern($message->value, $scope);
+            return $this->resolvePattern($message->value);
         }
 
         return $this->bundle->reportError(new ReferenceException("No value: {$id}."), $id);
     }
 
-    private function resolveTermReference(
-        TermReference $reference,
-        ResolutionScope $scope,
-    ): string|Stringable {
+    private function resolveTermReference(TermReference $reference): string|Stringable
+    {
         $id = $reference->id->name;
 
         if (! $term = $this->bundle->getTerm($id)) {
@@ -214,11 +211,11 @@ final class PatternResolver
 
             if (isset($attribute)) {
                 // Every TermReference has its own variables.
-                $scope->parameters = $reference->arguments?->named ?? [];
+                $this->parameters = $reference->arguments?->named ?? [];
 
-                $resolved = $this->resolvePattern($attribute->value, $scope);
+                $resolved = $this->resolvePattern($attribute->value);
 
-                $scope->parameters = null;
+                $this->parameters = null;
 
                 return $resolved;
             }
@@ -229,26 +226,24 @@ final class PatternResolver
             );
         }
 
-        $scope->parameters = $reference->arguments?->named ?? [];
+        $this->parameters = $reference->arguments?->named ?? [];
 
-        $resolved = $this->resolvePattern($term->value, $scope);
+        $resolved = $this->resolvePattern($term->value);
 
-        $scope->parameters = null;
+        $this->parameters = null;
 
         return $resolved;
     }
 
-    private function resolveFunctionReference(
-        FunctionReference $reference,
-        ResolutionScope $scope,
-    ): string|Stringable {
+    private function resolveFunctionReference(FunctionReference $reference): string|Stringable
+    {
         $name = $reference->id->name;
 
         if (! $function = $this->bundle->getFunction($name)) {
             return $this->bundle->reportError(new ReferenceException("Unknown function: {$name}()."), "{$name}()");
         }
 
-        $arguments = $this->getFunctionArguments($reference->arguments, $scope, $name === 'NUMBER');
+        $arguments = $this->getFunctionArguments($reference->arguments, $name === 'NUMBER');
 
         try {
             $output = $function(...$arguments);
@@ -272,30 +267,24 @@ final class PatternResolver
     /**
      * @return array<int|string, mixed>
      */
-    private function getFunctionArguments(
-        CallArguments $arguments,
-        ResolutionScope $scope,
-        bool $number = false,
-    ): array {
+    private function getFunctionArguments(CallArguments $arguments, bool $number): array
+    {
         /** @var array<int|string, mixed> */
         $prepared = [];
 
         foreach ($arguments->positional as $position => $argument) {
-            $prepared[] = $this->resolveArgument($argument, $scope, $position === 0 && $number);
+            $prepared[] = $this->resolveArgument($argument, $position === 0 && $number);
         }
 
         foreach ($arguments->named as $argument) {
-            $prepared[$argument->name->name] = $this->resolveArgument($argument->value, $scope);
+            $prepared[$argument->name->name] = $this->resolveArgument($argument->value);
         }
 
         return $prepared;
     }
 
-    private function resolveArgument(
-        Expression $argument,
-        ResolutionScope $scope,
-        bool $number = false,
-    ): mixed {
+    private function resolveArgument(Expression $argument, bool $number = false): mixed
+    {
         if ($argument instanceof NumberLiteral && ! $number) {
             $number = $argument->parse();
 
@@ -304,12 +293,12 @@ final class PatternResolver
 
         if (
             $argument instanceof VariableReference
-            && array_key_exists($id = $argument->id->name, $scope->arguments)
+            && array_key_exists($id = $argument->id->name, $this->arguments)
         ) {
-            return $scope->arguments[$id];
+            return $this->arguments[$id];
         }
 
-        $value = $this->resolveExpression($argument, $scope);
+        $value = $this->resolveExpression($argument);
 
         return match (true) {
             $value instanceof FluentNone => null,
@@ -318,41 +307,37 @@ final class PatternResolver
         };
     }
 
-    private function resolveSelectExpression(
-        SelectExpression $expression,
-        ResolutionScope $scope,
-    ): string {
-        $selector = $this->resolveExpression($expression->selector, $scope);
+    private function resolveSelectExpression(SelectExpression $expression): string
+    {
+        $selector = $this->resolveExpression($expression->selector);
 
         $variants = $expression->variants;
 
         if ($selector instanceof FluentNone) {
-            return $this->getDefaultVariant($variants, $scope);
+            return $this->getDefaultVariant($variants);
         }
 
         foreach ($variants as $variant) {
             $key = $variant->key instanceof Identifier
                 ? $variant->key->name
-                : $this->resolveExpression($variant->key, $scope);
+                : $this->resolveExpression($variant->key);
 
             if ($this->matchVariant($selector, $key)) {
-                return $this->resolvePattern($variant->value, $scope);
+                return $this->resolvePattern($variant->value);
             }
         }
 
-        return $this->getDefaultVariant($variants, $scope);
+        return $this->getDefaultVariant($variants);
     }
 
     /**
      * @param list<Variant> $variants
      */
-    private function getDefaultVariant(
-        array $variants,
-        ResolutionScope $scope,
-    ): string {
+    private function getDefaultVariant(array $variants): string
+    {
         foreach ($variants as $variant) {
             if ($variant->default) {
-                return $this->resolvePattern($variant->value, $scope);
+                return $this->resolvePattern($variant->value);
             }
         }
 
