@@ -10,7 +10,6 @@ use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\NullPatternException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
-use Major\Fluent\Exceptions\ShouldNotHappen;
 use Major\Fluent\Node\Syntax\CallArguments;
 use Major\Fluent\Node\Syntax\Expressions\Expression;
 use Major\Fluent\Node\Syntax\Expressions\FunctionReference;
@@ -21,11 +20,9 @@ use Major\Fluent\Node\Syntax\Expressions\SelectExpression;
 use Major\Fluent\Node\Syntax\Expressions\TermReference;
 use Major\Fluent\Node\Syntax\Expressions\VariableReference;
 use Major\Fluent\Node\Syntax\Identifier;
-use Major\Fluent\Node\Syntax\NamedArgument;
 use Major\Fluent\Node\Syntax\Patterns\Pattern;
 use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Node\Syntax\Patterns\TextElement;
-use Major\Fluent\Node\Syntax\Variant;
 use Major\PluralRules\PluralRules;
 use Stringable;
 use Throwable;
@@ -45,8 +42,7 @@ final class PatternResolver
     /** @var WeakMap<Pattern, true> */
     private WeakMap $dirty;
 
-    /** @var ?list<NamedArgument> */
-    private ?array $parameters = null;
+    private ?TermReference $currentTerm = null;
 
     public function __construct(
         private FluentBundle $bundle,
@@ -132,24 +128,22 @@ final class PatternResolver
     {
         $id = $reference->id->name;
 
-        if ($this->parameters !== null) {
-            // We're inside a TermReference. It's OK to reference undefined parameters.
-            foreach ($this->parameters as $argument) {
-                if ($argument->name->name === $id) {
-                    return $this->resolveExpression($argument->value);
-                }
+        // We're inside a TermReference. It's OK to reference undefined parameters.
+        if ($this->currentTerm !== null) {
+            if (! $argument = $this->currentTerm->arguments?->getArgument($id)) {
+                return new FluentNone("\${$id}");
             }
 
-            return new FluentNone("\${$id}");
+            return $this->resolveExpression($argument->value);
         }
 
-        if (array_key_exists($id, $this->arguments)) {
-            // We're in the top-level Pattern or inside a MessageReference.
-            // Missing variables references produce ReferenceExceptions.
-            $argument = $this->arguments[$id];
-        } else {
+        // We're in the top-level Pattern or inside a MessageReference.
+        // Missing variables references produce ReferenceExceptions.
+        if (! array_key_exists($id, $this->arguments)) {
             return $this->bundle->reportError(new ReferenceException("Unknown variable: \${$id}."), "\${$id}");
         }
+
+        $argument = $this->arguments[$id];
 
         if ($argument instanceof FluentNumber) {
             return $argument->setLocale($this->bundle->getLocale());
@@ -178,13 +172,7 @@ final class PatternResolver
         }
 
         if ($attributeName = $reference->attribute?->name) {
-            foreach ($message->attributes as $messageAttribute) {
-                if ($messageAttribute->id->name === $attributeName) {
-                    $attribute = $messageAttribute;
-                }
-            }
-
-            if (isset($attribute)) {
+            if ($attribute = $message->getAttribute($attributeName)) {
                 return $this->resolvePattern($attribute->value);
             }
 
@@ -210,36 +198,23 @@ final class PatternResolver
         }
 
         if ($attributeName = $reference->attribute?->name) {
-            foreach ($term->attributes as $termAttribute) {
-                if ($termAttribute->id->name === $attributeName) {
-                    $attribute = $termAttribute;
-                }
-            }
-
-            if (isset($attribute)) {
-                // Every TermReference has its own variables.
-                $this->parameters = $reference->arguments?->named ?? [];
-
-                $resolved = $this->resolvePattern($attribute->value);
-
-                $this->parameters = null;
-
-                return $resolved;
-            }
-
-            return $this->bundle->reportError(
-                new ReferenceException("Unknown attribute: -{$id}.{$attributeName}."),
-                "-{$id}.{$attributeName}",
-            );
+            $pattern = $term->getAttribute($attributeName)?->value;
+        } else {
+            $pattern = $term->value;
         }
 
-        $this->parameters = $reference->arguments?->named ?? [];
+        if ($pattern) {
+            $this->currentTerm = $reference;
+            $resolved = $this->resolvePattern($pattern);
+            $this->currentTerm = null;
 
-        $resolved = $this->resolvePattern($term->value);
+            return $resolved;
+        }
 
-        $this->parameters = null;
-
-        return $resolved;
+        return $this->bundle->reportError(
+            new ReferenceException("Unknown attribute: -{$id}.{$attributeName}."),
+            "-{$id}.{$attributeName}",
+        );
     }
 
     private function resolveFunctionReference(FunctionReference $reference): string|Stringable
@@ -321,7 +296,7 @@ final class PatternResolver
         $variants = $expression->variants;
 
         if ($selector instanceof FluentNone) {
-            return $this->getDefaultVariant($variants);
+            return $this->resolvePattern($expression->getDefaultVariant()->value);
         }
 
         foreach ($variants as $variant) {
@@ -334,21 +309,7 @@ final class PatternResolver
             }
         }
 
-        return $this->getDefaultVariant($variants);
-    }
-
-    /**
-     * @param list<Variant> $variants
-     */
-    private function getDefaultVariant(array $variants): string
-    {
-        foreach ($variants as $variant) {
-            if ($variant->default) {
-                return $this->resolvePattern($variant->value);
-            }
-        }
-
-        throw new ShouldNotHappen(); // @codeCoverageIgnore
+        return $this->resolvePattern($expression->getDefaultVariant()->value);
     }
 
     private function matchVariant(

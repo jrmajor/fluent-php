@@ -12,4 +12,15 @@ final class CallArguments extends SyntaxNode
         /** @var list<NamedArgument> */
         public array $named = [],
     ) { }
+
+    public function getArgument(string $name): ?NamedArgument
+    {
+        foreach ($this->named as $argument) {
+            if ($argument->name->name === $name) {
+                return $argument;
+            }
+        }
+
+        return null;
+    }
 }

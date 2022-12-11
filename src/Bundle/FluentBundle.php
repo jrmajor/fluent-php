@@ -159,27 +159,21 @@ final class FluentBundle
             $arguments = $arguments[0];
         }
 
-        $messageId = explode('.', $_message, limit: 2);
+        $ids = explode('.', $_message, limit: 2);
+        $messageId = $ids[0];
+        $attributeId = $ids[1] ?? null;
 
-        $message = $this->messages[$messageId[0]] ?? null;
-
-        if (! $message) {
+        if (! $message = $this->messages[$messageId] ?? null) {
             return null;
         }
 
-        $attributeId = $messageId[1] ?? null;
-
         if ($attributeId === null) {
-            return $this->resolvePattern($message->value, $arguments);
+            $pattern = $message->value;
+        } else {
+            $pattern = $message->getAttribute($attributeId)?->value;
         }
 
-        foreach ($message->attributes as $attribute) {
-            if ($attribute->id->name === $attributeId) {
-                return $this->resolvePattern($attribute->value, $arguments);
-            }
-        }
-
-        return null;
+        return $this->resolvePattern($pattern, $arguments);
     }
 
     private function resolvePattern(?Pattern $pattern, array $arguments): string
