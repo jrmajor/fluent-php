@@ -7,18 +7,10 @@ use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver as Err;
 use Major\Fluent\Node\Syntax\CallArguments;
+use Major\Fluent\Node\Syntax\Expressions as Expr;
 use Major\Fluent\Node\Syntax\Expressions\Expression;
-use Major\Fluent\Node\Syntax\Expressions\FunctionReference;
-use Major\Fluent\Node\Syntax\Expressions\Literals\NumberLiteral;
-use Major\Fluent\Node\Syntax\Expressions\Literals\StringLiteral;
-use Major\Fluent\Node\Syntax\Expressions\MessageReference;
-use Major\Fluent\Node\Syntax\Expressions\SelectExpression;
-use Major\Fluent\Node\Syntax\Expressions\TermReference;
-use Major\Fluent\Node\Syntax\Expressions\VariableReference;
 use Major\Fluent\Node\Syntax\Identifier;
-use Major\Fluent\Node\Syntax\Patterns\Pattern;
-use Major\Fluent\Node\Syntax\Patterns\Placeable;
-use Major\Fluent\Node\Syntax\Patterns\TextElement;
+use Major\Fluent\Node\Syntax\Patterns as Pattern;
 use Stringable;
 use Throwable;
 use WeakMap;
@@ -34,10 +26,10 @@ final class PatternResolver
     /** Unicode BiDi control character - pop directional isolate. */
     private const PDI = "\u{2069}";
 
-    /** @var WeakMap<Pattern, true> */
+    /** @var WeakMap<Pattern\Pattern, true> */
     private WeakMap $dirty;
 
-    private ?TermReference $currentTerm = null;
+    private ?Expr\TermReference $currentTerm = null;
 
     private VariantMatcher $variantMatcher;
 
@@ -52,7 +44,7 @@ final class PatternResolver
         $this->variantMatcher = new VariantMatcher($this->bundle->getLocale());
     }
 
-    public function resolvePattern(?Pattern $pattern): string
+    public function resolvePattern(?Pattern\Pattern $pattern): string
     {
         if (! $pattern) {
             return (string) $this->error(new Err\NullPatternException());
@@ -71,13 +63,13 @@ final class PatternResolver
         $useIsolating = $this->bundle->usesIsolating() && count($pattern->elements) > 1;
 
         foreach ($pattern->elements as $element) {
-            if ($element instanceof TextElement) {
+            if ($element instanceof Pattern\TextElement) {
                 $result .= $element->value;
 
                 continue;
             }
 
-            assert($element instanceof Placeable);
+            assert($element instanceof Pattern\Placeable);
 
             $result .= $useIsolating ? self::FSI : '';
 
@@ -89,32 +81,32 @@ final class PatternResolver
         return $result;
     }
 
-    private function resolvePlaceable(Placeable $element): string|Stringable
+    private function resolvePlaceable(Pattern\Placeable $element): string|Stringable
     {
-        return $element->expression instanceof Placeable
+        return $element->expression instanceof Pattern\Placeable
             ? $this->resolvePlaceable($element->expression)
             : $this->resolveExpression($element->expression);
     }
 
-    private function resolveExpression(Expression $e): string|Stringable
+    private function resolveExpression(Expr\Expression $e): string|Stringable
     {
         return match (true) {
-            $e instanceof SelectExpression => $this->resolveSelectExpression($e),
-            $e instanceof NumberLiteral => $this->resolveNumberLiteral($e),
-            $e instanceof StringLiteral => $this->resolveStringLiteral($e),
-            $e instanceof FunctionReference => $this->resolveFunctionReference($e),
-            $e instanceof MessageReference => $this->resolveMessageReference($e),
-            $e instanceof TermReference => $this->resolveTermReference($e),
-            $e instanceof VariableReference => $this->resolveVariableReference($e),
+            $e instanceof Expr\SelectExpression => $this->resolveSelectExpression($e),
+            $e instanceof Expr\Literals\NumberLiteral => $this->resolveNumberLiteral($e),
+            $e instanceof Expr\Literals\StringLiteral => $this->resolveStringLiteral($e),
+            $e instanceof Expr\FunctionReference => $this->resolveFunctionReference($e),
+            $e instanceof Expr\MessageReference => $this->resolveMessageReference($e),
+            $e instanceof Expr\TermReference => $this->resolveTermReference($e),
+            $e instanceof Expr\VariableReference => $this->resolveVariableReference($e),
         };
     }
 
-    private function resolveStringLiteral(StringLiteral $literal): string
+    private function resolveStringLiteral(Expr\Literals\StringLiteral $literal): string
     {
         return $literal->parse()->value;
     }
 
-    private function resolveNumberLiteral(NumberLiteral $literal): FluentNumber
+    private function resolveNumberLiteral(Expr\Literals\NumberLiteral $literal): FluentNumber
     {
         $parsed = $literal->parse();
 
@@ -123,7 +115,7 @@ final class PatternResolver
             ->setOptions(['minimumFractionDigits' => $parsed->precision]);
     }
 
-    private function resolveVariableReference(VariableReference $reference): string|Stringable
+    private function resolveVariableReference(Expr\VariableReference $reference): string|Stringable
     {
         $id = $reference->id->name;
 
@@ -162,7 +154,7 @@ final class PatternResolver
         return $this->error(new Err\TypeException($error, $argument), "\${$id}");
     }
 
-    private function resolveMessageReference(MessageReference $reference): string|Stringable
+    private function resolveMessageReference(Expr\MessageReference $reference): string|Stringable
     {
         $id = $reference->id->name;
 
@@ -187,7 +179,7 @@ final class PatternResolver
         return $this->error(new Err\ReferenceException("No value: {$id}."), $id);
     }
 
-    private function resolveTermReference(TermReference $reference): string|Stringable
+    private function resolveTermReference(Expr\TermReference $reference): string|Stringable
     {
         $id = $reference->id->name;
 
@@ -214,7 +206,7 @@ final class PatternResolver
         return $this->error(new Err\ReferenceException($error), "-{$id}.{$attributeName}");
     }
 
-    private function resolveFunctionReference(FunctionReference $reference): string|Stringable
+    private function resolveFunctionReference(Expr\FunctionReference $reference): string|Stringable
     {
         $name = $reference->id->name;
 
@@ -266,14 +258,14 @@ final class PatternResolver
 
     private function resolveArgument(Expression $argument, bool $number = false): mixed
     {
-        if ($argument instanceof NumberLiteral && ! $number) {
+        if ($argument instanceof Expr\Literals\NumberLiteral && ! $number) {
             $number = $argument->parse();
 
             return $number->precision === 0 ? (int) $number->value : $number->value;
         }
 
         if (
-            $argument instanceof VariableReference
+            $argument instanceof Expr\VariableReference
             && array_key_exists($id = $argument->id->name, $this->arguments)
         ) {
             return $this->arguments[$id];
@@ -288,7 +280,7 @@ final class PatternResolver
         };
     }
 
-    private function resolveSelectExpression(SelectExpression $expression): string
+    private function resolveSelectExpression(Expr\SelectExpression $expression): string
     {
         $selector = $this->resolveExpression($expression->selector);
 
