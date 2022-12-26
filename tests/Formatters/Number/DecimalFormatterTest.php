@@ -36,13 +36,13 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{0: string, 1: int|float, 2?: O}>
+     * @return Generator<array{string, int|float, O}>
      */
     public static function provideDecimalCases(): Generator
     {
         foreach ([
-            [1234.5678],
-            [-420],
+            [1234.5678, []],
+            [-420, []],
             [1234.5678, ['useGrouping' => false]],
             [96, ['minimumIntegerDigits' => 5]],
             [69, ['minimumIntegerDigits' => 4]],

@@ -10,6 +10,9 @@ use stdClass;
 
 final class MostPopularTest extends TestCase
 {
+    /**
+     * @param list<mixed> $values
+     */
     #[DataProvider('provideOkCases')]
     #[TestDox('most_popular helper works')]
     public function testOk(mixed $expected, array $values): void

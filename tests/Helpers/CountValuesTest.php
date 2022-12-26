@@ -10,6 +10,9 @@ use stdClass;
 
 final class CountValuesTest extends TestCase
 {
+    /**
+     * @param list<mixed> $values
+     */
     #[DataProvider('provideOkCases')]
     #[TestDox('count_values helper works')]
     public function testOk(mixed $expected, array $values): void

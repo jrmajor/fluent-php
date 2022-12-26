@@ -39,12 +39,12 @@
         "nunomaduro/collision": "^6.3",
         "php-standard-library/psalm-plugin": "^2.2",
         "phpbench/phpbench": "^1.2",
-        "phpunit/phpunit": "10.0.x-dev#74bdbf5",
+        "phpunit/phpunit": "10.0.x-dev#9f75afb",
         "psalm/plugin-phpunit": "^0.18.0",
-        "sebastian/diff": "5.0.x-dev#7d8cf26 as 4.0.4",
+        "sebastian/diff": "5.0.x-dev#e5a097f as 4.0.4",
         "symfony/console": "^6.2",
         "symfony/var-dumper": "^6.2",
-        "vimeo/psalm": "^5.1"
+        "vimeo/psalm": "^5.4"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

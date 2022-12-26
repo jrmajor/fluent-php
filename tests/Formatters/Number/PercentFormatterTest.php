@@ -41,13 +41,13 @@ final class PercentFormatterTest extends NumberFormatterTestCase
     }
 
     /**
-     * @return Generator<array{0: string, 1: int|float, 2?: O}>
+     * @return Generator<array{string, int|float, O}>
      */
     public static function providePercentCases(): Generator
     {
         foreach ([
-            [0.69],
-            [-0.5],
+            [0.69, []],
+            [-0.5, []],
             [0.42, ['minimumFractionDigits' => 1]],
             [0.2137, ['maximumFractionDigits' => 2]],
             [2.137, ['maximumSignificantDigits' => 4]],
