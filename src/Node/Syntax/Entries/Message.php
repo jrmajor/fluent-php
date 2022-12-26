@@ -16,4 +16,15 @@ final class Message extends Entry
         public array $attributes = [],
         public ?Comment $comment = null,
     ) { }
+
+    public function getAttribute(string $name): ?Attribute
+    {
+        foreach ($this->attributes as $attribute) {
+            if ($attribute->id->name === $name) {
+                return $attribute;
+            }
+        }
+
+        return null;
+    }
 }
