@@ -100,6 +100,7 @@ final class FluentBundle
 
     /**
      * @param array<string, Closure> $functions
+     *
      * @return $this
      */
     public function addFunctions(array $functions): static

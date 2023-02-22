@@ -15,6 +15,7 @@ final class CurrenciesOptimizer
     /**
      * @param array<string, Currency> $region
      * @param array<string, Currency> $base
+     *
      * @return array<string, Currency>
      */
     public function optimize(array $region, array $base = []): array

@@ -501,6 +501,7 @@ final class FluentParser
      * beginning of text lines. The common indent is calculated in getPattern.
      *
      * @param list<PatternElement|Indent> $elements
+     *
      * @return list<PatternElement>
      */
     private function dedent(array $elements, ?int $commonIndent): array

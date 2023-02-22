@@ -44,6 +44,7 @@ final class CurrenciesFactory
 
     /**
      * @param array<string, string> $data
+     *
      * @return ?array<string, string>
      */
     private static function makePlurals(array $data): ?array

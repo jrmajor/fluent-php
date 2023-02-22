@@ -86,6 +86,7 @@ final class LocaleData
 
     /**
      * @param non-empty-string $path
+     *
      * @return non-empty-string
      */
     private static function fileLocale(string $path): string

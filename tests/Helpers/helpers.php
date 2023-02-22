@@ -9,6 +9,7 @@ use Psl\Vec;
  * @template T
  *
  * @param list<T> $values
+ *
  * @return list<array{value: T, count: int}>
  */
 function count_values(array $values): array
@@ -40,6 +41,7 @@ function count_values(array $values): array
  * @template T
  *
  * @param list<T> $values
+ *
  * @return ?T
  */
 function most_popular(array $values): mixed

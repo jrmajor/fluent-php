@@ -32,6 +32,7 @@ final class FluentNumber implements Stringable
 
     /**
      * @param array<string, mixed> $options
+     *
      * @return $this
      */
     public function setOptions(array $options): self

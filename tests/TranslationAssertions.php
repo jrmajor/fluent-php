@@ -52,6 +52,7 @@ trait TranslationAssertions
 
     /**
      * @param array<string, mixed> $arguments
+     *
      * @return array{?string, list<ResolverException>}
      */
     private function getResultAndErrors(

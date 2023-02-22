@@ -34,6 +34,7 @@ abstract class NumberFormatterTestCase extends TestCase
 
     /**
      * @param list<string> $except
+     *
      * @return Generator<string>
      */
     final protected static function provideLocales(array $except = []): Generator
