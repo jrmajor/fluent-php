@@ -48,6 +48,11 @@ final class CldrData
      */
     public static function get(string $package, string $locale, string $key): array
     {
+        if (! str_contains($key, '.')) {
+            throw new InvalidArgumentException('Key should be in a dot notation.');
+        }
+
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         [$filename, $keys] = explode('.', $key, 2);
 
         $path = self::path($package, "{$locale}/{$filename}.json");
