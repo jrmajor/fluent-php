@@ -247,7 +247,7 @@ return [
     'TOP' => new C('TOP', 'トンガ パ・アンガ', narrow: 'T$', plurals: ['other' => 'トンガ パ・アンガ']),
     'TPE' => new C('TPE', 'ティモール エスクード', plurals: ['other' => 'ティモール エスクード']),
     'TRL' => new C('TRL', 'トルコ リラ (1922–2005)', plurals: ['other' => 'トルコ リラ (1922–2005)']),
-    'TRY' => new C('TRY', '新トルコリラ', narrow: '₺', plurals: ['other' => '新トルコリラ']),
+    'TRY' => new C('TRY', 'トルコリラ', narrow: '₺', plurals: ['other' => 'トルコリラ']),
     'TTD' => new C('TTD', 'トリニダード・トバゴ ドル', narrow: '$', plurals: ['other' => 'トリニダード・トバゴ ドル']),
     'TWD' => new C('TWD', '新台湾ドル', 'NT$', narrow: '$', plurals: ['other' => '新台湾ドル']),
     'TZS' => new C('TZS', 'タンザニア シリング', plurals: ['other' => 'タンザニア シリング']),

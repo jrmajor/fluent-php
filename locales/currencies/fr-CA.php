@@ -28,7 +28,6 @@ return [
     'JPY' => new C('JPY', 'yen japonais', '¥', narrow: '¥', plurals: ['one' => 'yen japonais', 'other' => 'yens japonais'], minorUnits: 0),
     'KMF' => new C('KMF', 'franc comorien', narrow: 'CF', plurals: ['one' => 'franc comorien', 'other' => 'francs comoriens'], minorUnits: 0),
     'KRW' => new C('KRW', 'won sud-coréen', narrow: '₩', plurals: ['one' => 'won sud-coréen', 'other' => 'wons sud-coréens'], minorUnits: 0),
-    'LAK' => new C('LAK', 'kip laotien', narrow: '₭', plurals: ['one' => 'kip laotien', 'other' => 'kips laotiens']),
     'LBP' => new C('LBP', 'livre libanaise', narrow: '£L', plurals: ['one' => 'livre libanaise', 'other' => 'livres libanaises']),
     'MXN' => new C('MXN', 'peso mexicain', narrow: '$', plurals: ['one' => 'peso mexicain', 'other' => 'pesos mexicains']),
     'NAD' => new C('NAD', 'dollar namibien', narrow: '$', plurals: ['one' => 'dollar namibien', 'other' => 'dollars namibiens']),

@@ -134,7 +134,7 @@ return [
     'KWD' => new C('KWD', 'dinar koweïtien', plurals: ['one' => 'dinar koweïtien', 'other' => 'dinar koweïtiens'], minorUnits: 3),
     'KYD' => new C('KYD', 'dollar des îles Caïmans', narrow: '$', plurals: ['one' => 'dollar des îles Caïmans', 'other' => 'dollars des îles Caïmans']),
     'KZT' => new C('KZT', 'tenge kazakh', narrow: '₸', plurals: ['one' => 'tenge kazakh', 'other' => 'tenges kazakhs']),
-    'LAK' => new C('LAK', 'kip loatien', narrow: '₭', plurals: ['one' => 'kip loatien', 'other' => 'kips loatiens']),
+    'LAK' => new C('LAK', 'kip laotien', narrow: '₭', plurals: ['one' => 'kip laotien', 'other' => 'kips laotiens']),
     'LBP' => new C('LBP', 'livre libanaise', '£LB', narrow: '£L', plurals: ['one' => 'livre libanaise', 'other' => 'livres libanaises']),
     'LKR' => new C('LKR', 'roupie srilankaise', narrow: 'Rs', plurals: ['one' => 'roupie srilankaise', 'other' => 'roupies srilankaises']),
     'LRD' => new C('LRD', 'dollar libérien', narrow: '$', plurals: ['one' => 'dollar libérien', 'other' => 'dollars libériens']),

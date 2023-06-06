@@ -86,7 +86,7 @@ return [
     'LBP' => new C('LBP', 'लेबनीज पाउंड', narrow: 'L£', plurals: ['one' => 'लेबनीज पाउंड', 'other' => 'लेबनीज पाउंड्स']),
     'LKR' => new C('LKR', 'श्रीलंकन रुपया', narrow: 'Rs', plurals: ['one' => 'श्रीलंकन रुपया', 'other' => 'श्रीलंकन रुपये']),
     'LRD' => new C('LRD', 'लाइबेरियन डॉलर', narrow: '$', plurals: ['one' => 'लाइबेरियन डॉलर', 'other' => 'लाइबेरियन डॉलर्स']),
-    'LSL' => new C('LSL', 'लेसोटो लोटी'),
+    'LSL' => new C('LSL', 'लेसोटो लोटी', plurals: ['one' => 'लेसोटो लोटी', 'other' => 'लेसोटो लोटी']),
     'LTL' => new C('LTL', 'लिथुआनियन लिटास', narrow: 'Lt', plurals: ['one' => 'लिथुआनियन लिटास', 'other' => 'लिथुआनियन लिटाई']),
     'LVL' => new C('LVL', 'लाट्व्हियन लाट्झ', narrow: 'Ls', plurals: ['one' => 'लाट्व्हियन लाट्झ', 'other' => 'लाट्व्हियन लाटी']),
     'LYD' => new C('LYD', 'लिबियाचा दिनार', plurals: ['one' => 'लिबियाचा दिनार', 'other' => 'लिबियन दिनार'], minorUnits: 3),

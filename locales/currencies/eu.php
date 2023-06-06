@@ -301,7 +301,7 @@ return [
     'YUR' => new C('YUR', 'dinar yugoslaviar erreformatua (1992–1993)', plurals: ['one' => 'dinar yugoslaviar erreformatu (1992–1993)', 'other' => 'dinar yugoslaviar erreformatu (1992–1993)']),
     'ZAL' => new C('ZAL', 'rand hegoafrikarra (finantzarioa)', plurals: ['one' => 'rand hegoafrikar (finantzarioa)', 'other' => 'rand hegoafrikar (finantzarioa)']),
     'ZAR' => new C('ZAR', 'rand hegoafrikarra', narrow: 'R', plurals: ['one' => 'rand hegoafrikar', 'other' => 'rand hegoafrikar']),
-    'ZMK' => new C('ZMK', 'Zambiako kwacha (1968–2012)'),
+    'ZMK' => new C('ZMK', 'Zambiako kwacha (1968–2012)', plurals: ['one' => 'Zambiako kwacha (1968–2012)', 'other' => 'Zambiako kwacha (1968–2012)']),
     'ZMW' => new C('ZMW', 'kwacha zambiarra', narrow: 'ZK', plurals: ['one' => 'kwacha zambiar', 'other' => 'kwacha zambiar']),
     'ZRN' => new C('ZRN', 'zaire berri zairetarra (1993–1998)', plurals: ['one' => 'zaire berri zairetar (1993–1998)', 'other' => 'zaire berri zairetar (1993–1998)']),
     'ZRZ' => new C('ZRZ', 'zaire zairetarra (1971–1993)', plurals: ['one' => 'zaire zairetar (1971–1993)', 'other' => 'zaire zairetar (1971–1993)']),

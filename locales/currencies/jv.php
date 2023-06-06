@@ -93,7 +93,7 @@ return [
     'MKD' => new C('MKD', 'Denar Masedonia', plurals: ['other' => 'Denar Masedonia']),
     'MMK' => new C('MMK', 'Kyat Myanmar', narrow: 'K', plurals: ['other' => 'Kyat Myanmar']),
     'MNT' => new C('MNT', 'Tugrik Mongol', narrow: '₮', plurals: ['other' => 'Tugrik Mongol']),
-    'MOP' => new C('MOP', 'Pataca Macau'),
+    'MOP' => new C('MOP', 'Pataca Macau', plurals: ['other' => 'Pataca Macau']),
     'MRO' => new C('MRO', 'Ouguiya Mauritania (1973 - 2017)', plurals: ['other' => 'Ouguiya Mauritania (1973 - 2017)']),
     'MRU' => new C('MRU', 'Ouguiya Mauritania', plurals: ['other' => 'Ouguiya Mauritania']),
     'MUR' => new C('MUR', 'Rupee Mauritius', narrow: 'Rs', plurals: ['other' => 'Rupee Mauritius']),

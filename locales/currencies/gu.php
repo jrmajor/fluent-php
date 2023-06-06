@@ -86,7 +86,7 @@ return [
     'LBP' => new C('LBP', 'લેબેનિઝ પાઉન્ડ', narrow: 'L£', plurals: ['one' => 'લેબેનિઝ પાઉન્ડ', 'other' => 'લેબેનિઝ પાઉન્ડ']),
     'LKR' => new C('LKR', 'શ્રી લંકન રૂપી', narrow: 'Rs', plurals: ['one' => 'શ્રી લંકન રૂપી', 'other' => 'શ્રી લંકન રૂપી']),
     'LRD' => new C('LRD', 'લિબેરિયન ડોલર', narrow: '$', plurals: ['one' => 'લિબેરિયન ડોલર', 'other' => 'લિબેરિયન ડોલર']),
-    'LSL' => new C('LSL', 'લેસોથો લોતી'),
+    'LSL' => new C('LSL', 'લેસોથો લોતી', plurals: ['one' => 'લેસોથો લોતી', 'other' => 'લેસોથો લોતી']),
     'LTL' => new C('LTL', 'લિથુએનિયન લિતાસ', narrow: 'Lt', plurals: ['one' => 'લિથુએનિયન લિતાસ', 'other' => 'લિથુએનિયન લિતાસ']),
     'LVL' => new C('LVL', 'લાતવિયન લેત્સ', narrow: 'Ls', plurals: ['one' => 'લાતવિયન લેત્સ', 'other' => 'લાતવિયન લેત્સ']),
     'LYD' => new C('LYD', 'લિબ્યન દિનાર', plurals: ['one' => 'લિબ્યન દિનાર', 'other' => 'લિબ્યન દિનાર'], minorUnits: 3),

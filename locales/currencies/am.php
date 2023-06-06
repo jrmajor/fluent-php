@@ -87,7 +87,7 @@ return [
     'LBP' => new C('LBP', 'የሊባኖስ ፓውንድ', narrow: 'L£', plurals: ['one' => 'የሊባኖስ ፓውንድ', 'other' => 'የሊባኖስ ፓውንድ']),
     'LKR' => new C('LKR', 'የሲሪላንካ ሩፒ', narrow: 'Rs', plurals: ['one' => 'የሲሪላንካ ሩፒ', 'other' => 'የሲሪላንካ ሩፒ']),
     'LRD' => new C('LRD', 'የላይቤሪያ ዶላር', narrow: '$', plurals: ['one' => 'የላይቤሪያ ዶላር', 'other' => 'የላይቤሪያ ዶላር']),
-    'LSL' => new C('LSL', 'የሌሶቶ ሎቲ'),
+    'LSL' => new C('LSL', 'የሌሶቶ ሎቲ', plurals: ['one' => 'የሌሶቶ ሎቲ', 'other' => 'የሌሶቶ ሎቲ']),
     'LTL' => new C('LTL', 'ሊቱዌንያን ሊታስ', narrow: 'Lt', plurals: ['one' => 'ሊቱዌንያን ሊታስ', 'other' => 'ሊቱዌንያን ሊታስ']),
     'LVL' => new C('LVL', 'የላቲቫ ላትስ', narrow: 'Ls', plurals: ['one' => 'የላቲቫ ላትስ', 'other' => 'የላቲቫ ላትስ']),
     'LYD' => new C('LYD', 'የሊቢያ ዲናር', plurals: ['one' => 'የሊቢያ ዲናር', 'other' => 'የሊቢያ ዲናር'], minorUnits: 3),
