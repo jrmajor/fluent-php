@@ -37,18 +37,16 @@ final class FluentBundle
         private bool $allowOverrides = false,
     ) {
         $this->functions = [
-            'NUMBER' => Closure::fromCallable([$this, 'numberFunction']),
-            'DATETIME' => Closure::fromCallable([$this, 'dateTimeFunction']),
+            'NUMBER' => $this->numberFunction(...),
+            'DATETIME' => $this->dateTimeFunction(...),
         ];
     }
 
     /**
      * @return $this
      */
-    public function addResource(
-        FluentResource $resource,
-        ?bool $allowOverrides = null,
-    ): static {
+    public function addResource(FluentResource $resource, ?bool $allowOverrides = null): static
+    {
         $allowOverrides ??= $this->allowOverrides;
 
         foreach ($resource->body as $entry) {
@@ -87,9 +85,11 @@ final class FluentBundle
     /**
      * @return $this
      */
-    public function addFunction(string $name, Closure $function): static
+    public function addFunction(string $name, Closure $function, ?bool $allowOverrides = null): static
     {
-        if ($this->hasFunction($name)) {
+        $allowOverrides ??= $this->allowOverrides;
+
+        if (! $allowOverrides && $this->hasFunction($name)) {
             throw new FunctionExistsException($name);
         }
 
@@ -103,10 +103,10 @@ final class FluentBundle
      *
      * @return $this
      */
-    public function addFunctions(array $functions): static
+    public function addFunctions(array $functions, ?bool $allowOverrides = null): static
     {
         foreach ($functions as $name => $function) {
-            $this->addFunction($name, $function);
+            $this->addFunction($name, $function, $allowOverrides);
         }
 
         return $this;
