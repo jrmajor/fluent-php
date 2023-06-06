@@ -21,7 +21,9 @@ final class CurrenciesOptimizer
     public function optimize(array $region, array $base = []): array
     {
         $comp = function (string $name, Currency $c) use ($base): bool {
-            return ! ($base[$name] ?? $this->und[$name])->isIdentical($c);
+            $base = $base[$name] ?? $this->und[$name] ?? new Currency($c->code);
+
+            return ! $base->isIdentical($c);
         };
 
         return Dict\filter_with_key($region, $comp);
