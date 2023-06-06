@@ -123,7 +123,7 @@ final class FluentCursor extends Cursor
         if ($junkStart < $lastNewline) {
             // Last seen newline is after the junk start. It's safe to rewind
             // without the risk of resuming at the same broken entry.
-            $this->setIndex($lastNewline);
+            $this->index = $lastNewline;
         }
 
         while ($this->currentChar() !== null) {

@@ -75,7 +75,7 @@ abstract class Cursor
         for ($i = 0; $i < $chars; $i++) {
             $isClRf = $this->slice($this->index, 2) === "\r\n";
 
-            $this->incrementIndex($isClRf ? 2 : 1);
+            $this->index += $isClRf ? 2 : 1;
         }
     }
 
@@ -97,8 +97,7 @@ abstract class Cursor
 
     public function skipToPeek(): void
     {
-        $this->incrementIndex($this->peekOffset);
-
+        $this->index += $this->peekOffset;
         $this->peekOffset = 0;
     }
 
@@ -223,15 +222,5 @@ abstract class Cursor
         $this->next();
 
         return $char;
-    }
-
-    protected function setIndex(int $index): void
-    {
-        $this->index = $index;
-    }
-
-    private function incrementIndex(int $offset = 1): void
-    {
-        $this->index += $offset;
     }
 }
