@@ -45,17 +45,11 @@ abstract class Cursor
 
         $char = $this->chars[$pos];
 
-        $nextPos = $pos + 1;
-
-        if (
-            $char === "\r"
-            && $nextPos < $this->length
-            && $this->chars[$nextPos] === "\n"
-        ) {
+        if ($char === "\r" && ($this->chars[$pos + 1] ?? null) === "\n") {
             return "\n";
         }
 
-        return $char !== '' ? $char : null;
+        return $char;
     }
 
     public function currentChar(): ?string
@@ -73,7 +67,8 @@ abstract class Cursor
         $this->peekOffset = 0;
 
         for ($i = 0; $i < $chars; $i++) {
-            $isClRf = $this->slice($this->index, 2) === "\r\n";
+            $isClRf = ($this->chars[$this->index] ?? null) === "\r"
+                && ($this->chars[$this->index + 1] ?? null) === "\n";
 
             $this->index += $isClRf ? 2 : 1;
         }
@@ -82,9 +77,11 @@ abstract class Cursor
     public function peek(int $chars = 1): ?string
     {
         for ($i = 0; $i < $chars; $i++) {
-            $currentPeek = $this->slice($this->index + $this->peekOffset, 2);
+            $pos = $this->index + $this->peekOffset;
+            $isClRf = ($this->chars[$pos] ?? null) === "\r"
+                && ($this->chars[$pos + 1] ?? null) === "\n";
 
-            $this->peekOffset += $currentPeek === "\r\n" ? 2 : 1;
+            $this->peekOffset += $isClRf ? 2 : 1;
         }
 
         return $this->currentPeek();
