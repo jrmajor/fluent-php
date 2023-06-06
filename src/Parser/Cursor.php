@@ -34,7 +34,7 @@ abstract class Cursor
         return $this->peekOffset;
     }
 
-    private function substr($start, $length = 1): string
+    private function substr(int $start, int $length = 1): string
     {
         return implode('', array_slice($this->buffer, $start, $length));
     }
