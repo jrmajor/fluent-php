@@ -14,14 +14,15 @@ abstract class Cursor
 
     protected int $peekOffset = 0;
 
-    private array $buffer;
+    /** @var list<string> */
+    private array $chars;
+
     private int $length;
 
-    public function __construct(
-        string $string,
-    ) {
-        $this->buffer = mb_str_split($string);
-        $this->length = count($this->buffer);
+    public function __construct(string $string)
+    {
+        $this->chars = mb_str_split($string);
+        $this->length = count($this->chars);
     }
 
     public function index(): int
@@ -34,11 +35,6 @@ abstract class Cursor
         return $this->peekOffset;
     }
 
-    private function substr(int $start, int $length = 1): string
-    {
-        return implode('', array_slice($this->buffer, $start, $length));
-    }
-
     private function charFromIndex(int $offset = 0): ?string
     {
         $pos = $this->index + $offset;
@@ -47,14 +43,14 @@ abstract class Cursor
             return null;
         }
 
-        $char = $this->buffer[$pos];
+        $char = $this->chars[$pos];
 
         $nextPos = $pos + 1;
 
         if (
             $char === "\r" &&
             $nextPos < $this->length &&
-            $this->buffer[$nextPos] === "\n"
+            $this->chars[$nextPos] === "\n"
         ) {
             return "\n";
         }
@@ -77,7 +73,7 @@ abstract class Cursor
         $this->peekOffset = 0;
 
         for ($i = 0; $i < $chars; $i++) {
-            $isClRf = $this->substr($this->index, 2) === "\r\n";
+            $isClRf = $this->slice($this->index, 2) === "\r\n";
 
             $this->incrementIndex($isClRf ? 2 : 1);
         }
@@ -86,7 +82,7 @@ abstract class Cursor
     public function peek(int $chars = 1): ?string
     {
         for ($i = 0; $i < $chars; $i++) {
-            $currentPeek = $this->substr($this->index + $this->peekOffset, 2);
+            $currentPeek = $this->slice($this->index + $this->peekOffset, 2);
 
             $this->peekOffset += $currentPeek === "\r\n" ? 2 : 1;
         }
@@ -108,9 +104,7 @@ abstract class Cursor
 
     public function slice(int $start, int $length = 1): string
     {
-        return $start >= $this->index
-            ? $this->substr($start - $this->index, $length)
-            : $this->substr($start, $length);
+        return implode('', array_slice($this->chars, $start, $length));
     }
 
     public function peekBlankInline(): void
@@ -128,7 +122,7 @@ abstract class Cursor
 
         $this->peekBlankInline();
 
-        $blank = $this->substr($this->index + $start, $this->peekOffset - $start);
+        $blank = $this->slice($this->index + $start, $this->peekOffset - $start);
 
         $this->skipToPeek();
 
