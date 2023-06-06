@@ -29,12 +29,8 @@ final class CurrenciesFactory
      */
     private static function makeCurrency(string $locale, string $code, array $data): Currency
     {
-        $name = $data['displayName']
-            ?? throw new Exception("No display name for {$code} in {$locale}.");
-
-        $symbol = $data['symbol']
-            ?? throw new Exception("No symbol for {$code} in {$locale}.");
-
+        $name = $data['displayName'] ?? null;
+        $symbol = $data['symbol'] ?? null;
         $narrow = $data['symbol-alt-narrow'] ?? null;
         $minorUnits = H\IsoData::minorUnits($code);
         $plurals = self::makePlurals($data);
