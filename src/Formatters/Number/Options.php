@@ -36,6 +36,10 @@ final class Options
             throw new InvalidArgumentException('Allowed values of currencyDisplay are symbol, narrowSymbol, code and name.');
         }
 
+        if (! in_array($unitDisplay, ['short', 'long', 'narrow'], true)){
+            throw new InvalidArgumentException('Allowed values of currencyDisplay are short, long and narrow.');
+        }
+
         if ($style === 'currency' && $currency === null) {
             throw new InvalidArgumentException('Currency must be specified when using currency formatting.');
         }
