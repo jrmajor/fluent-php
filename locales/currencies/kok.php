@@ -65,7 +65,7 @@ return [
     'HUF' => new C('HUF', 'हंगेरियन फोरिंट', narrow: 'Ft', plurals: ['other' => 'हंगेरियन फोरिंट्स']),
     'IDR' => new C('IDR', 'इंडोनेशियन रुपिया', narrow: 'Rp', plurals: ['other' => 'इंडोनेशियन रुपिया']),
     'ILS' => new C('ILS', 'इस्त्रायली न्यु शेकेल', '₪', narrow: '₪', plurals: ['other' => 'इस्त्रायली न्यु शेकेल्स']),
-    'INR' => new C('INR', 'भारतीय रुपया', '₹', narrow: '₹'),
+    'INR' => new C('INR', 'भारतीय रुपया', '₹', narrow: '₹', plurals: ['other' => 'भारतीय रुपया']),
     'IQD' => new C('IQD', 'इराकी डिनार', plurals: ['other' => 'इराकी डिनार्स'], minorUnits: 3),
     'IRR' => new C('IRR', 'ईरानी रियाल', plurals: ['other' => 'ईरानी रियाल्स']),
     'ISK' => new C('ISK', 'आईस्लान्डिक क्रोना', narrow: 'kr', plurals: ['other' => 'आईस्लान्डिक क्रोनुर'], minorUnits: 0),

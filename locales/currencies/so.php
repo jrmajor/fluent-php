@@ -140,7 +140,7 @@ return [
     'SGD' => new C('SGD', 'Doolarka Singabuur', narrow: '$', plurals: ['one' => 'doolarka Singabuur', 'other' => 'doolarka Singabuur']),
     'SHP' => new C('SHP', 'Bowndka St Helen', narrow: '£', plurals: ['one' => 'bowndka St Helen', 'other' => 'Bowndka St Helen']),
     'SLL' => new C('SLL', 'Leonka Sira Leon', plurals: ['one' => 'leonka Sira Leon', 'other' => 'leonka Sira Leon']),
-    'SOS' => new C('SOS', 'Shilingka Soomaaliya', 'S'),
+    'SOS' => new C('SOS', 'Shilingka Soomaaliya', 'S', plurals: ['one' => 'Shilingka Soomaaliya', 'other' => 'Shilingka Soomaaliya']),
     'SRD' => new C('SRD', 'Doolarka Surinamees', narrow: '$', plurals: ['one' => 'Doolarka Surinamees', 'other' => 'Doolarada Surinamees']),
     'SSP' => new C('SSP', 'Bowndka Koonfurta Suudaan', narrow: '£', plurals: ['one' => 'Bowndka Koonfurta Suudaan', 'other' => 'Bowndka Koonfurta Suudaan']),
     'STN' => new C('STN', 'Dobra Sao Tome & Birinsibi', narrow: 'Db', plurals: ['one' => 'dobrada Sao Tome Birinsibi', 'other' => 'dobrada Sao Tome & Birinsibi']),

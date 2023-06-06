@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Major\Fluent\Dev\Currencies;
 
-use Exception;
 use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Psl\Dict;
@@ -29,12 +28,8 @@ final class CurrenciesFactory
      */
     private static function makeCurrency(string $locale, string $code, array $data): Currency
     {
-        $name = $data['displayName']
-            ?? throw new Exception("No display name for {$code} in {$locale}.");
-
-        $symbol = $data['symbol']
-            ?? throw new Exception("No symbol for {$code} in {$locale}.");
-
+        $name = $data['displayName'] ?? null;
+        $symbol = $data['symbol'] ?? null;
         $narrow = $data['symbol-alt-narrow'] ?? null;
         $minorUnits = H\IsoData::minorUnits($code);
         $plurals = self::makePlurals($data);

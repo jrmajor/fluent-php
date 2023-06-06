@@ -32,7 +32,7 @@ return [
     'BMD' => new C('BMD', 'دلار برمودا', narrow: '$', plurals: ['one' => 'دلار برمودا', 'other' => 'دلار برمودا']),
     'BND' => new C('BND', 'دلار برونئی', narrow: '$', plurals: ['one' => 'دلار برونئی', 'other' => 'دلار برونئی']),
     'BOB' => new C('BOB', 'بولیویانوی بولیوی', narrow: 'Bs', plurals: ['one' => 'بولیویانوی بولیوی', 'other' => 'بولیویانوی بولیوی']),
-    'BOP' => new C('BOP', 'پزوی بولیوی'),
+    'BOP' => new C('BOP', 'پزوی بولیوی', plurals: ['one' => 'پزوی بولیوی', 'other' => 'پزوی بولیوی']),
     'BRL' => new C('BRL', 'رئال برزیل', 'R$', narrow: 'R$', plurals: ['one' => 'رئال برزیل', 'other' => 'رئال برزیل']),
     'BSD' => new C('BSD', 'دلار باهاما', narrow: '$', plurals: ['one' => 'دلار باهاما', 'other' => 'دلار باهاما']),
     'BTN' => new C('BTN', 'انگولتروم بوتان', plurals: ['one' => 'انگولتروم بوتان', 'other' => 'انگولتروم بوتان']),

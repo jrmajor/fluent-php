@@ -99,7 +99,7 @@ return [
     'LBP' => new C('LBP', 'Libānas mārciņa', narrow: 'L£', plurals: ['zero' => 'Libānas mārciņas', 'one' => 'Libānas mārciņa', 'other' => 'Libānas mārciņas']),
     'LKR' => new C('LKR', 'Šrilankas rūpija', narrow: 'Rs', plurals: ['zero' => 'Šrilankas rūpijas', 'one' => 'Šrilankas rūpija', 'other' => 'Šrilankas rūpijas']),
     'LRD' => new C('LRD', 'Libērijas dolārs', narrow: '$', plurals: ['zero' => 'Libērijas dolāri', 'one' => 'Libērijas dolārs', 'other' => 'Libērijas dolāri']),
-    'LSL' => new C('LSL', 'Lesoto loti'),
+    'LSL' => new C('LSL', 'Lesoto loti', plurals: ['zero' => 'Lesoto loti', 'one' => 'Lesoto loti', 'other' => 'Lesoto loti']),
     'LTL' => new C('LTL', 'Lietuvas lits', narrow: 'Lt', plurals: ['zero' => 'Lietuvas liti', 'one' => 'Lietuvas lits', 'other' => 'Lietuvas liti']),
     'LUF' => new C('LUF', 'Luksemburgas franks'),
     'LVL' => new C('LVL', 'Latvijas lats', 'Ls', narrow: 'Ls', plurals: ['zero' => 'Latvijas lati', 'one' => 'Latvijas lats', 'other' => 'Latvijas lati']),

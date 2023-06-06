@@ -147,7 +147,7 @@ return [
     'LBP' => new C('LBP', "ເລ\u{200B}ບາ\u{200B}ນີ\u{200B}ສ ພາວດ໌", narrow: 'L£', plurals: ['other' => "ເລ\u{200B}ບາ\u{200B}ນີ\u{200B}ສ ພາວດ໌"]),
     'LKR' => new C('LKR', "ສີ\u{200B}ລັງ\u{200B}ກາ ຣູ\u{200B}ປີ", narrow: 'Rs', plurals: ['other' => "ສີ\u{200B}ລັງ\u{200B}ກາ ຣູ\u{200B}ປີ"]),
     'LRD' => new C('LRD', "ລິ\u{200B}ເບີ\u{200B}ຣຽນ ໂດ\u{200B}ລ່າ", narrow: '$', plurals: ['other' => "ລິ\u{200B}ເບີ\u{200B}ຣຽນ ໂດ\u{200B}ລ່າ"]),
-    'LSL' => new C('LSL', 'ໂລຕິ ເລໂຊໂຕ'),
+    'LSL' => new C('LSL', 'ໂລຕິ ເລໂຊໂຕ', plurals: ['other' => 'ໂລຕິ ເລໂຊໂຕ']),
     'LTL' => new C('LTL', "ລິ\u{200B}ທົວ\u{200B}ນຽນ ລິ\u{200B}ທັ\u{200B}ສ", narrow: 'Lt', plurals: ['other' => "ລິ\u{200B}ທົວ\u{200B}ນຽນ ລິ\u{200B}ທັ\u{200B}ສ"]),
     'LTT' => new C('LTT', 'ທາໂລນັສ ລິທົວເນຍ'),
     'LUC' => new C('LUC', 'ຟຣັງ ລຸກຊຳບວກ ທີ່ປ່ຽນແປງ'),

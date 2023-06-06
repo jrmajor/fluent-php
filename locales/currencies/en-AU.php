@@ -42,6 +42,7 @@ return [
     'SCR' => new C('SCR', 'Seychellois Rupee', 'Rs', plurals: ['one' => 'Seychellois rupee', 'other' => 'Seychellois rupees']),
     'SEK' => new C('SEK', 'Swedish Krona', narrow: 'Kr', plurals: ['one' => 'Swedish krona', 'other' => 'Swedish kronor']),
     'SHP' => new C('SHP', 'St Helena Pound', narrow: '£', plurals: ['one' => 'St Helena pound', 'other' => 'St Helena pounds']),
+    'SLL' => new C('SLL', 'Sierra Leonean Leone (1964–2022)', plurals: ['one' => 'Sierra Leonean leone (1964–2022)', 'other' => 'Sierra Leonean leones (1964–2022)']),
     'SRD' => new C('SRD', 'Suriname Dollar', narrow: '$', plurals: ['one' => 'Suriname dollar', 'other' => 'Suriname dollars']),
     'TJR' => new C('TJR', 'Tajikistani Rouble', plurals: ['one' => 'Tajikistani rouble', 'other' => 'Tajikistani roubles']),
     'TRY' => new C('TRY', 'Turkish Lira', narrow: '₺', plurals: ['one' => 'Turkish lira', 'other' => 'Turkish lire']),

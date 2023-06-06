@@ -7,5 +7,5 @@ return [
     'CNY' => new C('CNY', '人民币', 'CN¥', narrow: '¥', plurals: ['other' => '人民币']),
     'MOP' => new C('MOP', '澳门币', 'MOP$', plurals: ['other' => '澳门元']),
     'NIO' => new C('NIO', '尼加拉瓜科多巴', narrow: 'C$', plurals: ['other' => '尼加拉瓜科多巴']),
-    'XAG' => new C('XAG', '白银'),
+    'XAG' => new C('XAG', '白银', plurals: ['other' => '白银']),
 ];
