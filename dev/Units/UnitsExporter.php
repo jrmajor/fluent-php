@@ -25,12 +25,12 @@ final class UnitsExporter implements Exporter
         $args = [];
 
         foreach ([
-                     'name',
-                     'long',
-                     'short',
-                     'narrow',
-                 ] as $name) {
-            $args[] = E\join([$name . ': ', E\guess($c->$name)->export()]);
+            'name',
+            'long',
+            'short',
+            'narrow',
+        ] as $name) {
+            $args[] = E\join([$name . ': ', E\guess($c->{$name})->export()]);
         }
 
         $c = new Exported('U', new E\Imports([Unit::class . ' as U']));

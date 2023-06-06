@@ -25,7 +25,7 @@ final class Options
         public ?string $currency = null,
         public string $currencyDisplay = 'symbol',
         public ?string $unit = null,
-        public string $unitDisplay = 'short'
+        public string $unitDisplay = 'short',
     ) {
         /** @psalm-suppress DocblockTypeContradiction */
         if (! in_array($style, ['decimal', 'currency', 'percent', 'unit'], true)) {

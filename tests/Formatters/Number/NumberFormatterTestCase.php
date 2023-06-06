@@ -34,6 +34,7 @@ abstract class NumberFormatterTestCase extends TestCase
 
     /**
      * @param list<string> $except
+     *
      * @return Generator<string>
      */
     final protected static function provideLocales(array $except = []): Generator
@@ -61,7 +62,7 @@ abstract class NumberFormatterTestCase extends TestCase
         self::assertCount(0, $diff, 'Locales ' . Str\join($diff, ', ') . ' do not need to be excluded.');
 
         foreach ($locales as $locale) {
-            if (!Iter\contains($except, $locale)) {
+            if (! Iter\contains($except, $locale)) {
                 yield $locale;
             }
         }
@@ -72,12 +73,12 @@ abstract class NumberFormatterTestCase extends TestCase
     {
         $values = Vec\map(
             LocaleData::all(),
-            fn(Locale $l): string => $l->{static::patternType()},
+            fn (Locale $l): string => $l->{static::patternType()},
         );
 
         $values = H\count_values($values);
 
-        $values = Vec\map($values, fn($v): string => $v['value']);
+        $values = Vec\map($values, fn ($v): string => $v['value']);
 
         $this->assertSame($values, Vec\values(static::patternsToTest()));
     }
@@ -105,7 +106,7 @@ abstract class NumberFormatterTestCase extends TestCase
                 Type\literal_scalar('decimal'),
                 Type\literal_scalar('currency'),
                 Type\literal_scalar('percent'),
-                Type\literal_scalar('unit')
+                Type\literal_scalar('unit'),
             )),
             'unit' => Type\optional(Type\string()),
             'unitDisplay' => Type\optional(Type\string()),

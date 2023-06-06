@@ -115,7 +115,7 @@ final class LocaleData
     public static function all(): array
     {
         return array_map(
-            fn(string $f): Locale => require $f,
+            fn (string $f): Locale => require $f,
             glob(self::Path . 'numbers/*.php'),
         );
     }

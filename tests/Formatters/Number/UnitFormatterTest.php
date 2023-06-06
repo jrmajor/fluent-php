@@ -21,11 +21,11 @@ final class UnitFormatterTest extends NumberFormatterTestCase
         return [];
     }
 
-    public function testAllPatterns(): void{
+    public function testAllPatterns(): void {
         $this->markTestSkipped('Test doesnt actual for units');
     }
 
-    public function testCorrectPatterns(): void{
+    public function testCorrectPatterns(): void {
         $this->markTestSkipped('Test doesnt actual for units');
     }
 
@@ -74,10 +74,10 @@ final class UnitFormatterTest extends NumberFormatterTestCase
     public static function provideLongDisplayCases(): Generator
     {
         foreach ([
-                     [69, ['unit' => 'kilometer']],
-                     [21.37, ['unit' => 'foot']],
-                     [1444, ['unit' => 'megabit']],
-                 ] as $case) {
+            [69, ['unit' => 'kilometer']],
+            [21.37, ['unit' => 'foot']],
+            [1444, ['unit' => 'megabit']],
+        ] as $case) {
             foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
@@ -90,10 +90,10 @@ final class UnitFormatterTest extends NumberFormatterTestCase
     public static function provideShortDisplayCases(): Generator
     {
         foreach ([
-                     [69, ['unit' => 'kilometer']],
-                     [21.37, ['unit' => 'foot']],
-                     [1444, ['unit' => 'megabit']],
-                 ] as $case) {
+            [69, ['unit' => 'kilometer']],
+            [21.37, ['unit' => 'foot']],
+            [1444, ['unit' => 'megabit']],
+        ] as $case) {
             foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }
@@ -106,10 +106,10 @@ final class UnitFormatterTest extends NumberFormatterTestCase
     public static function provideNarrowDisplayCases(): Generator
     {
         foreach ([
-                     [69, ['unit' => 'kilometer']],
-                     [21.37, ['unit' => 'foot']],
-                     [1444, ['unit' => 'megabit']],
-                 ] as $case) {
+            [69, ['unit' => 'kilometer']],
+            [21.37, ['unit' => 'foot']],
+            [1444, ['unit' => 'megabit']],
+        ] as $case) {
             foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
             }

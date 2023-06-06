@@ -7,20 +7,13 @@ namespace Major\Fluent\Formatters\Number\Locale;
  */
 final class Unit
 {
-    /**
-     * @param string $name
-     * @param array|null $long
-     * @param array|null $short
-     * @param array|null $narrow
-     */
     public function __construct(
         readonly string $name,
         readonly ?array $long = null,
         readonly ?array $short = null,
-        readonly ?array $narrow = null
+        readonly ?array $narrow = null,
     )
     {
-
     }
 
     public function isIdentical(self $other): bool

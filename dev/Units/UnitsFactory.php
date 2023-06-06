@@ -12,7 +12,6 @@ use Psl\Str;
 
 final class UnitsFactory
 {
-
     /**
      * A subset of units from the full list was selected for use in ECMAScript.
      *
@@ -78,22 +77,16 @@ final class UnitsFactory
         /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $subset = array_combine(Dict\map(
             self::$unitSubset,
-            fn($n) => explode('-', $n, 2)[1]
+            fn ($n) => explode('-', $n, 2)[1],
         ), self::$unitSubset);
 
         return Dict\map_with_key(
             $subset,
-            fn($_, $unit) => self::makeUnit(locale: $locale, unit: $unit, long: $long[$unit], short: $short[$unit], narrow: $narrow[$unit]),
+            fn ($_, $unit) => self::makeUnit(locale: $locale, unit: $unit, long: $long[$unit], short: $short[$unit], narrow: $narrow[$unit]),
         );
     }
 
     /**
-     * @param string $locale
-     * @param string $unit
-     * @param array $long
-     * @param array $short
-     * @param array $narrow
-     * @return Unit
      * @throws Exception
      */
     private static function makeUnit(string $locale, string $unit, array $long, array $short, array $narrow): Unit
@@ -120,21 +113,21 @@ final class UnitsFactory
         return [
             'name' => $name,
             'plurals' => $plurals,
-            'perUnit' => $perUnitPattern
+            'perUnit' => $perUnitPattern,
         ];
     }
 
     /**
      * @param array<string, string> $data
+     *
      * @return ?array<string, string>
      */
     private static function makePlurals(array $data): ?array
     {
         $prefix = 'unitPattern-count-';
-        $data = Dict\filter_keys($data, fn($key) => str_starts_with($key, $prefix));
-        $data = Dict\map_keys($data, fn($key) => Str\strip_prefix($key, $prefix));
+        $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, $prefix));
+        $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, $prefix));
 
         return $data ?: null;
     }
-
 }

@@ -4,7 +4,6 @@ namespace Major\Fluent\Tests\Formatters\Number;
 
 use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Locale;
-use Major\Fluent\Tests\Helpers as H;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
 use Psl\Iter;
@@ -24,9 +23,9 @@ final class LocaleKnownValuesTest extends TestCase
                 'arabext',
                 'beng',
                 'deva',
-                'mymr'
+                'mymr',
             ],
-            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->system))
+            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->system)),
         );
     }
 
@@ -36,9 +35,9 @@ final class LocaleKnownValuesTest extends TestCase
         $this->assertEqualsCanonicalizing(
             [
                 '#,##0.###',
-                '#,##,##0.###'
+                '#,##,##0.###',
             ],
-            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal))
+            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal)),
         );
     }
 
@@ -53,7 +52,7 @@ final class LocaleKnownValuesTest extends TestCase
                 '%#,##0',
                 "%\u{A0}#,##0",
             ],
-            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent))
+            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent)),
         );
     }
 
@@ -77,7 +76,7 @@ final class LocaleKnownValuesTest extends TestCase
                 "\u{200E}¤#,##0.00",
                 "\u{200F}#,##0.00\u{A0}\u{200F}¤;\u{200F}-#,##0.00\u{A0}\u{200F}¤",
             ],
-            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency))
+            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency)),
         );
     }
 
@@ -89,7 +88,7 @@ final class LocaleKnownValuesTest extends TestCase
                 1,
                 2,
             ],
-            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping))
+            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping)),
         );
     }
 
@@ -113,7 +112,7 @@ final class LocaleKnownValuesTest extends TestCase
                 ['٫', '٬', "\u{200E}−", '٪'],
                 ['٫', '٬', "\u{200E}-\u{200E}", '%'],
             ],
-            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols),SORT_REGULAR)
+            array_unique(Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols), SORT_REGULAR),
         );
     }
 
