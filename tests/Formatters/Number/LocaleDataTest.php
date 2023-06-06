@@ -43,6 +43,6 @@ final class LocaleDataTest extends TestCase
     #[TestDox('it can get all locales')]
     public static function testAll(): void
     {
-        PU::assertCount(394, LocaleData::all());
+        PU::assertCount(388, LocaleData::all());
     }
 }

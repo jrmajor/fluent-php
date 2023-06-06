@@ -30,7 +30,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '19.2'
+          node-version: '20.2'
 
       - name: Get Composer cache directory path
         id: composer-cache-dir
