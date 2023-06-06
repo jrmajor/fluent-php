@@ -22,12 +22,14 @@
         </testsuite>
     </testsuites>
 
-    <coverage pathCoverage="true">
+    <coverage pathCoverage="true"/>
+
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
             <file>src/Exceptions/ShouldNotHappen.php</file>
         </exclude>
-    </coverage>
+    </source>
 </phpunit>
