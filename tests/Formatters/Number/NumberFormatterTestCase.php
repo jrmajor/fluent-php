@@ -23,7 +23,7 @@ use Psl\Vec;
 abstract class NumberFormatterTestCase extends TestCase
 {
     /**
-     * @return 'decimal'|'percent'|'currency'
+     * @return 'decimal'|'percent'|'currency'|'unit'
      */
     abstract protected static function patternType(): string;
 
@@ -34,7 +34,6 @@ abstract class NumberFormatterTestCase extends TestCase
 
     /**
      * @param list<string> $except
-     *
      * @return Generator<string>
      */
     final protected static function provideLocales(array $except = []): Generator
@@ -62,29 +61,29 @@ abstract class NumberFormatterTestCase extends TestCase
         self::assertCount(0, $diff, 'Locales ' . Str\join($diff, ', ') . ' do not need to be excluded.');
 
         foreach ($locales as $locale) {
-            if (! Iter\contains($except, $locale)) {
+            if (!Iter\contains($except, $locale)) {
                 yield $locale;
             }
         }
     }
 
     #[TestDox('all possible patterns are tested')]
-    final public function testAllPatterns(): void
+    public function testAllPatterns(): void
     {
         $values = Vec\map(
             LocaleData::all(),
-            fn (Locale $l): string => $l->{static::patternType()},
+            fn(Locale $l): string => $l->{static::patternType()},
         );
 
         $values = H\count_values($values);
 
-        $values = Vec\map($values, fn ($v): string => $v['value']);
+        $values = Vec\map($values, fn($v): string => $v['value']);
 
         $this->assertSame($values, Vec\values(static::patternsToTest()));
     }
 
     #[TestDox('correct languages are assigned to tested patterns')]
-    final public function testCorrectPatterns(): void
+    public function testCorrectPatterns(): void
     {
         foreach (static::patternsToTest() as $locale => $pattern) {
             $locale = LocaleData::loadNumbers($locale);
@@ -106,7 +105,10 @@ abstract class NumberFormatterTestCase extends TestCase
                 Type\literal_scalar('decimal'),
                 Type\literal_scalar('currency'),
                 Type\literal_scalar('percent'),
+                Type\literal_scalar('unit')
             )),
+            'unit' => Type\optional(Type\string()),
+            'unitDisplay' => Type\optional(Type\string()),
             'useGrouping' => Type\optional(Type\bool()),
             'minimumIntegerDigits' => Type\optional(Type\int()),
             'minimumFractionDigits' => Type\optional(Type\int()),

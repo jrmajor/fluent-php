@@ -14,7 +14,7 @@ final class Options
      * @psalm-suppress DocblockTypeContradiction
      */
     public function __construct(
-        /** @var 'decimal'|'currency'|'percent' */
+        /** @var 'decimal'|'currency'|'percent'|'unit' */
         public string $style = 'decimal',
         public bool $useGrouping = true,
         public ?int $minimumIntegerDigits = null,
@@ -24,10 +24,12 @@ final class Options
         public ?int $maximumSignificantDigits = null,
         public ?string $currency = null,
         public string $currencyDisplay = 'symbol',
+        public ?string $unit = null,
+        public string $unitDisplay = 'short'
     ) {
         /** @psalm-suppress DocblockTypeContradiction */
-        if (! in_array($style, ['decimal', 'currency', 'percent'], true)) {
-            throw new InvalidArgumentException('Allowed styles are decimal, currency and percent.');
+        if (! in_array($style, ['decimal', 'currency', 'percent', 'unit'], true)) {
+            throw new InvalidArgumentException('Allowed styles are decimal, currency, unit and percent.');
         }
 
         if (! in_array($currencyDisplay, ['symbol', 'narrowSymbol', 'code', 'name'], true)) {
@@ -36,6 +38,10 @@ final class Options
 
         if ($style === 'currency' && $currency === null) {
             throw new InvalidArgumentException('Currency must be specified when using currency formatting.');
+        }
+
+        if ($style === 'unit' && $unit === null) {
+            throw new InvalidArgumentException('Unit must be specified when using currency formatting.');
         }
 
         if ($currency !== null) {
@@ -83,12 +89,12 @@ final class Options
         $this->minimumIntegerDigits ??= 1;
 
         $this->minimumFractionDigits ??= match ($this->style) {
-            'decimal', 'percent' => 0,
+            'decimal', 'percent', 'unit' => 0,
             'currency' => $currency->minorUnits,
         };
 
         $this->maximumFractionDigits ??= match ($this->style) {
-            'decimal' => max($this->minimumFractionDigits, 3),
+            'decimal', 'unit' => max($this->minimumFractionDigits, 3),
             'currency' => max($this->minimumFractionDigits, $currency->minorUnits),
             'percent' => max($this->minimumFractionDigits, 0),
         };

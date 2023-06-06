@@ -35,6 +35,17 @@ final class LocaleData
         );
     }
 
+    public static function loadUnits(string $locale): array
+    {
+        [$language, $region] = self::getLangAndRegionPaths('units', $locale);
+
+        return array_merge(
+            require self::Path . 'units/und.php',
+            require $language,
+            $region !== null ? require $region : [],
+        );
+    }
+
     /**
      * @return array{string, ?string}
      */
@@ -104,7 +115,7 @@ final class LocaleData
     public static function all(): array
     {
         return array_map(
-            fn (string $f): Locale => require $f,
+            fn(string $f): Locale => require $f,
             glob(self::Path . 'numbers/*.php'),
         );
     }
