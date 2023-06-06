@@ -33,17 +33,17 @@
     "require-dev": {
         "ext-json": "*",
         "ext-simplexml": "*",
-        "azjezz/psl": "^2.4",
+        "azjezz/psl": "^2.6",
         "jrmajor/cs": "^0.5.0",
         "jrmajor/exporter": "dev-master#6ada458",
-        "nunomaduro/collision": "^7.0",
+        "nunomaduro/collision": "^7.5",
         "php-standard-library/psalm-plugin": "^2.2",
         "phpbench/phpbench": "^1.2",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^10.2",
         "psalm/plugin-phpunit": "^0.18.0",
-        "symfony/console": "^6.2",
-        "symfony/var-dumper": "^6.2",
-        "vimeo/psalm": "^5.7"
+        "symfony/console": "^6.3",
+        "symfony/var-dumper": "^6.3",
+        "vimeo/psalm": "^5.12"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
