@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Major\Fluent\Dev\Currencies;
 
-use Exception;
 use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Psl\Dict;
