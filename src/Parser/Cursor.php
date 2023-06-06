@@ -34,6 +34,11 @@ abstract class Cursor
         return $this->peekOffset;
     }
 
+    private function substr($start, $length = 1): string
+    {
+        return implode('', array_slice($this->buffer, $start, $length));
+    }
+
     private function charFromIndex(int $offset = 0): ?string
     {
         $pos = $this->index + $offset;
@@ -76,10 +81,6 @@ abstract class Cursor
 
             $this->incrementIndex($isClRf ? 2 : 1);
         }
-    }
-
-    private function substr($start, $length = 1){
-        return implode('', array_slice($this->buffer, $start, $length));
     }
 
     public function peek(int $chars = 1): ?string
