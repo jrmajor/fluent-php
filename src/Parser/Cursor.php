@@ -48,9 +48,9 @@ abstract class Cursor
         $nextPos = $pos + 1;
 
         if (
-            $char === "\r" &&
-            $nextPos < $this->length &&
-            $this->chars[$nextPos] === "\n"
+            $char === "\r"
+            && $nextPos < $this->length
+            && $this->chars[$nextPos] === "\n"
         ) {
             return "\n";
         }
