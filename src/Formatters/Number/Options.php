@@ -29,15 +29,15 @@ final class Options
     ) {
         /** @psalm-suppress DocblockTypeContradiction */
         if (! in_array($style, ['decimal', 'currency', 'percent', 'unit'], true)) {
-            throw new InvalidArgumentException('Allowed styles are decimal, currency, unit and percent.');
+            throw new InvalidArgumentException('Allowed styles are decimal, currency, percent and unit.');
         }
 
         if (! in_array($currencyDisplay, ['symbol', 'narrowSymbol', 'code', 'name'], true)) {
             throw new InvalidArgumentException('Allowed values of currencyDisplay are symbol, narrowSymbol, code and name.');
         }
 
-        if (! in_array($unitDisplay, ['short', 'long', 'narrow'], true)){
-            throw new InvalidArgumentException('Allowed values of currencyDisplay are short, long and narrow.');
+        if (! in_array($unitDisplay, ['long', 'short', 'narrow'], true)){
+            throw new InvalidArgumentException('Allowed values of unitDisplay are long, short and narrow.');
         }
 
         if ($style === 'currency' && $currency === null) {
@@ -45,7 +45,7 @@ final class Options
         }
 
         if ($style === 'unit' && $unit === null) {
-            throw new InvalidArgumentException('Unit must be specified when using currency formatting.');
+            throw new InvalidArgumentException('Unit must be specified when using unit formatting.');
         }
 
         if ($currency !== null) {

@@ -9,7 +9,7 @@ use Major\Exporter\Exporters\Traits\IgnoresIndentation;
 use Major\Exporter\Exporters\Traits\IsStringable;
 use Major\Fluent\Formatters\Number\Locale\Unit;
 
-final class UnitsExporter implements Exporter
+final class UnitExporter implements Exporter
 {
     use IgnoresIndentation;
     use IsStringable;
@@ -20,21 +20,16 @@ final class UnitsExporter implements Exporter
 
     public function export(): Exported
     {
-        $c = $this->unit;
+        $u = $this->unit;
 
         $args = [];
 
-        foreach ([
-            'name',
-            'long',
-            'short',
-            'narrow',
-        ] as $name) {
-            $args[] = E\join([$name . ': ', E\guess($c->{$name})->export()]);
+        foreach (['name', 'long', 'short', 'narrow'] as $name) {
+            $args[] = E\join([$name . ': ', E\guess($u->{$name})->export()]);
         }
 
-        $c = new Exported('U', new E\Imports([Unit::class . ' as U']));
+        $u = new Exported('U', new E\Imports([Unit::class . ' as U']));
 
-        return E\join(['new ', $c, '(', E\join($args, ', '), ')']);
+        return E\join(['new ', $u, '(', E\join($args, ', '), ')']);
     }
 }

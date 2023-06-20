@@ -54,7 +54,7 @@ final class NumberFormatter
         );
 
         if (
-            $options->style === 'currency' && $options->currencyDisplay === 'name'
+            ($options->style === 'currency' && $options->currencyDisplay === 'name')
             || $options->style === 'unit'
         ) {
             $pattern = $this->locale->decimal;

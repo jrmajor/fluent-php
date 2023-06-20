@@ -12,9 +12,7 @@ final class Unit
         readonly ?array $long = null,
         readonly ?array $short = null,
         readonly ?array $narrow = null,
-    )
-    {
-    }
+    ) { }
 
     public function isIdentical(self $other): bool
     {

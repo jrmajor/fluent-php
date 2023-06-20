@@ -17,7 +17,7 @@ final class UnitsFactory
      *
      * @see https://tc39.es/proposal-unified-intl-numberformat/section6/locales-currencies-tz_proposed_out.html#sec-issanctionedsimpleunitidentifier
      *
-     * @var string[]
+     * @var list<string>
      */
     private static array $unitSubset = [
         'length-kilometer',

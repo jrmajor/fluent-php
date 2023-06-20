@@ -19,14 +19,14 @@ final class CurrenciesFactory
         return Dict\map_with_key(
             /** @var array<string, array<string, string>> */
             H\CldrData::get('numbers', $locale, 'currencies.*.*.numbers.*'),
-            fn ($code, $data) => self::makeCurrency($locale, $code, $data),
+            fn ($code, $data) => self::makeCurrency($code, $data),
         );
     }
 
     /**
      * @param array<string, string> $data
      */
-    private static function makeCurrency(string $locale, string $code, array $data): Currency
+    private static function makeCurrency(string $code, array $data): Currency
     {
         $name = $data['displayName'] ?? null;
         $symbol = $data['symbol'] ?? null;
@@ -44,8 +44,9 @@ final class CurrenciesFactory
      */
     private static function makePlurals(array $data): ?array
     {
-        $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, 'displayName-count-'));
-        $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, 'displayName-count-'));
+        $prefix = 'displayName-count-';
+        $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, $prefix));
+        $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, $prefix));
 
         return $data ?: null;
     }

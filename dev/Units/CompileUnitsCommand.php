@@ -37,11 +37,11 @@ final class CompileUnitsCommand extends Command
             }
         }
 
-        foreach ($compiled as $locale => $currencies) {
-            $currencies = Dict\map($currencies, fn ($c) => new UnitsExporter($c));
-            $currencies = E\dict($currencies)->multiline();
+        foreach ($compiled as $locale => $units) {
+            $units = Dict\map($units, fn ($c) => new UnitExporter($c));
+            $units = E\dict($units)->multiline();
 
-            H\LocaleFiles::write('units', $locale, E\to_file($currencies));
+            H\LocaleFiles::write('units', $locale, E\to_file($units));
         }
 
         $output->writeln('<info>Compiled in ' . round(microtime(true) - $start, 2) . 's</info>');
