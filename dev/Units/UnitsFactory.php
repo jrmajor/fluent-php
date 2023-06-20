@@ -20,7 +20,6 @@ final class UnitsFactory
      * @var list<string>
      */
     private static array $unitSubset = [
-        'length-kilometer',
         'angle-degree',
         'area-acre',
         'area-hectare',
@@ -49,8 +48,8 @@ final class UnitsFactory
         'length-inch',
         'length-kilometer',
         'length-meter',
-        'length-mile-scandinavian',
         'length-mile',
+        'length-mile-scandinavian',
         'length-millimeter',
         'length-yard',
         'mass-gram',
