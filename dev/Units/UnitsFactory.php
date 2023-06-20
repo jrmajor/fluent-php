@@ -16,53 +16,51 @@ final class UnitsFactory
      * A subset of units from the full list was selected for use in ECMAScript.
      *
      * @see https://tc39.es/proposal-unified-intl-numberformat/section6/locales-currencies-tz_proposed_out.html#sec-issanctionedsimpleunitidentifier
-     *
-     * @var list<string>
      */
-    private static array $unitSubset = [
-        'angle-degree',
-        'area-acre',
-        'area-hectare',
-        'concentr-percent',
-        'digital-bit',
-        'digital-byte',
-        'digital-gigabit',
-        'digital-gigabyte',
-        'digital-kilobit',
-        'digital-kilobyte',
-        'digital-megabit',
-        'digital-megabyte',
-        'digital-petabyte',
-        'digital-terabit',
-        'digital-terabyte',
-        'duration-day',
-        'duration-hour',
-        'duration-millisecond',
-        'duration-minute',
-        'duration-month',
-        'duration-second',
-        'duration-week',
-        'duration-year',
-        'length-centimeter',
-        'length-foot',
-        'length-inch',
-        'length-kilometer',
-        'length-meter',
-        'length-mile',
-        'length-mile-scandinavian',
-        'length-millimeter',
-        'length-yard',
-        'mass-gram',
-        'mass-kilogram',
-        'mass-ounce',
-        'mass-pound',
-        'mass-stone',
-        'temperature-celsius',
-        'temperature-fahrenheit',
-        'volume-fluid-ounce',
-        'volume-gallon',
-        'volume-liter',
-        'volume-milliliter',
+    private const UnitSubset = [
+        'acre' => 'area-acre',
+        'bit' => 'digital-bit',
+        'byte' => 'digital-byte',
+        'celsius' => 'temperature-celsius',
+        'centimeter' => 'length-centimeter',
+        'day' => 'duration-day',
+        'degree' => 'angle-degree',
+        'fahrenheit' => 'temperature-fahrenheit',
+        'fluid-ounce' => 'volume-fluid-ounce',
+        'foot' => 'length-foot',
+        'gallon' => 'volume-gallon',
+        'gigabit' => 'digital-gigabit',
+        'gigabyte' => 'digital-gigabyte',
+        'gram' => 'mass-gram',
+        'hectare' => 'area-hectare',
+        'hour' => 'duration-hour',
+        'inch' => 'length-inch',
+        'kilobit' => 'digital-kilobit',
+        'kilobyte' => 'digital-kilobyte',
+        'kilogram' => 'mass-kilogram',
+        'kilometer' => 'length-kilometer',
+        'liter' => 'volume-liter',
+        'megabit' => 'digital-megabit',
+        'megabyte' => 'digital-megabyte',
+        'meter' => 'length-meter',
+        'mile' => 'length-mile',
+        'mile-scandinavian' => 'length-mile-scandinavian',
+        'milliliter' => 'volume-milliliter',
+        'millimeter' => 'length-millimeter',
+        'millisecond' => 'duration-millisecond',
+        'minute' => 'duration-minute',
+        'month' => 'duration-month',
+        'ounce' => 'mass-ounce',
+        'percent' => 'concentr-percent',
+        'petabyte' => 'digital-petabyte',
+        'pound' => 'mass-pound',
+        'second' => 'duration-second',
+        'stone' => 'mass-stone',
+        'terabit' => 'digital-terabit',
+        'terabyte' => 'digital-terabyte',
+        'week' => 'duration-week',
+        'yard' => 'length-yard',
+        'year' => 'duration-year',
     ];
 
     /**
@@ -71,18 +69,14 @@ final class UnitsFactory
     public static function make(string $locale): array
     {
         $unitStyles = H\CldrData::get('units', $locale, 'units.*.*.units');
-        ['long' => $long, 'short' => $short, 'narrow' => $narrow] = $unitStyles;
 
-        /** @psalm-suppress PossiblyUndefinedArrayOffset */
-        $subset = array_combine(Dict\map(
-            self::$unitSubset,
-            fn ($n) => explode('-', $n, 2)[1],
-        ), self::$unitSubset);
-
-        return Dict\map_with_key(
-            $subset,
-            fn ($_, $unit) => self::makeUnit(locale: $locale, unit: $unit, long: $long[$unit], short: $short[$unit], narrow: $narrow[$unit]),
-        );
+        return Dict\map(self::UnitSubset, fn ($unit) => self::makeUnit(
+            locale: $locale,
+            unit: $unit,
+            long: $unitStyles['long'][$unit],
+            short: $unitStyles['short'][$unit],
+            narrow: $unitStyles['narrow'][$unit],
+        ));
     }
 
     /**
