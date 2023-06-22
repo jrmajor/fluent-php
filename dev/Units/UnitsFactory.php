@@ -8,6 +8,7 @@ use Exception;
 use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Unit;
 use Psl\Dict;
+use Psl\Iter;
 use Psl\Str;
 
 final class UnitsFactory
@@ -68,58 +69,50 @@ final class UnitsFactory
      */
     public static function make(string $locale): array
     {
-        $unitStyles = H\CldrData::get('units', $locale, 'units.*.*.units');
+        $data = H\CldrData::get('units', $locale, 'units.*.*.units');
 
-        return Dict\map(self::UnitSubset, fn ($unit) => self::makeUnit(
-            locale: $locale,
-            long: $unitStyles['long'][$unit],
-            short: $unitStyles['short'][$unit],
-            narrow: $unitStyles['narrow'][$unit],
+        return Dict\map(self::UnitSubset, fn ($unit) => new Unit(
+            self::makeStyle($locale, $unit, 'long', $data),
+            self::makeStyle($locale, $unit, 'short', $data),
+            self::makeStyle($locale, $unit, 'narrow', $data),
         ));
     }
 
     /**
-     * @throws Exception
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, string>
      */
-    private static function makeUnit(string $locale, array $long, array $short, array $narrow): Unit
-    {
-        $long = self::makePart($long, 'long', $locale);
-        $short = self::makePart($short, 'short', $locale);
-        $narrow = self::makePart($narrow, 'narrow', $locale);
+    private static function makeStyle(
+        string $locale,
+        string $unit,
+        string $style,
+        array $data,
+    ): array {
+        $exceptionsFor = "for {$style} {$unit} in {$locale}";
 
-        return new Unit($long, $short, $narrow);
-    }
+        $styleData = $data[$style][$unit]
+            ?? throw new Exception("No data {$exceptionsFor}.");
 
-    /**
-     * @psalm-param 'long'|'narrow'|'short' $style
-     */
-    private static function makePart(array $data, string $style, string $locale): array
-    {
-        $name = $data['displayName']
-            ?? throw new Exception("No display name for {$style} in {$locale}.");
+        $plurals = self::makePlurals($styleData);
 
-        $plurals = self::makePlurals($data);
+        if (! Iter\contains_key($plurals, 'other')) {
+            throw new Exception("Plurals {$exceptionsFor} does not contain the \"other\" key.");
+        }
 
-        $perUnitPattern = $data['perUnitPattern'] ?? '';
-
-        return [
-            'name' => $name,
-            'plurals' => $plurals,
-            'perUnit' => $perUnitPattern,
-        ];
+        return $plurals;
     }
 
     /**
      * @param array<string, string> $data
      *
-     * @return ?array<string, string>
+     * @return array<string, string>
      */
-    private static function makePlurals(array $data): ?array
+    private static function makePlurals(array $data): array
     {
         $prefix = 'unitPattern-count-';
         $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, $prefix));
-        $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, $prefix));
 
-        return $data ?: null;
+        return Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, $prefix));
     }
 }

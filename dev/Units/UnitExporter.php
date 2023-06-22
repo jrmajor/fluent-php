@@ -22,11 +22,11 @@ final class UnitExporter implements Exporter
     {
         $u = $this->unit;
 
-        $args = [];
-
-        foreach (['long', 'short', 'narrow'] as $name) {
-            $args[] = E\join([$name . ': ', E\guess($u->{$name})->export()]);
-        }
+        $args = [
+            E\guess($u->longPlurals)->export(),
+            E\guess($u->shortPlurals)->export(),
+            E\guess($u->narrowPlurals)->export(),
+        ];
 
         $u = new Exported('U', new E\Imports([Unit::class . ' as U']));
 

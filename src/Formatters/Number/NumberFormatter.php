@@ -249,12 +249,17 @@ final class NumberFormatter
     private function applyUnit(Options $o, string $formatted, int|float $original): string
     {
         $unit = $this->getUnit($o);
-        $unitData = $unit->{$o->unitDisplay};
+
+        $plurals = match ($o->unitDisplay) {
+            'long' => $unit->longPlurals,
+            'short' => $unit->shortPlurals,
+            'narrow' => $unit->narrowPlurals,
+        };
 
         $category = PluralRules::select($this->locale->code, $original);
-        $pattern = $unitData['plurals'][$category] ?? $unitData['name'];
+        $pattern = $plurals[$category] ?? $plurals['other'];
 
-        return str_replace(['{0}'], [$formatted], $pattern);
+        return str_replace('{0}', $formatted, $pattern);
     }
 
     private function insertCurrencySymbol(Options $o, string $formatted): string

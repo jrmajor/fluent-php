@@ -8,15 +8,18 @@ namespace Major\Fluent\Formatters\Number\Locale;
 final class Unit
 {
     public function __construct(
-        readonly ?array $long = null,
-        readonly ?array $short = null,
-        readonly ?array $narrow = null,
+        /** @var array<string, string> */
+        readonly array $longPlurals,
+        /** @var array<string, string> */
+        readonly array $shortPlurals,
+        /** @var array<string, string> */
+        readonly array $narrowPlurals,
     ) { }
 
     public function isIdentical(self $other): bool
     {
-        return $this->long === $other->long
-            && $this->short === $other->short
-            && $this->narrow === $other->narrow;
+        return $this->longPlurals === $other->longPlurals
+            && $this->shortPlurals === $other->shortPlurals
+            && $this->narrowPlurals === $other->narrowPlurals;
     }
 }

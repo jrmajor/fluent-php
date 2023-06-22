@@ -19,11 +19,11 @@ final class CompileUnitsCommand extends Command
 
         H\LocaleFiles::prepareDirectory('units');
 
-        $compiled = ['und' => UnitsFactory::make('und')];
-        $optimizer = new UnitsOptimizer($compiled['und']);
+        $compiled = [];
+        $optimizer = new UnitsOptimizer();
 
         foreach (H\CldrData::regions('units') as $lang => $regions) {
-            $compiled[$lang] = $optimizer->optimize(UnitsFactory::make($lang));
+            $compiled[$lang] = UnitsFactory::make($lang);
 
             foreach ($regions as $region) {
                 $regionData = $optimizer->optimize(

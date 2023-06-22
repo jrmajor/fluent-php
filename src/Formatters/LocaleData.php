@@ -40,7 +40,6 @@ final class LocaleData
         [$language, $region] = self::getLangAndRegionPaths('units', $locale);
 
         return array_merge(
-            require self::Path . 'units/und.php',
             require $language,
             $region !== null ? require $region : [],
         );
