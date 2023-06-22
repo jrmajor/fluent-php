@@ -8,7 +8,6 @@ namespace Major\Fluent\Formatters\Number\Locale;
 final class Unit
 {
     public function __construct(
-        readonly string $name,
         readonly ?array $long = null,
         readonly ?array $short = null,
         readonly ?array $narrow = null,
@@ -16,8 +15,7 @@ final class Unit
 
     public function isIdentical(self $other): bool
     {
-        return $this->name === $other->name
-            && $this->long === $other->long
+        return $this->long === $other->long
             && $this->short === $other->short
             && $this->narrow === $other->narrow;
     }

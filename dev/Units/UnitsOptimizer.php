@@ -21,7 +21,7 @@ final class UnitsOptimizer
     public function optimize(array $region, array $base = []): array
     {
         $comp = function (string $name, Unit $u) use ($base): bool {
-            $base = $base[$name] ?? $this->und[$name] ?? new Unit($u->name);
+            $base = $base[$name] ?? $this->und[$name];
 
             return ! $base->isIdentical($u);
         };

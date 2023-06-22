@@ -24,7 +24,7 @@ final class UnitExporter implements Exporter
 
         $args = [];
 
-        foreach (['name', 'long', 'short', 'narrow'] as $name) {
+        foreach (['long', 'short', 'narrow'] as $name) {
             $args[] = E\join([$name . ': ', E\guess($u->{$name})->export()]);
         }
 

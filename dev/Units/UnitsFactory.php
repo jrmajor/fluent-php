@@ -72,7 +72,6 @@ final class UnitsFactory
 
         return Dict\map(self::UnitSubset, fn ($unit) => self::makeUnit(
             locale: $locale,
-            unit: $unit,
             long: $unitStyles['long'][$unit],
             short: $unitStyles['short'][$unit],
             narrow: $unitStyles['narrow'][$unit],
@@ -82,13 +81,13 @@ final class UnitsFactory
     /**
      * @throws Exception
      */
-    private static function makeUnit(string $locale, string $unit, array $long, array $short, array $narrow): Unit
+    private static function makeUnit(string $locale, array $long, array $short, array $narrow): Unit
     {
         $long = self::makePart($long, 'long', $locale);
         $short = self::makePart($short, 'short', $locale);
         $narrow = self::makePart($narrow, 'narrow', $locale);
 
-        return new Unit($unit, $long, $short, $narrow);
+        return new Unit($long, $short, $narrow);
     }
 
     /**
