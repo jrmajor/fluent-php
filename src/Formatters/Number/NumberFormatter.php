@@ -330,7 +330,8 @@ final class NumberFormatter
 
         assert($unit !== null);
 
-        return $this->units[$unit] ?? new Unit($unit);
+        return $this->units[$unit]
+            ?? throw new InvalidArgumentException("Unsupported unit: {$unit}.");
     }
 
     /**
