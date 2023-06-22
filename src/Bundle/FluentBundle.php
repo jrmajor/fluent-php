@@ -147,10 +147,7 @@ final class FluentBundle
         return $errors;
     }
 
-    /**
-     * @psalm-param array<string, mixed> $arguments
-     */
-    public function message(string $_message, array ...$arguments): ?string
+    public function message(string $_message, mixed ...$arguments): ?string
     {
         if (
             count($arguments) === 1
