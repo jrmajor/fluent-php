@@ -14,11 +14,11 @@ use Psl\Str;
 final class UnitsFactory
 {
     /**
-     * A subset of units from the full list was selected for use in ECMAScript.
+     * A subset of units from CLDR that is available in JavaScript.
      *
-     * @see https://tc39.es/proposal-unified-intl-numberformat/section6/locales-currencies-tz_proposed_out.html#sec-issanctionedsimpleunitidentifier
+     * @see https://tc39.es/ecma402/#table-sanctioned-simple-unit-identifiers
      */
-    private const UnitSubset = [
+    private const Units = [
         'acre' => 'area-acre',
         'bit' => 'digital-bit',
         'byte' => 'digital-byte',
@@ -44,6 +44,7 @@ final class UnitsFactory
         'megabit' => 'digital-megabit',
         'megabyte' => 'digital-megabyte',
         'meter' => 'length-meter',
+        'microsecond' => 'duration-microsecond',
         'mile' => 'length-mile',
         'mile-scandinavian' => 'length-mile-scandinavian',
         'milliliter' => 'volume-milliliter',
@@ -51,6 +52,7 @@ final class UnitsFactory
         'millisecond' => 'duration-millisecond',
         'minute' => 'duration-minute',
         'month' => 'duration-month',
+        'nanosecond' => 'duration-nanosecond',
         'ounce' => 'mass-ounce',
         'percent' => 'concentr-percent',
         'petabyte' => 'digital-petabyte',
@@ -71,7 +73,7 @@ final class UnitsFactory
     {
         $data = H\CldrData::get('units', $locale, 'units.*.*.units');
 
-        return Dict\map(self::UnitSubset, fn ($unit) => new Unit(
+        return Dict\map(self::Units, fn ($unit) => new Unit(
             self::makeStyle($locale, $unit, 'long', $data),
             self::makeStyle($locale, $unit, 'short', $data),
             self::makeStyle($locale, $unit, 'narrow', $data),
