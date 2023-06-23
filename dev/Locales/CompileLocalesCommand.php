@@ -2,6 +2,7 @@
 
 namespace Major\Fluent\Dev\Locales;
 
+use Major\Exporter as E;
 use Major\Fluent\Dev\Helpers as H;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,9 +19,10 @@ final class CompileLocalesCommand extends Command
         H\LocaleFiles::prepareDirectory('numbers');
 
         foreach (H\CldrData::locales('numbers') as $locale) {
-            $compiler = new LocaleCompiler($locale);
+            $compiled = LocalesFactory::make($locale);
+            $exported = new LocaleExporter($compiled);
 
-            $compiler->make();
+            H\LocaleFiles::write('numbers', $locale, E\to_file($exported));
         }
 
         $output->writeln('<info>Compiled in ' . round(microtime(true) - $start, 2) . 's</info>');
