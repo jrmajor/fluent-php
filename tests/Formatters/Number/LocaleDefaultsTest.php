@@ -50,7 +50,7 @@ final class LocaleDefaultsTest extends TestCase
     #[TestDox('default currency pattern is the most popular one')]
     public function testCurrency(): void
     {
-        $expected = '¤#,##0.00';
+        $expected = "#,##0.00\u{A0}¤";
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 

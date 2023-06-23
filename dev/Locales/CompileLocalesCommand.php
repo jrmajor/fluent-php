@@ -18,9 +18,22 @@ final class CompileLocalesCommand extends Command
 
         H\LocaleFiles::prepareDirectory('numbers');
 
-        foreach (H\CldrData::locales('numbers') as $locale) {
-            $compiled = LocalesFactory::make($locale);
-            $exported = new LocaleExporter($compiled);
+        $compiled = ['und' => LocalesFactory::make('und')];
+
+        foreach (H\CldrData::regions('numbers') as $lang => $regions) {
+            $compiled[$lang] = LocalesFactory::make($lang);
+
+            foreach ($regions as $region) {
+                $compiledRegion = LocalesFactory::make($region);
+
+                if (! $compiledRegion->isIdentical($compiled[$lang])) {
+                    $compiled[$region] = $compiledRegion;
+                }
+            }
+        }
+
+        foreach ($compiled as $locale => $data) {
+            $exported = new LocaleExporter($data);
 
             H\LocaleFiles::write('numbers', $locale, E\to_file($exported));
         }

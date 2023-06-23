@@ -1,3 +1,0 @@
-<?php
-
-return new Major\Fluent\Formatters\Number\Locale\Locale(symbols: [',', "\u{A0}", '-', '%']);

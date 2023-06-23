@@ -23,10 +23,10 @@ final class LocaleDataTest extends TestCase
     public static function provideLoadNumbersCases(): array
     {
         return [
-            ['pl', new Locale(currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'])],
-            ['pl-UNKNOWN', new Locale(currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'])],
-            ['en', new Locale()],
-            ['en-US', new Locale()],
+            ['pl', new Locale(grouping: 2, symbols: [',', "\u{A0}", '-', '%'])],
+            ['pl-UNKNOWN', new Locale(grouping: 2, symbols: [',', "\u{A0}", '-', '%'])],
+            ['en', new Locale(currency: '¤#,##0.00')],
+            ['en-US', new Locale(currency: '¤#,##0.00')],
             ['en-CH', new Locale(currency: "¤\u{A0}#,##0.00;¤-#,##0.00", symbols: ['.', '’', '-', '%'])],
         ];
     }
@@ -43,6 +43,6 @@ final class LocaleDataTest extends TestCase
     #[TestDox('it can get all locales')]
     public static function testAll(): void
     {
-        PU::assertCount(388, LocaleData::all());
+        PU::assertCount(168, LocaleData::all());
     }
 }
