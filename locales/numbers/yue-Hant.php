@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Cantonese (Traditional)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

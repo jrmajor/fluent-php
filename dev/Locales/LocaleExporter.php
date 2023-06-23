@@ -23,7 +23,7 @@ final class LocaleExporter implements Exporter
     {
         $l = $this->locale;
 
-        $args = [E\string($l->name)->export()];
+        $args = [];
 
         if ($l->system !== H\LocaleDefaults::for('system')) {
             $args[] = E\join(['system: ', E\guess($l->system)->export()]);

@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (Namibia)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

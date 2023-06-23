@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (Palau)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

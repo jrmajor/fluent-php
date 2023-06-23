@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (Australia)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

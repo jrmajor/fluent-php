@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Urdu', symbols: ['.', ',', "\u{200E}-", '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale(symbols: ['.', ',', "\u{200E}-", '%']);

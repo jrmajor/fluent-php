@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (Northern Mariana Islands)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

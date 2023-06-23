@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (Niue)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

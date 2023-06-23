@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Somali (Kenya)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

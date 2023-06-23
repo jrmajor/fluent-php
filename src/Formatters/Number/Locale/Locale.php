@@ -10,7 +10,6 @@ final class Locale
     public readonly string $code;
 
     public function __construct(
-        public readonly string $name,
         public readonly string $system = 'latn',
         public readonly string $decimal = '#,##0.###',
         public readonly string $percent = '#,##0%',
@@ -41,7 +40,6 @@ final class Locale
     public function isIdentical(self $other): bool
     {
         return $this->code === $other->code
-            && $this->name === $other->name
             && $this->system === $other->system
             && $this->decimal === $other->decimal
             && $this->percent === $other->percent

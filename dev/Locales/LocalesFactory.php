@@ -3,7 +3,6 @@
 namespace Major\Fluent\Dev\Locales;
 
 use Exception;
-use Locale as IntlLocale;
 use Major\Fluent\Dev\Helpers as H;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Formatters\Number\NumberFormatter;
@@ -22,7 +21,6 @@ final class LocalesFactory
         self::checkCurrencySpacing($locale, $data, $system);
 
         return new Locale(
-            self::name($locale),
             $system,
             self::pattern($data, $system, 'decimal'),
             self::pattern($data, $system, 'percent'),
@@ -31,14 +29,6 @@ final class LocalesFactory
             self::symbols($data, $system),
             self::unitPatterns($data, $system),
             code: $locale,
-        );
-    }
-
-    private static function name(string $locale): string
-    {
-        return Str\replace_every(
-            IntlLocale::getDisplayName($locale),
-            ['English (world)' => 'English (World)'],
         );
     }
 

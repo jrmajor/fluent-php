@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (Cocos [Keeling] Islands)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();

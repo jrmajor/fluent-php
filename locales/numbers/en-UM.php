@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (U.S. Outlying Islands)');
+return new Major\Fluent\Formatters\Number\Locale\Locale();
