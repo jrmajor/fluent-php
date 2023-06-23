@@ -15,7 +15,7 @@ final class CurrencyExporter implements Exporter
     use IsStringable;
 
     public function __construct(
-        private Currency $currency,
+        private readonly Currency $currency,
     ) { }
 
     public function export(): Exported

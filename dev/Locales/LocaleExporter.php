@@ -15,7 +15,7 @@ final class LocaleExporter implements Exporter
     use IsStringable;
 
     public function __construct(
-        private Locale $locale,
+        private readonly Locale $locale,
     ) { }
 
     public function export(): Exported
