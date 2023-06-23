@@ -23,27 +23,44 @@ final class CurrencyExporter implements Exporter
         $c = $this->currency;
 
         $args = [E\string($c->code)->export()];
+        $skippedArgument = false;
 
-        if ($c->name !== $c->code && $c->symbol !== $c->code) {
+        if ($c->name !== $c->code) {
             $args[] = E\string($c->name)->export();
-            $args[] = E\string($c->symbol)->export();
-        } elseif ($c->name !== $c->code) {
-            $args[] = E\string($c->name)->export();
-        } elseif ($c->symbol !== $c->code) {
-            $args[] = E\join(['symbol: ', E\string($c->symbol)->export()]);
+        } else {
+            $skippedArgument = true;
+        }
+
+        if ($c->symbol !== $c->code) {
+            $args[] = $skippedArgument
+                ? E\join(['symbol: ', E\string($c->symbol)->export()])
+                : E\string($c->symbol)->export();
+        } else {
+            $skippedArgument = true;
         }
 
         if ($c->narrow !== $c->code) {
-            $args[] = E\join(['narrow: ', E\string($c->narrow)->export()]);
+            $args[] = $skippedArgument
+                ? E\join(['narrow: ', E\string($c->narrow)->export()])
+                : E\string($c->narrow)->export();
+        } else {
+            $skippedArgument = true;
         }
 
         if ($c->plurals) {
             $plurals = count($c->plurals) === 1 ? $c->plurals['other'] : $c->plurals;
-            $args[] = E\join(['plurals: ', E\guess($plurals)->export()]);
+
+            $args[] = $skippedArgument
+                ? E\join(['plurals: ', E\guess($plurals)->export()])
+                : E\guess($plurals)->export();
+        } else {
+            $skippedArgument = true;
         }
 
         if ($c->minorUnits !== 2) {
-            $args[] = E\join(['minorUnits: ', E\int($c->minorUnits)->export()]);
+            $args[] = $skippedArgument
+                ? E\join(['minorUnits: ', E\int($c->minorUnits)->export()])
+                : E\int($c->minorUnits)->export();
         }
 
         $c = new Exported('C', new E\Imports([Currency::class . ' as C']));

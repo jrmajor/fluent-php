@@ -17,7 +17,7 @@ return [
     'THB' => new C('THB', 'baht tailandes', narrow: '฿', plurals: ['one' => 'baht tailandes', 'other' => 'bahts tailandeses']),
     'USD' => new C('USD', 'dólar estadounidense', narrow: '$', plurals: ['one' => 'dólar estadounidense', 'other' => 'dólares estadounidenses']),
     'UZS' => new C('UZS', 'som uzbeko', plurals: ['one' => 'som uzbeko', 'other' => 'soms uzbekos']),
-    'VEF' => new C('VEF', 'bolívar venezolano (2008–2018)', 'Bs.', narrow: 'Bs.', plurals: ['one' => 'bolívar venezolano (2008–2018)', 'other' => 'bolívares venezolanos (2008–2018)']),
+    'VEF' => new C('VEF', 'bolívar venezolano (2008–2018)', 'Bs.', 'Bs.', ['one' => 'bolívar venezolano (2008–2018)', 'other' => 'bolívares venezolanos (2008–2018)']),
     'VES' => new C('VES', 'bolívar soberano', 'Bs.S', plurals: ['one' => 'bolívar soberano', 'other' => 'bolívares soberanos']),
     'VND' => new C('VND', 'dong', narrow: '₫', plurals: ['one' => 'dong', 'other' => 'dongs'], minorUnits: 0),
     'XXX' => new C('XXX', 'moneda desconocida', '¤', plurals: ['one' => '(unidad de moneda desconocida)', 'other' => '(moneda desconocida)']),

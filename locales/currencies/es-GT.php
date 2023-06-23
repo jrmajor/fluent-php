@@ -8,7 +8,7 @@ return [
     'EGP' => new C('EGP', 'libra egipcia', narrow: 'E£', plurals: ['one' => 'libra egipcia', 'other' => 'libras egipcias']),
     'EUR' => new C('EUR', 'euro', narrow: '€', plurals: ['one' => 'euro', 'other' => 'euros']),
     'FKP' => new C('FKP', 'libra malvinense', narrow: 'FK£', plurals: ['one' => 'libra malvinense', 'other' => 'libras malvinenses']),
-    'GTQ' => new C('GTQ', 'quetzal', 'Q', narrow: 'Q', plurals: ['one' => 'quetzal', 'other' => 'quetzales']),
+    'GTQ' => new C('GTQ', 'quetzal', 'Q', 'Q', ['one' => 'quetzal', 'other' => 'quetzales']),
     'HTG' => new C('HTG', 'gourde haitiano', plurals: ['one' => 'gourde haitiano', 'other' => 'gourdes haitianos']),
     'KZT' => new C('KZT', 'tenge kazajo', narrow: '₸', plurals: ['one' => 'tenge kazajo', 'other' => 'tengues kazajos']),
     'MWK' => new C('MWK', 'kwacha malauí', plurals: ['one' => 'kwacha malauí', 'other' => 'kwachas malauíes']),

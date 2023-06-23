@@ -3,5 +3,5 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
-    'KMF' => new C('KMF', 'franc comorien', 'CF', narrow: 'FC', plurals: ['one' => 'franc comorien', 'other' => 'francs comoriens'], minorUnits: 0),
+    'KMF' => new C('KMF', 'franc comorien', 'CF', 'FC', ['one' => 'franc comorien', 'other' => 'francs comoriens'], 0),
 ];

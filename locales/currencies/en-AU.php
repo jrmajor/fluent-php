@@ -3,7 +3,7 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
-    'AUD' => new C('AUD', 'Australian Dollar', '$', narrow: '$', plurals: ['one' => 'Australian dollar', 'other' => 'Australian dollars']),
+    'AUD' => new C('AUD', 'Australian Dollar', '$', '$', ['one' => 'Australian dollar', 'other' => 'Australian dollars']),
     'BAM' => new C('BAM', 'Bosnia-Herzegovina Convertible Marka', narrow: 'KM', plurals: 'Bosnia-Herzegovina convertible marka'),
     'BBD' => new C('BBD', 'Barbados Dollar', narrow: '$', plurals: ['one' => 'Barbados dollar', 'other' => 'Barbados dollars']),
     'BDT' => new C('BDT', 'Bangladeshi Taka', narrow: 'Tk', plurals: ['one' => 'Bangladeshi taka', 'other' => 'Bangladeshi takas']),

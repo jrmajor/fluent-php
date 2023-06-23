@@ -9,8 +9,8 @@ return [
     'BYN' => new C('BYN', 'Belarusian Rouble', plurals: ['one' => 'Belarusian rouble', 'other' => 'Belarusian roubles']),
     'BYR' => new C('BYR', 'Belarusian Rouble (2000–2016)', plurals: ['one' => 'Belarusian rouble (2000–2016)', 'other' => 'Belarusian roubles (2000–2016)']),
     'ETB' => new C('ETB', 'Ethiopian Birr', plurals: 'Ethiopian birr'),
-    'GYD' => new C('GYD', 'Guyanaese Dollar', '$', narrow: '$', plurals: ['one' => 'Guyanaese dollar', 'other' => 'Guyanaese dollars']),
-    'JPY' => new C('JPY', 'Japanese Yen', 'JP¥', narrow: '¥', plurals: 'Japanese yen', minorUnits: 0),
+    'GYD' => new C('GYD', 'Guyanaese Dollar', '$', '$', ['one' => 'Guyanaese dollar', 'other' => 'Guyanaese dollars']),
+    'JPY' => new C('JPY', 'Japanese Yen', 'JP¥', '¥', 'Japanese yen', 0),
     'LSL' => new C('LSL', 'Lesotho Loti', plurals: ['one' => 'Lesotho loti', 'other' => 'Lesotho maloti']),
     'LVR' => new C('LVR', 'Latvian Rouble', plurals: ['one' => 'Latvian rouble', 'other' => 'Latvian roubles']),
     'MGA' => new C('MGA', 'Malagasy Ariary', narrow: 'Ar', plurals: 'Malagasy ariary'),
@@ -19,6 +19,6 @@ return [
     'RUR' => new C('RUR', 'Russian Rouble (1991–1998)', plurals: ['one' => 'Russian rouble (1991–1998)', 'other' => 'Russian roubles (1991–1998)']),
     'SHP' => new C('SHP', 'St Helena Pound', narrow: '£', plurals: ['one' => 'St Helena pound', 'other' => 'St Helena pounds']),
     'TJR' => new C('TJR', 'Tajikistani Rouble', plurals: ['one' => 'Tajikistani rouble', 'other' => 'Tajikistani roubles']),
-    'USD' => new C('USD', 'US Dollar', 'US$', narrow: '$', plurals: ['one' => 'US dollar', 'other' => 'US dollars']),
+    'USD' => new C('USD', 'US Dollar', 'US$', '$', ['one' => 'US dollar', 'other' => 'US dollars']),
     'VUV' => new C('VUV', 'Vanuatu Vatu', plurals: 'Vanuatu vatu', minorUnits: 0),
 ];

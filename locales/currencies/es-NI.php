@@ -11,7 +11,7 @@ return [
     'HTG' => new C('HTG', 'gourde haitiano', plurals: ['one' => 'gourde haitiano', 'other' => 'gourdes haitianos']),
     'KZT' => new C('KZT', 'tenge kazajo', narrow: '₸', plurals: ['one' => 'tenge kazajo', 'other' => 'tengues kazajos']),
     'MWK' => new C('MWK', 'kwacha malauí', plurals: ['one' => 'kwacha malauí', 'other' => 'kwachas malauíes']),
-    'NIO' => new C('NIO', 'córdoba nicaragüense', 'C$', narrow: 'C$', plurals: ['one' => 'córdoba nicaragüense', 'other' => 'córdobas nicaragüenses']),
+    'NIO' => new C('NIO', 'córdoba nicaragüense', 'C$', 'C$', ['one' => 'córdoba nicaragüense', 'other' => 'córdobas nicaragüenses']),
     'SSP' => new C('SSP', 'libra sursudanesa', narrow: 'SD£', plurals: ['one' => 'libra sursudanesa', 'other' => 'libras sursudanesas']),
     'SYP' => new C('SYP', 'libra siria', narrow: 'S£', plurals: ['one' => 'libra siria', 'other' => 'libras sirias']),
     'THB' => new C('THB', 'baht tailandes', narrow: '฿', plurals: ['one' => 'baht tailandes', 'other' => 'bahts tailandeses']),

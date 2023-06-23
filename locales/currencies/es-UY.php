@@ -15,7 +15,7 @@ return [
     'SSP' => new C('SSP', 'libra sursudanesa', narrow: 'SD£', plurals: ['one' => 'libra sursudanesa', 'other' => 'libras sursudanesas']),
     'SYP' => new C('SYP', 'libra siria', narrow: 'S£', plurals: ['one' => 'libra siria', 'other' => 'libras sirias']),
     'THB' => new C('THB', 'baht tailandes', narrow: '฿', plurals: ['one' => 'baht tailandes', 'other' => 'bahts tailandeses']),
-    'UYU' => new C('UYU', 'peso uruguayo', '$', narrow: '$', plurals: ['one' => 'peso uruguayo', 'other' => 'pesos uruguayos']),
+    'UYU' => new C('UYU', 'peso uruguayo', '$', '$', ['one' => 'peso uruguayo', 'other' => 'pesos uruguayos']),
     'UYW' => new C('UYW', 'unidad previsional uruguayo', 'UP', plurals: ['one' => 'unidad previsional uruguayo', 'other' => 'unidades previsionales uruguayos'], minorUnits: 4),
     'UZS' => new C('UZS', 'som uzbeko', plurals: ['one' => 'som uzbeko', 'other' => 'soms uzbekos']),
     'VEF' => new C('VEF', 'bolívar venezolano (2008–2018)', narrow: 'BsF', plurals: ['one' => 'bolívar venezolano (2008–2018)', 'other' => 'bolívares venezolanos (2008–2018)']),

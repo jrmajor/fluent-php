@@ -12,7 +12,7 @@ return [
     'KZT' => new C('KZT', 'tenge kazajo', narrow: '₸', plurals: ['one' => 'tenge kazajo', 'other' => 'tengues kazajos']),
     'MWK' => new C('MWK', 'kwacha malauí', plurals: ['one' => 'kwacha malauí', 'other' => 'kwachas malauíes']),
     'NIO' => new C('NIO', 'córdoba nicaragüense', narrow: 'C$', plurals: ['one' => 'córdoba nicaragüense', 'other' => 'córdobas nicaragüenses']),
-    'PYG' => new C('PYG', 'guaraní paraguayo', 'Gs.', narrow: '₲', plurals: ['one' => 'guaraní paraguayo', 'other' => 'guaraníes paraguayos'], minorUnits: 0),
+    'PYG' => new C('PYG', 'guaraní paraguayo', 'Gs.', '₲', ['one' => 'guaraní paraguayo', 'other' => 'guaraníes paraguayos'], 0),
     'SSP' => new C('SSP', 'libra sursudanesa', narrow: 'SD£', plurals: ['one' => 'libra sursudanesa', 'other' => 'libras sursudanesas']),
     'SYP' => new C('SYP', 'libra siria', narrow: 'S£', plurals: ['one' => 'libra siria', 'other' => 'libras sirias']),
     'THB' => new C('THB', 'baht tailandes', narrow: '฿', plurals: ['one' => 'baht tailandes', 'other' => 'bahts tailandeses']),

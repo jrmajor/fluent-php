@@ -9,7 +9,7 @@ return [
     'BYN' => new C('BYN', 'Belarusian Rouble', plurals: ['one' => 'Belarusian rouble', 'other' => 'Belarusian roubles']),
     'BYR' => new C('BYR', 'Belarusian Rouble (2000–2016)', plurals: ['one' => 'Belarusian rouble (2000–2016)', 'other' => 'Belarusian roubles (2000–2016)']),
     'ETB' => new C('ETB', 'Ethiopian Birr', plurals: 'Ethiopian birr'),
-    'JPY' => new C('JPY', 'Japanese Yen', 'JP¥', narrow: '¥', plurals: 'Japanese yen', minorUnits: 0),
+    'JPY' => new C('JPY', 'Japanese Yen', 'JP¥', '¥', 'Japanese yen', 0),
     'LSL' => new C('LSL', 'Lesotho Loti', plurals: ['one' => 'Lesotho loti', 'other' => 'Lesotho maloti']),
     'LVR' => new C('LVR', 'Latvian Rouble', plurals: ['one' => 'Latvian rouble', 'other' => 'Latvian roubles']),
     'MGA' => new C('MGA', 'Malagasy Ariary', narrow: 'Ar', plurals: 'Malagasy ariary'),

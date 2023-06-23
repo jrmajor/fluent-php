@@ -96,7 +96,7 @@ return [
     'ESB' => new C('ESB', 'Ispanų pesetai (konvertuojama sąskaita)', plurals: ['one' => 'Ispanų pesetas (konvertuojama sąskaita)', 'other' => 'Ispanų pesetai (konvertuojama sąskaita)']),
     'ESP' => new C('ESP', 'Ispanijos peseta', narrow: '₧', plurals: ['one' => 'Ispanų pesetas', 'other' => 'Ispanų pesetai']),
     'ETB' => new C('ETB', 'Etiopijos biras', plurals: ['one' => 'Etiopijos biras', 'few' => 'Etiopijos birai', 'many' => 'Etiopijos biro', 'other' => 'Etiopijos birų']),
-    'EUR' => new C('EUR', 'Euras', '€', narrow: '€', plurals: ['one' => 'euras', 'few' => 'eurai', 'many' => 'euro', 'other' => 'eurų']),
+    'EUR' => new C('EUR', 'Euras', '€', '€', ['one' => 'euras', 'few' => 'eurai', 'many' => 'euro', 'other' => 'eurų']),
     'FIM' => new C('FIM', 'Suomijos markė', plurals: ['one' => 'Suomijos markė', 'other' => 'Suomijos markės']),
     'FJD' => new C('FJD', 'Fidžio doleris', narrow: '$', plurals: ['one' => 'Fidžio doleris', 'few' => 'Fidžio doleriai', 'many' => 'Fidžio dolerio', 'other' => 'Fidžio dolerių']),
     'FKP' => new C('FKP', 'Falklando salų svaras', narrow: '£', plurals: ['one' => 'Falklando salų svaras', 'few' => 'Falklando salų svarai', 'many' => 'Falklando salų svaro', 'other' => 'Falklando salų svarų']),
