@@ -51,7 +51,7 @@ return [
     'XAF' => new C('XAF', 'franc CFA (BEAC)', plurals: ['one' => 'franc CFA (BEAC)', 'other' => 'francs CFA (BEAC)'], minorUnits: 0),
     'XOF' => new C('XOF', 'franc CFA (BCEAO)', plurals: ['one' => 'franc CFA (BCEAO)', 'other' => 'francs CFA (BCEAO)'], minorUnits: 0),
     'XPF' => new C('XPF', 'franc CFP', plurals: ['one' => 'franc CFP', 'other' => 'francs CFP'], minorUnits: 0),
-    'XXX' => new C('XXX', 'Devise inconnue', '¤', plurals: ['one' => '(devise inconnue)', 'other' => '(devise inconnue)']),
+    'XXX' => new C('XXX', 'Devise inconnue', '¤', plurals: ['other' => '(devise inconnue)']),
     'YER' => new C('YER', 'rial yéménite', plurals: ['one' => 'rial yéménite', 'other' => 'rials yéménites']),
     'ZMW' => new C('ZMW', 'kwacha zambien', narrow: 'ZK', plurals: ['one' => 'kwacha zambien', 'other' => 'kwachas zambiens']),
 ];

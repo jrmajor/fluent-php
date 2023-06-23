@@ -240,7 +240,9 @@ final class NumberFormatter
         $currency = $this->getCurrency($o);
 
         $category = PluralRules::select($this->locale->code, $original);
-        $name = $currency->plurals[$category] ?? $currency->name;
+        $name = $currency->plurals[$category]
+            ?? $currency->plurals['other']
+            ?? $currency->name;
         $pattern = $this->locale->unitPattern($category);
 
         return str_replace(['{0}', '{1}'], [$formatted, $name], $pattern);

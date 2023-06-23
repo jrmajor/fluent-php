@@ -245,7 +245,7 @@ return [
     'UYP' => new C('UYP', 'peso uruguayen (1975–1993)', plurals: ['one' => 'peso uruguayen (1975–1993)', 'other' => 'pesos uruguayens (1975–1993)']),
     'UYU' => new C('UYU', 'peso uruguayen', '$UY', narrow: '$', plurals: ['one' => 'peso uruguayen', 'other' => 'pesos uruguayens']),
     'UZS' => new C('UZS', 'sum ouzbek', plurals: ['one' => 'sum ouzbek', 'other' => 'sums ouzbeks']),
-    'VEB' => new C('VEB', 'bolivar vénézuélien (1871–2008)', plurals: ['one' => 'bolivar vénézuélien (1871–2008)', 'other' => 'bolivar vénézuélien (1871–2008)']),
+    'VEB' => new C('VEB', 'bolivar vénézuélien (1871–2008)', plurals: ['other' => 'bolivar vénézuélien (1871–2008)']),
     'VEF' => new C('VEF', 'bolivar vénézuélien (2008–2018)', narrow: 'Bs', plurals: ['one' => 'bolivar vénézuélien (2008–2018)', 'other' => 'bolivars vénézuéliens (2008–2018)']),
     'VES' => new C('VES', 'bolivar vénézuélien', plurals: ['one' => 'bolivar vénézuélien', 'other' => 'bolivars vénézuéliens']),
     'VND' => new C('VND', 'dông vietnamien', '₫', narrow: '₫', plurals: ['one' => 'dông vietnamien', 'other' => 'dôngs vietnamiens'], minorUnits: 0),
