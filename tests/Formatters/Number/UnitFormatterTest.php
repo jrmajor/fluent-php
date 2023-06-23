@@ -74,7 +74,11 @@ final class UnitFormatterTest extends NumberFormatterTestCase
     public static function provideLongDisplayCases(): Generator
     {
         foreach ([
+            [-5, ['unit' => 'celsius']],
+            [1, ['unit' => 'stone']],
+            [2, ['unit' => 'fluid-ounce']],
             [69, ['unit' => 'kilometer']],
+            [88.7637985, ['unit' => 'gram']],
             [21.37, ['unit' => 'foot']],
             [1444, ['unit' => 'megabit']],
         ] as $case) {
@@ -90,7 +94,11 @@ final class UnitFormatterTest extends NumberFormatterTestCase
     public static function provideShortDisplayCases(): Generator
     {
         foreach ([
+            [-5, ['unit' => 'celsius']],
+            [1, ['unit' => 'stone']],
+            [2, ['unit' => 'fluid-ounce']],
             [69, ['unit' => 'kilometer']],
+            [88.7637985, ['unit' => 'gram']],
             [21.37, ['unit' => 'foot']],
             [1444, ['unit' => 'megabit']],
         ] as $case) {
@@ -106,7 +114,11 @@ final class UnitFormatterTest extends NumberFormatterTestCase
     public static function provideNarrowDisplayCases(): Generator
     {
         foreach ([
+            [-5, ['unit' => 'celsius']],
+            [1, ['unit' => 'stone']],
+            [2, ['unit' => 'fluid-ounce']],
             [69, ['unit' => 'kilometer']],
+            [88.7637985, ['unit' => 'gram']],
             [21.37, ['unit' => 'foot']],
             [1444, ['unit' => 'megabit']],
         ] as $case) {
