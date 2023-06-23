@@ -27,7 +27,7 @@ final class LocaleDataTest extends TestCase
             ['pl-UNKNOWN', new Locale('Polish', currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'], code: 'pl')],
             ['en', new Locale('English', code: 'en')],
             ['en-US', new Locale('English', code: 'en')],
-            ['en-AT', new Locale('English (Austria)', percent: "#,##0\u{A0}%", currency: "¤\u{A0}#,##0.00", symbols: [',', '.', '-', '%'], code: 'en-AT')],
+            ['en-CH', new Locale('English (Switzerland)', currency: "¤\u{A0}#,##0.00;¤-#,##0.00", symbols: ['.', '’', '-', '%'], code: 'en-CH')],
         ];
     }
 
