@@ -54,7 +54,7 @@ final class UnitFormatterTest extends NumberFormatterTestCase
      * @param O $options
      */
     #[DataProvider('provideNarrowDisplayCases')]
-    #[TestDox('it works with narrow unit display')]
+    #[TestDox('it works with narrow display')]
     public function testNarrow(
         string $locale, int|float $number, array $options = [],
     ): void {
