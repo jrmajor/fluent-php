@@ -287,7 +287,7 @@ return [
     'XSU' => new C('XSU', 'sukre', plurals: ['one' => 'sukra', 'few' => 'sukre', 'other' => 'sukri']),
     'XTS' => new C('XTS', 'ispitni kod valute', plurals: ['one' => 'ispitni kod vlaute', 'few' => 'ispitna koda valute', 'other' => 'ispitnih kodova valute']),
     'XUA' => new C('XUA', 'obračunska jedinica ADB', plurals: ['one' => 'obračunska jedinica ADB', 'few' => 'obračunske jedinice ADB', 'other' => 'obračunskih jedinica ADB']),
-    'XXX' => new C('XXX', 'nepoznata valuta', plurals: ['other' => '(nepoznata valuta)']),
+    'XXX' => new C('XXX', 'nepoznata valuta', plurals: '(nepoznata valuta)'),
     'YDD' => new C('YDD', 'jemenski dinar', plurals: ['one' => 'jemenski dinar', 'few' => 'jemenska dinara', 'other' => 'jemenskih dinara']),
     'YER' => new C('YER', 'jemenski rijal', plurals: ['one' => 'jemenski rijal', 'few' => 'jemenska rijala', 'other' => 'jemenskih rijala']),
     'YUD' => new C('YUD', 'jugoslavenski čvrsti dinar', plurals: ['one' => 'jugoslavenski čvrsti dinar', 'few' => 'jugoslavenska čvrsta dinara', 'other' => 'jugoslavenskih čvrstih dinara']),

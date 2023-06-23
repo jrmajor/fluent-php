@@ -7,24 +7,31 @@ namespace Major\Fluent\Formatters\Number\Locale;
  */
 final class Currency
 {
-    public string $name;
+    public readonly string $name;
 
-    public string $symbol;
+    public readonly string $symbol;
 
-    public string $narrow;
+    public readonly string $narrow;
 
+    /** @var ?array<string, string> */
+    public readonly ?array $plurals;
+
+    /**
+     * @param string|array<string, string>|null $plurals
+     */
     public function __construct(
-        public string $code,
+        public readonly string $code,
         ?string $name = null,
         ?string $symbol = null,
         ?string $narrow = null,
-        /** @var ?array<string, string> */
-        public ?array $plurals = null,
-        public int $minorUnits = 2,
+        string|array|null $plurals = null,
+        public readonly int $minorUnits = 2,
     ) {
         $this->name = $name ?? $code;
         $this->symbol = $symbol ?? $code;
         $this->narrow = $narrow ?? $code;
+
+        $this->plurals = is_string($plurals) ? ['other' => $plurals] : $plurals;
     }
 
     public function isIdentical(self $other): bool

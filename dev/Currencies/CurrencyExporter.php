@@ -38,7 +38,8 @@ final class CurrencyExporter implements Exporter
         }
 
         if ($c->plurals) {
-            $args[] = E\join(['plurals: ', E\guess($c->plurals)->export()]);
+            $plurals = count($c->plurals) === 1 ? $c->plurals['other'] : $c->plurals;
+            $args[] = E\join(['plurals: ', E\guess($plurals)->export()]);
         }
 
         if ($c->minorUnits !== 2) {
