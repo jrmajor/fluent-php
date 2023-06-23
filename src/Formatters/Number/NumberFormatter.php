@@ -7,6 +7,7 @@ use Major\Fluent\Formatters\InvalidArgumentException;
 use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
+use Major\Fluent\Formatters\Number\Locale\Unit;
 use Major\PluralRules\PluralRules;
 
 /**
@@ -30,6 +31,9 @@ final class NumberFormatter
     /** @var array<string, Currency> */
     private array $currencies = [];
 
+    /** @var array<string, Unit> */
+    private array $units = [];
+
     public function __construct(string $locale)
     {
         $locale = str_replace('_', '-', $locale);
@@ -49,7 +53,10 @@ final class NumberFormatter
             $options->style === 'currency' ? $this->getCurrency($options) : null,
         );
 
-        if ($options->style === 'currency' && $options->currencyDisplay === 'name') {
+        if (
+            ($options->style === 'currency' && $options->currencyDisplay === 'name')
+            || $options->style === 'unit'
+        ) {
             $pattern = $this->locale->decimal;
         } else {
             $pattern = $this->locale->{$options->style};
@@ -78,15 +85,19 @@ final class NumberFormatter
         $minus = $this->applyReplacements($minus);
         $formatted = $this->applyReplacements($pre . $formatted . $post);
 
-        if ($options->style !== 'currency') {
-            return $minus . $formatted;
+        if ($options->style === 'currency') {
+            if ($options->currencyDisplay === 'name') {
+                return $this->applyCurrencyName($options, $minus . $formatted, $original);
+            }
+
+            return $minus . $this->insertCurrencySymbol($options, $formatted);
         }
 
-        if ($options->currencyDisplay === 'name') {
-            return $this->applyCurrencyName($options, $minus . $formatted, $original);
+        if ($options->style === 'unit') {
+            return $this->applyUnit($options, $minus . $formatted, $original);
         }
 
-        return $minus . $this->insertCurrencySymbol($options, $formatted);
+        return $minus . $formatted;
     }
 
     /**
@@ -235,6 +246,22 @@ final class NumberFormatter
         return str_replace(['{0}', '{1}'], [$formatted, $name], $pattern);
     }
 
+    private function applyUnit(Options $o, string $formatted, int|float $original): string
+    {
+        $unit = $this->getUnit($o);
+
+        $plurals = match ($o->unitDisplay) {
+            'long' => $unit->longPlurals,
+            'short' => $unit->shortPlurals,
+            'narrow' => $unit->narrowPlurals,
+        };
+
+        $category = PluralRules::select($this->locale->code, $original);
+        $pattern = $plurals[$category] ?? $plurals['other'];
+
+        return str_replace('{0}', $formatted, $pattern);
+    }
+
     private function insertCurrencySymbol(Options $o, string $formatted): string
     {
         $currency = $this->getCurrency($o);
@@ -282,6 +309,7 @@ final class NumberFormatter
     {
         $this->locale = LocaleData::loadNumbers($locale);
         $this->currencies = LocaleData::loadCurrencies($locale);
+        $this->units = LocaleData::loadUnits($locale);
     }
 
     private function getCurrency(Options $options): Currency
@@ -295,6 +323,20 @@ final class NumberFormatter
         assert($currency !== null);
 
         return $this->currencies[$currency] ?? new Currency($currency);
+    }
+
+    private function getUnit(Options $options): Unit
+    {
+        if ($options->style !== 'unit'){
+            throw new InvalidArgumentException();
+        }
+
+        $unit = $options->unit;
+
+        assert($unit !== null);
+
+        return $this->units[$unit]
+            ?? throw new InvalidArgumentException("Unsupported unit: {$unit}.");
     }
 
     /**

@@ -106,6 +106,7 @@ abstract class NumberFormatterTestCase extends TestCase
                 Type\literal_scalar('decimal'),
                 Type\literal_scalar('currency'),
                 Type\literal_scalar('percent'),
+                Type\literal_scalar('unit'),
             )),
             'useGrouping' => Type\optional(Type\bool()),
             'minimumIntegerDigits' => Type\optional(Type\int()),
@@ -115,6 +116,8 @@ abstract class NumberFormatterTestCase extends TestCase
             'maximumSignificantDigits' => Type\optional(Type\int()),
             'currency' => Type\optional(Type\string()),
             'currencyDisplay' => Type\optional(Type\string()),
+            'unit' => Type\optional(Type\string()),
+            'unitDisplay' => Type\optional(Type\string()),
         ])->coerce($options);
 
         $jsonOptions = Json\encode($options);

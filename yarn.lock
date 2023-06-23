@@ -6,3 +6,8 @@ cldr-numbers-modern@^43.0:
   version "43.0.0"
   resolved "https://registry.yarnpkg.com/cldr-numbers-modern/-/cldr-numbers-modern-43.0.0.tgz#cc507bb9fad7d2236bbfa0957bc4124e2bdd6510"
   integrity sha512-CBNLVCjzlAEUlJUojtqx4TvpK3ifuOmHTDMwKbQpwWO8GN43iVrBYeLQQ4cKWblbPMueV0tzcE7Ltb1g7MNQ3g==
+
+cldr-units-modern@^43.0:
+  version "43.1.0"
+  resolved "https://registry.yarnpkg.com/cldr-units-modern/-/cldr-units-modern-43.1.0.tgz#8e3a6258cd0183aec9696f9077dbd97d037a9a91"
+  integrity sha512-CJxa4HtuQle92vYfMmYJ4qHndgoyJDfLGgvl0oa9ZD4BZj+Dcet7Bjdpj5dbkQOWieTDEv/BTfH0HX8rz+azUw==

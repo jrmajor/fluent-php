@@ -35,6 +35,16 @@ final class LocaleData
         );
     }
 
+    public static function loadUnits(string $locale): array
+    {
+        [$language, $region] = self::getLangAndRegionPaths('units', $locale);
+
+        return array_merge(
+            require $language,
+            $region !== null ? require $region : [],
+        );
+    }
+
     /**
      * @return array{string, ?string}
      */
