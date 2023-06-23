@@ -7,8 +7,6 @@ namespace Major\Fluent\Formatters\Number\Locale;
  */
 final class Locale
 {
-    public readonly string $code;
-
     public function __construct(
         public readonly string $system = 'latn',
         public readonly string $decimal = '#,##0.###',
@@ -19,13 +17,7 @@ final class Locale
         public readonly array $symbols = ['.', ',', '-', '%'],
         /** @var array<string, string> */
         public readonly array $unitPatterns = [],
-        ?string $code = null,
-    ) {
-        $path = debug_backtrace()[0]['file'];
-
-        /** @psalm-suppress PossiblyFalseOperand */
-        $this->code = $code ?? substr($path, strrpos($path, '/') + 1, -4);
-    }
+    ) { }
 
     public function symbol(string $symbol): string
     {
@@ -39,8 +31,7 @@ final class Locale
 
     public function isIdentical(self $other): bool
     {
-        return $this->code === $other->code
-            && $this->system === $other->system
+        return $this->system === $other->system
             && $this->decimal === $other->decimal
             && $this->percent === $other->percent
             && $this->currency === $other->currency

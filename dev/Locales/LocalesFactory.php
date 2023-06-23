@@ -28,7 +28,6 @@ final class LocalesFactory
             self::grouping($data),
             self::symbols($data, $system),
             self::unitPatterns($data, $system),
-            code: $locale,
         );
     }
 

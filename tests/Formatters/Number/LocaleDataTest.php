@@ -23,11 +23,11 @@ final class LocaleDataTest extends TestCase
     public static function provideLoadNumbersCases(): array
     {
         return [
-            ['pl', new Locale(currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'], code: 'pl')],
-            ['pl-UNKNOWN', new Locale(currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'], code: 'pl')],
-            ['en', new Locale(code: 'en')],
-            ['en-US', new Locale(code: 'en')],
-            ['en-CH', new Locale(currency: "¤\u{A0}#,##0.00;¤-#,##0.00", symbols: ['.', '’', '-', '%'], code: 'en-CH')],
+            ['pl', new Locale(currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'])],
+            ['pl-UNKNOWN', new Locale(currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%'])],
+            ['en', new Locale()],
+            ['en-US', new Locale()],
+            ['en-CH', new Locale(currency: "¤\u{A0}#,##0.00;¤-#,##0.00", symbols: ['.', '’', '-', '%'])],
         ];
     }
 
