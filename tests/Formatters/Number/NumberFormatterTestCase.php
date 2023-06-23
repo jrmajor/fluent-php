@@ -23,7 +23,7 @@ use Psl\Vec;
 abstract class NumberFormatterTestCase extends TestCase
 {
     /**
-     * @return 'decimal'|'percent'|'currency'|'unit'
+     * @return 'decimal'|'percent'|'currency'
      */
     abstract protected static function patternType(): string;
 
@@ -69,7 +69,7 @@ abstract class NumberFormatterTestCase extends TestCase
     }
 
     #[TestDox('all possible patterns are tested')]
-    public function testAllPatterns(): void
+    final public function testAllPatterns(): void
     {
         $values = Vec\map(
             LocaleData::all(),
@@ -84,7 +84,7 @@ abstract class NumberFormatterTestCase extends TestCase
     }
 
     #[TestDox('correct languages are assigned to tested patterns')]
-    public function testCorrectPatterns(): void
+    final public function testCorrectPatterns(): void
     {
         foreach (static::patternsToTest() as $locale => $pattern) {
             $locale = LocaleData::loadNumbers($locale);
@@ -108,8 +108,6 @@ abstract class NumberFormatterTestCase extends TestCase
                 Type\literal_scalar('percent'),
                 Type\literal_scalar('unit'),
             )),
-            'unit' => Type\optional(Type\string()),
-            'unitDisplay' => Type\optional(Type\string()),
             'useGrouping' => Type\optional(Type\bool()),
             'minimumIntegerDigits' => Type\optional(Type\int()),
             'minimumFractionDigits' => Type\optional(Type\int()),
@@ -118,6 +116,8 @@ abstract class NumberFormatterTestCase extends TestCase
             'maximumSignificantDigits' => Type\optional(Type\int()),
             'currency' => Type\optional(Type\string()),
             'currencyDisplay' => Type\optional(Type\string()),
+            'unit' => Type\optional(Type\string()),
+            'unitDisplay' => Type\optional(Type\string()),
         ])->coerce($options);
 
         $jsonOptions = Json\encode($options);

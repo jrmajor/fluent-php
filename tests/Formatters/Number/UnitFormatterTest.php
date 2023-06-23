@@ -13,20 +13,15 @@ final class UnitFormatterTest extends NumberFormatterTestCase
 {
     protected static function patternType(): string
     {
-        return 'unit';
+        return 'decimal';
     }
 
     protected static function patternsToTest(): array
     {
-        return [];
-    }
-
-    public function testAllPatterns(): void {
-        $this->markTestSkipped('Test doesnt actual for units');
-    }
-
-    public function testCorrectPatterns(): void {
-        $this->markTestSkipped('Test doesnt actual for units');
+        return [
+            'pl' => '#,##0.###',
+            'ne' => '#,##,##0.###',
+        ];
     }
 
     /**
