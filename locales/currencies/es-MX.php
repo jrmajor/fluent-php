@@ -21,7 +21,7 @@ return [
     'MRU' => new C('MRU', 'uguiya', 'UM', plurals: ['one' => 'uguiya', 'other' => 'uguiyas']),
     'MVR' => new C('MVR', 'rupia de Maldivas', plurals: ['one' => 'rupia de Maldivas', 'other' => 'rupias de Maldivas']),
     'MWK' => new C('MWK', 'kwacha malauí', plurals: ['one' => 'kwacha malauí', 'other' => 'kwachas malauíes']),
-    'MXN' => new C('MXN', 'peso mexicano', '$', narrow: '$', plurals: ['one' => 'peso mexicano', 'other' => 'pesos mexicanos']),
+    'MXN' => new C('MXN', 'peso mexicano', '$', '$', ['one' => 'peso mexicano', 'other' => 'pesos mexicanos']),
     'NIO' => new C('NIO', 'córdoba nicaragüense', narrow: 'C$', plurals: ['one' => 'córdoba nicaragüense', 'other' => 'córdobas nicaragüenses']),
     'RON' => new C('RON', 'leu rumano', narrow: 'lei', plurals: ['one' => 'leu rumano', 'other' => 'lei rumanos']),
     'STN' => new C('STN', 'dobra santotomense', narrow: 'Db', plurals: ['one' => 'dobra santotomense', 'other' => 'dobras santotomenses']),

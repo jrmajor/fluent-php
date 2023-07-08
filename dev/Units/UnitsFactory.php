@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Major\Fluent\Dev\Units;
 
 use Exception;
@@ -96,13 +94,7 @@ final class UnitsFactory
         $styleData = $data[$style][$unit]
             ?? throw new Exception("No data {$exceptionsFor}.");
 
-        $plurals = self::makePlurals($styleData);
-
-        if (! Iter\contains_key($plurals, 'other')) {
-            throw new Exception("Plurals {$exceptionsFor} does not contain the \"other\" key.");
-        }
-
-        return $plurals;
+        return self::makePlurals($styleData, $exceptionsFor);
     }
 
     /**
@@ -110,11 +102,16 @@ final class UnitsFactory
      *
      * @return array<string, string>
      */
-    private static function makePlurals(array $data): array
+    private static function makePlurals(array $data, string $exceptionsFor): array
     {
         $prefix = 'unitPattern-count-';
         $data = Dict\filter_keys($data, fn ($key) => str_starts_with($key, $prefix));
+        $data = Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, $prefix));
 
-        return Dict\map_keys($data, fn ($key) => Str\strip_prefix($key, $prefix));
+        if (! Iter\contains_key($data, 'other')) {
+            throw new Exception("Plurals {$exceptionsFor} do not contain the \"other\" key.");
+        }
+
+        return Dict\filter_with_key($data, fn ($c, $v) => $c === 'other' || $v !== $data['other']);
     }
 }

@@ -8,6 +8,7 @@ use Major\Exporter\Exporters\Exporter;
 use Major\Exporter\Exporters\Traits\IgnoresIndentation;
 use Major\Exporter\Exporters\Traits\IsStringable;
 use Major\Fluent\Formatters\Number\Locale\Unit;
+use Psl\Vec;
 
 final class UnitExporter implements Exporter
 {
@@ -22,11 +23,11 @@ final class UnitExporter implements Exporter
     {
         $u = $this->unit;
 
-        $args = [
-            E\guess($u->longPlurals)->export(),
-            E\guess($u->shortPlurals)->export(),
-            E\guess($u->narrowPlurals)->export(),
-        ];
+        $args = Vec\map([
+            count($u->longPlurals) === 1 ? $u->longPlurals['other'] : $u->longPlurals,
+            count($u->shortPlurals) === 1 ? $u->shortPlurals['other'] : $u->shortPlurals,
+            count($u->narrowPlurals) === 1 ? $u->narrowPlurals['other'] : $u->narrowPlurals,
+        ], fn ($v) => E\guess($v)->export());
 
         $u = new Exported('U', new E\Imports([Unit::class . ' as U']));
 

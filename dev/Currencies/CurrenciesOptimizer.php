@@ -9,7 +9,7 @@ final class CurrenciesOptimizer
 {
     public function __construct(
         /** @var array<string, Currency> */
-        private array $und,
+        private readonly array $und,
     ) { }
 
     /**

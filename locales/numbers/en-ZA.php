@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English (South Africa)', symbols: [',', "\u{A0}", '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale(currency: '¤#,##0.00', symbols: [',', "\u{A0}", '-', '%']);

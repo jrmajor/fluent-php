@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('Portuguese (Cape Verde)', currency: "#,##0.00\u{A0}¤", grouping: 2, symbols: [',', "\u{A0}", '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale(grouping: 2, symbols: [',', "\u{A0}", '-', '%']);

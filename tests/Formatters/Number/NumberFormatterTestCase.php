@@ -52,7 +52,7 @@ abstract class NumberFormatterTestCase extends TestCase
                 'my', // mymr
             ],
             // english
-            ...['en', 'en-AU', 'en-GB', 'en-INVALID', 'en-US'],
+            ...['en', 'en-AU', 'en-GB', 'en-INVALID', 'en-US', 'en-CH'],
             // random
             ...['ar', 'es', 'nl', 'no', 'pl', 'ru', 'sw'],
         ]));

@@ -26,6 +26,8 @@ final class NumberFormatter
         'mymr' => ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
     ];
 
+    private string $localeName;
+
     private Locale $locale;
 
     /** @var array<string, Currency> */
@@ -36,13 +38,15 @@ final class NumberFormatter
 
     public function __construct(string $locale)
     {
-        $locale = str_replace('_', '-', $locale);
+        $this->localeName = str_replace('_', '-', $locale);
 
         if (! preg_match('/^[A-Za-z-]+$/', $locale)) {
             throw new InvalidArgumentException("Locale \"{$locale}\" contains invalid characters.");
         }
 
-        $this->loadLocaleData($locale);
+        $this->locale = LocaleData::loadNumbers($this->localeName);
+        $this->currencies = LocaleData::loadCurrencies($this->localeName);
+        $this->units = LocaleData::loadUnits($this->localeName);
     }
 
     public function format(int|float $number, Options $options): string
@@ -239,8 +243,10 @@ final class NumberFormatter
     {
         $currency = $this->getCurrency($o);
 
-        $category = PluralRules::select($this->locale->code, $original);
-        $name = $currency->plurals[$category] ?? $currency->name;
+        $category = PluralRules::select($this->localeName, $original);
+        $name = $currency->plurals[$category]
+            ?? $currency->plurals['other']
+            ?? $currency->name;
         $pattern = $this->locale->unitPattern($category);
 
         return str_replace(['{0}', '{1}'], [$formatted, $name], $pattern);
@@ -256,7 +262,7 @@ final class NumberFormatter
             'narrow' => $unit->narrowPlurals,
         };
 
-        $category = PluralRules::select($this->locale->code, $original);
+        $category = PluralRules::select($this->localeName, $original);
         $pattern = $plurals[$category] ?? $plurals['other'];
 
         return str_replace('{0}', $formatted, $pattern);
@@ -303,13 +309,6 @@ final class NumberFormatter
     private function isDigit(string $c): bool
     {
         return in_array($c, self::NumeralSystems[$this->locale->system], true);
-    }
-
-    private function loadLocaleData(string $locale): void
-    {
-        $this->locale = LocaleData::loadNumbers($locale);
-        $this->currencies = LocaleData::loadCurrencies($locale);
-        $this->units = LocaleData::loadUnits($locale);
     }
 
     private function getCurrency(Options $options): Currency

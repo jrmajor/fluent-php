@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale('English');
+return new Major\Fluent\Formatters\Number\Locale\Locale(currency: '¤#,##0.00');

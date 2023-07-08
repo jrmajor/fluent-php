@@ -7,10 +7,7 @@ use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Tests\Helpers as H;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
-use Psl\Iter;
 use Psl\Vec;
-use ReflectionClass;
-use ReflectionParameter;
 
 final class LocaleDefaultsTest extends TestCase
 {
@@ -21,7 +18,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
-        $this->assertSame($expected, $this->getDefaultValueFor('system'));
+        $this->assertSame($expected, (new Locale())->system);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -32,7 +29,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
-        $this->assertSame($expected, $this->getDefaultValueFor('decimal'));
+        $this->assertSame($expected, (new Locale())->decimal);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -43,18 +40,18 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent);
 
-        $this->assertSame($expected, $this->getDefaultValueFor('percent'));
+        $this->assertSame($expected, (new Locale())->percent);
         $this->assertSame($expected, H\most_popular($values));
     }
 
     #[TestDox('default currency pattern is the most popular one')]
     public function testCurrency(): void
     {
-        $expected = '¤#,##0.00';
+        $expected = "#,##0.00\u{A0}¤";
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 
-        $this->assertSame($expected, $this->getDefaultValueFor('currency'));
+        $this->assertSame($expected, (new Locale())->currency);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -65,7 +62,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping);
 
-        $this->assertSame($expected, $this->getDefaultValueFor('grouping'));
+        $this->assertSame($expected, (new Locale())->grouping);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -76,18 +73,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
-        $this->assertSame($expected, $this->getDefaultValueFor('symbols'));
+        $this->assertSame($expected, (new Locale())->symbols);
         $this->assertSame($expected, H\most_popular($values));
-    }
-
-    /**
-     * @psalm-suppress PossiblyNullReference
-     */
-    private function getDefaultValueFor(string $property): mixed
-    {
-        return Iter\search(
-            (new ReflectionClass(Locale::class))->getConstructor()->getParameters(),
-            fn (ReflectionParameter $p): bool => $p->getName() === $property,
-        )->getDefaultValue();
     }
 }

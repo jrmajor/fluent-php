@@ -48,7 +48,7 @@ final class LocaleData
     /**
      * @return array{string, ?string}
      */
-    public static function getLangAndRegionPaths(string $type, string $locale): array
+    private static function getLangAndRegionPaths(string $type, string $locale): array
     {
         [$language, $region] = self::splitLocale($locale);
 
