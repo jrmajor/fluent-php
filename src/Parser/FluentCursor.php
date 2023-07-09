@@ -118,12 +118,12 @@ final class FluentCursor extends Cursor
 
     public function skipToNextEntryStart(int $junkStart): void
     {
-        $lastNewline = mb_strrpos($this->slice(0, $this->index), "\n") ?: 0;
+        $lastNewline = $this->latestNewline();
 
         if ($junkStart < $lastNewline) {
             // Last seen newline is after the junk start. It's safe to rewind
             // without the risk of resuming at the same broken entry.
-            $this->setIndex($lastNewline);
+            $this->index = $lastNewline;
         }
 
         while ($this->currentChar() !== null) {

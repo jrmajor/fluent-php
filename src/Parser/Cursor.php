@@ -45,17 +45,11 @@ abstract class Cursor
 
         $char = $this->chars[$pos];
 
-        $nextPos = $pos + 1;
-
-        if (
-            $char === "\r"
-            && $nextPos < $this->length
-            && $this->chars[$nextPos] === "\n"
-        ) {
+        if ($char === "\r" && ($this->chars[$pos + 1] ?? null) === "\n") {
             return "\n";
         }
 
-        return $char !== '' ? $char : null;
+        return $char;
     }
 
     public function currentChar(): ?string
@@ -73,18 +67,21 @@ abstract class Cursor
         $this->peekOffset = 0;
 
         for ($i = 0; $i < $chars; $i++) {
-            $isClRf = $this->slice($this->index, 2) === "\r\n";
+            $isClRf = ($this->chars[$this->index] ?? null) === "\r"
+                && ($this->chars[$this->index + 1] ?? null) === "\n";
 
-            $this->incrementIndex($isClRf ? 2 : 1);
+            $this->index += $isClRf ? 2 : 1;
         }
     }
 
     public function peek(int $chars = 1): ?string
     {
         for ($i = 0; $i < $chars; $i++) {
-            $currentPeek = $this->slice($this->index + $this->peekOffset, 2);
+            $pos = $this->index + $this->peekOffset;
+            $isClRf = ($this->chars[$pos] ?? null) === "\r"
+                && ($this->chars[$pos + 1] ?? null) === "\n";
 
-            $this->peekOffset += $currentPeek === "\r\n" ? 2 : 1;
+            $this->peekOffset += $isClRf ? 2 : 1;
         }
 
         return $this->currentPeek();
@@ -97,8 +94,7 @@ abstract class Cursor
 
     public function skipToPeek(): void
     {
-        $this->incrementIndex($this->peekOffset);
-
+        $this->index += $this->peekOffset;
         $this->peekOffset = 0;
     }
 
@@ -118,15 +114,12 @@ abstract class Cursor
 
     public function skipBlankInline(): string
     {
-        $start = $this->peekOffset;
+        $start = $this->index + $this->peekOffset;
 
         $this->peekBlankInline();
-
-        $blank = $this->slice($this->index + $start, $this->peekOffset - $start);
-
         $this->skipToPeek();
 
-        return $blank;
+        return str_repeat(' ', $this->index - $start);
     }
 
     public function peekBlankBlock(): string
@@ -183,6 +176,17 @@ abstract class Cursor
         $this->skipToPeek();
     }
 
+    protected function latestNewline(): int
+    {
+        for ($i = $this->index - 1; $i >= 0; $i--) {
+            if ($this->chars[$i] === "\n") {
+                return $i;
+            }
+        }
+
+        return 0;
+    }
+
     public function expectChar(string $char): void
     {
         if ($this->currentChar() === $char) {
@@ -223,15 +227,5 @@ abstract class Cursor
         $this->next();
 
         return $char;
-    }
-
-    protected function setIndex(int $index): void
-    {
-        $this->index = $index;
-    }
-
-    private function incrementIndex(int $offset = 1): void
-    {
-        $this->index += $offset;
     }
 }
