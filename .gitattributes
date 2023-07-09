@@ -8,6 +8,6 @@
 /gen                   export-ignore
 /package.json          export-ignore
 /phpbench.json         export-ignore
-/phpunit.xml.dist      export-ignore
+/phpunit.dist.xml      export-ignore
 /psalm.xml             export-ignore
 /yarn.lock             export-ignore
