@@ -176,6 +176,17 @@ abstract class Cursor
         $this->skipToPeek();
     }
 
+    protected function latestNewline(): int
+    {
+        for ($i = $this->index - 1; $i >= 0; $i--) {
+            if ($this->chars[$i] === "\n") {
+                return $i;
+            }
+        }
+
+        return 0;
+    }
+
     public function expectChar(string $char): void
     {
         if ($this->currentChar() === $char) {
