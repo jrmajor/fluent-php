@@ -326,7 +326,7 @@ final class NumberFormatter
 
     private function getUnit(Options $options): Unit
     {
-        if ($options->style !== 'unit'){
+        if ($options->style !== 'unit') {
             throw new InvalidArgumentException();
         }
 

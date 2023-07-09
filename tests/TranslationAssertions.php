@@ -29,8 +29,8 @@ trait TranslationAssertions
     }
 
     /**
-     * @param array<string, mixed> $arguments
      * @param non-empty-list<array{class-string<ResolverException>, string}> $expectedErrors
+     * @param array<string, mixed> $arguments
      */
     public function assertTranslationErrors(
         string $expected,

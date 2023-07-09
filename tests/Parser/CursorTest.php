@@ -460,6 +460,6 @@ final class CursorTest extends TestCase
     private function cursor(string $string): Cursor
     {
         /** @psalm-suppress InternalClass */
-        return new class ($string) extends Cursor {};
+        return new class ($string) extends Cursor { };
     }
 }

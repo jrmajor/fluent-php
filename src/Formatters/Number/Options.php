@@ -36,7 +36,7 @@ final class Options
             throw new InvalidArgumentException('Allowed values of currencyDisplay are symbol, narrowSymbol, code and name.');
         }
 
-        if (! in_array($unitDisplay, ['long', 'short', 'narrow'], true)){
+        if (! in_array($unitDisplay, ['long', 'short', 'narrow'], true)) {
             throw new InvalidArgumentException('Allowed values of unitDisplay are long, short and narrow.');
         }
 
