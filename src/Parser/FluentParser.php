@@ -111,6 +111,8 @@ final class FluentParser
      *
      * Preceding comments are ignored unless they contain syntax errors
      * themselves, in which case Junk for the invalid comment is returned.
+     *
+     * @internal
      */
     public function parseEntry(string $source): Entry|Junk
     {
