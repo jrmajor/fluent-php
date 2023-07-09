@@ -114,15 +114,12 @@ abstract class Cursor
 
     public function skipBlankInline(): string
     {
-        $start = $this->peekOffset;
+        $start = $this->index + $this->peekOffset;
 
         $this->peekBlankInline();
-
-        $blank = $this->slice($this->index + $start, $this->peekOffset - $start);
-
         $this->skipToPeek();
 
-        return $blank;
+        return str_repeat(' ', $this->index - $start);
     }
 
     public function peekBlankBlock(): string
