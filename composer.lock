@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "231b78d77a1f453e60ec9d0527ef760d",
+    "content-hash": "698db884c0915a922a6b36c17afc8727",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/pluralrules.git",
-                "reference": "e1ac8d79be130bc7113f595a99b64146ba1005f4"
+                "reference": "0347d7b0837cce2c80083bbf79ea480b22ae5e4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/e1ac8d79be130bc7113f595a99b64146ba1005f4",
-                "reference": "e1ac8d79be130bc7113f595a99b64146ba1005f4",
+                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/0347d7b0837cce2c80083bbf79ea480b22ae5e4a",
+                "reference": "0347d7b0837cce2c80083bbf79ea480b22ae5e4a",
                 "shasum": ""
             },
             "require": {
@@ -25,16 +25,16 @@
                 "php": "8.1 - 8.2"
             },
             "require-dev": {
-                "azjezz/psl": "^2.0",
+                "azjezz/psl": "^2.6",
                 "hoa/compiler": "~3.17",
-                "jrmajor/cs": "^0.4.6",
+                "jrmajor/cs": "^0.5.1",
                 "nette/php-generator": "^4.0",
-                "nunomaduro/collision": "^6.3",
+                "nunomaduro/collision": "^7.7",
                 "php-standard-library/phpstan-extension": "^1.0",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5",
-                "symfony/console": "^6.1",
-                "symfony/var-dumper": "^6.1",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.2.3",
+                "symfony/console": "^6.3",
+                "symfony/var-dumper": "^6.3",
                 "vaimo/composer-patches": "^5.1"
             },
             "type": "library",
@@ -78,7 +78,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/pluralrules/issues",
-                "source": "https://github.com/jrmajor/pluralrules/tree/v1.1.0"
+                "source": "https://github.com/jrmajor/pluralrules/tree/v1.1.1"
             },
             "funding": [
                 {
@@ -86,7 +86,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-18T14:15:53+00:00"
+            "time": "2023-07-09T14:55:40+00:00"
         }
     ],
     "packages-dev": [
@@ -1246,12 +1246,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/exporter.git",
-                "reference": "6ada458"
+                "reference": "691d32c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/6ada458",
-                "reference": "6ada458",
+                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/691d32c",
+                "reference": "691d32c",
                 "shasum": ""
             },
             "require": {
@@ -1259,14 +1259,13 @@
                 "php": "8.1 - 8.2"
             },
             "require-dev": {
-                "jrmajor/cs": "^0.4.6",
-                "php-standard-library/psalm-plugin": "^2.0",
+                "jrmajor/cs": "^0.5.1",
+                "php-standard-library/psalm-plugin": "^2.2",
                 "phpbench/phpbench": "^1.2",
-                "phpunit/phpunit": "10.0.x-dev#969707c",
-                "psalm/plugin-phpunit": "^0.17.0",
-                "sebastian/diff": "5.0.x-dev#5acc6d5 as 4.0.4",
-                "symfony/var-dumper": "^6.1",
-                "vimeo/psalm": "^4.29"
+                "phpunit/phpunit": "^10.2",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "symfony/var-dumper": "^6.3",
+                "vimeo/psalm": "^5.13"
             },
             "default-branch": true,
             "type": "library",
@@ -1304,7 +1303,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-09T17:04:16+00:00"
+            "time": "2023-07-09T16:06:24+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",

@@ -35,7 +35,7 @@
         "ext-simplexml": "*",
         "azjezz/psl": "^2.6",
         "jrmajor/cs": "^0.5.1",
-        "jrmajor/exporter": "dev-master#6ada458",
+        "jrmajor/exporter": "dev-master#691d32c",
         "nunomaduro/collision": "^7.7",
         "php-standard-library/psalm-plugin": "^2.2",
         "phpbench/phpbench": "^1.2",
