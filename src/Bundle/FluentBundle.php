@@ -147,17 +147,12 @@ final class FluentBundle
         return $errors;
     }
 
-    public function message(string $_message, mixed ...$arguments): ?string
+    /**
+     * @param array<string, mixed> $arguments
+     */
+    public function message(string $message, array $arguments = []): ?string
     {
-        if (
-            count($arguments) === 1
-            && array_key_exists(0, $arguments)
-            && is_array($arguments[0])
-        ) {
-            $arguments = $arguments[0];
-        }
-
-        $ids = explode('.', $_message, limit: 2);
+        $ids = explode('.', $message, limit: 2);
         $messageId = $ids[0];
         $attributeId = $ids[1] ?? null;
 

@@ -64,16 +64,4 @@ final class ArgumentsTest extends TestCase
     {
         $this->assertTranslation('Foo', 'selector', ['num' => 3]);
     }
-
-    #[TestDox('it can be passed as a named argument')]
-    public function testAsNamedArgument(): void
-    {
-        $message = $this->bundle->message('msg', num: 3);
-
-        foreach ($this->bundle->popErrors() as $error) {
-            throw $error;
-        }
-
-        $this->assertSame('Foo 3', $message);
-    }
 }
