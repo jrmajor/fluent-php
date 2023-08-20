@@ -175,6 +175,7 @@ final class PatternResolver
         if ($message->value) {
             return $this->resolvePattern($message->value);
         }
+
         // null pattern?
         return $this->error(new Err\ReferenceException("No value: {$id}."), $id);
     }
