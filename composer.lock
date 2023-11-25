@@ -8,31 +8,31 @@
     "packages": [
         {
             "name": "jrmajor/pluralrules",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/pluralrules.git",
-                "reference": "0347d7b0837cce2c80083bbf79ea480b22ae5e4a"
+                "reference": "31e74e7df48e5c182e8f9c85684940e9937bb45d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/0347d7b0837cce2c80083bbf79ea480b22ae5e4a",
-                "reference": "0347d7b0837cce2c80083bbf79ea480b22ae5e4a",
+                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/31e74e7df48e5c182e8f9c85684940e9937bb45d",
+                "reference": "31e74e7df48e5c182e8f9c85684940e9937bb45d",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
-                "php": "8.1 - 8.2"
+                "php": "8.1 - 8.3"
             },
             "require-dev": {
-                "azjezz/psl": "^2.6",
+                "azjezz/psl": "^2.8",
                 "hoa/compiler": "~3.17",
-                "jrmajor/cs": "^0.5.1",
-                "nette/php-generator": "^4.0",
-                "nunomaduro/collision": "^7.7",
+                "jrmajor/cs": "^0.5.4",
+                "nette/php-generator": "^4.1",
+                "nunomaduro/collision": "^7.10",
                 "php-standard-library/phpstan-extension": "^1.0",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.2.3",
+                "phpunit/phpunit": "^10.4",
                 "symfony/console": "^6.3",
                 "symfony/var-dumper": "^6.3",
                 "vaimo/composer-patches": "^5.1"
@@ -78,7 +78,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/pluralrules/issues",
-                "source": "https://github.com/jrmajor/pluralrules/tree/v1.1.1"
+                "source": "https://github.com/jrmajor/pluralrules/tree/v1.1.2"
             },
             "funding": [
                 {
@@ -86,7 +86,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-09T14:55:40+00:00"
+            "time": "2023-11-24T23:41:05+00:00"
         }
     ],
     "packages-dev": [
@@ -1862,21 +1862,21 @@
         },
         {
             "name": "phpbench/container",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/container.git",
-                "reference": "6d555ff7174fca13f9b1ec0b4a089ed41d0ab392"
+                "reference": "a59b929e00b87b532ca6d0edd8eca0967655af33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/container/zipball/6d555ff7174fca13f9b1ec0b4a089ed41d0ab392",
-                "reference": "6d555ff7174fca13f9b1ec0b4a089ed41d0ab392",
+                "url": "https://api.github.com/repos/phpbench/container/zipball/a59b929e00b87b532ca6d0edd8eca0967655af33",
+                "reference": "a59b929e00b87b532ca6d0edd8eca0967655af33",
                 "shasum": ""
             },
             "require": {
                 "psr/container": "^1.0|^2.0",
-                "symfony/options-resolver": "^4.2 || ^5.0 || ^6.0"
+                "symfony/options-resolver": "^4.2 || ^5.0 || ^6.0 || ^7.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
@@ -1907,9 +1907,9 @@
             "description": "Simple, configurable, service container.",
             "support": {
                 "issues": "https://github.com/phpbench/container/issues",
-                "source": "https://github.com/phpbench/container/tree/2.2.1"
+                "source": "https://github.com/phpbench/container/tree/2.2.2"
             },
-            "time": "2022-01-25T10:17:35+00:00"
+            "time": "2023-10-30T13:38:26+00:00"
         },
         {
             "name": "phpbench/dom",
