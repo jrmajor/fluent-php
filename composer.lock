@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8dfc1d8a9c8186059176da7b3b21bdd",
+    "content-hash": "837245e2649eec6e5926402be653eda6",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -5713,7 +5713,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.1 - 8.2",
+        "php": "8.1 - 8.3",
         "ext-intl": "*"
     },
     "platform-dev": {
