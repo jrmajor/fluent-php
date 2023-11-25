@@ -28,7 +28,7 @@ final class IsoData
 
         self::$minorUnits = [];
 
-        foreach ($xml->CcyTbl->children() as $data) {
+        foreach ($xml->CcyTbl->children() ?? [] as $data) {
             $currency = (string) $data->Ccy;
             $minorUnits = Str\to_int((string) $data->CcyMnrUnts);
 
