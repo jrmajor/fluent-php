@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "03cf0eda7ea0383c6a9468d72cd3c4a9",
+    "content-hash": "b8dfc1d8a9c8186059176da7b3b21bdd",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -1239,32 +1239,31 @@
         },
         {
             "name": "jrmajor/exporter",
-            "version": "dev-master",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/exporter.git",
-                "reference": "440282e"
+                "reference": "e080f407a41ccd8c7659d068198a93fbdc6d00ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/440282e",
-                "reference": "440282e",
+                "url": "https://api.github.com/repos/jrmajor/exporter/zipball/e080f407a41ccd8c7659d068198a93fbdc6d00ef",
+                "reference": "e080f407a41ccd8c7659d068198a93fbdc6d00ef",
                 "shasum": ""
             },
             "require": {
-                "azjezz/psl": "^2.0",
-                "php": "8.1 - 8.2"
+                "azjezz/psl": "^2.8",
+                "php": "8.1 - 8.3"
             },
             "require-dev": {
-                "jrmajor/cs": "^0.5.1",
+                "jrmajor/cs": "^0.5.4",
                 "php-standard-library/psalm-plugin": "^2.2",
                 "phpbench/phpbench": "^1.2",
-                "phpunit/phpunit": "^10.2",
+                "phpunit/phpunit": "^10.4",
                 "psalm/plugin-phpunit": "^0.18.4",
                 "symfony/var-dumper": "^6.3",
-                "vimeo/psalm": "^5.13"
+                "vimeo/psalm": "^5.16"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -1292,7 +1291,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/exporter/issues",
-                "source": "https://github.com/jrmajor/exporter/tree/master"
+                "source": "https://github.com/jrmajor/exporter/tree/v0.1.0"
             },
             "funding": [
                 {
@@ -1300,7 +1299,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-09T16:35:12+00:00"
+            "time": "2023-11-25T13:50:25+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
@@ -5710,9 +5709,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "jrmajor/exporter": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
