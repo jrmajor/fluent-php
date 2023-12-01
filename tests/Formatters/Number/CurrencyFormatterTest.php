@@ -162,6 +162,10 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             }
         }
 
+        yield ['nn', 1, ['currency' => 'GWP']];
+
+        yield ['nn', 2, ['currency' => 'GWP']];
+
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }
 }
