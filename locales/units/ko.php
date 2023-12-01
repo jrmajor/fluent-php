@@ -24,7 +24,7 @@ return [
     'kilobyte' => new U('{0}킬로바이트', '{0}kB', '{0}kB'),
     'kilogram' => new U('{0}킬로그램', '{0}kg', '{0}kg'),
     'kilometer' => new U('{0}킬로미터', '{0}km', '{0}km'),
-    'liter' => new U('{0}리터', '{0}L', '{0}ℓ'),
+    'liter' => new U('{0}리터', '{0}L', '{0}L'),
     'megabit' => new U('{0}메가비트', '{0}Mb', '{0}Mb'),
     'megabyte' => new U('{0}메가바이트', '{0}MB', '{0}MB'),
     'meter' => new U('{0}미터', '{0}m', '{0}m'),

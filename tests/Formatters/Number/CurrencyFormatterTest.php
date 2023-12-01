@@ -24,10 +24,11 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             'mn' => "¤\u{A0}#,##0.00",
             'hi' => '¤#,##,##0.00',
             'ar-TN' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤",
-            'nl' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00",
             'es-CL' => '¤#,##0.00;¤-#,##0.00',
+            'no' => "#,##0.00\u{A0}¤;-#,##0.00\u{A0}¤",
             'ne' => "¤\u{A0}#,##,##0.00",
             'de-CH' => "¤\u{A0}#,##0.00;¤-#,##0.00",
+            'nl' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00",
             'bn' => '#,##,##0.00¤',
             'km' => '#,##0.00¤',
             'fa' => "\u{200E}¤#,##0.00",
@@ -160,6 +161,10 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
                 yield [$locale, ...$case];
             }
         }
+
+        yield ['nn', 1, ['currency' => 'GWP']];
+
+        yield ['nn', 2, ['currency' => 'GWP']];
 
         yield ['en-AU', 98.789, ['currency' => 'xyz']];
     }

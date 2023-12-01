@@ -137,7 +137,7 @@ return [
     'JOD' => new C('JOD', 'Dinar Iòrdanach', plurals: ['two' => 'dhinar Iòrdanach', 'other' => 'dinar Iòrdanach'], minorUnits: 3),
     'JPY' => new C('JPY', 'Yen Seapanach', 'JP¥', '¥', 'yen Seapanach', 0),
     'KES' => new C('KES', 'Shilling Ceineach', plurals: 'shilling Ceineach'),
-    'KGS' => new C('KGS', 'Som Cìorgasach', plurals: ['two' => 'shom Cìorgasach', 'other' => 'som Cìorgasach']),
+    'KGS' => new C('KGS', 'Som Cìorgasach', narrow: '⃀', plurals: ['two' => 'shom Cìorgasach', 'other' => 'som Cìorgasach']),
     'KHR' => new C('KHR', 'Riel Cambuideach', narrow: '៛', plurals: 'riel Cambuideach'),
     'KMF' => new C('KMF', 'Franc Comorosach', narrow: 'CF', plurals: ['one' => 'fhranc Comorosach', 'two' => 'fhranc Comorosach', 'other' => 'franc Comorosach'], minorUnits: 0),
     'KPW' => new C('KPW', 'Won Choirèa a Tuath', narrow: '₩', plurals: 'won Choirèa a Tuath'),

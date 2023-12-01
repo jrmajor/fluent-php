@@ -29,7 +29,7 @@ return [
     'megabyte' => new U(['one' => '{0} megabyte', 'other' => '{0} megabytes'], '{0} MB', '{0} MB'),
     'meter' => new U('{0} meter', '{0} m', '{0} m'),
     'microsecond' => new U(['one' => '{0} mikrosekund', 'other' => '{0} mikrosekunder'], '{0} μs', '{0}μs'),
-    'mile' => new U(['one' => '{0} engelsk mil', 'other' => '{0} engelske mil'], '{0} mil', '{0} mil'),
+    'mile' => new U(['one' => '{0} engelsk mil', 'other' => '{0} miles'], '{0} mi', '{0} mi'),
     'mile-scandinavian' => new U(['one' => '{0} svensk mil', 'other' => '{0} svenske mil'], '{0} smi', '{0}sv. mil'),
     'milliliter' => new U('{0} milliliter', '{0} ml', '{0} ml'),
     'millimeter' => new U('{0} millimeter', '{0} mm', '{0} mm'),

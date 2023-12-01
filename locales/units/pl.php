@@ -45,7 +45,7 @@ return [
     'stone' => new U(['one' => '{0} kamień', 'few' => '{0} kamienie', 'many' => '{0} kamieni', 'other' => '{0} kamienia'], '{0} st', '{0} st'),
     'terabit' => new U(['one' => '{0} terabit', 'few' => '{0} terabity', 'many' => '{0} terabitów', 'other' => '{0} terabita'], '{0} Tb', '{0} Tb'),
     'terabyte' => new U(['one' => '{0} terabajt', 'few' => '{0} terabajty', 'many' => '{0} terabajtów', 'other' => '{0} terabajta'], '{0} TB', '{0} TB'),
-    'week' => new U(['one' => '{0} tydzień', 'few' => '{0} tygodnie', 'many' => '{0} tygodni', 'other' => '{0} tygodnia'], ['one' => '{0} tydz.', 'other' => '{0} tyg.'], ['one' => '{0} tydz.', 'few' => '{0} t.', 'other' => '{0} tyg.']),
+    'week' => new U(['one' => '{0} tydzień', 'few' => '{0} tygodnie', 'many' => '{0} tygodni', 'other' => '{0} tygodnia'], ['one' => '{0} tydz.', 'other' => '{0} tyg.'], '{0} t.'),
     'yard' => new U(['one' => '{0} jard', 'few' => '{0} jardy', 'many' => '{0} jardów', 'other' => '{0} jarda'], '{0} yd', '{0} yd'),
     'year' => new U(['one' => '{0} rok', 'few' => '{0} lata', 'many' => '{0} lat', 'other' => '{0} roku'], ['one' => '{0} rok', 'few' => '{0} lata', 'many' => '{0} lat', 'other' => '{0} roku'], ['few' => '{0} l.', 'many' => '{0} l.', 'other' => '{0} r.']),
 ];

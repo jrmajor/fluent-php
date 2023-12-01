@@ -3,5 +3,5 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
-    'ANG' => new C('ANG', 'Nederlands-Antilliaanse gulden', 'NAf.', plurals: 'Nederlands-Antilliaanse gulden'),
+    'ANG' => new C('ANG', 'Nederlands-Antilliaanse gulden', 'NAf.'),
 ];

@@ -2,6 +2,7 @@
 
 namespace Major\Fluent\Tests\Formatters\Number;
 
+use Major\Exporter as E;
 use Major\Fluent\Formatters\LocaleData;
 use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Tests\Helpers as H;
@@ -20,7 +21,7 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
         $this->assertSame([
-            ['value' => 'latn', 'count' => 156],
+            ['value' => 'latn', 'count' => 158],
             ['value' => 'arabext', 'count' => 4],
             ['value' => 'beng', 'count' => 3],
             ['value' => 'arab', 'count' => 2],
@@ -34,8 +35,8 @@ final class LocaleKnownValuesTest extends TestCase
     {
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
-        $this->assertSame([
-            ['value' => '#,##0.###', 'count' => 155],
+        $this->assertSamePatterns([
+            ['value' => '#,##0.###', 'count' => 157],
             ['value' => '#,##,##0.###', 'count' => 13],
         ], H\count_values($values));
     }
@@ -45,9 +46,9 @@ final class LocaleKnownValuesTest extends TestCase
     {
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent);
 
-        $this->assertSame([
-            ['value' => '#,##0%', 'count' => 104],
-            ['value' => "#,##0\u{A0}%", 'count' => 55],
+        $this->assertSamePatterns([
+            ['value' => '#,##0%', 'count' => 127],
+            ['value' => "#,##0\u{A0}%", 'count' => 34],
             ['value' => '#,##,##0%', 'count' => 7],
             ['value' => '%#,##0', 'count' => 1],
             ['value' => "%\u{A0}#,##0", 'count' => 1],
@@ -59,16 +60,17 @@ final class LocaleKnownValuesTest extends TestCase
     {
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 
-        $this->assertSame([
-            ['value' => "#,##0.00\u{A0}¤", 'count' => 64], // todo
+        $this->assertSamePatterns([
+            ['value' => "#,##0.00\u{A0}¤", 'count' => 65], // todo
             ['value' => '¤#,##0.00', 'count' => 50],
             ['value' => "¤\u{A0}#,##0.00", 'count' => 21],
             ['value' => '¤#,##,##0.00', 'count' => 7],
             ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 6],
-            ['value' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00", 'count' => 5],
             ['value' => '¤#,##0.00;¤-#,##0.00', 'count' => 4],
+            ['value' => "#,##0.00\u{A0}¤;-#,##0.00\u{A0}¤", 'count' => 3],
             ['value' => "¤\u{A0}#,##,##0.00", 'count' => 3],
             ['value' => "¤\u{A0}#,##0.00;¤-#,##0.00", 'count' => 3],
+            ['value' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00", 'count' => 3],
             ['value' => '#,##,##0.00¤', 'count' => 1],
             ['value' => '#,##0.00¤', 'count' => 1],
             ['value' => "\u{200E}¤#,##0.00", 'count' => 1],
@@ -83,8 +85,8 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping);
 
         $this->assertSame([
-            ['value' => 1, 'count' => 148],
-            ['value' => 2, 'count' => 20],
+            ['value' => 1, 'count' => 149],
+            ['value' => 2, 'count' => 21],
         ], H\count_values($values));
     }
 
@@ -94,9 +96,9 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
         $this->assertSame([
-            ['value' => ['.', ',', '-', '%'], 'count' => 62],
-            ['value' => [',', '.', '-', '%'], 'count' => 41],
-            ['value' => [',', "\u{A0}", '-', '%'], 'count' => 35],
+            ['value' => ['.', ',', '-', '%'], 'count' => 63],
+            ['value' => [',', '.', '-', '%'], 'count' => 43],
+            ['value' => [',', "\u{A0}", '-', '%'], 'count' => 34],
             ['value' => [',', "\u{A0}", '−', '%'], 'count' => 7],
             ['value' => [',', '.', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 4],
             ['value' => ['.', '’', '-', '%'], 'count' => 4],
@@ -120,5 +122,23 @@ final class LocaleKnownValuesTest extends TestCase
             (new ReflectionClass(Locale::class))->getConstructor()->getParameters(),
             fn (ReflectionParameter $p): bool => $p->getName() === $property,
         )->getDefaultValue();
+    }
+
+    /**
+     * @param list<array{value: string, ...}> $expected
+     * @param list<array{value: string, ...}> $actual
+     */
+    private function assertSamePatterns(array $expected, array $actual): void
+    {
+        $exporter = function (array $data): array {
+            $data['value'] = E\to_string(E\guess($data['value']));
+
+            return $data;
+        };
+
+        $expected = Vec\map($expected, $exporter);
+        $actual = Vec\map($actual, $exporter);
+
+        $this->assertSame($expected, $actual);
     }
 }

@@ -3,7 +3,7 @@
 use Major\Fluent\Formatters\Number\Locale\Unit as U;
 
 return [
-    'acre' => new U('{0} akr', '{0} akr', '{0} ac'),
+    'acre' => new U('{0} akr', '{0} akr', '{0} akr'),
     'bit' => new U('{0} bit', '{0} bit', '{0} bit'),
     'byte' => new U('{0} bayt', '{0} bayt', '{0} bayt'),
     'celsius' => new U('{0} Selsiy darajasi', '{0}°C', '{0}°C'),
@@ -37,7 +37,7 @@ return [
     'minute' => new U('{0} daqiqa', '{0} daq.', '{0} daq.'),
     'month' => new U('{0} oy', '{0} oy', '{0} oy'),
     'nanosecond' => new U('{0} nanosoniya', '{0} ns', '{0} ns'),
-    'ounce' => new U('{0} unsiya', '{0} unsiya', '{0} untsiya'),
+    'ounce' => new U('{0} unsiya', '{0} unsiya', '{0} unsiya'),
     'percent' => new U('{0} foiz', '{0}%', '{0}%'),
     'petabyte' => new U('{0} petabayt', '{0} PB', '{0} PB'),
     'pound' => new U('{0} funt', '{0} funt', '{0} funt'),

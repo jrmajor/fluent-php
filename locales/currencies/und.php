@@ -51,6 +51,7 @@ return [
     'ISK' => new C('ISK', narrow: 'kr', minorUnits: 0),
     'JMD' => new C('JMD', narrow: '$'),
     'JPY' => new C('JPY', symbol: 'JP¥', narrow: '¥', minorUnits: 0),
+    'KGS' => new C('KGS', narrow: '⃀'),
     'KHR' => new C('KHR', narrow: '៛'),
     'KMF' => new C('KMF', narrow: 'CF', minorUnits: 0),
     'KPW' => new C('KPW', narrow: '₩'),
