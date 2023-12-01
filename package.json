@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "cldr-numbers-modern": "^43.0",
-    "cldr-units-modern": "^43.0"
+    "cldr-numbers-modern": "^44.0",
+    "cldr-units-modern": "^44.0"
   }
 }

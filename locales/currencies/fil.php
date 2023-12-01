@@ -3,7 +3,7 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
-    'AED' => new C('AED', 'United Arab Emirates Dirham', plurals: ['one' => 'UAE dirham', 'other' => 'UAE dirhams']),
+    'AED' => new C('AED', 'United Arab Emirates Dirham', plurals: ['one' => 'dirham ng UAE', 'other' => 'UAE dirhams']),
     'AFN' => new C('AFN', 'Afghan Afghani', narrow: '؋', plurals: ['one' => 'Afghan Afghani', 'other' => 'Afghan Afghanis']),
     'ALL' => new C('ALL', 'Lek ng Albania', plurals: ['one' => 'lek ng Albania', 'other' => 'leke ng Albania']),
     'AMD' => new C('AMD', 'Armenian Dram', narrow: '֏', plurals: ['one' => 'Armenian dram', 'other' => 'Armenian drams']),
@@ -77,7 +77,7 @@ return [
     'JOD' => new C('JOD', 'Jordanian Dinar', plurals: ['one' => 'Jordanian dinar', 'other' => 'Jordanian dinars'], minorUnits: 3),
     'JPY' => new C('JPY', 'Japanese Yen', '¥', '¥', 'Japanese yen', 0),
     'KES' => new C('KES', 'Kenyan Shilling', plurals: ['one' => 'Kenyan shilling', 'other' => 'Kenyan shillings']),
-    'KGS' => new C('KGS', 'Kyrgystani Som', plurals: ['one' => 'Kyrgystani som', 'other' => 'Kyrgystani soms']),
+    'KGS' => new C('KGS', 'Kyrgystani Som', narrow: '⃀', plurals: ['one' => 'Kyrgystani som', 'other' => 'Kyrgystani soms']),
     'KHR' => new C('KHR', 'Cambodian Riel', narrow: '៛', plurals: ['one' => 'Cambodian riel', 'other' => 'Cambodian riels']),
     'KMF' => new C('KMF', 'Comorian Franc', narrow: 'CF', plurals: ['one' => 'Comorian franc', 'other' => 'Comorian francs'], minorUnits: 0),
     'KPW' => new C('KPW', 'Won ng Hilagang Korea', narrow: '₩', plurals: 'won ng Hilagang Korea'),
@@ -92,7 +92,7 @@ return [
     'LSL' => new C('LSL', 'Lesotho Loti', plurals: ['one' => 'Lesotho loti', 'other' => 'Lesotho lotis']),
     'LTL' => new C('LTL', 'Lithuanian Litas', narrow: 'Lt', plurals: ['one' => 'Lithuanian litas', 'other' => 'Lithuanian litai']),
     'LVL' => new C('LVL', 'Latvian Lats', narrow: 'Ls', plurals: ['one' => 'Latvian lats', 'other' => 'Latvian lati']),
-    'LYD' => new C('LYD', 'Dinar ng Libya', plurals: ['one' => 'Libyan dinar', 'other' => 'Libyan dinars'], minorUnits: 3),
+    'LYD' => new C('LYD', 'Dinar ng Libya', plurals: ['one' => 'dinar ng Libya', 'other' => 'mga dinar ng Libya'], minorUnits: 3),
     'MAD' => new C('MAD', 'Moroccan Dirham', plurals: ['one' => 'Moroccan dirham', 'other' => 'Moroccan dirhams']),
     'MDL' => new C('MDL', 'Leu ng Moldova', plurals: ['one' => 'leu ng Moldova', 'other' => 'lei ng Moldova']),
     'MGA' => new C('MGA', 'Malagasy Ariary', narrow: 'Ar', plurals: ['one' => 'Malagasy Ariary', 'other' => 'Malagasy Ariaries']),
@@ -136,7 +136,8 @@ return [
     'SHP' => new C('SHP', 'Saint Helena Pound', narrow: '£', plurals: ['one' => 'Saint Helena pound', 'other' => 'Saint Helena pounds']),
     'SIT' => new C('SIT', 'Slovenian Tolar'),
     'SKK' => new C('SKK', 'Slovak Koruna'),
-    'SLL' => new C('SLL', 'Sierra Leonean Leone', plurals: ['one' => 'Sierra Leonean leone', 'other' => 'Sierra Leonean leones']),
+    'SLE' => new C('SLE', 'Sierra Leonean Leone', plurals: ['one' => 'Sierra Leonean leone', 'other' => 'Sierra Leonean leones']),
+    'SLL' => new C('SLL', 'Sierra Leonean Leone (1964—2022)', plurals: ['one' => 'Sierra Leonean leone (1964—2022)', 'other' => 'Sierra Leonean leones (1964—2022)']),
     'SOS' => new C('SOS', 'Somali Shilling', plurals: ['one' => 'Somali shilling', 'other' => 'Somali shillings']),
     'SRD' => new C('SRD', 'Dolyar ng Suriname', narrow: '$', plurals: ['one' => 'dolyar ng Suriname', 'other' => 'dolyares ng Suriname']),
     'SSP' => new C('SSP', 'Pound ng Timog Sudan', narrow: '£', plurals: ['one' => 'Pound ng Timog Sudan', 'other' => 'pounds ng Timog Sudan']),

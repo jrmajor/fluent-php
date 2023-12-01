@@ -12,7 +12,7 @@ return [
     'EGP' => new C('EGP', 'libra egipcia', narrow: 'E£', plurals: ['one' => 'libra egipcia', 'other' => 'libras egipcias']),
     'EUR' => new C('EUR', 'euro', narrow: '€', plurals: ['one' => 'euro', 'other' => 'euros']),
     'HTG' => new C('HTG', 'gourde haitiano', plurals: ['one' => 'gourde haitiano', 'other' => 'gourdes haitianos']),
-    'KGS' => new C('KGS', 'som kirguís', plurals: ['one' => 'som kirguís', 'other' => 'soms kirguises']),
+    'KGS' => new C('KGS', 'som kirguís', narrow: '⃀', plurals: ['one' => 'som kirguís', 'other' => 'soms kirguises']),
     'KHR' => new C('KHR', 'riel camboyano', narrow: '៛', plurals: ['one' => 'riel camboyano', 'other' => 'rieles camboyanos']),
     'KZT' => new C('KZT', 'tenge kazajo', narrow: '₸', plurals: ['one' => 'tenge kazajo', 'other' => 'tengues kazajos']),
     'LAK' => new C('LAK', 'kip laosiano', narrow: '₭', plurals: ['one' => 'kip laosiano', 'other' => 'kips laosianos']),

@@ -17,7 +17,7 @@ return [
     'CNY' => new C('CNY', 'Chinese Yuan', narrow: '¥', plurals: 'Chinese yuan'),
     'CUP' => new C('CUP', 'Cuban Peso', narrow: '₱', plurals: ['one' => 'Cuban peso', 'other' => 'Cuban pesos']),
     'EGP' => new C('EGP', 'Egyptian Pound', narrow: '£', plurals: ['one' => 'Egyptian pound', 'other' => 'Egyptian pounds']),
-    'EUR' => new C('EUR', 'Euro', narrow: '€', plurals: 'euro'),
+    'EUR' => new C('EUR', 'Euro', narrow: '€', plurals: ['one' => 'euro', 'other' => 'euros']),
     'GBP' => new C('GBP', 'British Pound', narrow: '£', plurals: ['one' => 'British pound', 'other' => 'British pounds']),
     'GEL' => new C('GEL', 'Georgian Lari', narrow: '₾', plurals: 'Georgian lari'),
     'HKD' => new C('HKD', 'Hong Kong Dollar', narrow: '$', plurals: ['one' => 'Hong Kong dollar', 'other' => 'Hong Kong dollars']),
