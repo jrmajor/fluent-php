@@ -13,11 +13,11 @@ final class Currency
 
     public readonly string $narrow;
 
-    /** @var ?array<string, string> */
+    /** @var ?non-empty-array<string, string> */
     public readonly ?array $plurals;
 
     /**
-     * @param string|array<string, string>|null $plurals
+     * @param string|non-empty-array<string, string>|null $plurals
      */
     public function __construct(
         public readonly string $code,

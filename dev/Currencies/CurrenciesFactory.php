@@ -42,7 +42,7 @@ final class CurrenciesFactory
     /**
      * @param array<string, string> $data
      *
-     * @return ?array<string, string>
+     * @return ?non-empty-array<string, string>
      */
     private static function makePlurals(array $data, string $exceptionsFor): ?array
     {
@@ -64,6 +64,10 @@ final class CurrenciesFactory
             throw new Exception("Remove the workaround for {$exceptionsFor}.");
         }
 
-        return Dict\filter_with_key($data, fn ($c, $v) => $c === 'other' || $v !== $data['other']);
+        $filtered = Dict\filter_with_key($data, fn ($c, $v) => $c === 'other' || $v !== $data['other']);
+
+        assert($filtered !== []);
+
+        return $filtered;
     }
 }

@@ -162,7 +162,7 @@ final class PatternResolver
             return $this->error(new Err\ReferenceException("Unknown message: {$id}."), $id);
         }
 
-        if ($attributeName = $reference->attribute?->name) {
+        if (null !== $attributeName = $reference->attribute?->name) {
             if ($attribute = $message->getAttribute($attributeName)) {
                 return $this->resolvePattern($attribute->value);
             }
@@ -188,7 +188,7 @@ final class PatternResolver
             return $this->error(new Err\ReferenceException("Unknown term: -{$id}."), "-{$id}");
         }
 
-        if ($attributeName = $reference->attribute?->name) {
+        if (null !== $attributeName = $reference->attribute?->name) {
             $pattern = $term->getAttribute($attributeName)?->value;
         } else {
             $pattern = $term->value;
