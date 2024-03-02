@@ -1,0 +1,178 @@
+name: Tests
+
+on:
+  push:
+    branches-ignore: [master]
+
+jobs:
+  tests:
+    name: Tests / PHP ${{ matrix.php }}, ${{ matrix.stability }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.2', '8.3']
+        stability: [prefer-lowest, prefer-stable]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21.3'
+
+      - name: Get Composer cache directory path
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Node assertions cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/node-assertions
+          key: node-assertions-${{ github.sha }}
+          restore-keys: node-assertions-
+
+      - name: Install Composer dependencies
+        run: composer update --${{ matrix.stability }}
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
+
+  types:
+    name: Types / PHP ${{ matrix.php }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.3']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Get Composer cache directory path
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Psalm cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/psalm
+          key: psalm-${{ github.sha }}
+          restore-keys: psalm-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Run Psalm
+        run: vendor/bin/psalm --output-format=github --no-progress
+
+  style:
+    name: Style
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+
+      - name: Get Composer cache directory path
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: PHP-CS-Fixer cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/.php-cs-fixer.cache
+          key: php-cs-fixer-${{ github.sha }}
+          restore-keys: php-cs-fixer-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Run PHP-CS-Fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction
+
+  integrity:
+    name: Integrity
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Get Composer cache directory path
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Install Yarn dependencies
+        run: yarn install
+
+      - name: Compile rules
+        run: |
+          php gen currencies
+          php gen numbers
+          php gen units
+
+      - name: Check for uncommitted changes
+        run: git add . && git diff --cached --exit-code
