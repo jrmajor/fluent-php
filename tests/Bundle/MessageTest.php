@@ -11,14 +11,14 @@ final class MessageTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             foo = Foo
             -bar = Bar
 
             welcome = Welcome
                 .guest = Welcome, Guest
                 .user = Welcome, { $userName }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it returns messages')]

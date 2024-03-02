@@ -11,7 +11,7 @@ final class NestingTermReferencesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             -foo = Foo { $arg }
             -bar = { -foo }
             -baz = { -foo() }
@@ -29,7 +29,7 @@ final class NestingTermReferencesTest extends TestCase
             call-baz-with-arg = { -baz(arg: 2) }
             call-qux-with-arg = { -qux(arg: 2) }
             call-qux-with-other = { -qux(other: 3) }
-            ftl);
+            FTL);
     }
 
     #[TestDox('no parameterization, no parameterization, no externals')]

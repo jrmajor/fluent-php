@@ -24,7 +24,7 @@ final class RuntimeFunctionsTest extends TestCase
             'PROPS' => fn (object $object) => json_encode(get_object_vars($object)),
             'WRONG_RETURN' => fn () => new stdClass(),
             'THROWS' => fn () => throw new Exception('Something went wrong!'),
-        ])->addFtl(<<<'ftl'
+        ])->addFtl(<<<'FTL'
             strings = { CONCAT("Foo", "Bar") }
             numbers = { SUM(1, 2.5) }
             named-args = { JSON("test", another: 123, key: "value") }
@@ -35,7 +35,7 @@ final class RuntimeFunctionsTest extends TestCase
             unknown = { TYPE($arg) }
             wrong-return = { WRONG_RETURN() }
             throws = { THROWS() }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it works for strings')]

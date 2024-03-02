@@ -12,7 +12,7 @@ final class SimpleSelectorsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             string-selector = { $selector ->
                 [a] A
                *[b] B
@@ -21,7 +21,7 @@ final class SimpleSelectorsTest extends TestCase
                 [0] A
                *[1] B
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it falls back to default variant when selector is missing')]

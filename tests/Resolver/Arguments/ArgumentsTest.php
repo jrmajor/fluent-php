@@ -12,7 +12,7 @@ final class ArgumentsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             missing = { $arg }
             msg = Foo { $num }
             ref = { msg }
@@ -24,7 +24,7 @@ final class ArgumentsTest extends TestCase
             selector = { $num ->
                *[3] Foo
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox("it falls back to argument's name if it is missing")]

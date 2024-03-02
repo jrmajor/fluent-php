@@ -11,11 +11,11 @@ final class ReferencesAndCallsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             -bar = Bar
             term-ref = { -bar }
             term-call = { -bar() }
-            ftl);
+            FTL);
     }
 
     #[TestDox('terms can be referenced without parens')]

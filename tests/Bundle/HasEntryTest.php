@@ -11,7 +11,7 @@ final class HasEntryTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             foo = Foo
             -bar = Term
 
@@ -38,7 +38,7 @@ final class HasEntryTest extends TestCase
             -err8 =
                 .attr1 = Attr
                 .attr2 = {}
-            ftl);
+            FTL);
     }
 
     #[TestDox('it returns true for existing messages')]

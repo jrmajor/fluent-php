@@ -11,14 +11,14 @@ final class PassingArgumentsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             -foo = Foo { $arg }
 
             ref-foo = { -foo }
             call-foo-no-args = { -foo() }
             call-foo-with-expected-arg = { -foo(arg: 1) }
             call-foo-with-other-arg = { -foo(other: 3) }
-            ftl);
+            FTL);
     }
 
     #[TestDox('not parameterized, no externals')]

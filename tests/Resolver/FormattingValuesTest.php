@@ -13,7 +13,7 @@ final class FormattingValuesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             key1 = Value 1
             key2 = { $sel ->
                 [a] A2
@@ -27,7 +27,7 @@ final class FormattingValuesTest extends TestCase
             key5 =
                 .a = A5
                 .b = B5
-            ftl);
+            FTL);
     }
 
     #[TestDox('it returns the value')]

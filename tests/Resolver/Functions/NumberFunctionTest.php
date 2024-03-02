@@ -17,12 +17,12 @@ class NumberFunctionTest extends TestCase
     {
         parent::setUp();
 
-        $ftl = <<<'ftl'
+        $ftl = <<<'FTL'
             num = { NUMBER($arg) }
             option = { NUMBER($arg, minimumFractionDigits: 1) }
             percent = { NUMBER($arg, style: "percent") }
             zeroes = { NUMBER(1.00) }
-            ftl;
+            FTL;
 
         $this->us = (new FluentBundle('en-US', useIsolating: false))->addFtl($ftl);
 

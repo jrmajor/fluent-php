@@ -11,7 +11,7 @@ final class SimpleStringTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             foo = Foo
 
             placeable-literal = { "Foo" } Bar
@@ -32,7 +32,7 @@ final class SimpleStringTest extends TestCase
             selector-attr = { -baz.attr ->
                *[BazAttribute] Member 3
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it can be used as a value')]

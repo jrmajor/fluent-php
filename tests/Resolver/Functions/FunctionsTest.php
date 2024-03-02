@@ -14,7 +14,7 @@ final class FunctionsTest extends TestCase
 
         $this->bundle->addFunction('IDENTITY', fn (...$args) => $args[0]);
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             missing = { MISSING("Foo") }
             foo = Foo
                 .attr = Attribute
@@ -25,7 +25,7 @@ final class FunctionsTest extends TestCase
             pass-attr          = { IDENTITY(foo.attr) }
             pass-variable      = { IDENTITY($var) }
             pass-function-call = { IDENTITY(IDENTITY(1)) }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it falls back to the name of the function')]

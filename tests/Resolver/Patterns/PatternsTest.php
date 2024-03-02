@@ -13,7 +13,7 @@ final class PatternsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             simple = Simple
 
             foo = Foo
@@ -30,7 +30,7 @@ final class PatternsTest extends TestCase
             msg-no-val =
                 .attr = Foo Attr
             no-val-ref = { msg-no-val } Bar
-            ftl);
+            FTL);
     }
 
     #[TestDox('it returns the simple string value')]

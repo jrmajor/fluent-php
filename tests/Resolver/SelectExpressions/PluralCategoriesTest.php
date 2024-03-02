@@ -12,7 +12,7 @@ final class PluralCategoriesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             matching = { $selector ->
                 [one] A
                *[other] B
@@ -22,7 +22,7 @@ final class PluralCategoriesTest extends TestCase
                 [one] A
                *[default] D
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it returns variant for matching number selector')]
@@ -52,12 +52,12 @@ final class PluralCategoriesTest extends TestCase
     #[TestDox('plural categories in english')]
     public function testPluralEnglish(): void
     {
-        $bundle = (new FluentBundle('en-EN', useIsolating: false))->addFtl(<<<'ftl'
+        $bundle = (new FluentBundle('en-EN', useIsolating: false))->addFtl(<<<'FTL'
             msg = { $arg ->
                 [one] example
                *[other] examples
             }
-            ftl);
+            FTL);
 
         $this->assertTranslation('example', 'msg', ['arg' => 1], $bundle);
         $this->assertTranslation('examples', 'msg', ['arg' => 2], $bundle);
@@ -69,14 +69,14 @@ final class PluralCategoriesTest extends TestCase
     #[TestDox('plural categories in polish')]
     public function testPluralPolish(): void
     {
-        $bundle = (new FluentBundle('pl-PL', useIsolating: false))->addFtl(<<<'ftl'
+        $bundle = (new FluentBundle('pl-PL', useIsolating: false))->addFtl(<<<'FTL'
             msg = { $arg ->
                 [one] przykład
                 [few] przykłady
                 [many] przykładów
                *[other] przykładu
             }
-            ftl);
+            FTL);
 
         $this->assertTranslation('przykład', 'msg', ['arg' => 1], $bundle);
         $this->assertTranslation('przykłady', 'msg', ['arg' => 2], $bundle);

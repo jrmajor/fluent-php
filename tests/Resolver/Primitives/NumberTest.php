@@ -11,14 +11,14 @@ final class NumberTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             one = { 1 }
 
             select = { 1 ->
                *[0] Zero
                 [1] One
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it can be used in a placeable')]

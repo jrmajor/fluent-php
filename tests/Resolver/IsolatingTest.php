@@ -18,7 +18,7 @@ final class IsolatingTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle = (new FluentBundle('en-US'))->addFtl(<<<'ftl'
+        $this->bundle = (new FluentBundle('en-US'))->addFtl(<<<'FTL'
             foo = Foo
             bar = { foo } Bar
             baz = { $arg } Baz
@@ -26,7 +26,7 @@ final class IsolatingTest extends TestCase
 
             -brand-short-name = Amaya
             skip-isolation = { -brand-short-name }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it isolates interpolated message references')]

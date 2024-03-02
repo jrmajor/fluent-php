@@ -11,7 +11,7 @@ final class LiteralsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             matching-string = { "a" ->
                 [a] A
                *[b] B
@@ -34,7 +34,7 @@ final class LiteralsTest extends TestCase
                 [one] A
                *[other] B
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('a matching string literal selector')]

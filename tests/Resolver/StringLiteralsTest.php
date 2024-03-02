@@ -11,7 +11,7 @@ final class StringLiteralsTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             simple-string = { "Кто сказал: «Всё сгорело дотла, больше в землю не бросите семя»?" }
 
             double-backslash = { "abc\\def" }
@@ -23,7 +23,7 @@ final class StringLiteralsTest extends TestCase
             surrogates = { "\uD803\uDC83 is \U010C83" }
 
             complex-escape = { "\\\u2137\\\"\\u3\"\\" }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it can parse simple string')]

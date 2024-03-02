@@ -20,10 +20,10 @@ final class NumberLiteralsTest extends TestCase
     {
         parent::setUp();
 
-        $ftl = <<<'ftl'
+        $ftl = <<<'FTL'
             num-in-placeable = { 332035625.33203 }
             num-in-var = { $number }
-            ftl;
+            FTL;
 
         $this->en = (new FluentBundle('en-US'))->addFtl($ftl);
         $this->pl = (new FluentBundle('pl'))->addFtl($ftl);

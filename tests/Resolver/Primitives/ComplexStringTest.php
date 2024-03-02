@@ -11,7 +11,7 @@ final class ComplexStringTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             foo = Foo
             bar = { foo }Bar
 
@@ -21,7 +21,7 @@ final class ComplexStringTest extends TestCase
                 .attr = { bar }BazAttribute
 
             placeable-attr = { baz.attr }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it can be used as a value')]

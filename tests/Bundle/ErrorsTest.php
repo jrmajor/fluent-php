@@ -31,9 +31,9 @@ final class ErrorsTest extends TestCase
     public function testResolverIgnore(): void
     {
         $bundle = (new FluentBundle('en-US', useIsolating: false))
-            ->addFtl(<<<'ftl'
+            ->addFtl(<<<'FTL'
                 foo = { $one } and { $two }
-                ftl);
+                FTL);
 
         $this->assertSame('{$one} and {$two}', $bundle->message('foo'));
 

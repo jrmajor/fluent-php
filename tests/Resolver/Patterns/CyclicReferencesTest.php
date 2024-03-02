@@ -12,7 +12,7 @@ final class CyclicReferencesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             cyclic = { cyclic-ref }
             cyclic-ref = { cyclic }
 
@@ -38,7 +38,7 @@ final class CyclicReferencesTest extends TestCase
 
             foo = { -foo }
             bar = { -bar }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it returns {???} for cyclic reference')]

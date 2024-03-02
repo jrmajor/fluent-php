@@ -95,12 +95,12 @@ final class ParseEntryTest extends TestCase
     #[TestDox('it ignores all valid comments')]
     public function testValidComments(): void
     {
-        $input = <<<'ftl'
+        $input = <<<'FTL'
             # Attached Comment
             ## Group Comment
             ### Resource Comment
             foo = Foo
-            ftl;
+            FTL;
 
         $expected = [
             'type' => 'Message',

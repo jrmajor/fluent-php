@@ -26,7 +26,7 @@ final class AttributesTest extends TestCase
         $this->patterns = new FluentBundle('en-US', useIsolating: false);
         $this->select = new FluentBundle('en-US', useIsolating: false);
 
-        $this->fallbacks->addFtl(<<<'ftl'
+        $this->fallbacks->addFtl(<<<'FTL'
             foo = Foo
             bar = Bar
                 .attr = Bar Attribute
@@ -38,9 +38,9 @@ final class AttributesTest extends TestCase
             ref-bar = { bar.missing }
             ref-baz = { baz.missing }
             ref-qux = { qux.missing }
-            ftl);
+            FTL);
 
-        $this->strings->addFtl(<<<'ftl'
+        $this->strings->addFtl(<<<'FTL'
             foo = Foo
                 .attr = Foo Attribute
             bar = { foo } Bar
@@ -48,9 +48,9 @@ final class AttributesTest extends TestCase
 
             ref-foo = { foo.attr }
             ref-bar = { bar.attr }
-            ftl);
+            FTL);
 
-        $this->patterns->addFtl(<<<'ftl'
+        $this->patterns->addFtl(<<<'FTL'
             foo = Foo
             bar = Bar
                 .attr = { foo } Attribute
@@ -62,9 +62,9 @@ final class AttributesTest extends TestCase
             ref-bar = { bar.attr }
             ref-baz = { baz.attr }
             ref-qux = { qux.attr }
-            ftl);
+            FTL);
 
-        $this->select->addFtl(<<<'ftl'
+        $this->select->addFtl(<<<'FTL'
             foo = Foo
                 .attr = { "a" ->
                     [a] A
@@ -72,7 +72,7 @@ final class AttributesTest extends TestCase
                 }
 
             ref-foo = { foo.attr }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it falls back to id.attribute for entities with string values and no attributes')]

@@ -11,13 +11,13 @@ final class NestingMessageReferencesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             foo = Foo { $arg }
             -bar = { foo }
             ref-bar = { -bar }
             call-bar = { -bar() }
             call-bar-with-arg = { -bar(arg: 1) }
-            ftl);
+            FTL);
     }
 
     #[TestDox('no parameterization, no externals')]

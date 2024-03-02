@@ -11,7 +11,7 @@ final class ParametrizingTermAttributesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             -ship = Ship
                 .gender = { $style ->
                    *[traditional] neuter
@@ -38,7 +38,7 @@ final class ParametrizingTermAttributesTest extends TestCase
                 [feminine] She
                 [neuter] It
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('not parameterized, no externals')]

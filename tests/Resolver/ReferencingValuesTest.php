@@ -12,7 +12,7 @@ final class ReferencingValuesTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle->addFtl(<<<'ftl'
+        $this->bundle->addFtl(<<<'FTL'
             key1 = Value 1
             -key2 = { $sel ->
                 [a] A2
@@ -50,7 +50,7 @@ final class ReferencingValuesTest extends TestCase
             ref16 = { -key6.a ->
                *[a] A
             }
-            ftl);
+            FTL);
     }
 
     #[TestDox('it can reference the value')]
