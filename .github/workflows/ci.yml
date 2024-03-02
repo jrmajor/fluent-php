@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.1', '8.2', '8.3']
+        php: ['8.2', '8.3']
         stability: [prefer-lowest, prefer-stable]
 
     steps:
@@ -62,7 +62,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - php: '8.1'
+          - php: '8.2'
             stability: prefer-lowest
           - php: '8.3'
             stability: prefer-stable
@@ -113,7 +113,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           coverage: none
 
       - name: Get Composer cache directory path
