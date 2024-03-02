@@ -61,7 +61,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.1', '8.3']
+        include:
+          - php: '8.1'
+            stability: prefer-lowest
+          - php: '8.3'
+            stability: prefer-stable
 
     steps:
       - name: Checkout code
@@ -92,7 +96,7 @@ jobs:
           restore-keys: psalm-
 
       - name: Install Composer dependencies
-        run: composer install
+        run: composer update --${{ matrix.stability }}
 
       - name: Run Psalm
         run: vendor/bin/psalm --output-format=github --no-progress
