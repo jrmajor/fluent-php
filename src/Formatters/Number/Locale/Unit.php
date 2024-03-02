@@ -5,16 +5,16 @@ namespace Major\Fluent\Formatters\Number\Locale;
 /**
  * @internal
  */
-final class Unit
+final readonly class Unit
 {
     /** @var array<string, string> */
-    public readonly array $longPlurals;
+    public array $longPlurals;
 
     /** @var array<string, string> */
-    public readonly array $shortPlurals;
+    public array $shortPlurals;
 
     /** @var array<string, string> */
-    public readonly array $narrowPlurals;
+    public array $narrowPlurals;
 
     /**
      * @param string|array<string, string> $longPlurals

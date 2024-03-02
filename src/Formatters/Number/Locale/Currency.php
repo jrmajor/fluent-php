@@ -5,27 +5,27 @@ namespace Major\Fluent\Formatters\Number\Locale;
 /**
  * @internal
  */
-final class Currency
+final readonly class Currency
 {
-    public readonly string $name;
+    public string $name;
 
-    public readonly string $symbol;
+    public string $symbol;
 
-    public readonly string $narrow;
+    public string $narrow;
 
     /** @var ?non-empty-array<string, string> */
-    public readonly ?array $plurals;
+    public ?array $plurals;
 
     /**
      * @param string|non-empty-array<string, string>|null $plurals
      */
     public function __construct(
-        public readonly string $code,
+        public string $code,
         ?string $name = null,
         ?string $symbol = null,
         ?string $narrow = null,
         string|array|null $plurals = null,
-        public readonly int $minorUnits = 2,
+        public int $minorUnits = 2,
     ) {
         $this->name = $name ?? $code;
         $this->symbol = $symbol ?? $code;

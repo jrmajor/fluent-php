@@ -5,11 +5,11 @@ namespace Major\Fluent\Dev\Currencies;
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Psl\Dict;
 
-final class CurrenciesOptimizer
+final readonly class CurrenciesOptimizer
 {
     public function __construct(
         /** @var array<string, Currency> */
-        private readonly array $und,
+        private array $und,
     ) { }
 
     /**

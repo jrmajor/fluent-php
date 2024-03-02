@@ -5,18 +5,18 @@ namespace Major\Fluent\Formatters\Number\Locale;
 /**
  * @internal
  */
-final class Locale
+final readonly class Locale
 {
     public function __construct(
-        public readonly string $system = 'latn',
-        public readonly string $decimal = '#,##0.###',
-        public readonly string $percent = '#,##0%',
-        public readonly string $currency = "#,##0.00\u{A0}¤",
-        public readonly int $grouping = 1,
+        public string $system = 'latn',
+        public string $decimal = '#,##0.###',
+        public string $percent = '#,##0%',
+        public string $currency = "#,##0.00\u{A0}¤",
+        public int $grouping = 1,
         /** @var array{string, string, string, string} */
-        public readonly array $symbols = ['.', ',', '-', '%'],
+        public array $symbols = ['.', ',', '-', '%'],
         /** @var array<string, string> */
-        public readonly array $unitPatterns = [],
+        public array $unitPatterns = [],
     ) { }
 
     public function symbol(string $symbol): string
