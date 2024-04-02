@@ -23,8 +23,10 @@ final class Options
         public ?int $minimumSignificantDigits = null,
         public ?int $maximumSignificantDigits = null,
         public ?string $currency = null,
+        /** @var 'symbol'|'narrowSymbol'|'code'|'name' */
         public string $currencyDisplay = 'symbol',
         public ?string $unit = null,
+        /** @var 'long'|'short'|'narrow' */
         public string $unitDisplay = 'short',
     ) {
         /** @psalm-suppress DocblockTypeContradiction */
@@ -94,11 +96,13 @@ final class Options
 
         $this->minimumFractionDigits ??= match ($this->style) {
             'decimal', 'percent', 'unit' => 0,
+            /** @phpstan-ignore-next-line */
             'currency' => $currency->minorUnits,
         };
 
         $this->maximumFractionDigits ??= match ($this->style) {
             'decimal', 'unit' => max($this->minimumFractionDigits, 3),
+            /** @phpstan-ignore-next-line */
             'currency' => max($this->minimumFractionDigits, $currency->minorUnits),
             'percent' => max($this->minimumFractionDigits, 0),
         };

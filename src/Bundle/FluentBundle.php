@@ -137,6 +137,8 @@ final class FluentBundle
 
     /**
      * @return list<ResolverException>
+     *
+     * @phpstan-impure
      */
     public function popErrors(): array
     {
@@ -169,6 +171,9 @@ final class FluentBundle
         return $this->resolvePattern($pattern, $arguments);
     }
 
+    /**
+     * @param array<string, mixed> $arguments
+     */
     private function resolvePattern(?Pattern $pattern, array $arguments): string
     {
         $resolver = new PatternResolver($this, $arguments);
@@ -224,6 +229,7 @@ final class FluentBundle
             $number = new FluentNumber($number);
         }
 
+        /** @phpstan-ignore-next-line */
         return $number->setLocale($this->locale)->setOptions($options);
     }
 

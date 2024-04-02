@@ -8,10 +8,7 @@ use Major\Fluent\Formatters\Number\Locale\Locale;
 use Major\Fluent\Tests\Helpers as H;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
-use Psl\Iter;
 use Psl\Vec;
-use ReflectionClass;
-use ReflectionParameter;
 
 final class LocaleKnownValuesTest extends TestCase
 {
@@ -111,17 +108,6 @@ final class LocaleKnownValuesTest extends TestCase
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '%'], 'count' => 1],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '٪'], 'count' => 1],
         ], H\count_values($values));
-    }
-
-    /**
-     * @psalm-suppress PossiblyNullReference
-     */
-    private function getDefaultValueFor(string $property): mixed
-    {
-        return Iter\search(
-            (new ReflectionClass(Locale::class))->getConstructor()->getParameters(),
-            fn (ReflectionParameter $p): bool => $p->getName() === $property,
-        )->getDefaultValue();
     }
 
     /**

@@ -28,6 +28,9 @@ final class LocaleDataTest extends TestCase
         PU::assertTrue($actual->isIdentical($expected));
     }
 
+    /**
+     * @return list<array{string, Locale}>
+     */
     public static function provideLoadNumbersCases(): array
     {
         return [
@@ -56,6 +59,9 @@ final class LocaleDataTest extends TestCase
         PU::assertTrue($actual[$expected->code]->isIdentical($expected));
     }
 
+    /**
+     * @return list<array{string, Currency}>
+     */
     public static function provideLoadCurrenciesCases(): array
     {
         $polishPlurals = [
@@ -90,6 +96,9 @@ final class LocaleDataTest extends TestCase
         PU::assertTrue($actual['stone']->isIdentical($expected));
     }
 
+    /**
+     * @return list<array{string, Unit}>
+     */
     public static function provideLoadUnitsCases(): array
     {
         return [

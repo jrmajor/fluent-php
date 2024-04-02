@@ -5,6 +5,7 @@ namespace Major\Fluent\Tests\Formatters\Number;
 use Major\Fluent\Tests\Helpers\Node;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
+use Psl\Type;
 
 final class NodeVersionTest extends TestCase
 {
@@ -22,6 +23,8 @@ final class NodeVersionTest extends TestCase
 
     private function versionOf(string $library): string
     {
-        return Node::instance()->freshOutput("process.versions.{$library}");
+        $v = Node::instance()->freshOutput("process.versions.{$library}");
+
+        return Type\string()->coerce($v);
     }
 }

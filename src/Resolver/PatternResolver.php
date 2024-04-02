@@ -6,6 +6,7 @@ use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Bundle\Types\FluentNone;
 use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver as Err;
+use Major\Fluent\Exceptions\ShouldNotHappen;
 use Major\Fluent\Node\Syntax\CallArguments;
 use Major\Fluent\Node\Syntax\Expressions as Expr;
 use Major\Fluent\Node\Syntax\Expressions\Expression;
@@ -98,6 +99,7 @@ final class PatternResolver
             $e instanceof Expr\MessageReference => $this->resolveMessageReference($e),
             $e instanceof Expr\TermReference => $this->resolveTermReference($e),
             $e instanceof Expr\VariableReference => $this->resolveVariableReference($e),
+            default => throw new ShouldNotHappen(),
         };
     }
 

@@ -43,10 +43,7 @@ final class CldrData
         return $regions;
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public static function get(string $package, string $locale, string $key): array
+    public static function get(string $package, string $locale, string $key): mixed
     {
         if (! str_contains($key, '.')) {
             throw new InvalidArgumentException('Key should be in a dot notation.');
@@ -59,8 +56,20 @@ final class CldrData
 
         $data = Json\decode(File\read($path));
 
+        $path = '';
+
         foreach (Str\Byte\split($keys, '.') as $key) {
+            $path = $path == '' ? $key : "{$path}.{$key}";
+
+            if (! is_array($data)) {
+                throw new InvalidArgumentException(sprintf('Can not acces key "%s" on a %s.', $key, gettype($data)));
+            }
+
             if ($key !== '*') {
+                if (! array_key_exists($key, $data)) {
+                    throw new InvalidArgumentException(sprintf('There is nothing at path %s.', $path));
+                }
+
                 $data = $data[$key];
 
                 continue;

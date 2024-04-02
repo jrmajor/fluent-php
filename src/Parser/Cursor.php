@@ -52,6 +52,9 @@ abstract class Cursor
         return $char;
     }
 
+    /**
+     * @phpstan-impure
+     */
     public function currentChar(): ?string
     {
         return $this->charFromIndex();

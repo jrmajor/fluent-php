@@ -276,6 +276,7 @@ final class NumberFormatter
             'symbol' => $currency->symbol,
             'narrowSymbol' => $currency->narrow,
             'code' => $currency->code,
+            default => throw new ShouldNotHappen(),
         };
 
         $prefix = '';

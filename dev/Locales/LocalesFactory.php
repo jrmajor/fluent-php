@@ -15,6 +15,7 @@ final class LocalesFactory
 {
     public static function make(string $locale): Locale
     {
+        /** @var array<string, mixed> */
         $data = H\CldrData::get('numbers', $locale, 'numbers.*.*.numbers');
 
         $system = self::system($data);
@@ -86,6 +87,8 @@ final class LocalesFactory
         if (! $data) {
             return [];
         }
+
+        $data = Type\dict(Type\string(), Type\string())->coerce($data);
 
         return Dict\map_keys($data, function ($key) {
             return Str\strip_prefix($key, 'unitPattern-count-');
