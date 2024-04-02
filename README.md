@@ -132,6 +132,6 @@ All resolver exceptions extend `ResolverException`. In strict mode they would be
 
 ```sh
 vendor/bin/phpunit           # Tests
-vendor/bin/psalm             # Static analysis
+vendor/bin/phpstan analyze   # Static analysis
 vendor/bin/php-cs-fixer fix  # Formatting
 ```
