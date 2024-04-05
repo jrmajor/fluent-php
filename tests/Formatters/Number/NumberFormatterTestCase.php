@@ -18,7 +18,7 @@ use Psl\Type;
 use Psl\Vec;
 
 /**
- * @psalm-type O = array<string, int|bool|string>
+ * @phpstan-type O = array<string, int|bool|string>
  */
 abstract class NumberFormatterTestCase extends TestCase
 {

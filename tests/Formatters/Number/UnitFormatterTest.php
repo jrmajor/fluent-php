@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
 /**
- * @psalm-import-type O from NumberFormatterTestCase
+ * @phpstan-import-type O from NumberFormatterTestCase
  */
 final class UnitFormatterTest extends NumberFormatterTestCase
 {
