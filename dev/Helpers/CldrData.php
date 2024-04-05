@@ -49,7 +49,6 @@ final class CldrData
             throw new InvalidArgumentException('Key should be in a dot notation.');
         }
 
-        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         [$filename, $keys] = explode('.', $key, 2);
 
         $path = self::path($package, "{$locale}/{$filename}.json");

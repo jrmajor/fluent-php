@@ -10,9 +10,6 @@ use Major\Fluent\Formatters\Number\Locale\Currency;
  */
 final class Options
 {
-    /**
-     * @psalm-suppress DocblockTypeContradiction
-     */
     public function __construct(
         /** @var 'decimal'|'currency'|'percent'|'unit' */
         public string $style = 'decimal',
@@ -29,7 +26,6 @@ final class Options
         /** @var 'long'|'short'|'narrow' */
         public string $unitDisplay = 'short',
     ) {
-        /** @psalm-suppress DocblockTypeContradiction */
         if (! in_array($style, ['decimal', 'currency', 'percent', 'unit'], true)) {
             throw new InvalidArgumentException('Allowed styles are decimal, currency, percent and unit.');
         }
@@ -87,9 +83,6 @@ final class Options
         $this->maximumSignificantDigits ??= 21;
     }
 
-    /**
-     * @psalm-suppress PossiblyNullPropertyFetch
-     */
     private function fillForOther(?Currency $currency): void
     {
         $this->minimumIntegerDigits ??= 1;

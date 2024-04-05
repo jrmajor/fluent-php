@@ -94,8 +94,6 @@ abstract class NumberFormatterTestCase extends TestCase
     }
 
     /**
-     * @psalm-suppress InvalidScalarArgument
-     *
      * @param O $options
      */
     final protected static function assertNumberFormat(

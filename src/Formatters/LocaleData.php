@@ -8,8 +8,6 @@ use Major\Fluent\Formatters\Number\Locale\Unit;
 
 /**
  * @internal
- *
- * @psalm-suppress UnresolvableInclude
  */
 final class LocaleData
 {
@@ -89,8 +87,6 @@ final class LocaleData
 
     /**
      * @return list<non-empty-string>
-     *
-     * @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType
      */
     private static function getFiles(string $type, string $language): array
     {

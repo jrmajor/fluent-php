@@ -11,7 +11,6 @@ abstract class TestCase extends BaseTestCase
     use AstAssertions;
     use TranslationAssertions;
 
-    /** @psalm-suppress MissingConstructor */
     protected FluentBundle $bundle;
 
     protected function setUp(): void

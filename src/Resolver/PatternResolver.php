@@ -39,7 +39,6 @@ final class PatternResolver
         /** @var array<string, mixed> */
         private array $arguments,
     ) {
-        /** @psalm-suppress PropertyTypeCoercion */
         $this->dirty = new WeakMap();
 
         $this->variantMatcher = new VariantMatcher($this->bundle->getLocale());
