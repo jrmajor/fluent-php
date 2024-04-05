@@ -10,9 +10,6 @@ use Major\Fluent\Formatters\Number\Locale\Currency;
  */
 final class Options
 {
-    /**
-     * @psalm-suppress DocblockTypeContradiction
-     */
     public function __construct(
         /** @var 'decimal'|'currency'|'percent'|'unit' */
         public string $style = 'decimal',
@@ -23,11 +20,12 @@ final class Options
         public ?int $minimumSignificantDigits = null,
         public ?int $maximumSignificantDigits = null,
         public ?string $currency = null,
+        /** @var 'symbol'|'narrowSymbol'|'code'|'name' */
         public string $currencyDisplay = 'symbol',
         public ?string $unit = null,
+        /** @var 'long'|'short'|'narrow' */
         public string $unitDisplay = 'short',
     ) {
-        /** @psalm-suppress DocblockTypeContradiction */
         if (! in_array($style, ['decimal', 'currency', 'percent', 'unit'], true)) {
             throw new InvalidArgumentException('Allowed styles are decimal, currency, percent and unit.');
         }
@@ -85,20 +83,19 @@ final class Options
         $this->maximumSignificantDigits ??= 21;
     }
 
-    /**
-     * @psalm-suppress PossiblyNullPropertyFetch
-     */
     private function fillForOther(?Currency $currency): void
     {
         $this->minimumIntegerDigits ??= 1;
 
         $this->minimumFractionDigits ??= match ($this->style) {
             'decimal', 'percent', 'unit' => 0,
+            /** @phpstan-ignore property.nonObject */
             'currency' => $currency->minorUnits,
         };
 
         $this->maximumFractionDigits ??= match ($this->style) {
             'decimal', 'unit' => max($this->minimumFractionDigits, 3),
+            /** @phpstan-ignore property.nonObject */
             'currency' => max($this->minimumFractionDigits, $currency->minorUnits),
             'percent' => max($this->minimumFractionDigits, 0),
         };

@@ -8,6 +8,7 @@ use Major\Fluent\Formatters\Number\Locale\Unit;
 use Psl\Dict;
 use Psl\Iter;
 use Psl\Str;
+use Psl\Type;
 
 final class UnitsFactory
 {
@@ -69,6 +70,7 @@ final class UnitsFactory
      */
     public static function make(string $locale): array
     {
+        /** @var array<string, mixed> */
         $data = H\CldrData::get('units', $locale, 'units.*.*.units');
 
         return Dict\map(self::Units, fn ($unit) => new Unit(
@@ -79,8 +81,6 @@ final class UnitsFactory
     }
 
     /**
-     * @param array<string, mixed> $data
-     *
      * @return array<string, string>
      */
     private static function makeStyle(
@@ -94,12 +94,12 @@ final class UnitsFactory
         $styleData = $data[$style][$unit]
             ?? throw new Exception("No data {$exceptionsFor}.");
 
+        $styleData = Type\dict(Type\string(), Type\string())->coerce($styleData);
+
         return self::makePlurals($styleData, $exceptionsFor);
     }
 
     /**
-     * @param array<string, string> $data
-     *
      * @return array<string, string>
      */
     private static function makePlurals(array $data, string $exceptionsFor): array

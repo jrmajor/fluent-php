@@ -4,11 +4,10 @@ namespace Major\Fluent\Formatters;
 
 use Major\Fluent\Formatters\Number\Locale\Currency;
 use Major\Fluent\Formatters\Number\Locale\Locale;
+use Major\Fluent\Formatters\Number\Locale\Unit;
 
 /**
  * @internal
- *
- * @psalm-suppress UnresolvableInclude
  */
 final class LocaleData
 {
@@ -35,6 +34,9 @@ final class LocaleData
         );
     }
 
+    /**
+     * @return array<string, Unit>
+     */
     public static function loadUnits(string $locale): array
     {
         [$language, $region] = self::getLangAndRegionPaths('units', $locale);
@@ -85,12 +87,10 @@ final class LocaleData
 
     /**
      * @return list<non-empty-string>
-     *
-     * @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType
      */
     private static function getFiles(string $type, string $language): array
     {
-        /** @var list<non-empty-string> $files */
+        /** @phpstan-ignore return.type */
         return glob(self::Path . "{$type}/{$language}*.php");
     }
 
@@ -113,9 +113,9 @@ final class LocaleData
      */
     public static function all(): array
     {
-        return array_map(
-            fn (string $f): Locale => require $f,
-            glob(self::Path . 'numbers/*.php'),
-        );
+        $files = glob(self::Path . 'numbers/*.php');
+        assert($files !== false);
+
+        return array_map(fn (string $f): Locale => require $f, $files);
     }
 }

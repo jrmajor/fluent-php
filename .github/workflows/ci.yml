@@ -88,18 +88,18 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
-      - name: Psalm cache
+      - name: PHPStan cache
         uses: actions/cache@v4
         with:
-          path: .cache/psalm
-          key: psalm-${{ github.sha }}
-          restore-keys: psalm-
+          path: .cache/phpstan
+          key: phpstan-${{ github.sha }}
+          restore-keys: phpstan-
 
       - name: Install Composer dependencies
         run: composer update --${{ matrix.stability }}
 
-      - name: Run Psalm
-        run: vendor/bin/psalm --output-format=github --no-progress
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyze --no-progress --no-interaction
 
   style:
     name: Style

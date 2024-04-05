@@ -62,7 +62,7 @@ final class NumberLiteralTest extends TestCase
     ): void {
         $ast = (new FluentParser(true))->parseEntry($ftl);
 
-        /** @psalm-suppress UndefinedPropertyFetch */
+        /** @phpstan-ignore property.notFound */
         $expr = $ast->value->elements[0]->expression;
 
         $parsed = Type\instance_of(NumberLiteralValue::class)->coerce($expr->parse());

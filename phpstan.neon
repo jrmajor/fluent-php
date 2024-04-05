@@ -1,0 +1,22 @@
+parameters:
+    level: max
+    paths:
+        - dev
+        - src
+        - tests
+    ignoreErrors:
+        - '#^Method .*::patternType\(\) never returns .* so it can be removed from the return type\.$#'
+        - '#^Parameter \#1 \$file of function Psl\\File\\read expects non-empty-string, string given\.$#'
+        -
+            message: '#^Generator expects value type .*$#'
+            path: tests/Formatters/Number
+        -
+            message: '#^Method .* has parameter \$data with no value type specified in iterable type array\.$#'
+            path: dev/**/*Factory.php
+
+    tmpDir: .cache/phpstan
+
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/php-standard-library/phpstan-extension/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon

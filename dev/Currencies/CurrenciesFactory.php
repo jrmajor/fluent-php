@@ -18,16 +18,15 @@ final class CurrenciesFactory
      */
     public static function make(string $locale): array
     {
+        /** @var array<string, array<string, string>> $data */
+        $data = H\CldrData::get('numbers', $locale, 'currencies.*.*.numbers.*');
+
         return Dict\map_with_key(
-            /** @var array<string, array<string, string>> */
-            H\CldrData::get('numbers', $locale, 'currencies.*.*.numbers.*'),
+            $data,
             fn ($code, $data) => self::makeCurrency($locale, $code, $data),
         );
     }
 
-    /**
-     * @param array<string, string> $data
-     */
     private static function makeCurrency(string $locale, string $code, array $data): Currency
     {
         $name = $data['displayName'] ?? null;
@@ -40,8 +39,6 @@ final class CurrenciesFactory
     }
 
     /**
-     * @param array<string, string> $data
-     *
      * @return ?non-empty-array<string, string>
      */
     private static function makePlurals(array $data, string $exceptionsFor): ?array

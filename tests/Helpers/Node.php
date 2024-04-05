@@ -33,7 +33,7 @@ final class Node
         return self::$instance ??= new self();
     }
 
-    public function cachedOutput(string $command): string
+    public function cachedOutput(string $command): mixed
     {
         $hash = Hash\hash($command, Hash\Algorithm::SHA1);
 
@@ -60,6 +60,7 @@ final class Node
             File\write($this->path, '{}');
         }
 
+        /** @phpstan-ignore assign.propertyType */
         $this->cache = Json\decode(File\read($this->path));
     }
 
