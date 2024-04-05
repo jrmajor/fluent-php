@@ -60,7 +60,7 @@ final class Node
             File\write($this->path, '{}');
         }
 
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore assign.propertyType */
         $this->cache = Json\decode(File\read($this->path));
     }
 

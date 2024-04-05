@@ -229,7 +229,7 @@ final class FluentBundle
             $number = new FluentNumber($number);
         }
 
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore argument.type */
         return $number->setLocale($this->locale)->setOptions($options);
     }
 

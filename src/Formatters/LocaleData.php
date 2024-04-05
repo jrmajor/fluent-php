@@ -90,7 +90,7 @@ final class LocaleData
      */
     private static function getFiles(string $type, string $language): array
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return glob(self::Path . "{$type}/{$language}*.php");
     }
 

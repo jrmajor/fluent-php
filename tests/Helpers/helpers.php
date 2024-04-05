@@ -33,7 +33,7 @@ function count_values(array $values): array
         $primary = $b['count'] <=> $a['count'];
         $secondary = $a['value'] <=> $b['value'];
 
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore ternary.alwaysFalse */
         return $primary ?: $secondary;
     });
 }
