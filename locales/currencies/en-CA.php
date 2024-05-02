@@ -17,6 +17,6 @@ return [
     'STN' => new C('STN', 'São Tomé and Príncipe Dobra', narrow: 'Db', plurals: ['one' => 'São Tomé and Príncipe dobra', 'other' => 'São Tomé and Príncipe dobras']),
     'TJR' => new C('TJR', 'Tajikistani Rouble', plurals: ['one' => 'Tajikistani rouble', 'other' => 'Tajikistani roubles']),
     'TTD' => new C('TTD', 'Trinidad and Tobago Dollar', narrow: '$', plurals: ['one' => 'Trinidad and Tobago dollar', 'other' => 'Trinidad and Tobago dollars']),
-    'USD' => new C('USD', 'US Dollar', 'US$', 'US$', ['one' => 'US dollar', 'other' => 'US dollars']),
+    'USD' => new C('USD', 'US Dollar', 'US$', '$', ['one' => 'US dollar', 'other' => 'US dollars']),
     'XXX' => new C('XXX', 'unknown currency', '¤', plurals: ['one' => '(unknown unit of currency)', 'other' => '(unknown currency)']),
 ];

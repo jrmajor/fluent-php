@@ -280,6 +280,7 @@ return [
     'XBC' => new C('XBC', 'European Unit of Account (XBC)', plurals: ['one' => 'European unit of account (XBC)', 'other' => 'European units of account (XBC)']),
     'XBD' => new C('XBD', 'European Unit of Account (XBD)', plurals: ['one' => 'European unit of account (XBD)', 'other' => 'European units of account (XBD)']),
     'XCD' => new C('XCD', 'East Caribbean Dollar', 'EC$', '$', ['one' => 'East Caribbean dollar', 'other' => 'East Caribbean dollars']),
+    'XCG' => new C('XCG', 'Caribbean guilder', 'Cg.', plurals: ['one' => 'Caribbean guilder', 'other' => 'Caribbean guilders']),
     'XDR' => new C('XDR', 'Special Drawing Rights', plurals: 'special drawing rights'),
     'XEU' => new C('XEU', 'European Currency Unit', plurals: ['one' => 'European currency unit', 'other' => 'European currency units']),
     'XFO' => new C('XFO', 'French Gold Franc', plurals: ['one' => 'French gold franc', 'other' => 'French gold francs']),

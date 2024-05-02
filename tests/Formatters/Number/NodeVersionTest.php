@@ -12,13 +12,13 @@ final class NodeVersionTest extends TestCase
     #[TestDox('local node uses correct icu version')]
     public function testIcu(): void
     {
-        $this->assertSame('74.1', $this->versionOf('icu'));
+        $this->assertSame('74.2', $this->versionOf('icu'));
     }
 
     #[TestDox('local node uses correct cldr version')]
     public function testCldr(): void
     {
-        $this->assertSame('44.0', $this->versionOf('cldr'));
+        $this->assertSame('44.1', $this->versionOf('cldr'));
     }
 
     private function versionOf(string $library): string

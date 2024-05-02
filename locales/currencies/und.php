@@ -103,6 +103,7 @@ return [
     'VND' => new C('VND', symbol: '₫', narrow: '₫', minorUnits: 0),
     'XAF' => new C('XAF', symbol: 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', symbol: 'EC$', narrow: '$'),
+    'XCG' => new C('XCG', symbol: 'Cg.'),
     'XOF' => new C('XOF', symbol: "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', symbol: 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', symbol: '¤'),
