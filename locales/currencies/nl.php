@@ -280,6 +280,7 @@ return [
     'XBC' => new C('XBC', 'Europese rekeneenheid (XBC)'),
     'XBD' => new C('XBD', 'Europese rekeneenheid (XBD)'),
     'XCD' => new C('XCD', 'Oost-Caribische dollar', 'EC$', '$'),
+    'XCG' => new C('XCG', 'Caribische gulden', 'Cg.', 'Cg'),
     'XDR' => new C('XDR', 'Special Drawing Rights'),
     'XEU' => new C('XEU', 'European Currency Unit'),
     'XFO' => new C('XFO', 'Franse gouden franc'),

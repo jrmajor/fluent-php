@@ -260,6 +260,7 @@ return [
     'XBC' => new C('XBC', 'unité de compte européenne (XBC)', plurals: ['one' => 'unité de compte 9 européenne (UEC–9)', 'other' => 'unités de compte 9 européennes (UEC–9)']),
     'XBD' => new C('XBD', 'unité de compte européenne (XBD)', plurals: ['one' => 'unité de compte 17 européenne (UEC–17)', 'other' => 'unités de compte 17 européennes (UEC–17)']),
     'XCD' => new C('XCD', 'dollar des Caraïbes orientales', narrow: '$', plurals: ['one' => 'dollar des Caraïbes orientales', 'other' => 'dollars des Caraïbes orientales']),
+    'XCG' => new C('XCG', 'florin caribéen', 'Cg.', plurals: ['one' => 'florin caribéen', 'other' => 'florins caribéens']),
     'XDR' => new C('XDR', 'droit de tirage spécial', plurals: ['one' => 'droit de tirage spécial', 'other' => 'droits de tirage spéciaux']),
     'XEU' => new C('XEU', 'unité de compte européenne (ECU)'),
     'XFO' => new C('XFO', 'franc or', plurals: ['one' => 'franc or', 'other' => 'francs or']),
