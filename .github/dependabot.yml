@@ -12,6 +12,20 @@ updates:
         update-types: [minor, patch]
     versioning-strategy: increase
 
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      cldr:
+        patterns: [cldr-*]
+    ignore:
+      - dependency-name: cldr-*
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-patch
+    versioning-strategy: increase
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
