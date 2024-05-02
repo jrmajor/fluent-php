@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-cldr-numbers-modern@^44.0:
-  version "44.0.1"
-  resolved "https://registry.yarnpkg.com/cldr-numbers-modern/-/cldr-numbers-modern-44.0.1.tgz#21c7da68b41012756a3826d0128137b55d182533"
-  integrity sha512-kNG28gSHtNeVrvmqS09Kugte5w1HQOrX6z69RzYvNF28Y5RpRa+H5YLVHl8iytoa6t9C2birLaWt+sW0kH+aRA==
+cldr-numbers-modern@^45.0:
+  version "45.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-numbers-modern/-/cldr-numbers-modern-45.0.0.tgz#5c9ccf421172d280d25b49e29686efaf1796b068"
+  integrity sha512-U8mQj/p8Db1woLcTPr5RNgP4mJokCYawp0ae+jvvU+fRCLF9Jx2vP/LGEkXf4k7bp0VcfB40JxkXZXhAXS247w==
 
-cldr-units-modern@^44.0:
-  version "44.0.1"
-  resolved "https://registry.yarnpkg.com/cldr-units-modern/-/cldr-units-modern-44.0.1.tgz#d7fb6dd5b5b3e44bfa5150716b6e24be7de46abf"
-  integrity sha512-NMv31zxhumJD8Bqa+NxsiR10THiz0S90xpwAcOVvtS2LBcODssxqCyiAu/ebCW6hyQomQ2gJqtxljU+XZdFnnA==
+cldr-units-modern@^45.0:
+  version "45.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-units-modern/-/cldr-units-modern-45.0.0.tgz#fec3dab3ecdc9ad79c5e1e0491e04de0b1b15f4a"
+  integrity sha512-B0qgBcMwaMEALXsuco6v+xeRRi1NtmTeYMFNJQzJXm/Mwirm8iW8YN1zdl83Ae6iI3JbJTuwhK1+IuHO3mVs6w==
