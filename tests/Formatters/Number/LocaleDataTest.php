@@ -74,7 +74,7 @@ final class LocaleDataTest extends TestCase
         return [
             ['pl', new Currency('USD', 'dolar amerykański', narrow: '$', plurals: $polishPlurals)],
             ['pl-UNKNOWN', new Currency('USD', 'dolar amerykański', narrow: '$', plurals: $polishPlurals)],
-            ['en-CA', new Currency('USD', 'US Dollar', 'US$', 'US$', ['one' => 'US dollar', 'other' => 'US dollars'])],
+            ['en-CA', new Currency('USD', 'US Dollar', 'US$', '$', ['one' => 'US dollar', 'other' => 'US dollars'])],
             ['en-CA', new Currency('PLN', 'Polish Zloty', narrow: 'zł', plurals: ['one' => 'Polish zloty', 'other' => 'Polish zlotys'])],
         ];
     }
