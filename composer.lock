@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41ce27303245e47bf18b7874bc06c5cd",
+    "content-hash": "e25c020850e5000cdfe4157e2a6290f4",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -1716,16 +1716,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.x-dev",
+            "version": "1.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c80f35e"
+                "reference": "e64220a05c1209fc856d58e789c3b7a32c0bb9a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c80f35e",
-                "reference": "c80f35e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e64220a05c1209fc856d58e789c3b7a32c0bb9a5",
+                "reference": "e64220a05c1209fc856d58e789c3b7a32c0bb9a5",
                 "shasum": ""
             },
             "require": {
@@ -1734,7 +1734,6 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "default-branch": true,
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1771,7 +1770,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-01T11:50:12+00:00"
+            "time": "2024-05-31T13:53:37+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -5502,18 +5501,9 @@
             "time": "2022-05-24T19:45:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "phpstan/phpstan",
-            "version": "1.11.9999999.9999999-dev",
-            "alias": "1.10.66",
-            "alias_normalized": "1.10.66.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phpstan/phpstan": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
