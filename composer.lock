@@ -4,38 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a1642e9cef4897f21a20ae8528a1434",
+    "content-hash": "9f43cc9742dcf10b3428905b2eabdda7",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
-            "version": "v1.1.2",
+            "version": "v1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/pluralrules.git",
-                "reference": "31e74e7df48e5c182e8f9c85684940e9937bb45d"
+                "reference": "c5168c2347737dcc5295a4ff9af7beb113f071d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/31e74e7df48e5c182e8f9c85684940e9937bb45d",
-                "reference": "31e74e7df48e5c182e8f9c85684940e9937bb45d",
+                "url": "https://api.github.com/repos/jrmajor/pluralrules/zipball/c5168c2347737dcc5295a4ff9af7beb113f071d9",
+                "reference": "c5168c2347737dcc5295a4ff9af7beb113f071d9",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
-                "php": "8.1 - 8.3"
+                "php": "8.2 - 8.4"
             },
             "require-dev": {
-                "azjezz/psl": "^2.8",
+                "azjezz/psl": "^3.1",
                 "hoa/compiler": "~3.17",
-                "jrmajor/cs": "^0.5.4",
+                "jrmajor/cs": "^0.6.1",
                 "nette/php-generator": "^4.1",
-                "nunomaduro/collision": "^7.10",
-                "php-standard-library/phpstan-extension": "^1.0",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.4",
-                "symfony/console": "^6.3",
-                "symfony/var-dumper": "^6.3",
-                "vaimo/composer-patches": "^5.1"
+                "nunomaduro/collision": "^8.5",
+                "php-standard-library/phpstan-extension": "^2.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.4",
+                "symfony/console": "^7.0",
+                "symfony/var-dumper": "^7.1",
+                "vaimo/composer-patches": "^5.2"
             },
             "type": "library",
             "extra": {
@@ -78,7 +78,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/pluralrules/issues",
-                "source": "https://github.com/jrmajor/pluralrules/tree/v1.1.2"
+                "source": "https://github.com/jrmajor/pluralrules/tree/v1.1.3"
             },
             "funding": [
                 {
@@ -86,7 +86,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-24T23:41:05+00:00"
+            "time": "2024-11-22T19:30:06+00:00"
         }
     ],
     "packages-dev": [
@@ -5514,7 +5514,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.2 - 8.3",
+        "php": "8.2 - 8.4",
         "ext-intl": "*"
     },
     "platform-dev": {
