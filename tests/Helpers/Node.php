@@ -35,7 +35,7 @@ final class Node
 
     public function cachedOutput(string $command): mixed
     {
-        $hash = Hash\hash($command, Hash\Algorithm::SHA1);
+        $hash = Hash\hash($command, Hash\Algorithm::Sha1);
 
         if (! array_key_exists($hash, $this->cache)) {
             $this->cache[$hash] = $this->freshOutput($command);
@@ -66,7 +66,7 @@ final class Node
 
     private function saveCache(): void
     {
-        File\write($this->path, Json\encode($this->cache), File\WriteMode::TRUNCATE);
+        File\write($this->path, Json\encode($this->cache), File\WriteMode::Truncate);
     }
 
     private function versionsHash(): string
@@ -75,6 +75,6 @@ final class Node
 
         $versions = $type->coerce($this->freshOutput('process.versions'));
 
-        return Hash\hash(Json\encode(['self' => 1, ...$versions]), Hash\Algorithm::SHA1);
+        return Hash\hash(Json\encode(['self' => 1, ...$versions]), Hash\Algorithm::Sha1);
     }
 }

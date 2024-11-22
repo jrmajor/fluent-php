@@ -17,7 +17,7 @@ final class LocaleFiles
 
     public static function write(string $type, string $locale, string $content): void
     {
-        File\write(self::path("{$type}/{$locale}.php"), $content, File\WriteMode::MUST_CREATE);
+        File\write(self::path("{$type}/{$locale}.php"), $content, File\WriteMode::MustCreate);
     }
 
     public static function read(string $type, string $locale): string
