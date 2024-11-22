@@ -104,8 +104,10 @@ final class LocaleData
         /** @var positive-int $slashPosition */
         $slashPosition = strrpos($path, '/');
 
-        /** @var non-empty-string */
-        return strtolower(substr($path, $slashPosition + 1, -4));
+        $locale = strtolower(substr($path, $slashPosition + 1, -4));
+        assert($locale !== '');
+
+        return $locale;
     }
 
     /**
