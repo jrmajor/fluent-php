@@ -15,9 +15,9 @@ use Major\PluralRules\PluralRules;
  */
 final class NumberFormatter
 {
-    public const PatternRegEx = "([¤\\-%\u{A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{A0}\u{200F}]*)";
+    public const string PatternRegEx = "([¤\\-%\u{A0}\u{200E}\u{200F}]*)([,.#0]+)([¤%\u{A0}\u{200F}]*)";
 
-    private const NumeralSystems = [
+    private const array NumeralSystems = [
         'arab' => ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
         'arabext' => ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
         'beng' => ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],

@@ -11,7 +11,7 @@ use Major\Fluent\Formatters\Number\Locale\Unit;
  */
 final class LocaleData
 {
-    private const Path = __DIR__ . '/../../locales/';
+    private const string Path = __DIR__ . '/../../locales/';
 
     public static function loadNumbers(string $locale): Locale
     {

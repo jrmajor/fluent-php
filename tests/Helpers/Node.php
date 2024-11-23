@@ -11,7 +11,7 @@ use Psl\Type;
 
 final class Node
 {
-    private const CacheDir = __DIR__ . '/../../.cache/node-assertions';
+    private const string CacheDir = __DIR__ . '/../../.cache/node-assertions';
 
     /** @var non-empty-string */
     private string $path;

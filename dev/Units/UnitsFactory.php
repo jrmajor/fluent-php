@@ -17,7 +17,7 @@ final class UnitsFactory
      *
      * @see https://tc39.es/ecma402/#table-sanctioned-simple-unit-identifiers
      */
-    private const Units = [
+    private const array Units = [
         'acre' => 'area-acre',
         'bit' => 'digital-bit',
         'byte' => 'digital-byte',

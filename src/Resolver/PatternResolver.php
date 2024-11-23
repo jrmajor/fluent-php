@@ -22,10 +22,10 @@ use WeakMap;
 final class PatternResolver
 {
     /** Unicode BiDi control character - first-string isolate. */
-    private const FSI = "\u{2068}";
+    private const string FSI = "\u{2068}";
 
     /** Unicode BiDi control character - pop directional isolate. */
-    private const PDI = "\u{2069}";
+    private const string PDI = "\u{2069}";
 
     /** @var WeakMap<Pattern\Pattern, true> */
     private WeakMap $dirty;
