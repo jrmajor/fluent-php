@@ -10,12 +10,12 @@ env:
 
 jobs:
   tests:
-    name: Tests / ${{ matrix.version }} PHP, ${{ matrix.stability }}
+    name: Tests / ${{ matrix.php }} PHP, ${{ matrix.stability }}
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['lowest', 'latest']
+        php: ['lowest', 'latest']
         stability: [prefer-lowest, prefer-stable]
 
     steps:
@@ -27,7 +27,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.version == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
+          php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
       - name: Setup Node
@@ -60,15 +60,15 @@ jobs:
         run: vendor/bin/phpunit
 
   types:
-    name: Types / ${{ matrix.version }} PHP
+    name: Types / ${{ matrix.php }} PHP
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - version: lowest
+          - php: lowest
             stability: prefer-lowest
-          - version: latest
+          - php: latest
             stability: prefer-stable
 
     steps:
@@ -78,7 +78,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.version == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
+          php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
       - name: Get Composer cache directory path
