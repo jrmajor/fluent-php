@@ -3,5 +3,9 @@
   "dependencies": {
     "cldr-numbers-modern": "^44.0",
     "cldr-units-modern": "^44.0"
+  },
+  "volta": {
+    "node": "21.3.0",
+    "yarn": "1.22.22"
   }
 }
