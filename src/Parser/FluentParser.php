@@ -556,7 +556,7 @@ final class FluentParser
         $lastElement = $trimmed[count($trimmed) - 1];
 
         if ($lastElement instanceof TextElement) {
-            $lastElement->value = rtrim($lastElement->value);
+            $lastElement->value = rtrim($lastElement->value, " \n\r");
 
             if ($lastElement->value === '') {
                 array_pop($trimmed);

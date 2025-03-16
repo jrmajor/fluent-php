@@ -3,6 +3,7 @@
 namespace Major\Fluent\Tests\Resolver\Functions;
 
 use Exception;
+use Major\Fluent\Bundle\Types\FluentNumber;
 use Major\Fluent\Exceptions\Resolver\FunctionException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Exceptions\Resolver\TypeException;
@@ -18,7 +19,8 @@ final class RuntimeFunctionsTest extends TestCase
 
         $this->bundle->addFunctions([
             'CONCAT' => fn (...$args) => implode('', $args),
-            'SUM' => fn (...$args) => array_sum($args),
+            'SUM' => fn (...$args) => new FluentNumber(array_sum($args)),
+            'PLATFORM' => fn () => 'windows',
             'JSON' => fn ($arg, $key, $another) => json_encode(func_get_args()),
             'TYPE' => fn ($arg) => get_debug_type($arg),
             'PROPS' => fn (object $object) => json_encode(get_object_vars($object)),
@@ -27,6 +29,11 @@ final class RuntimeFunctionsTest extends TestCase
         ])->addFtl(<<<'FTL'
             strings = { CONCAT("Foo", "Bar") }
             numbers = { SUM(1, 2.5) }
+            selector =
+              { PLATFORM() ->
+                [windows] Options
+                *[other] Preferences
+              }
             named-args = { JSON("test", another: 123, key: "value") }
             int = { TYPE(12) }
             float = { TYPE(4.5) }
@@ -48,6 +55,12 @@ final class RuntimeFunctionsTest extends TestCase
     public function testNumbers(): void
     {
         $this->assertTranslation('3.5', 'numbers');
+    }
+
+    #[TestDox('it works for selectors')]
+    public function testSelectors(): void
+    {
+        $this->assertTranslation('Options', 'selector');
     }
 
     #[TestDox('it works with named arguments')]
