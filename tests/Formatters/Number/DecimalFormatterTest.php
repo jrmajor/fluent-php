@@ -52,6 +52,8 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
             [12.345, ['maximumSignificantDigits' => 4]],
             [12345, ['maximumSignificantDigits' => 4]],
             [45.67, ['maximumSignificantDigits' => 2]],
+            [5962399.87, ['maximumSignificantDigits' => 3]],
+            [46538.069971871, ['maxFractionDigits' => 4]],
         ] as $case) {
             foreach (self::provideLocales() as $locale) {
                 yield [$locale, ...$case];
