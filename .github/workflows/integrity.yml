@@ -24,8 +24,16 @@ jobs:
       - name: Install Composer dependencies
         run: composer install
 
-      - name: Install Yarn dependencies
-        run: yarn install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+
+      - name: Install npm dependencies
+        run: pnpm install
 
       - name: Compile rules
         run: |

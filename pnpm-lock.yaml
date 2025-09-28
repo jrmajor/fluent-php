@@ -1,0 +1,158 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      cldr-numbers-modern:
+        specifier: ^44.0
+        version: 44.0.1(cldr-core@44.1.0)
+      cldr-units-modern:
+        specifier: ^44.0
+        version: 44.0.1(cldr-core@44.1.0)
+    devDependencies:
+      node:
+        specifier: runtime:21.3.0
+        version: runtime:21.3.0
+
+packages:
+
+  cldr-core@44.1.0:
+    resolution: {integrity: sha512-ssbJaXu3pCkc4YqNC6xHhgleZG7YqnOFZ9laMlJfHOfnspoA9waI4AH54gKB3Fe/+wI4i3cVxKFdCTVGTRw+UA==}
+
+  cldr-numbers-modern@44.0.1:
+    resolution: {integrity: sha512-kNG28gSHtNeVrvmqS09Kugte5w1HQOrX6z69RzYvNF28Y5RpRa+H5YLVHl8iytoa6t9C2birLaWt+sW0kH+aRA==}
+    peerDependencies:
+      cldr-core: 44.0.1
+
+  cldr-units-modern@44.0.1:
+    resolution: {integrity: sha512-NMv31zxhumJD8Bqa+NxsiR10THiz0S90xpwAcOVvtS2LBcODssxqCyiAu/ebCW6hyQomQ2gJqtxljU+XZdFnnA==}
+    peerDependencies:
+      cldr-core: 44.0.1
+
+  node@runtime:21.3.0:
+    resolution:
+      type: variations
+      variants:
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-Z8jsoLVjM6fDWy8J9BbkeXrfN0ejIOaTr+A3MbfV7OM=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-aix-ppc64.tar.gz
+          targets:
+            - cpu: ppc64
+              os: aix
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-DcuC1S3/rNDgBywBzZGYBkMt1Avl1643zB+y35zYXHU=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-darwin-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-q+YibwMOSv+zfJZGKKusGTVhUyI/l8e2Y3VBl7qJw84=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-darwin-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-PaokpCO9MtBjZVRpXhR8kCsp/T88plSJTwfHktXk7ck=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-linux-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-VpI5lYQnlqfTRmPpBQoxgjz5Ux9q36/ruU8rD4Cgt4M=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-linux-armv7l.tar.gz
+          targets:
+            - cpu: armv7l
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-2ARMtJHtHZeD5G+uAGWVzMuDL6HBeZXhT+dA6t6kCaA=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-linux-ppc64le.tar.gz
+          targets:
+            - cpu: ppc64le
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-RSJY/kRSCrnyixBILSWgFSdbqEWlEuLmGErY27qeq0U=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-linux-s390x.tar.gz
+          targets:
+            - cpu: s390x
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-6PivCkpbB/+c7VXvwbbqcSoUQblcAs4NiBQHAUjyf0I=
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-linux-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-o5Mm/9Pvb0umHAxg6y/DM4m/409h+CRDUirH3Q1Jnqg=
+            prefix: node-v21.3.0-win-arm64
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-win-arm64.zip
+          targets:
+            - cpu: arm64
+              os: win32
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-mWRavfdyPkgOanLkGTYjMZq5LI/DoFSfDo02WTkZXus=
+            prefix: node-v21.3.0-win-x64
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-win-x64.zip
+          targets:
+            - cpu: x64
+              os: win32
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-iIUv7xT0BfItR9OyVxrVdyon5HVW8psdtKBJ3H4Naos=
+            prefix: node-v21.3.0-win-x86
+            type: binary
+            url: https://nodejs.org/download/release/v21.3.0/node-v21.3.0-win-x86.zip
+          targets:
+            - cpu: x86
+              os: win32
+    version: 21.3.0
+    hasBin: true
+
+snapshots:
+
+  cldr-core@44.1.0: {}
+
+  cldr-numbers-modern@44.0.1(cldr-core@44.1.0):
+    dependencies:
+      cldr-core: 44.1.0
+
+  cldr-units-modern@44.0.1(cldr-core@44.1.0):
+    dependencies:
+      cldr-core: 44.1.0
+
+  node@runtime:21.3.0: {}
