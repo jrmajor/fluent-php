@@ -30,11 +30,6 @@ jobs:
           php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.0'
-
       - name: Get Composer cache directory path
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -55,6 +50,17 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer update --${{ matrix.stability }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+
+      - name: Install npm dependencies
+        run: pnpm install
 
       - name: Execute tests
         run: vendor/bin/phpunit
@@ -173,8 +179,16 @@ jobs:
       - name: Install Composer dependencies
         run: composer install
 
-      - name: Install Yarn dependencies
-        run: yarn install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+
+      - name: Install npm dependencies
+        run: pnpm install
 
       - name: Compile rules
         run: |

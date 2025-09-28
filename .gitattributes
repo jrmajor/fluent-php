@@ -10,4 +10,4 @@
 /phpbench.json         export-ignore
 /phpstan.neon          export-ignore
 /phpunit.dist.xml      export-ignore
-/yarn.lock             export-ignore
+/pnpm-lock.yaml        export-ignore

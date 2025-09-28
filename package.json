@@ -1,11 +1,19 @@
 {
-  "private": true,
-  "dependencies": {
-    "cldr-numbers-modern": "^45.0",
-    "cldr-units-modern": "^45.0"
-  },
-  "volta": {
-    "node": "22.0.0",
-    "yarn": "1.22.22"
-  }
+	"private": true,
+	"packageManager": "pnpm@10.17.1",
+	"dependencies": {
+		"cldr-numbers-modern": "^45.0",
+		"cldr-units-modern": "^45.0"
+	},
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "10.17.1"
+		},
+		"runtime": {
+			"name": "node",
+			"version": "22.0.0",
+			"onFail": "download"
+		}
+	}
 }

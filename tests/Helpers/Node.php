@@ -49,7 +49,7 @@ final class Node
     {
         $nodeArgs = ['-e', "console.log(JSON.stringify({$command}))"];
 
-        return Json\decode(Shell\execute('node', $nodeArgs));
+        return Json\decode(Shell\execute('pnpm exec node', $nodeArgs));
     }
 
     private function loadCache(): void

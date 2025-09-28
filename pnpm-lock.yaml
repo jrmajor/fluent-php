@@ -1,0 +1,158 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      cldr-numbers-modern:
+        specifier: ^45.0
+        version: 45.0.0(cldr-core@44.1.0)
+      cldr-units-modern:
+        specifier: ^45.0
+        version: 45.0.0(cldr-core@44.1.0)
+    devDependencies:
+      node:
+        specifier: runtime:22.0.0
+        version: runtime:22.0.0
+
+packages:
+
+  cldr-core@44.1.0:
+    resolution: {integrity: sha512-ssbJaXu3pCkc4YqNC6xHhgleZG7YqnOFZ9laMlJfHOfnspoA9waI4AH54gKB3Fe/+wI4i3cVxKFdCTVGTRw+UA==}
+
+  cldr-numbers-modern@45.0.0:
+    resolution: {integrity: sha512-U8mQj/p8Db1woLcTPr5RNgP4mJokCYawp0ae+jvvU+fRCLF9Jx2vP/LGEkXf4k7bp0VcfB40JxkXZXhAXS247w==}
+    peerDependencies:
+      cldr-core: 45.0.0
+
+  cldr-units-modern@45.0.0:
+    resolution: {integrity: sha512-B0qgBcMwaMEALXsuco6v+xeRRi1NtmTeYMFNJQzJXm/Mwirm8iW8YN1zdl83Ae6iI3JbJTuwhK1+IuHO3mVs6w==}
+    peerDependencies:
+      cldr-core: 45.0.0
+
+  node@runtime:22.0.0:
+    resolution:
+      type: variations
+      variants:
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-13Q/3fXoZxJPVVqR9scpEE/Vx12TgvEChsP7s/0S7wc=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-aix-ppc64.tar.gz
+          targets:
+            - cpu: ppc64
+              os: aix
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-6pbTSc+qZ6qHzuqj5bUskWf3rDAv2NH/Fi0HhencB4U=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-darwin-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-Qio4h/9UGPCkVS2Jz5k0arirUbtdOEZguqiLhETSwRE=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-darwin-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-HTVHImvn5ZrO7lx9Aan4/BjeZ+AVxaFdjPOFtuAtBis=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-linux-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-0h239Xxc4YKuwrmoPjKVq8N+FzGrtzmV09Vz4EQJl3w=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-linux-armv7l.tar.gz
+          targets:
+            - cpu: armv7l
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-OwmNzPVtRGu7gIRdNbvsvbdGEoYNFpDzohY4fJnJ1iA=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-linux-ppc64le.tar.gz
+          targets:
+            - cpu: ppc64le
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-fsX9rQyBnuoXkA60PB3pSNYgp4OxrJQGLKpDh3ipKzA=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-linux-s390x.tar.gz
+          targets:
+            - cpu: s390x
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-dLsPOoAwfFKUIcPthFF7j1Q4Z3CfQeU81z35nmRCr00=
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-linux-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-N2Ehz0a9PAJcXmetrhkK/14l0zoLWPvA2GUtczULOPA=
+            prefix: node-v22.0.0-win-arm64
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-win-arm64.zip
+          targets:
+            - cpu: arm64
+              os: win32
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-MtY5tH1MCmUf+PjX1BpFQWij1ARb43mF+agQz4zvYXQ=
+            prefix: node-v22.0.0-win-x64
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-win-x64.zip
+          targets:
+            - cpu: x64
+              os: win32
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-4BNPUBcVSjN2csf7zRVOKyx3S0MQkRhWAZINY9DEt9A=
+            prefix: node-v22.0.0-win-x86
+            type: binary
+            url: https://nodejs.org/download/release/v22.0.0/node-v22.0.0-win-x86.zip
+          targets:
+            - cpu: x86
+              os: win32
+    version: 22.0.0
+    hasBin: true
+
+snapshots:
+
+  cldr-core@44.1.0: {}
+
+  cldr-numbers-modern@45.0.0(cldr-core@44.1.0):
+    dependencies:
+      cldr-core: 44.1.0
+
+  cldr-units-modern@45.0.0(cldr-core@44.1.0):
+    dependencies:
+      cldr-core: 44.1.0
+
+  node@runtime:22.0.0: {}
