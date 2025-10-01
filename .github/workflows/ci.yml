@@ -57,8 +57,6 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v5
-        with:
-          cache: pnpm
 
       - name: Install npm dependencies
         run: pnpm install
@@ -185,8 +183,6 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v5
-        with:
-          cache: pnpm
 
       - name: Install npm dependencies
         run: pnpm install
