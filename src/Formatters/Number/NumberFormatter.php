@@ -144,28 +144,25 @@ final class NumberFormatter
         assert($maximumFractionDigits !== null);
 
         if ($maximumFractionDigits <= 0) {
-            $intWithoutLast = substr($int, 0, strlen($int) - 1);
-            $intLastDigit = (int) substr($int, strlen($int) - 1);
-
             if ((int) substr($frac, 0, 1) >= 5) {
-                $intLastDigit++;
+                ++$int;
             }
 
-            return [$intWithoutLast . $intLastDigit, ''];
+            return [$int, ''];
         }
 
         if (strlen($frac) <= $maximumFractionDigits) {
             return [$int, $frac];
         }
 
-        $withoutLast = substr($frac, 0, $maximumFractionDigits - 1);
-        $lastDigit = (int) substr($frac, $maximumFractionDigits - 1, 1);
+        $leftPadding = substr($frac, 0, strspn($frac, '0'));
+        $cutted = (int) substr($frac, 0, $maximumFractionDigits);
 
         if ((int) substr($frac, $maximumFractionDigits, 1) >= 5) {
-            $lastDigit++;
+            ++$cutted;
         }
 
-        return [$int, $withoutLast . $lastDigit];
+        return [$int, substr($leftPadding . $cutted, -1 * $maximumFractionDigits)];
     }
 
     private function applyMaximumSignificantDigits(Options $o, string $int): string
@@ -177,15 +174,14 @@ final class NumberFormatter
             return $int;
         }
 
-        $withoutLast = substr($int, 0, $o->maximumSignificantDigits - 1);
-        $lastDigit = (int) substr($int, $o->maximumSignificantDigits - 1, 1);
+        $cutted = (int) substr($int, 0, $o->maximumSignificantDigits);
         $padding = str_repeat('0', strlen($int) - $o->maximumSignificantDigits);
 
         if ((int) substr($int, $o->maximumSignificantDigits, 1) >= 5) {
-            $lastDigit++;
+            ++$cutted;
         }
 
-        return $withoutLast . $lastDigit . $padding;
+        return $cutted . $padding;
     }
 
     private function applyMinimumIntegerDigits(Options $o, string $int): string
