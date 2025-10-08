@@ -162,7 +162,11 @@ final class NumberFormatter
             $trimmed++;
         }
 
-        return [$int, substr($paddingZeros . $trimmed, -$maximumFractionDigits)];
+        if (strlen((string) $trimmed) > $maximumFractionDigits) {
+            return [(string) ++$int, ''];
+        }
+
+        return [$int, rtrim($paddingZeros . $trimmed, '0')];
     }
 
     private function applyMaximumSignificantDigits(Options $o, string $int): string
