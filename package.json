@@ -1,14 +1,14 @@
 {
 	"private": true,
-	"packageManager": "pnpm@10.17.1",
-	"dependencies": {
+	"packageManager": "pnpm@10.20.0",
+	"devDependencies": {
 		"cldr-numbers-modern": "^45.0",
 		"cldr-units-modern": "^45.0"
 	},
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "10.17.1"
+			"version": "10.20.0"
 		},
 		"runtime": {
 			"name": "node",

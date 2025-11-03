@@ -53,13 +53,10 @@ jobs:
         run: composer update --${{ matrix.stability }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v5
-
-      - name: Install npm dependencies
-        run: pnpm install
+        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
+        with:
+          cache: true
+          run_install: true
 
       - name: Execute tests
         run: vendor/bin/phpunit
@@ -179,13 +176,10 @@ jobs:
         run: composer install
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v5
-
-      - name: Install npm dependencies
-        run: pnpm install
+        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
+        with:
+          cache: true
+          run_install: true
 
       - name: Compile rules
         run: |

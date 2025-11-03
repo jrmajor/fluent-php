@@ -7,14 +7,13 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       cldr-numbers-modern:
         specifier: ^45.0
         version: 45.0.0(cldr-core@44.1.0)
       cldr-units-modern:
         specifier: ^45.0
         version: 45.0.0(cldr-core@44.1.0)
-    devDependencies:
       node:
         specifier: runtime:22.0.0
         version: runtime:22.0.0

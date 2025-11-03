@@ -1,0 +1,6 @@
+# prevents pnpm from discovering package.json is tests/fluent.js
+packages: []
+
+engineStrict: true
+strictDepBuilds: true
+# strictPeerDependencies: true
