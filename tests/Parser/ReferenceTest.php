@@ -27,11 +27,6 @@ final class ReferenceTest extends TestCase
     #[TestDox('reference test')]
     public function testReference(string $name, string $ftl, string $expectedAst): void
     {
-        if ($name === 'leading_dots') {
-            // https://github.com/projectfluent/fluent.js/issues/237
-            $this->markTestSkipped('Broken Attributes break the entire Entry right now.');
-        }
-
         $expectedAst = Json\decode($expectedAst);
 
         $resource = $this->parser->parse($ftl);
@@ -61,6 +56,12 @@ final class ReferenceTest extends TestCase
         ]))->coerce($cases);
 
         foreach ($cases as $name => ['ftl' => $ftl, 'json' => $json]) {
+            if ($name === 'leading_dots') {
+                // broken Attributes break the entire Entry right now
+                // https://github.com/projectfluent/fluent.js/issues/237
+                continue;
+            }
+
             $ftl = File\read($ftl);
             $json = File\read($json);
 
