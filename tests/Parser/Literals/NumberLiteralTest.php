@@ -2,11 +2,12 @@
 
 namespace Major\Fluent\Tests\Parser\Literals;
 
-use Major\Fluent\Node\LiteralValues\NumberLiteralValue;
+use Major\Fluent\Node\Syntax\Entries\Message;
+use Major\Fluent\Node\Syntax\Expressions\Literals\NumberLiteral;
+use Major\Fluent\Node\Syntax\Patterns\Placeable;
 use Major\Fluent\Parser\FluentParser;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
-use Psl\Type;
 
 final class NumberLiteralTest extends TestCase
 {
@@ -62,10 +63,15 @@ final class NumberLiteralTest extends TestCase
     ): void {
         $ast = (new FluentParser(true))->parseEntry($ftl);
 
-        /** @phpstan-ignore property.notFound */
+        assert($ast instanceof Message);
+        assert($ast->value !== null);
+        assert($ast->value->elements[0] instanceof Placeable);
+
         $expr = $ast->value->elements[0]->expression;
 
-        $parsed = Type\instance_of(NumberLiteralValue::class)->coerce($expr->parse());
+        assert($expr instanceof NumberLiteral);
+
+        $parsed = $expr->parse();
 
         self::assertSame($value, $parsed->value);
         self::assertSame($precision, $parsed->precision);

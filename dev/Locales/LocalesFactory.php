@@ -34,6 +34,7 @@ final class LocalesFactory
 
     private static function system(array $data): string
     {
+        /** @phpstan-ignore return.type */
         return $data['defaultNumberingSystem'];
     }
 

@@ -35,6 +35,7 @@ final class CurrenciesFactory
         $minorUnits = H\IsoData::minorUnits($code);
         $plurals = self::makePlurals($data, "{$code} in {$locale}");
 
+        /** @phpstan-ignore argument.type, argument.type, argument.type */
         return new Currency($code, $name, $symbol, $narrow, $plurals, $minorUnits);
     }
 
@@ -65,6 +66,7 @@ final class CurrenciesFactory
 
         assert($filtered !== []);
 
+        /** @phpstan-ignore return.type */
         return $filtered;
     }
 }

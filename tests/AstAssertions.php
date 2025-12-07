@@ -65,6 +65,7 @@ trait AstAssertions
                 throw new InvalidArgumentException("Expected property {$trace}::\${$subnode} should be node, but it is scalar.");
             }
 
+            /** @phpstan-ignore argument.type */
             self::compareSubnode($expected[$subnode], $node->{$subnode}, "{$trace}::\${$subnode}");
         }
 
@@ -77,6 +78,7 @@ trait AstAssertions
                 throw new InvalidArgumentException("Expected property {$trace}::\${$array} should be array.");
             }
 
+            /** @phpstan-ignore argument.type */
             self::compareArrayOfNodes($expected[$array], $node->{$array}, "{$trace}::\${$array}");
         }
 
@@ -105,7 +107,7 @@ trait AstAssertions
             throw new InvalidArgumentException("Expected node {$trace} should be represented as an array.");
         }
 
-        if (! array_key_exists('type', $expected)) {
+        if (! array_key_exists('type', $expected) || ! is_string($expected['type'])) {
             throw new InvalidArgumentException("Expected node {$trace} should have specified type.");
         }
 

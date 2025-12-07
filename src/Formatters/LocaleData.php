@@ -17,6 +17,7 @@ final class LocaleData
     {
         [$language, $region] = self::getLangAndRegionPaths('numbers', $locale);
 
+        /** @phpstan-ignore return.type */
         return require $region ?? $language;
     }
 
@@ -27,9 +28,13 @@ final class LocaleData
     {
         [$language, $region] = self::getLangAndRegionPaths('currencies', $locale);
 
+        /** @phpstan-ignore return.type */
         return array_merge(
+            /** @phpstan-ignore argument.type */
             require self::Path . 'currencies/und.php',
+            /** @phpstan-ignore argument.type */
             require $language,
+            /** @phpstan-ignore argument.type */
             $region !== null ? require $region : [],
         );
     }
@@ -41,8 +46,11 @@ final class LocaleData
     {
         [$language, $region] = self::getLangAndRegionPaths('units', $locale);
 
+        /** @phpstan-ignore return.type */
         return array_merge(
+            /** @phpstan-ignore argument.type */
             require $language,
+            /** @phpstan-ignore argument.type */
             $region !== null ? require $region : [],
         );
     }
@@ -118,6 +126,7 @@ final class LocaleData
         $files = glob(self::Path . 'numbers/*.php');
         assert($files !== false);
 
+        /** @phpstan-ignore return.type */
         return array_map(fn (string $f): Locale => require $f, $files);
     }
 }

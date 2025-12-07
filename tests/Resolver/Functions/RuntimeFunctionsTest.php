@@ -18,7 +18,9 @@ final class RuntimeFunctionsTest extends TestCase
         parent::setUp();
 
         $this->bundle->addFunctions([
+            /** @phpstan-ignore argument.type */
             'CONCAT' => fn (...$args) => implode('', $args),
+            /** @phpstan-ignore argument.type */
             'SUM' => fn (...$args) => new FluentNumber(array_sum($args)),
             'PLATFORM' => fn () => 'windows',
             'JSON' => fn ($arg, $key, $another) => json_encode(func_get_args()),

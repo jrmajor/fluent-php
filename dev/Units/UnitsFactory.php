@@ -112,6 +112,7 @@ final class UnitsFactory
             throw new Exception("Plurals {$exceptionsFor} do not contain the \"other\" key.");
         }
 
+        /** @phpstan-ignore return.type */
         return Dict\filter_with_key($data, fn ($c, $v) => $c === 'other' || $v !== $data['other']);
     }
 }

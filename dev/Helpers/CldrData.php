@@ -40,6 +40,7 @@ final class CldrData
 
         unset($regions['und']);
 
+        /** @phpstan-ignore return.type */
         return $regions;
     }
 

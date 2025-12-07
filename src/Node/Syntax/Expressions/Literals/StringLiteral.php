@@ -12,31 +12,30 @@ final class StringLiteral extends Literal
 
     public function parse(): StringLiteralValue
     {
-        $callback = function ($match): string {
-            if ($match[0] === '\\\\') {
-                return '\\';
-            }
-
-            if ($match[0] === '\\"') {
-                return '"';
-            }
-
-            $codepoint = intval($match[1] ?: $match[2], 16);
-
-            if ($codepoint <= 0xD7FF || $codepoint >= 0xE000) {
-                // It's an Unicode scalar value.
-                return mb_chr($codepoint);
-            }
-
-            // Escape sequences representing surrogate code points are
-            // well-formed but invalid in Fluent. Replace them with U+FFFD
-            // REPLACEMENT CHARACTER.
-            return '�';
-        };
-
         $value = preg_replace_callback(
             self::KnownEscapes,
-            $callback,
+            function ($match): string {
+                if ($match[0] === '\\\\') {
+                    return '\\';
+                }
+
+                if ($match[0] === '\\"') {
+                    return '"';
+                }
+
+                /** @phpstan-ignore offsetAccess.notFound */
+                $codepoint = intval($match[1] ?: $match[2], 16);
+
+                if ($codepoint <= 0xD7FF || $codepoint >= 0xE000) {
+                    // It's an Unicode scalar value.
+                    return mb_chr($codepoint);
+                }
+
+                // Escape sequences representing surrogate code points are
+                // well-formed but invalid in Fluent. Replace them with U+FFFD
+                // REPLACEMENT CHARACTER.
+                return '�';
+            },
             $this->value,
         );
 
