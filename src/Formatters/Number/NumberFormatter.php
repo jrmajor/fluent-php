@@ -133,6 +133,8 @@ final class NumberFormatter
     }
 
     /**
+     * @param numeric-string $int
+     *
      * @return array{string, string}
      */
     private function applyMaximumFractionDigits(Options $o, string $int, string $frac): array
@@ -355,13 +357,13 @@ final class NumberFormatter
     }
 
     /**
-     * @return array{string, string}
+     * @return array{numeric-string, string}
      */
     private function splitNumber(int|float $number): array
     {
         $number = explode('.', (string) $number, 2);
 
-        /** @var array{string, string} */
+        /** @var array{numeric-string, string} */
         return count($number) === 2 ? $number : [$number[0], ''];
     }
 }

@@ -7,7 +7,7 @@ on:
 
 env:
   PHP_LOWEST: '8.3'
-  PHP_LATEST: '8.4'
+  PHP_LATEST: '8.5'
 
 jobs:
   tests:
