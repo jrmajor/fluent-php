@@ -2,8 +2,9 @@
 	"private": true,
 	"packageManager": "pnpm@10.24.0",
 	"devDependencies": {
-		"cldr-numbers-modern": "^45.0",
-		"cldr-units-modern": "^45.0"
+		"cldr-core": "^45.0",
+		"cldr-numbers-full": "^45.0",
+		"cldr-units-full": "^45.0"
 	},
 	"devEngines": {
 		"packageManager": {

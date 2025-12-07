@@ -18,8 +18,12 @@ final class CldrData
      */
     public static function locales(string $package): array
     {
-        $locales = Filesystem\read_directory(self::path($package));
+        $modern = self::getModernLocales();
+
+        $locales = Filesystem\read_directory(self::path($package, 'main'));
         $locales = Vec\map($locales, fn ($l) => Filesystem\get_filename($l));
+
+        $locales = array_filter($locales, fn (string $l) => Iter\contains($modern, $l));
 
         return Vec\sort($locales);
     }
@@ -52,7 +56,7 @@ final class CldrData
 
         [$filename, $keys] = explode('.', $key, 2);
 
-        $path = self::path($package, "{$locale}/{$filename}.json");
+        $path = self::path($package, "main/{$locale}/{$filename}.json");
 
         $data = Json\decode(File\read($path));
 
@@ -86,11 +90,27 @@ final class CldrData
     }
 
     /**
+     * @return list<string>
+     */
+    private static function getModernLocales(): array
+    {
+        $path = self::path('core', 'availableLocales.json');
+        $data = Json\decode(File\read($path));
+
+        /** @phpstan-ignore return.type */
+        return $data['availableLocales']['modern'];
+    }
+
+    /**
      * @return non-empty-string
      */
     private static function path(string $package, string $path = ''): string
     {
-        $path = "node_modules/cldr-{$package}-modern/main/{$path}";
+        if ($package !== 'core') {
+            $package .= '-full';
+        }
+
+        $path = "node_modules/cldr-{$package}/{$path}";
 
         /** @var non-empty-string */
         return Str\Byte\trim_right(__DIR__ . "/../../{$path}", '/');

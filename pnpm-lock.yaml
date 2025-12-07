@@ -8,28 +8,31 @@ importers:
 
   .:
     devDependencies:
-      cldr-numbers-modern:
+      cldr-core:
         specifier: ^45.0
-        version: 45.0.0(cldr-core@44.1.0)
-      cldr-units-modern:
+        version: 45.0.0
+      cldr-numbers-full:
         specifier: ^45.0
-        version: 45.0.0(cldr-core@44.1.0)
+        version: 45.0.0(cldr-core@45.0.0)
+      cldr-units-full:
+        specifier: ^45.0
+        version: 45.0.0(cldr-core@45.0.0)
       node:
         specifier: runtime:22.0.0
         version: runtime:22.0.0
 
 packages:
 
-  cldr-core@44.1.0:
-    resolution: {integrity: sha512-ssbJaXu3pCkc4YqNC6xHhgleZG7YqnOFZ9laMlJfHOfnspoA9waI4AH54gKB3Fe/+wI4i3cVxKFdCTVGTRw+UA==}
+  cldr-core@45.0.0:
+    resolution: {integrity: sha512-gQVxy3gzOQpXiTRGmlKiRQFLYimrr1RgvqGKZCS61JgmdkeNm7+LZGx+Lhw5/AW0t8WMM/uZhf4CMva6LuUobQ==}
 
-  cldr-numbers-modern@45.0.0:
-    resolution: {integrity: sha512-U8mQj/p8Db1woLcTPr5RNgP4mJokCYawp0ae+jvvU+fRCLF9Jx2vP/LGEkXf4k7bp0VcfB40JxkXZXhAXS247w==}
+  cldr-numbers-full@45.0.0:
+    resolution: {integrity: sha512-5Lf03tqz7XgHEA2hXTHAxOAYxea5d/BYMIAtt8HtGmrfHK2vNLJgaOoqALx801GJgQjCBoYs6f0P98qUkji+CQ==}
     peerDependencies:
       cldr-core: 45.0.0
 
-  cldr-units-modern@45.0.0:
-    resolution: {integrity: sha512-B0qgBcMwaMEALXsuco6v+xeRRi1NtmTeYMFNJQzJXm/Mwirm8iW8YN1zdl83Ae6iI3JbJTuwhK1+IuHO3mVs6w==}
+  cldr-units-full@45.0.0:
+    resolution: {integrity: sha512-plkuDoBaS2L9dCFJjgV7J9cERXs6b8eiS08fduDm5++n3Z6hegK91JYL6rmUPGQEtUPZNk7+jqFu1Ocgk47WVA==}
     peerDependencies:
       cldr-core: 45.0.0
 
@@ -144,14 +147,14 @@ packages:
 
 snapshots:
 
-  cldr-core@44.1.0: {}
+  cldr-core@45.0.0: {}
 
-  cldr-numbers-modern@45.0.0(cldr-core@44.1.0):
+  cldr-numbers-full@45.0.0(cldr-core@45.0.0):
     dependencies:
-      cldr-core: 44.1.0
+      cldr-core: 45.0.0
 
-  cldr-units-modern@45.0.0(cldr-core@44.1.0):
+  cldr-units-full@45.0.0(cldr-core@45.0.0):
     dependencies:
-      cldr-core: 44.1.0
+      cldr-core: 45.0.0
 
   node@runtime:22.0.0: {}
