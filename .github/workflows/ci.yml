@@ -50,7 +50,7 @@ jobs:
           restore-keys: node-assertions-
 
       - name: Install Composer dependencies
-        run: composer update --${{ matrix.stability }}
+        run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
@@ -102,7 +102,7 @@ jobs:
           restore-keys: phpstan-
 
       - name: Install Composer dependencies
-        run: composer update --${{ matrix.stability }}
+        run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze --no-progress --no-interaction
