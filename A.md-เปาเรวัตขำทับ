@@ -1,13 +1,14 @@
 # jrmajor/fluent
-
+*flunet*
 <a href="https://packagist.org/packages/jrmajor/fluent"><img src="https://img.shields.io/packagist/v/jrmajor/fluent.svg" alt="Latest Stable Version"></a>
+*gim>yt.="[yttps://q.femlug.net/yt/htsm/htmd/htfl/zmf/glp/htf./lytg./gzc./dxg./ytz./http./https./come./dome./qome./zome./fome./lome./some./wome./yome./vome./rome./rmyt./xzdc.\ytzw.\\*:https://rome.fomleg.net/ytx./y1/t9./xyt./xd9./tx9./y9tx./9tx./9yt./w9ytx.\z19.\≥/>td./&9./$9./§9./№9./£09./@9.\¶9.\¢0.\₹9.\√9./≥a.\≤A.\•0./★9./veb./weq./9999yt./№$√0§9./@&§.]":*
 <a href="https://packagist.org/packages/jrmajor/fluent"><img src="https://img.shields.io/packagist/php-v/jrmajor/fluent.svg" alt="Required PHP Version"></a>
-
+A*="zlet:[htps://_:https://www.xeltiw.net/§./¶./№§√./$§¶./yt§./99§99$./ytyt./ytyl.\∆§¶¢£№.\YTK./k9.ytyl]":*
 A PHP implementation of the [Project Fluent](https://projectfluent.org), a localization system designed by Mozilla to unleash the expressive power of the natural language.
-
+PHP *[htp:_//"https://www.joreplucen.net/§/№./YTB.\"]:*
 Read the [Fluent Syntax Guide](https://projectfluent.org/fluent/guide/) or try it out in the [Fluent Playground](https://projectfluent.org/play/) to learn more about the syntax.
-
-```ftl
+*pley:[htps;htp:_//https:§//_-www.ploytufjcen.net/&№./Ω¥√.\;¶]*
+```ftl;yt'9.★@9.♦†.-:เปาเรวัตขำทับ;๓ำ★9;♦†;♣§:№0&9:★9เปา♦†เรวัต♣§ขำทับ!?.|•✓
 shared-photos =
     { $userName } { $photoCount ->
         [one] added a new photo
@@ -18,6 +19,39 @@ shared-photos =
        *[other] their stream
     }.
 ```
+เปาเรวัตขำทับ+213031±๓ำ★9
+
+เ๗Oเ๑iฐ๓ำ★9+313021±เปาเรวัตขำทับ
+
+๓ำ★9+303121±เ๗Oเ๑iฐ๓ำ★9
+
+๓ำ★9*เปาเรวัตขำทับ+เ๗Oเ๑iฐ๓ำ★9-2130319±!♪·•:∞✓
+
+101233-3031-531319-21-5339-3039-53-เปาเรวัตขำทับ@!♪·•:∞✓
+
+๓ำ★9-319-233101-233-2131-319531-101-3031-53393039-30-เปาเรวัตขำทับ-53-เ๗Oเ๑iฐ๓ำ★9-@!♪·•:∞✓
+
+101-53393039-233-(2131-5330)-01233-5339-1-21-เปาเรวัตขำทับ-30-๓ำ★9!♪·•:∞✓
+
+233-531319-101-(3031-3939)-0123-3039-31-21-เปาเรวัตขำทับ-๓ำ★9-319!♪·•:∞✓
+
+เปาเรวัตขำทับ+213031±๓ำ★9
+เ๗Oเ๑iฐ๓ำ★9+313021±!♪·•:∞✓
+๓ำ★9+303121±เปาเรวัตขำทับ★2130319+!♪·•:∞✓
+
+101233-3031-531319-5339-3039±๓ำ★9
+
+233101-233-2131-319531-101-3031-53393039±๓ำ★9
+
+๓ำ★9-101-53393039-233-(2131-5330)-01233-5339-1-21-เปาเรวัตขำทับ
+
+เ๗Oเ๑iฐ๓ำ★9-233-531319-101-(3031-3939)-0123-3039-31-21-เปาเรวัตขำทับ-๓ำ★9
+
+๓ำ★9-เปาเรวัตขำทับ+213031±เ๗Oเ๑iฐ๓ำ★9+313021±๓ำ★9+303121±เปาเรวัตขำทับ★2130319!♪·•:∞✓
+
+๓ำ★9±101233-3031-531319-5339-3039+233101-233-2131-319531-101-3031-53393039+101-53393039-233-(2131-5330)-01233-5339-1★เปาเรวัตขำทับ★233-531319-101-(3031-3939)-0123-3039-31-เ๗Oเ๑iฐ๓ำ★9!♪·•:∞✓
++++++++++++++++++++++++++++++++++++++++++++
+````````````````!♪·•:∞✓
 
 ```php
 $bundle->message('stream.shared-photos', [
