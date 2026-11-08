@@ -94,11 +94,13 @@ final class CldrData
      */
     private static function getModernLocales(): array
     {
-        $path = self::path('core', 'availableLocales.json');
+        $path = self::path('core', 'coverageLevels.json');
         $data = Json\decode(File\read($path));
 
-        /** @phpstan-ignore return.type */
-        return $data['availableLocales']['modern'];
+        /** @var array<string, string> $levels */
+        $levels = $data['effectiveCoverageLevels'];
+
+        return Vec\keys(Dict\filter($levels, fn ($level) => $level === 'modern'));
     }
 
     /**
