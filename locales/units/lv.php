@@ -32,7 +32,7 @@ return [
     'mile' => new U(['zero' => '{0} jūdžu', 'one' => '{0} jūdze', 'other' => '{0} jūdzes'], ['one' => '{0} jūdze', 'other' => '{0} jūdzes'], '{0}mi'),
     'mile-scandinavian' => new U(['zero' => '{0} skandināvu jūdžu', 'one' => '{0} skandināvu jūdze', 'other' => '{0} skandināvu jūdzes'], ['one' => '{0} skandināvu jūdze', 'other' => '{0} skandināvu jūdzes'], ['zero' => "{0}\u{A0}sk.j.", 'other' => '{0} sk.j.']),
     'milliliter' => new U(['zero' => '{0} mililitru', 'one' => '{0} mililitrs', 'other' => '{0} mililitri'], '{0} ml', '{0} ml'),
-    'millimeter' => new U(['zero' => '{0} milimetru', 'one' => '{0} milimetrs', 'other' => '{0} milimetri'], '{0} mm', ['one' => '{0}mm', 'other' => '{0} mm']),
+    'millimeter' => new U(['zero' => '{0} milimetru', 'one' => '{0} milimetrs', 'other' => '{0} milimetri'], '{0} mm', '{0} mm'),
     'millisecond' => new U(['zero' => '{0} milisekunžu', 'one' => '{0} milisekunde', 'other' => '{0} milisekundes'], '{0} ms', '{0} ms'),
     'minute' => new U(['zero' => '{0} minūšu', 'one' => '{0} minūte', 'other' => '{0} minūtes'], '{0} min', '{0} min'),
     'month' => new U(['zero' => '{0} mēnešu', 'one' => '{0} mēnesis', 'other' => '{0} mēneši'], '{0} mēn.', '{0} m.'),

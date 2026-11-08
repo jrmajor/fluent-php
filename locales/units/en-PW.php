@@ -5,7 +5,7 @@ use Major\Fluent\Formatters\Number\Locale\Unit as U;
 return [
     'centimeter' => new U(['one' => '{0} centimetre', 'other' => '{0} centimetres'], '{0} cm', '{0}cm'),
     'fluid-ounce' => new U(['one' => '{0} US fluid ounce', 'other' => '{0} US fluid ounces'], '{0} US fl oz', '{0}US fl oz'),
-    'gallon' => new U(['one' => '{0} US gallon', 'other' => '{0} US gallons'], '{0} US gal', '{0}galUS'),
+    'gallon' => new U(['one' => '{0} US gallon', 'other' => '{0} US gallons'], '{0} US gal', '{0}USgal'),
     'hour' => new U(['one' => '{0} hour', 'other' => '{0} hours'], ['one' => '{0} hr', 'other' => '{0} hrs'], '{0}h'),
     'kilometer' => new U(['one' => '{0} kilometre', 'other' => '{0} kilometres'], '{0} km', '{0}km'),
     'liter' => new U(['one' => '{0} litre', 'other' => '{0} litres'], '{0} l', '{0}l'),

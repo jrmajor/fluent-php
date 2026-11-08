@@ -187,10 +187,12 @@ return [
     'WST' => new C('WST', 'samoaski tala', plurals: ['one' => 'samoaski tala', 'two' => 'samoaskej talej', 'few' => 'samoaske tale', 'other' => 'samoaskich talow']),
     'XAF' => new C('XAF', 'CFA-frank (BEAC)', 'FCFA', plurals: ['one' => 'CFA-frank (BEAC)', 'two' => 'CFA-frankaj (BEAC)', 'few' => 'CFA-franki (BEAC)', 'other' => 'CFA-frankow (BEAC)'], minorUnits: 0),
     'XCD' => new C('XCD', 'wuchodnokaribiski dolar', 'EC$', '$', ['one' => 'wuchodnokaribiski dolar', 'two' => 'wuchodnokaribiskej dolaraj', 'few' => 'wuchodnokaribiske dolary', 'other' => 'wuchodnokaribiskich dolarow']),
+    'XCG' => new C('XCG', 'karibiski gulden', 'Cg.', plurals: ['one' => 'karibiski gulden', 'two' => 'karibiskej guldenaj', 'few' => 'karibiske guldeny', 'other' => 'karibiskich guldenow']),
     'XOF' => new C('XOF', 'CFA-frank (BCEAO)', "F\u{202F}CFA", plurals: ['one' => 'CFA-frank (BCEAO)', 'two' => 'CFA-frankaj (BCEAO)', 'few' => 'CFA-franki (BCEAO)', 'other' => 'CFA-frankow (BCEAO)'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP-frank', 'CFPF', plurals: ['one' => 'CFP-frank', 'two' => 'CFP-frankaj', 'few' => 'CFP-franki', 'other' => 'CFP-frankow'], minorUnits: 0),
     'XXX' => new C('XXX', 'njeznata měna', '¤', plurals: ['one' => 'njeznata měna', 'two' => 'njeznatej měnje', 'few' => 'njeznate měny', 'other' => 'njeznatych měnow']),
     'YER' => new C('YER', 'jemenski rial', plurals: ['one' => 'jemenski rial', 'two' => 'jemenskej rialej', 'few' => 'jemenske riale', 'other' => 'jemenskich rialow']),
     'ZAR' => new C('ZAR', 'južnoafriski rand', narrow: 'R', plurals: ['one' => 'južnoafriski rand', 'two' => 'južnoafriskej randaj', 'few' => 'južnoafriske randy', 'other' => 'južnoafriskich randow']),
     'ZMW' => new C('ZMW', 'sambiski kwacha', narrow: 'ZK', plurals: ['one' => 'sambiski kwacha', 'two' => 'sambiskej kwachaj', 'few' => 'sambiske kwachi', 'other' => 'sambiskich kwachow']),
+    'ZWG' => new C('ZWG', 'simbabwiske złoto', plurals: ['one' => 'simbabwiske złoto', 'two' => 'simbabwiskej złoće', 'few' => 'simbabwiske złota', 'other' => 'simbabwiskich złotow']),
 ];

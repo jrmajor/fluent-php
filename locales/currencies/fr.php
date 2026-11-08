@@ -284,6 +284,7 @@ return [
     'ZRN' => new C('ZRN', 'nouveau zaïre zaïrien', plurals: ['one' => 'nouveau zaïre zaïrien', 'other' => 'nouveaux zaïres zaïriens']),
     'ZRZ' => new C('ZRZ', 'zaïre zaïrois', plurals: ['one' => 'zaïre zaïrois', 'other' => 'zaïres zaïrois']),
     'ZWD' => new C('ZWD', 'dollar zimbabwéen', plurals: ['one' => 'dollar zimbabwéen', 'other' => 'dollars zimbabwéens']),
+    'ZWG' => new C('ZWG', 'or du Zimbabwe'),
     'ZWL' => new C('ZWL', 'dollar zimbabwéen (2009)', plurals: ['one' => 'dollar zimbabwéen (2009)', 'other' => 'dollars zimbabwéens (2009)']),
     'ZWR' => new C('ZWR', 'dollar zimbabwéen (2008)', plurals: ['one' => 'dollar zimbabwéen (2008)', 'other' => 'dollars zimbabwéens (2008)']),
 ];

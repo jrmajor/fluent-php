@@ -3,6 +3,7 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
+    'AFN' => new C('AFN', 'afghani afghan', narrow: '؋', plurals: ['one' => 'afghani afghan', 'other' => 'afghanis afghans']),
     'ARS' => new C('ARS', 'peso argentin', narrow: '$', plurals: ['one' => 'peso argentin', 'other' => 'pesos argentins']),
     'AUD' => new C('AUD', 'dollar australien', "\$\u{A0}AU", '$', ['one' => 'dollar australien', 'other' => 'dollars australiens']),
     'AZN' => new C('AZN', 'manat azerbaïdjanais', narrow: '₼', plurals: ['one' => 'manat azerbaïdjanais', 'other' => 'manats azerbaïdjanais']),

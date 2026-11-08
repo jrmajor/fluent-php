@@ -184,6 +184,7 @@ return [
     'XAU' => new C('XAU', 'ਸੋਨਾ', plurals: 'ਸੋਨੇ ਦਾ ਟਰੌਏ ਔਂਸ'),
     'XBB' => new C('XBB', 'ਯੂਰਪੀ ਵਿੱਤੀ ਇਕਾਈ'),
     'XCD' => new C('XCD', 'ਪੂਰਬੀ ਕੈਰੇਬੀਅਨ ਡਾਲਰ', 'EC$', '$'),
+    'XCG' => new C('XCG', 'ਕੈਰੇਬੀਅਨ ਗਿਲਡਰ', 'Cg.'),
     'XEU' => new C('XEU', 'ਯੂਰਪੀ ਮੁਦਰਾ ਇਕਾਈ', plurals: ['one' => 'ਯੂਰਪੀਅਨ ਮੁਦਰਾ ਇਕਾਈ', 'other' => 'ਯੂਰਪੀ ਮੁਦਰਾ ਇਕਾਈ']),
     'XOF' => new C('XOF', 'ਪੱਛਮੀ ਅਫ਼ਰੀਕੀ (CFA) ਫ੍ਰੈਂਕ', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', 'ਫ੍ਰੈਂਕ (CFP)', 'CFPF', minorUnits: 0),
@@ -191,4 +192,5 @@ return [
     'YER' => new C('YER', 'ਯਮਨੀ ਰਿਆਲ'),
     'ZAR' => new C('ZAR', 'ਦੱਖਣੀ ਅਫਰੀਕੀ ਰੈਂਡ', narrow: 'R'),
     'ZMW' => new C('ZMW', 'ਜ਼ਾਮਬੀਆਈ ਕਵਾਚਾ', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'ਜ਼ਿੰਬਾਬਵੀ ਗੋਲਡ'),
 ];

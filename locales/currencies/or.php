@@ -158,10 +158,12 @@ return [
     'WST' => new C('WST', 'ସାମୋୟିୟ ତାଲା'),
     'XAF' => new C('XAF', 'ମଧ୍ୟ ଆଫ୍ରିକୀ CFA ଫ୍ରାଙ୍କ୍', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'ପୂର୍ବ କାରିବୀୟ ଡଲାର୍', 'EC$', '$'),
-    'XOF' => new C('XOF', 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍', "F\u{202F}CFA", minorUnits: 0),
+    'XCG' => new C('XCG', 'କ‍୍ୟାରବିଅନ୍‌ ଗିଲ୍ଡର୍‌', 'Cg.'),
+    'XOF' => new C('XOF', 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍', "F\u{202F}CFA", plurals: ['one' => 'ପଶ୍ଚିମ ଆଫ୍ରିକୀୟ CFA ଫ୍ରାଙ୍କ୍', 'other' => 'ପଶ୍ଚିମ ଆଫ୍ରିକିୟ CFA ଫ୍ରାଙ୍କ୍'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP ଫ୍ରାଙ୍କ୍', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'ଅଜଣା ମୁଦ୍ରା', '¤', plurals: ['one' => '(ମୁଦ୍ରାର ଅଜଣା ଏକକ)', 'other' => '(ଅଜଣା ମୁଦ୍ରା)']),
     'YER' => new C('YER', 'ୟେମେନି ରିଆଲ୍'),
     'ZAR' => new C('ZAR', 'ଦକ୍ଷିଣ ଆଫ୍ରିକିୟ ରାଣ୍ଡ୍', narrow: 'R'),
     'ZMW' => new C('ZMW', 'ଜାମ୍ବୀୟ କ୍ୱାଚା', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'ଜିମ୍ବାୱିଅନ୍‌ ଗୋଲ୍ଡ୍‌'),
 ];

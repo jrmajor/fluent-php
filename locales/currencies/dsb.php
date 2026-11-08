@@ -187,10 +187,12 @@ return [
     'WST' => new C('WST', 'samoaska tala', plurals: ['one' => 'samoaski tala', 'two' => 'samoaskej tali', 'few' => 'samoaske tale', 'other' => 'samoaskich talow']),
     'XAF' => new C('XAF', 'CFA-frank (BEAC)', 'FCFA', plurals: ['one' => 'CFA-frank (BEAC)', 'two' => 'CFA-franka (BEAC)', 'few' => 'CFA-franki (BEAC)', 'other' => 'CFA-frankow (BEAC)'], minorUnits: 0),
     'XCD' => new C('XCD', 'pódzajtšnokaribiski dolar', 'EC$', '$', ['one' => 'pódzajtšnokaribiski dolar', 'two' => 'pódzajtšnokaribiskej dolara', 'few' => 'pódzajtšnokaribiske dolary', 'other' => 'pódzajtšnokaribiskich dolarow']),
+    'XCG' => new C('XCG', 'karibiski šesnak', 'Cg.', plurals: ['one' => 'karibiski šesnak', 'two' => 'karibiskej šesnaka', 'few' => 'karibiske šesnaki', 'other' => 'karibiskich šesnakow']),
     'XOF' => new C('XOF', 'CFA-frank (BCEAO)', "F\u{202F}CFA", plurals: ['one' => 'CFA-frank (BCEAO)', 'two' => 'CFA-franka (BCEAO)', 'few' => 'CFA-franki (BCEAO)', 'other' => 'CFA-frankow (BCEAO)'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP-frank', 'CFPF', plurals: ['one' => 'CFP-frank', 'two' => 'CFP-franka', 'few' => 'CFP-franki', 'other' => 'CFP-frankow'], minorUnits: 0),
     'XXX' => new C('XXX', 'njeznate pjenjeze', '¤', plurals: ['one' => 'njeznate pjenjeze', 'two' => 'njeznate pjenjeze', 'few' => 'njeznate pjenjeze', 'other' => 'njeznatych pjenjez']),
     'YER' => new C('YER', 'jemeński rial', plurals: ['one' => 'jemeński rial', 'two' => 'jemeńskej riala', 'few' => 'jemeńske riale', 'other' => 'jemeńskich rialow']),
     'ZAR' => new C('ZAR', 'pódpołdnjowoafriski rand', narrow: 'R', plurals: ['one' => 'pódpołdnjowoafriski rand', 'two' => 'pódpołdnjowoafriskej randa', 'few' => 'pódpołdnjowoafriske randy', 'other' => 'pódpołdnjowoafriskich randow']),
     'ZMW' => new C('ZMW', 'sambiska kwacha', narrow: 'ZK', plurals: ['one' => 'sambiska kwacha', 'two' => 'sambiskej kwaše', 'few' => 'sambiske kwachy', 'other' => 'sambiskich kwachow']),
+    'ZWG' => new C('ZWG', 'simbabwiske złoto', plurals: ['one' => 'simbabwiske złoto', 'two' => 'simbabwiskej złośe', 'few' => 'simbabwiske złota', 'other' => 'simbabwiskich złotow']),
 ];

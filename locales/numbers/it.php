@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale(symbols: [',', '.', '-', '%']);
+return new Major\Fluent\Formatters\Number\Locale\Locale(grouping: 2, symbols: [',', '.', '-', '%']);

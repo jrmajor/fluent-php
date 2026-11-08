@@ -278,6 +278,7 @@ return [
     'XBC' => new C('XBC', 'Avrupa Hesap Birimi (XBC)'),
     'XBD' => new C('XBD', 'Avrupa Hesap Birimi (XBD)'),
     'XCD' => new C('XCD', 'Doğu Karayip doları', 'EC$', '$'),
+    'XCG' => new C('XCG', 'Karayip guldeni', 'Cg.'),
     'XDR' => new C('XDR', 'Özel Çekme Hakkı (SDR)'),
     'XEU' => new C('XEU', 'Avrupa Para Birimi'),
     'XFO' => new C('XFO', 'Fransız Altın Frangı'),
@@ -304,6 +305,7 @@ return [
     'ZRN' => new C('ZRN', 'Yeni Zaire Zairesi'),
     'ZRZ' => new C('ZRZ', 'Zaire Zairesi'),
     'ZWD' => new C('ZWD', 'Zimbabve Doları'),
+    'ZWG' => new C('ZWG', 'Zimbabve altını'),
     'ZWL' => new C('ZWL', 'Zimbabve Doları (2009)'),
     'ZWR' => new C('ZWR', 'Zimbabve Doları (2008)', plurals: 'Zimbabve doları (2008)'),
 ];

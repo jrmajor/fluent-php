@@ -3,7 +3,7 @@
 use Major\Fluent\Formatters\Number\Locale\Currency as C;
 
 return [
-    'AED' => new C('AED', 'সংযুক্ত আৰব আমিৰাত ডিৰহেম', plurals: 'UAE ডিৰহেম'),
+    'AED' => new C('AED', 'সংযুক্ত আৰব আমিৰাত ডিৰহেম'),
     'AFN' => new C('AFN', 'আফগান আফগানী', narrow: '؋'),
     'ALL' => new C('ALL', 'আলবেনীয় লেক'),
     'AMD' => new C('AMD', 'আৰ্মেনিয়ান ড্ৰাম', narrow: '֏'),
@@ -159,10 +159,12 @@ return [
     'WST' => new C('WST', 'ছামোৱান টালা'),
     'XAF' => new C('XAF', 'মধ্য আফ্ৰিকান CFA ফ্ৰেংক', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'ইষ্ট কেৰিবিয়ান ডলাৰ', 'EC$', '$'),
+    'XCG' => new C('XCG', 'কেৰিবীয়ান গিল্ডাৰ', 'Cg.'),
     'XOF' => new C('XOF', 'পশ্চিম আফ্ৰিকান CFA ফ্ৰেংক', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', 'CFP ফ্ৰেংক', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'অজ্ঞাত মুদ্ৰা', '¤', plurals: ['one' => '(মুদ্ৰাৰ অজ্ঞাত একক)', 'other' => '(অজ্ঞাত মুদ্ৰা)']),
     'YER' => new C('YER', 'য়েমেনী ৰিয়েল'),
     'ZAR' => new C('ZAR', 'দক্ষিণ আফ্ৰিকাৰ ৰাণ্ড', narrow: 'R'),
     'ZMW' => new C('ZMW', 'জাম্বিয়ান কোৱাচা', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'জিম্বাৱীয় সোণ'),
 ];

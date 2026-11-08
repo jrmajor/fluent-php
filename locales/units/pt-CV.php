@@ -13,5 +13,4 @@ return [
     'kilogram' => new U(['one' => '{0} quilograma', 'other' => '{0} quilogramas'], '{0} kg', '{0} kg'),
     'kilometer' => new U(['one' => '{0} quilómetro', 'other' => '{0} quilómetros'], '{0} km', '{0} km'),
     'liter' => new U(['one' => '{0} litro', 'other' => '{0} litros'], '{0} l', '{0} l'),
-    'mile' => new U(['one' => '{0} milha', 'other' => '{0} milhas'], ['one' => '{0} milha', 'other' => '{0} milhas'], ['one' => '{0} milha', 'other' => '{0} milhas']),
 ];

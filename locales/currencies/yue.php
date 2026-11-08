@@ -277,6 +277,7 @@ return [
     'XBC' => new C('XBC', '歐洲會計單位 (XBC)'),
     'XBD' => new C('XBD', '歐洲會計單位 (XBD)'),
     'XCD' => new C('XCD', '格瑞那達元', 'EC$', '$'),
+    'XCG' => new C('XCG', '加勒比盾', 'Cg.'),
     'XDR' => new C('XDR', '特殊提款權'),
     'XEU' => new C('XEU', '歐洲貨幣單位 (XEU)'),
     'XFO' => new C('XFO', '法國金法郎'),
@@ -303,6 +304,7 @@ return [
     'ZRN' => new C('ZRN', '薩伊新扎伊爾'),
     'ZRZ' => new C('ZRZ', '薩伊扎伊爾'),
     'ZWD' => new C('ZWD', '辛巴威元 (1980–2008)'),
+    'ZWG' => new C('ZWG', '辛巴威金'),
     'ZWL' => new C('ZWL', '辛巴威元 (2009)'),
     'ZWR' => new C('ZWR', '辛巴威元 (2008)'),
 ];

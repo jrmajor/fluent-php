@@ -41,7 +41,7 @@ return [
     'CAD' => new C('CAD', 'Kanadadalur', narrow: '$', plurals: ['one' => 'Kanadadalur', 'other' => 'Kanadadalir']),
     'CDF' => new C('CDF', 'kongóskur franki', plurals: ['one' => 'kongóskur franki', 'other' => 'kongóskir frankar']),
     'CHF' => new C('CHF', 'svissneskur franki', plurals: ['one' => 'svissneskur franki', 'other' => 'svissneskir frankar']),
-    'CLF' => new C('CLF', 'Chilean Unidades de Fomento', minorUnits: 4),
+    'CLF' => new C('CLF', 'Chilean Unidades de Fomento', plurals: 'síleskt Unidad de Fomento', minorUnits: 4),
     'CLP' => new C('CLP', 'síleskur pesi', narrow: '$', plurals: ['one' => 'síleskur pesi', 'other' => 'síleskir pesar'], minorUnits: 0),
     'CNH' => new C('CNH', 'kínverskt júan (utan heimalands)', plurals: ['one' => 'kínverskt júan (utan heimalands)', 'other' => 'kínversk júön (utan heimalands)']),
     'CNY' => new C('CNY', 'kínverskt júan', 'CN¥', '¥', ['one' => 'kínverskt júan', 'other' => 'kínversk júön']),
@@ -217,6 +217,7 @@ return [
     'WST' => new C('WST', 'Samóatala', plurals: ['one' => 'Samóatala', 'other' => 'Samóatölur']),
     'XAF' => new C('XAF', 'miðafrískur franki', 'FCFA', plurals: ['one' => 'miðafrískur franki', 'other' => 'miðafrískir frankar'], minorUnits: 0),
     'XCD' => new C('XCD', 'austurkarabískur dalur', 'EC$', '$', ['one' => 'austurkarabískur dalur', 'other' => 'austurkarabískir dalir']),
+    'XCG' => new C('XCG', 'Karíbahafsgyllini'),
     'XDR' => new C('XDR', 'Sérstök dráttarréttindi'),
     'XFO' => new C('XFO', 'Franskur gullfranki'),
     'XFU' => new C('XFU', 'Franskur franki, UIC'),
@@ -231,4 +232,5 @@ return [
     'ZMK' => new C('ZMK', 'Zambian Kwacha (1968–2012)'),
     'ZMW' => new C('ZMW', 'sambísk kvaka', narrow: 'ZK', plurals: ['one' => 'sambísk kvaka', 'other' => 'sambískar kvökur']),
     'ZWD' => new C('ZWD', 'Simbabveskur dalur'),
+    'ZWG' => new C('ZWG', 'simbabveskt gold'),
 ];

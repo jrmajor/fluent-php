@@ -8,7 +8,7 @@ return [
     'byte' => new U(['one' => '{0} byte', 'other' => '{0} bytes'], '{0} B', '{0} B'),
     'celsius' => new U(['one' => '{0} grao Celsius', 'other' => '{0} graos Celsius'], '{0} °C', '{0} °C'),
     'centimeter' => new U(['one' => '{0} centímetro', 'other' => '{0} centímetros'], '{0} cm', '{0} cm'),
-    'day' => new U(['one' => '{0} día', 'other' => '{0} días'], ['one' => '{0} día', 'other' => '{0} días'], '{0} d'),
+    'day' => new U(['one' => '{0} día', 'other' => '{0} días'], ['one' => '{0} día', 'other' => '{0} días'], '{0} d.'),
     'degree' => new U(['one' => '{0} grao', 'other' => '{0} graos'], '{0}°', '{0}°'),
     'fahrenheit' => new U(['one' => '{0} grao Fahrenheit', 'other' => '{0} graos Fahrenheit'], '{0} °F', '{0}°F'),
     'fluid-ounce' => new U(['one' => '{0} onza líquida', 'other' => '{0} onzas líquidas'], '{0} fl oz', '{0} fl oz'),

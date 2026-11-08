@@ -255,6 +255,7 @@ return [
     'XBC' => new C('XBC', 'unità di acconto europea (XBC)'),
     'XBD' => new C('XBD', 'unità di acconto europea (XBD)'),
     'XCD' => new C('XCD', 'dollaro dei Caraibi orientali', 'EC$', '$', ['one' => 'dollaro dei Caraibi orientali', 'other' => 'dollari dei Caraibi orientali']),
+    'XCG' => new C('XCG', 'fiorino caraibico', 'Cf', plurals: ['one' => 'fiorino caraibico', 'other' => 'fiorini caraibici']),
     'XDR' => new C('XDR', 'diritti speciali di incasso'),
     'XFO' => new C('XFO', 'franco oro francese'),
     'XFU' => new C('XFU', 'franco UIC francese'),
@@ -277,5 +278,6 @@ return [
     'ZRN' => new C('ZRN', 'nuovo zaire dello Zaire'),
     'ZRZ' => new C('ZRZ', 'zaire dello Zaire'),
     'ZWD' => new C('ZWD', 'dollaro dello Zimbabwe'),
+    'ZWG' => new C('ZWG', 'Zimbabwe Gold'),
     'ZWL' => new C('ZWL', 'dollaro zimbabwiano (2009)'),
 ];

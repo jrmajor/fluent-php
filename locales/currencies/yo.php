@@ -161,6 +161,7 @@ return [
     'WST' => new C('WST', 'Tálà Sàmóà'),
     'XAF' => new C('XAF', 'Firanki àárín Afíríkà', 'FCFA', plurals: 'àwọn firanki àárín Afíríkà', minorUnits: 0),
     'XCD' => new C('XCD', 'Dọ́là Ilà Oòrùn Karíbíà', 'EC$', '$', 'àwọn dọ́là Ilà Oòrùn Karíbíà'),
+    'XCG' => new C('XCG', 'Owó ìlú Kùrásọ̀ àti Saint Mátìnì', 'Cg.'),
     'XOF' => new C('XOF', 'Faransì ìwọ̀-oorùn Afíríkà', "F\u{202F}CFA", plurals: 'àwọn faransì ìwọ̀-oorùn Afíríkà', minorUnits: 0),
     'XPF' => new C('XPF', 'Fírànkì CFP', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'owóníná àìmọ̀', '¤'),
@@ -169,4 +170,5 @@ return [
     'ZMK' => new C('ZMK', 'Kawaṣa ti Orílẹ́ède Saabia (1968–2012)'),
     'ZMW' => new C('ZMW', 'Kàwasà Sámbíà', narrow: 'ZK', plurals: 'àwọn kàwasà Sámbíà'),
     'ZWD' => new C('ZWD', 'Dọla ti Orílẹ́ède Siibabuwe'),
+    'ZWG' => new C('ZWG', 'Owó ìlú Sìnbábúwè'),
 ];

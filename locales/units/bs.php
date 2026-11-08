@@ -3,14 +3,14 @@
 use Major\Fluent\Formatters\Number\Locale\Unit as U;
 
 return [
-    'acre' => new U(['one' => '{0} katastarsko jutro', 'few' => '{0} katastarska jutra', 'other' => '{0} katastarskih jutara'], '{0} kj', '{0} kj'),
+    'acre' => new U(['one' => '{0} katastarsko jutro', 'few' => '{0} katastarska jutra', 'other' => '{0} katastarskih jutara'], '{0} ac', '{0} ac'),
     'bit' => new U(['one' => '{0} bit', 'other' => '{0} bita'], '{0} bit', ['one' => '{0} bit', 'other' => '{0} bita']),
     'byte' => new U(['one' => '{0} bajt', 'few' => '{0} bajta', 'other' => '{0} bajtova'], '{0} bajt', '{0} B'),
     'celsius' => new U(['one' => '{0} stepen Celzijusa', 'few' => '{0} stepena Celzijusa', 'other' => '{0} stepeni Celzijusa'], '{0} °C', '{0}°'),
     'centimeter' => new U(['one' => '{0} centimetar', 'few' => '{0} centimetra', 'other' => '{0} centimetara'], '{0} cm', '{0} cm'),
     'day' => new U(['one' => '{0} dan', 'other' => '{0} dana'], ['one' => '{0} dan', 'other' => '{0} dana'], '{0} d.'),
     'degree' => new U(['one' => '{0} stepen', 'few' => '{0} stepena', 'other' => '{0} stepeni'], '{0}°', '{0}°'),
-    'fahrenheit' => new U(['one' => '{0} stepen Farenhajta', 'few' => '{0} stepena Farenhajta', 'other' => '{0} stepeni Farenhajta'], '{0} °F', ['few' => '{0} °F', 'other' => '{0}°F']),
+    'fahrenheit' => new U(['one' => '{0} stepen Farenhajta', 'few' => '{0} stepena Farenhajta', 'other' => '{0} stepeni Farenhajta'], '{0} °F', '{0} °F'),
     'fluid-ounce' => new U(['one' => '{0} tečna unca', 'few' => '{0} tečne unce', 'other' => '{0} tečnih unci'], '{0} fl oz', '{0} fl oz'),
     'foot' => new U(['few' => '{0} stope', 'other' => '{0} stopa'], '{0} ft', '{0} ft'),
     'gallon' => new U(['one' => '{0} galon', 'other' => '{0} galona'], '{0} gal', '{0} gal'),
@@ -31,7 +31,7 @@ return [
     'microsecond' => new U(['one' => '{0} mikrosekunda', 'few' => '{0} mikrosekunde', 'other' => '{0} mikrosekundi'], '{0} μs', '{0} μs'),
     'mile' => new U(['few' => '{0} milje', 'other' => '{0} milja'], '{0} mi', '{0} mi'),
     'mile-scandinavian' => new U(['one' => '{0} skandinavska milja', 'few' => '{0} skandinavske milje', 'other' => '{0} skandinavskih milja'], '{0} smi', '{0} smi'),
-    'milliliter' => new U(['one' => '{0} mililitar', 'few' => '{0} mililitra', 'other' => '{0} mililitara'], '{0} mL', '{0} mL'),
+    'milliliter' => new U(['one' => '{0} mililitar', 'few' => '{0} mililitra', 'other' => '{0} mililitara'], '{0} ml', '{0} ml'),
     'millimeter' => new U(['one' => '{0} milimetar', 'few' => '{0} milimetra', 'other' => '{0} milimetara'], '{0} mm', '{0} mm'),
     'millisecond' => new U(['one' => '{0} milisekunda', 'few' => '{0} milisekunde', 'other' => '{0} milisekundi'], '{0} ms', '{0} ms'),
     'minute' => new U(['few' => '{0} minute', 'other' => '{0} minuta'], '{0} min.', '{0} m'),

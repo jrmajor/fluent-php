@@ -5,7 +5,7 @@ use Major\Fluent\Formatters\Number\Locale\Currency as C;
 return [
     'AUD' => new C('AUD', 'دالر آسترالیا', 'A$', '$'),
     'BND' => new C('BND', 'دالر برونی', narrow: '$'),
-    'BYN' => new C('BYN', 'روبل روسیهٔ سفید', narrow: 'р.'),
+    'BYN' => new C('BYN', 'روبل روسیهٔ سفید', narrow: 'Br'),
     'BYR' => new C('BYR', 'روبل روسیهٔ سفید (۲۰۰۰–۲۰۱۶)'),
     'CAD' => new C('CAD', 'دالر کانادا', '$CA', '$'),
     'CHF' => new C('CHF', 'فرانک سویس'),

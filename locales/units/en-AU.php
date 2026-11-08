@@ -17,6 +17,6 @@ return [
     'minute' => new U(['one' => '{0} minute', 'other' => '{0} minutes'], ['one' => '{0} min', 'other' => '{0} mins'], '{0}m'),
     'percent' => new U('{0} per cent', '{0}%', '{0}%'),
     'pound' => new U(['one' => '{0} pound', 'other' => '{0} pounds'], '{0} lb', '{0}lb'),
-    'second' => new U(['one' => '{0} second', 'other' => '{0} seconds'], ['one' => '{0} sec.', 'other' => '{0} secs'], '{0}s.'),
+    'second' => new U(['one' => '{0} second', 'other' => '{0} seconds'], ['one' => '{0} sec', 'other' => '{0} secs'], '{0}s'),
     'stone' => new U('{0} stone', '{0} st', '{0}st'),
 ];

@@ -8,7 +8,7 @@ return [
     'byte' => new U(['one' => '{0} i-byte', 'other' => '{0} ama-bytes'], '{0} byte', '{0}B'),
     'celsius' => new U('{0}°C', '{0}°C', '{0}°'),
     'centimeter' => new U('{0} cm', '{0} cm', '{0} cm'),
-    'day' => new U(['one' => '{0} usuku', 'other' => '{0} izinsuku'], ['one' => '{0} usuku', 'other' => '{0} izinsuku'], ['one' => '{0}', 'other' => '{0} suku']),
+    'day' => new U(['one' => '{0} usuku', 'other' => '{0} izinsuku'], ['one' => '{0} usuku', 'other' => '{0} izinsuku'], ['one' => '{0} usuku', 'other' => '{0} suku']),
     'degree' => new U('{0}°', '{0}°', '{0}°'),
     'fahrenheit' => new U('{0}°F', '{0}°F', '{0}°F'),
     'fluid-ounce' => new U('{0} fl oz', '{0} fl oz', '{0} fl oz'),
@@ -47,5 +47,5 @@ return [
     'terabyte' => new U('{0} TB', '{0} TB', '{0}TB'),
     'week' => new U(['one' => '{0} iviki', 'other' => '{0} amaviki'], ['one' => '{0} viki', 'other' => '{0} amaviki'], '{0} w'),
     'yard' => new U('{0} yd', '{0} yd', '{0}yd'),
-    'year' => new U('{0} y', ['one' => '{0} y', 'other' => '{0} yrs'], '{0} y'),
+    'year' => new U('{0} y', '{0} y', '{0} y'),
 ];

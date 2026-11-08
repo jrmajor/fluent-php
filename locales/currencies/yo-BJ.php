@@ -131,6 +131,7 @@ return [
     'VES' => new C('VES', 'Bɔ̀lífà Fɛnɛsuɛ́là', plurals: 'àwɔn bɔ̀lífà Fɛnɛsuɛ́là'),
     'XAF' => new C('XAF', 'Firanki àárín Afíríkà', 'FCFA', plurals: 'àwɔn firanki àárín Afíríkà', minorUnits: 0),
     'XCD' => new C('XCD', 'Dɔ́là Ilà Oòrùn Karíbíà', 'EC$', '$', 'àwɔn dɔ́là Ilà Oòrùn Karíbíà'),
+    'XCG' => new C('XCG', 'Owó ìlú Kùrásɔ̀ àti Saint Mátìnì', 'Cg.'),
     'XOF' => new C('XOF', 'Faransì ìwɔ̀-oorùn Afíríkà', "F\u{202F}CFA", plurals: 'àwɔn faransì ìwɔ̀-oorùn Afíríkà', minorUnits: 0),
     'XXX' => new C('XXX', 'owóníná àìmɔ̀', '¤'),
     'YER' => new C('YER', 'Ráyò Yɛ́mɛ̀nì'),

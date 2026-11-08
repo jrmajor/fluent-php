@@ -42,7 +42,7 @@ return [
     'petabyte' => new U('{0} betabeyt', '{0} BB', '{0} BB'),
     'pound' => new U('{0} bownd', '{0} bw', '{0} bw'),
     'second' => new U('{0} ilbiriqsi', '{0} ilbrqsi', '{0}il'),
-    'stone' => new U('{0} st', '{0} st', '{0} st'),
+    'stone' => new U(['one' => '{0} dhagax', 'other' => '{0} dhagaxo'], '{0} dx', '{0}dx'),
     'terabit' => new U('{0} terabit', '{0} Tb', '{0} Tb'),
     'terabyte' => new U('{0} terabeyt', '{0} TB', '{0} TB'),
     'week' => new U(['one' => '{0} toddobaad', 'other' => '{0} toddobaadyo'], '{0} tdbd', '{0}t'),

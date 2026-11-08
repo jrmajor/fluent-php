@@ -161,10 +161,12 @@ return [
     'WST' => new C('WST', 'Samoa talasi'),
     'XAF' => new C('XAF', 'Markaziy Afrika CFA franki', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'Sharqiy Karib dollari', 'EC$', '$'),
+    'XCG' => new C('XCG', 'Karib guldeni', 'Cg.'),
     'XOF' => new C('XOF', 'G‘arbiy Afrika CFA franki', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', 'Fransuz Polineziyasi franki', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'Noma’lum valyuta', '¤', plurals: '(noma’lum valyuta)'),
     'YER' => new C('YER', 'Yaman riyoli'),
     'ZAR' => new C('ZAR', 'Janubiy Afrika rendi', narrow: 'R'),
     'ZMW' => new C('ZMW', 'Zambiya kvachasi', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'Zimbabve oltini'),
 ];

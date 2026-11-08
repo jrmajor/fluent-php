@@ -18,11 +18,11 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
         $this->assertSame([
-            ['value' => 'arab', 'count' => 2],
+            ['value' => 'arab', 'count' => 22],
             ['value' => 'arabext', 'count' => 4],
             ['value' => 'beng', 'count' => 3],
             ['value' => 'deva', 'count' => 2],
-            ['value' => 'latn', 'count' => 158],
+            ['value' => 'latn', 'count' => 185],
             ['value' => 'mymr', 'count' => 1],
         ], self::countValues($values));
     }
@@ -33,8 +33,8 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
         $this->assertSamePatterns([
-            ['value' => '#,##,##0.###', 'count' => 13],
-            ['value' => '#,##0.###', 'count' => 157],
+            ['value' => '#,##,##0.###', 'count' => 14],
+            ['value' => '#,##0.###', 'count' => 203],
         ], self::countValues($values));
     }
 
@@ -45,8 +45,8 @@ final class LocaleKnownValuesTest extends TestCase
 
         $this->assertSamePatterns([
             ['value' => '#,##,##0%', 'count' => 7],
-            ['value' => '#,##0%', 'count' => 127],
-            ['value' => "#,##0\u{A0}%", 'count' => 34],
+            ['value' => '#,##0%', 'count' => 169],
+            ['value' => "#,##0\u{A0}%", 'count' => 39],
             ['value' => '%#,##0', 'count' => 1],
             ['value' => "%\u{A0}#,##0", 'count' => 1],
         ], self::countValues($values));
@@ -59,19 +59,19 @@ final class LocaleKnownValuesTest extends TestCase
 
         $this->assertSamePatterns([
             ['value' => '#,##,##0.00¤', 'count' => 1],
-            ['value' => "#,##0.00\u{A0}¤", 'count' => 65], // todo
+            ['value' => "#,##0.00\u{A0}¤", 'count' => 83], // todo
             ['value' => "#,##0.00\u{A0}¤;-#,##0.00\u{A0}¤", 'count' => 3],
             ['value' => '#,##0.00¤', 'count' => 1],
-            ['value' => '¤#,##,##0.00', 'count' => 7],
-            ['value' => '¤#,##0.00', 'count' => 50],
+            ['value' => '¤#,##,##0.00', 'count' => 8],
+            ['value' => '¤#,##0.00', 'count' => 57],
             ['value' => '¤#,##0.00;¤-#,##0.00', 'count' => 4],
-            ['value' => "¤\u{A0}#,##,##0.00", 'count' => 3],
-            ['value' => "¤\u{A0}#,##0.00", 'count' => 21],
+            ['value' => "¤\u{A0}#,##,##0.00", 'count' => 2],
+            ['value' => "¤\u{A0}#,##0.00", 'count' => 24],
             ['value' => "¤\u{A0}#,##0.00;¤-#,##0.00", 'count' => 3],
             ['value' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00", 'count' => 3],
             ['value' => "\u{200E}¤#,##0.00", 'count' => 1],
-            ['value' => "\u{200F}#,##0.00\u{A0}¤", 'count' => 1],
-            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 6],
+            ['value' => "\u{200F}#,##0.00\u{A0}¤", 'count' => 21],
+            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 5],
             ['value' => "\u{200F}#,##0.00\u{A0}\u{200F}¤;\u{200F}-#,##0.00\u{A0}\u{200F}¤", 'count' => 1],
         ], self::countValues($values));
     }
@@ -82,8 +82,8 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping);
 
         $this->assertSame([
-            ['value' => 1, 'count' => 149],
-            ['value' => 2, 'count' => 21],
+            ['value' => 1, 'count' => 192],
+            ['value' => 2, 'count' => 25],
         ], self::countValues($values));
     }
 
@@ -93,17 +93,20 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
         $this->assertSame([
-            ['value' => [',', '.', '-', '%'], 'count' => 43],
+            ['value' => [',', "'", '-', '%'], 'count' => 1],
+            ['value' => [',', '.', '-', '%'], 'count' => 48],
             ['value' => [',', '.', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 4],
             ['value' => [',', '.', '−', '%'], 'count' => 3],
-            ['value' => [',', "\u{A0}", '-', '%'], 'count' => 34],
+            ['value' => [',', "\u{A0}", '-', '%'], 'count' => 46],
             ['value' => [',', "\u{A0}", '−', '%'], 'count' => 7],
-            ['value' => [',', "\u{202F}", '-', '%'], 'count' => 2],
-            ['value' => ['.', ',', '-', '%'], 'count' => 63],
+            ['value' => [',', "\u{202F}", '-', '%'], 'count' => 4],
+            ['value' => ['.', "'", '-', '%'], 'count' => 4],
+            ['value' => ['.', ',', '-', '%'], 'count' => 70],
             ['value' => ['.', ',', "\u{200E}-", '%'], 'count' => 2],
-            ['value' => ['.', ',', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 2],
-            ['value' => ['.', '’', '-', '%'], 'count' => 4],
-            ['value' => ['٫', '٬', "\u{061C}-", "٪\u{061C}"], 'count' => 2],
+            ['value' => ['.', ',', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 1],
+            ['value' => ['.', "\u{A0}", '-', '%'], 'count' => 1],
+            ['value' => ['.', '٬', "\u{061C}-", "٪\u{061C}"], 'count' => 1],
+            ['value' => ['٫', '٬', "\u{061C}-", "٪\u{061C}"], 'count' => 21],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '%'], 'count' => 1],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '٪'], 'count' => 1],
             ['value' => ['٫', '٬', "\u{200E}−", '٪'], 'count' => 2],

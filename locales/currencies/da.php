@@ -251,6 +251,7 @@ return [
     'XBA' => new C('XBA', 'EURCO'),
     'XBB' => new C('XBB', 'EMU'),
     'XCD' => new C('XCD', 'østkaribisk dollar', 'EC$', '$', ['one' => 'østkaribisk dollar', 'other' => 'østkaribiske dollar']),
+    'XCG' => new C('XCG', 'caribiske gylden', 'Cg.'),
     'XDR' => new C('XDR', 'SDR'),
     'XEU' => new C('XEU', 'ECU'),
     'XFO' => new C('XFO', 'Fransk guldfranc', plurals: ['one' => 'Fransk guldfranc', 'other' => 'Franske guldfranc']),
@@ -274,6 +275,7 @@ return [
     'ZRN' => new C('ZRN', 'Ny zairisk zaire (1993–1998)', plurals: ['one' => 'Ny zairisk zaire (1993–1998)', 'other' => 'Ny zairiske zaire (1993–1998)']),
     'ZRZ' => new C('ZRZ', 'Zairisk zaire (1971–1993)', plurals: ['one' => 'Zairisk zaire (1971–1993)', 'other' => 'Zairiske zaire (1971–1993)']),
     'ZWD' => new C('ZWD', 'Zimbabwisk dollar (1980–2008)', plurals: ['one' => 'Zimbabwisk dollar (1980–2008)', 'other' => 'Zimbabwiske dollar (1980–2008)']),
+    'ZWG' => new C('ZWG', 'Zimbabwe Gold'),
     'ZWL' => new C('ZWL', 'Zimbabwisk dollar (2009)', plurals: ['one' => 'Zimbabwisk dollar (2009)', 'other' => 'Zimbabwiske dollar (2009)']),
     'ZWR' => new C('ZWR', 'Zimbabwisk dollar (2008)', plurals: ['one' => 'Zimbabwisk dollar (2008)', 'other' => 'Zimbabwiske dollar (2008)']),
 ];

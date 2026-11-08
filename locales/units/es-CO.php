@@ -12,8 +12,6 @@ return [
     'millisecond' => new U(['one' => '{0} milisegundo', 'other' => '{0} milisegundos'], '{0} ms', '{0} ms'),
     'minute' => new U(['one' => '{0} minuto', 'other' => '{0} minutos'], '{0} min', '{0} min'),
     'month' => new U(['one' => '{0} mes', 'other' => '{0} meses'], ['one' => '{0} mes', 'other' => '{0} meses'], ['one' => '{0} mes', 'other' => '{0} meses']),
-    'ounce' => new U(['one' => '{0} onza', 'other' => '{0} onzas'], '{0} oz', ['one' => '{0} oz', 'other' => '{0}oz']),
-    'pound' => new U(['one' => '{0} libra', 'other' => '{0} libras'], '{0} lb', ['one' => '{0} lb', 'other' => '{0}lb']),
     'second' => new U(['one' => '{0} segundo', 'other' => '{0} segundos'], '{0} s', '{0} s'),
     'week' => new U(['one' => '{0} semana', 'other' => '{0} semanas'], ['one' => '{0} sem.', 'other' => '{0} sems.'], ['one' => '{0} sem.', 'other' => '{0} sems.']),
     'year' => new U(['one' => '{0} año', 'other' => '{0} años'], '{0} a.', '{0} a.'),

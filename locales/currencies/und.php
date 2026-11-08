@@ -83,6 +83,7 @@ return [
     'RON' => new C('RON', narrow: 'lei'),
     'RUB' => new C('RUB', narrow: '₽'),
     'RWF' => new C('RWF', narrow: 'RF', minorUnits: 0),
+    'SAR' => new C('SAR'),
     'SBD' => new C('SBD', narrow: '$'),
     'SEK' => new C('SEK', narrow: 'kr'),
     'SGD' => new C('SGD', narrow: '$'),

@@ -33,7 +33,7 @@ return [
     'CDF' => new C('CDF', 'የኮንጐ ፍራንክ ኮንጐሌዝ'),
     'CHF' => new C('CHF', 'የስዊስ ፍራንክ'),
     'CLP' => new C('CLP', 'የቺሊ ፔሶ', narrow: '$', minorUnits: 0),
-    'CNH' => new C('CNH', 'የቻይና ዩዋን (የውጭ ምንዛሪ)', 'የቻይና ዩዋን'),
+    'CNH' => new C('CNH', 'የቻይና ዩዋን (የውጭ ምንዛሪ)'),
     'CNY' => new C('CNY', 'የቻይና የን', 'CN¥', '¥'),
     'COP' => new C('COP', 'የኮሎምቢያ ፔሶ', narrow: '$'),
     'CRC' => new C('CRC', 'የኮስታሪካ ኮሎን', narrow: '₡'),
@@ -163,6 +163,7 @@ return [
     'WST' => new C('WST', 'ሳሞአን ታላ'),
     'XAF' => new C('XAF', 'የመካከለኛው አፍሪካ ሴፋ ፍራንክ', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'የምዕራብ ካሪብያን ዶላር', 'EC$', '$'),
+    'XCG' => new C('XCG', 'የካሪቢያን ጊልደር', 'Cg.'),
     'XOF' => new C('XOF', 'የምዕራብ አፍሪካ ሴፋ ፍራንክ', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', 'ሲ ኤፍ ፒ ፍራንክ', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'ያልታወቀ ገንዘብ', '¤'),
@@ -171,4 +172,5 @@ return [
     'ZMK' => new C('ZMK', 'የዛምቢያ ክዋቻ (1968–2012)'),
     'ZMW' => new C('ZMW', 'የዛምቢያ ክዋቻ', narrow: 'ZK'),
     'ZWD' => new C('ZWD', 'የዚምቧቡዌ ዶላር'),
+    'ZWG' => new C('ZWG', 'የዚምባብዌ ወርቅ'),
 ];

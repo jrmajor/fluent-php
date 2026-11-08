@@ -167,6 +167,7 @@ return [
     'WST' => new C('WST', 'Samoan Tala', plurals: 'Samoan tala'),
     'XAF' => new C('XAF', 'CFA Franc BEAC', 'FCFA', plurals: ['one' => 'CFA franc BEAC', 'other' => 'CFA francs BEAC'], minorUnits: 0),
     'XCD' => new C('XCD', 'Dolyar ng Silangang Caribbean', 'EC$', '$', ['one' => 'dolyar ng Silangang Caribbean', 'other' => 'dolyares ng Silangang Caribbean']),
+    'XCG' => new C('XCG', 'Caribbean guilder', 'Cg.', plurals: ['one' => 'Caribbean guilder', 'other' => 'Caribbean guilders']),
     'XOF' => new C('XOF', 'CFA Franc ng Kanlurang Africa', "F\u{202F}CFA", plurals: ['one' => 'CFA franc ng Kanlurang Africa', 'other' => 'CFA francs ng Kanlurang Africa'], minorUnits: 0),
     'XPF' => new C('XPF', 'CFP Franc', 'CFPF', plurals: ['one' => 'CFP franc', 'other' => 'CFP francs'], minorUnits: 0),
     'XXX' => new C('XXX', 'Hindi Kilalang Pera', '¤', plurals: ['one' => '(hindi kilalang unit ng currency)', 'other' => '(hindi kilalang pera)']),
@@ -174,4 +175,5 @@ return [
     'ZAR' => new C('ZAR', 'Rand ng Timog Africa', narrow: 'R', plurals: 'rand ng Timog Africa'),
     'ZMK' => new C('ZMK', 'Zambian Kwacha (1968–2012)'),
     'ZMW' => new C('ZMW', 'Zambian Kwacha', narrow: 'ZK', plurals: ['one' => 'Zambian kwacha', 'other' => 'Zambian kwachas']),
+    'ZWG' => new C('ZWG', 'Zimbabwean Gold', plurals: 'Zimbabwean gold'),
 ];

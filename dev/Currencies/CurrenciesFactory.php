@@ -58,13 +58,7 @@ final class CurrenciesFactory
         }
 
         if (! Iter\contains_key($data, 'other')) {
-            if ($exceptionsFor !== 'GWP in nn') {
-                throw new Exception("Plurals {$exceptionsFor} do not contain the \"other\" key.");
-            }
-
-            $data['other'] = $data['one'];
-        } elseif ($exceptionsFor === 'GWP in nn') {
-            throw new Exception("Remove the workaround for {$exceptionsFor}.");
+            throw new Exception("Plurals {$exceptionsFor} do not contain the \"other\" key.");
         }
 
         $filtered = Dict\filter_with_key($data, fn ($c, $v) => $c === 'other' || $v !== $data['other']);

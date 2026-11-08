@@ -232,6 +232,7 @@ return [
     'XBC' => new C('XBC', 'unitate de cont europeană (XBC)'),
     'XBD' => new C('XBD', 'unitate de cont europeană (XBD)'),
     'XCD' => new C('XCD', 'dolar est-caraib', narrow: '$', plurals: ['one' => 'dolar est-caraib', 'other' => 'dolari est-caraibi']),
+    'XCG' => new C('XCG', 'gulden caraib', 'Cg.', plurals: ['one' => 'gulden caraib', 'other' => 'guldeni caraibi']),
     'XDR' => new C('XDR', 'drepturi speciale de tragere'),
     'XEU' => new C('XEU', 'unitate de monedă europeană'),
     'XFO' => new C('XFO', 'franc francez de aur', plurals: ['one' => 'franc francez de aur', 'other' => 'franci francezi de aur']),
@@ -253,6 +254,7 @@ return [
     'ZMW' => new C('ZMW', 'kwacha zambian', narrow: 'ZK', plurals: ['one' => 'kwacha zambian', 'other' => 'kwache zambiene']),
     'ZRN' => new C('ZRN', 'zair nou', plurals: ['one' => 'zair nou', 'other' => 'zairi noi']),
     'ZWD' => new C('ZWD', 'dolar Zimbabwe (1980–2008)', plurals: ['one' => 'dolar Zimbabwe (1980–2008)', 'other' => 'dolari Zimbabwe (1980–2008)']),
+    'ZWG' => new C('ZWG', 'Zimbabwe Gold'),
     'ZWL' => new C('ZWL', 'dolar Zimbabwe (2009)'),
     'ZWR' => new C('ZWR', 'dolar Zimbabwe (2008)'),
 ];

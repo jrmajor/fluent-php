@@ -8,7 +8,7 @@ return [
     'byte' => new U(['one' => '{0} bajt', 'few' => '{0} bajty', 'many' => '{0} bajtów', 'other' => '{0} bajta'], '{0} B', '{0} B'),
     'celsius' => new U(['one' => '{0} stopień Celsjusza', 'few' => '{0} stopnie Celsjusza', 'many' => '{0} stopni Celsjusza', 'other' => '{0} stopnia Celsjusza'], '{0} st. C', '{0}°C'),
     'centimeter' => new U(['one' => '{0} centymetr', 'few' => '{0} centymetry', 'many' => '{0} centymetrów', 'other' => '{0} centymetra'], '{0} cm', '{0} cm'),
-    'day' => new U(['one' => '{0} doba', 'many' => '{0} dób', 'other' => '{0} doby'], ['one' => '{0} doba', 'many' => '{0} dób', 'other' => '{0} doby'], '{0} d.'),
+    'day' => new U(['one' => '{0} dzień', 'few' => '{0} dni', 'many' => '{0} dni', 'other' => '{0} dnia'], ['one' => '{0} dzień', 'few' => '{0} dni', 'many' => '{0} dni', 'other' => '{0} dnia'], '{0} d.'),
     'degree' => new U(['one' => '{0} stopień', 'few' => '{0} stopnie', 'many' => '{0} stopni', 'other' => '{0} stopnia'], '{0}°', '{0}°'),
     'fahrenheit' => new U(['one' => '{0} stopień Fahrenheita', 'few' => '{0} stopnie Fahrenheita', 'many' => '{0} stopni Fahrenheita', 'other' => '{0} stopnia Fahrenheita'], '{0}°F', '{0}°F'),
     'fluid-ounce' => new U(['one' => '{0} uncja płynu amerykańska', 'few' => '{0} uncje płynu amerykańskie', 'many' => '{0} uncji płynu amerykańskich', 'other' => '{0} uncji płynu amerykańskiej'], '{0} fl oz am.', '{0} fl oz am.'),

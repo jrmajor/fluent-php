@@ -197,6 +197,7 @@ return [
     'XBC' => new C('XBC', 'Eiropas norēķinu vienība (XBC)', plurals: ['one' => 'Eiropas norēķinu vienība (XBC)', 'other' => 'Eiropas norēķinu vienības (XBC)']),
     'XBD' => new C('XBD', 'Eiropas norēķinu vienība (XBD)', plurals: ['one' => 'Eiropas norēķinu vienība (XBD)', 'other' => 'Eiropas norēķinu vienības (XBD)']),
     'XCD' => new C('XCD', 'Austrumkarību dolārs', 'EC$', '$', ['one' => 'Austrumkarību dolārs', 'other' => 'Austrumkarību dolāri']),
+    'XCG' => new C('XCG', 'Karību guldenis', 'Cg.'),
     'XDR' => new C('XDR', 'Speciālās aizņēmuma tiesības'),
     'XEU' => new C('XEU', 'Eiropas norēķinu vienība'),
     'XFO' => new C('XFO', 'Francijas zelta franks'),
@@ -212,5 +213,6 @@ return [
     'ZMK' => new C('ZMK', 'Zambijas kvača (1968–2012)', plurals: ['one' => 'Zambijas kvača (1968–2012)', 'other' => 'Zambijas kvačas (1968–2012)']),
     'ZMW' => new C('ZMW', 'Zambijas kvača', narrow: 'ZK', plurals: ['one' => 'Zambijas kvača', 'other' => 'Zambijas kvačas']),
     'ZWD' => new C('ZWD', 'Zimbabves dolārs'),
+    'ZWG' => new C('ZWG', 'Zimbabves zelts'),
     'ZWL' => new C('ZWL', 'Zimbabves dolārs (2009)', plurals: ['one' => 'Zimbabves dollārs (2009)', 'other' => 'Zimbabves dollāri (2009)']),
 ];

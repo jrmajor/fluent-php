@@ -31,7 +31,7 @@ final class CurrencyFormatterTest extends NumberFormatterTestCase
             'de-CH' => "¤\u{A0}#,##0.00;¤-#,##0.00",
             'nl' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00",
             'fa' => "\u{200E}¤#,##0.00",
-            'ar' => "\u{200F}#,##0.00\u{A0}¤",
+            'ar-EG' => "\u{200F}#,##0.00\u{A0}¤",
             'ar-TN' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤",
             'he' => "\u{200F}#,##0.00\u{A0}\u{200F}¤;\u{200F}-#,##0.00\u{A0}\u{200F}¤",
         ];

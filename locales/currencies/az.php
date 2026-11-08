@@ -252,6 +252,7 @@ return [
     'XAG' => new C('XAG', 'gümüş'),
     'XAU' => new C('XAU', 'qızıl'),
     'XCD' => new C('XCD', 'Şərqi Karib Dolları', 'EC$', '$', 'Şərqi Karib dolları'),
+    'XCG' => new C('XCG', 'Karib gilderi', 'Cg.'),
     'XFO' => new C('XFO', 'Fransız Gızıl Frankı', plurals: 'Fransız gızıl frankı'),
     'XFU' => new C('XFU', 'Fransız UİC Frankı', plurals: 'Fransız UİC frankı'),
     'XOF' => new C('XOF', 'Fil Dişi Sahili Frankı', "F\u{202F}CFA", plurals: 'Fil Dişi Sahili frankı', minorUnits: 0),
@@ -271,6 +272,7 @@ return [
     'ZRN' => new C('ZRN', 'Zair Yeni Zairi (1993–1998)', plurals: 'Zair yeni zairi (1993–1998)'),
     'ZRZ' => new C('ZRZ', 'Zair Zairi (1971–1993)', plurals: 'Zair zairi (1971–1993)'),
     'ZWD' => new C('ZWD', 'Zimbabve Dolları (1980–2008)', plurals: 'Zimbabve dolları (1980–2008)'),
+    'ZWG' => new C('ZWG', 'Zimbabve Qızılı', plurals: 'Zimbabve qızılı'),
     'ZWL' => new C('ZWL', 'Zimbabve Dolları (2009)', plurals: 'Zimbabve dolları (2009)'),
     'ZWR' => new C('ZWR', 'Zimbabve Dolları (2008)', plurals: 'Zimbabve dolları (2008)'),
 ];
