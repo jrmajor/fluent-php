@@ -111,7 +111,7 @@ final class PatternResolver
     {
         $parsed = $literal->parse();
 
-        return (new FluentNumber($parsed->value, $literal->value))
+        return new FluentNumber($parsed->value, $literal->value)
             ->setLocale($this->bundle->getLocale())
             ->setOptions(['minimumFractionDigits' => $parsed->precision]);
     }
@@ -147,7 +147,7 @@ final class PatternResolver
         }
 
         if (is_int($argument) || is_float($argument)) {
-            return (new FluentNumber($argument))->setLocale($this->bundle->getLocale());
+            return new FluentNumber($argument)->setLocale($this->bundle->getLocale());
         }
 
         $error = "Variable \${$id} is of unsupported type %s.";
@@ -231,7 +231,7 @@ final class PatternResolver
         }
 
         if (is_int($output) || is_float($output)) {
-            return (new FluentNumber($output))->setLocale($this->bundle->getLocale());
+            return new FluentNumber($output)->setLocale($this->bundle->getLocale());
         }
 
         $error = "Return value of {$name}() must be of type string|Stringable, %s returned.";

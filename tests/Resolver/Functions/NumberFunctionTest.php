@@ -24,9 +24,9 @@ class NumberFunctionTest extends TestCase
             zeroes = { NUMBER(1.00) }
             FTL;
 
-        $this->us = (new FluentBundle('en-US', useIsolating: false))->addFtl($ftl);
+        $this->us = new FluentBundle('en-US', useIsolating: false)->addFtl($ftl);
 
-        $this->pl = (new FluentBundle('pl', useIsolating: false))->addFtl($ftl);
+        $this->pl = new FluentBundle('pl', useIsolating: false)->addFtl($ftl);
     }
 
     #[TestDox('it works')]
@@ -57,7 +57,7 @@ class NumberFunctionTest extends TestCase
     public function testPartiallyFormatted(): void
     {
         $this->assertTranslation('12345.0', 'option', [
-            'arg' => (new FluentNumber(12345))->setOptions(['useGrouping' => false]),
+            'arg' => new FluentNumber(12345)->setOptions(['useGrouping' => false]),
         ], $this->us);
     }
 }

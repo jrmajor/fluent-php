@@ -25,10 +25,10 @@ final class NumberLiteralsTest extends TestCase
             num-in-var = { $number }
             FTL;
 
-        $this->en = (new FluentBundle('en-US'))->addFtl($ftl);
-        $this->pl = (new FluentBundle('pl'))->addFtl($ftl);
-        $this->zh = (new FluentBundle('zh-Hant-TW'))->addFtl($ftl);
-        $this->fr = (new FluentBundle('fr-CA'))->addFtl($ftl);
+        $this->en = new FluentBundle('en-US')->addFtl($ftl);
+        $this->pl = new FluentBundle('pl')->addFtl($ftl);
+        $this->zh = new FluentBundle('zh-Hant-TW')->addFtl($ftl);
+        $this->fr = new FluentBundle('fr-CA')->addFtl($ftl);
     }
 
     #[TestDox('it formats numbers in placeables according to current locale')]

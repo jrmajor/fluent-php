@@ -15,7 +15,7 @@ final class ErrorsTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        (new FluentBundle('en-US'))->addFtl('syntax error');
+        new FluentBundle('en-US')->addFtl('syntax error');
     }
 
     #[TestDox('it throws syntax errors in strict mode')]
@@ -24,13 +24,13 @@ final class ErrorsTest extends TestCase
         $this->expectException(ParserException::class);
         $this->expectExceptionMessage('Expected token: "=" somewhere in "syntax error".');
 
-        (new FluentBundle('en-US', strict: true))->addFtl('syntax error');
+        new FluentBundle('en-US', strict: true)->addFtl('syntax error');
     }
 
     #[TestDox('errors are ignored by default and can be obtained by popErrors method')]
     public function testResolverIgnore(): void
     {
-        $bundle = (new FluentBundle('en-US', useIsolating: false))
+        $bundle = new FluentBundle('en-US', useIsolating: false)
             ->addFtl(<<<'FTL'
                 foo = { $one } and { $two }
                 FTL);
@@ -53,7 +53,7 @@ final class ErrorsTest extends TestCase
         $this->expectException(ReferenceException::class);
         $this->expectExceptionMessage('Unknown variable: $one.');
 
-        (new FluentBundle('en-US', strict: true))
+        new FluentBundle('en-US', strict: true)
             ->addFtl('foo = { $one } and { $two }')
             ->message('foo');
     }

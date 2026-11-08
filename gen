@@ -7,7 +7,7 @@ use Symfony\Component\Console\Application;
 
 require __DIR__ . '/vendor/autoload.php';
 
-(new Provider())->register();
+new Provider()->register();
 
 $application = new Application('fluent-php locale data compiler');
 

@@ -121,7 +121,7 @@ abstract class NumberFormatterTestCase extends TestCase
         $command = "new Intl.NumberFormat('{$locale}', {$jsonOptions}).format({$number})";
 
         $expected = H\Node::instance()->cachedOutput($command);
-        $actual = (new NumberFormatter($locale))->format($number, new Options(...$options));
+        $actual = new NumberFormatter($locale)->format($number, new Options(...$options));
 
         $message = "Failed asserting that formatting of {$number} for {$locale} with {$jsonOptions} is correct.";
 

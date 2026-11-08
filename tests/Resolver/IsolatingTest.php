@@ -18,7 +18,7 @@ final class IsolatingTest extends TestCase
     {
         parent::setUp();
 
-        $this->bundle = (new FluentBundle('en-US'))->addFtl(<<<'FTL'
+        $this->bundle = new FluentBundle('en-US')->addFtl(<<<'FTL'
             foo = Foo
             bar = { foo } Bar
             baz = { $arg } Baz
