@@ -12,8 +12,6 @@ return [
     'milliliter' => new U(['one' => '{0} mililitro', 'other' => '{0} mililitros'], '{0} ml', '{0}ml'),
     'millimeter' => new U(['one' => '{0} milímetro', 'other' => '{0} milímetros'], '{0} mm', ['one' => '{0} mm', 'other' => '{0}mm']),
     'month' => new U(['one' => '{0} mes', 'other' => '{0} meses'], ['one' => '{0} m', 'other' => '{0} mm.'], '{0}m'),
-    'ounce' => new U(['one' => '{0} onza', 'other' => '{0} onzas'], '{0} oz', ['one' => '{0} oz', 'other' => '{0}oz']),
-    'pound' => new U(['one' => '{0} libra', 'other' => '{0} libras'], '{0} lb', ['one' => '{0} lb', 'other' => '{0}lb']),
     'week' => new U(['one' => '{0} semana', 'other' => '{0} semanas'], ['one' => '{0} sem.', 'other' => '{0} sems.'], ['one' => '{0}sem.', 'other' => '{0}sems.']),
     'year' => new U(['one' => '{0} año', 'other' => '{0} años'], ['one' => '{0} a', 'other' => '{0} aa.'], '{0}a'),
 ];

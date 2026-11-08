@@ -279,6 +279,7 @@ return [
     'XBC' => new C('XBC', 'europeisk kontoenhet (XBC)', plurals: ['one' => 'europeisk kontoenhet (XBC)', 'other' => 'europeiska kontoenheter (XBC)']),
     'XBD' => new C('XBD', 'europeisk kontoenhet (XBD)', plurals: ['one' => 'europeisk kontoenhet (XBD)', 'other' => 'europeiska kontoenheter (XBD)']),
     'XCD' => new C('XCD', 'östkaribisk dollar', 'EC$', '$', ['one' => 'östkaribisk dollar', 'other' => 'östkaribiska dollar']),
+    'XCG' => new C('XCG', 'karibisk gulden'),
     'XDR' => new C('XDR', 'IMF särskild dragningsrätt', plurals: ['one' => 'IMF särskild dragningsrätt', 'other' => 'IMF särskilda dragningsrätter']),
     'XEU' => new C('XEU', 'europeisk valutaenhet', plurals: ['one' => 'europeisk valutaenhet', 'other' => 'europeiska valutaenheter']),
     'XFO' => new C('XFO', 'fransk guldfranc', plurals: ['one' => 'fransk guldfranc', 'other' => 'franska guldfranc']),
@@ -305,6 +306,7 @@ return [
     'ZRN' => new C('ZRN', 'zairisk ny zaire', plurals: ['one' => 'zaïrisk ny zaïre', 'other' => 'zaïriska nya zaïre']),
     'ZRZ' => new C('ZRZ', 'zairisk zaire', plurals: ['one' => 'zaïrisk zaïre', 'other' => 'zaïriska zaïre']),
     'ZWD' => new C('ZWD', 'Zimbabwe-dollar'),
+    'ZWG' => new C('ZWG', 'zimbabwiskt guld'),
     'ZWL' => new C('ZWL', 'Zimbabwe-dollar (2009)'),
     'ZWR' => new C('ZWR', 'Zimbabwe-dollar (2008)'),
 ];

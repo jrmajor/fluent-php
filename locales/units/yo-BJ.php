@@ -19,5 +19,5 @@ return [
     'terabit' => new U('{0} àwɔn tɛ́rábíìtì', '{0} Tb', '{0}Tb'),
     'terabyte' => new U('{0} àwɔn tɛ́rábáìtì', '{0} Tíbáìtì', '{0}TB'),
     'week' => new U('{0} ɔsh', '{0} ɔsh', '{0} ɔsh'),
-    'year' => new U('{0} ɔd', '{0} ɔd', '{0} ɔd'),
+    'year' => new U('{0} ɔ̀dún', '{0} ɔd', '{0} ɔd'),
 ];

@@ -161,6 +161,7 @@ return [
     'WST' => new C('WST', 'i-Samoan Tala'),
     'XAF' => new C('XAF', 'i-Central African CFA Franc', 'FCFA', plurals: 'i-CFA Franc BCEA', minorUnits: 0),
     'XCD' => new C('XCD', 'i-East Caribbean Dollar', 'EC$', '$'),
+    'XCG' => new C('XCG', 'Caribbean guilder', 'Cg.', plurals: ['one' => 'Caribbean guilder', 'other' => 'Caribbean guilders']),
     'XOF' => new C('XOF', 'i-West African CFA Franc', "F\u{202F}CFA", plurals: ['one' => 'i-West African CFA Franc', 'other' => 'i-West African CFA francs'], minorUnits: 0),
     'XPF' => new C('XPF', 'i-CFP Franc', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'imali engaziwa', '¤'),
@@ -168,4 +169,5 @@ return [
     'ZAR' => new C('ZAR', 'i-South African Rand', 'R', 'R'),
     'ZMK' => new C('ZMK', 'i-Zambian Kwacha (1968–2012)'),
     'ZMW' => new C('ZMW', 'i-Zambian Kwacha', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'Zimbabwean Gold', plurals: 'Zimbabwean gold'),
 ];

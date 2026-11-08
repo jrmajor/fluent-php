@@ -195,7 +195,7 @@ return [
     'TOP' => new C('TOP', 'פאנגה טונגי', narrow: 'T$'),
     'TPE' => new C('TPE', 'אסקודו טימוראי'),
     'TRL' => new C('TRL', 'לירה טורקית'),
-    'TRY' => new C('TRY', 'לירה טורקית חדשה', narrow: '₺', plurals: ['one' => 'לירה טורקית חדשה', 'other' => 'לירות טורקיות חדשות']),
+    'TRY' => new C('TRY', 'לירה טורקית חדשה', narrow: '₺', plurals: ['one' => 'לירה טורקית חדשה', 'other' => 'לירות טורקיות']),
     'TTD' => new C('TTD', 'דולר טרינידדי', narrow: '$'),
     'TWD' => new C('TWD', 'דולר טייוואני חדש', 'NT$', 'NT$'),
     'TZS' => new C('TZS', 'שילינג טנזני'),
@@ -217,6 +217,7 @@ return [
     'XAG' => new C('XAG', 'כסף'),
     'XAU' => new C('XAU', 'זהב'),
     'XCD' => new C('XCD', 'דולר מזרח קריבי', 'EC$', '$'),
+    'XCG' => new C('XCG', 'גילדר של הקריביים', 'Cg.'),
     'XDR' => new C('XDR', 'זכויות משיכה מיוחדות'),
     'XFO' => new C('XFO', 'פרנק זהב'),
     'XOF' => new C('XOF', 'פרנק CFA מערב אפריקני', "F\u{202F}CFA", minorUnits: 0),
@@ -233,4 +234,5 @@ return [
     'ZMW' => new C('ZMW', 'קוואצ׳ה זמבי', narrow: 'ZK'),
     'ZRN' => new C('ZRN', 'זאיר חדש'),
     'ZWD' => new C('ZWD', 'דולר זימבבואי'),
+    'ZWG' => new C('ZWG', 'זהב של זימבבואה'),
 ];

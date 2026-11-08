@@ -276,6 +276,7 @@ return [
     'XBC' => new C('XBC', 'Satuan Hitung Eropa (XBC)'),
     'XBD' => new C('XBD', 'Satuan Hitung Eropa (XBD)'),
     'XCD' => new C('XCD', 'Dolar Karibia Timur', 'EC$', '$'),
+    'XCG' => new C('XCG', 'Guilder Karibia', 'Cg.'),
     'XDR' => new C('XDR', 'Hak Khusus Menggambar'),
     'XEU' => new C('XEU', 'Satuan Mata Uang Eropa'),
     'XFO' => new C('XFO', 'Franc Gold Perancis'),
@@ -300,6 +301,7 @@ return [
     'ZRN' => new C('ZRN', 'Zaire Baru Zaire (1993–1998)'),
     'ZRZ' => new C('ZRZ', 'Zaire Zaire (1971–1993)'),
     'ZWD' => new C('ZWD', 'Dolar Zimbabwe (1980–2008)'),
+    'ZWG' => new C('ZWG', 'Emas Zimbabwe', plurals: 'emas Zimbabwe'),
     'ZWL' => new C('ZWL', 'Dolar Zimbabwe (2009)'),
     'ZWR' => new C('ZWR', 'Dolar Zimbabwe (2008)'),
 ];

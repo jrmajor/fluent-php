@@ -165,6 +165,7 @@ return [
     'WST' => new C('WST', 'Tala ya Samoa', plurals: ['one' => 'tala ya Samoa', 'other' => 'tala za Samoa']),
     'XAF' => new C('XAF', 'Faranga ya Afrika ya Kati CFA', 'FCFA', plurals: ['one' => 'faranga ya Afrika ya Kati CFA', 'other' => 'faranga za Afrika ya Kati CFA'], minorUnits: 0),
     'XCD' => new C('XCD', 'Dola ya Karibi Mashariki', 'EC$', '$', ['one' => 'dola ya Karibi Mashariki', 'other' => 'dola za Karibi Mashariki']),
+    'XCG' => new C('XCG', 'Guilder ya Karibe', 'Cg.'),
     'XOF' => new C('XOF', 'Faranga ya Afrika Magharibi CFA', "F\u{202F}CFA", plurals: ['one' => 'faranga ya Afrika Magharibi CFA', 'other' => 'faranga za Afrika Magharibi CFA'], minorUnits: 0),
     'XPF' => new C('XPF', 'Faranga ya CFP', 'CFPF', plurals: ['one' => 'faranga ya CFP', 'other' => 'faranga za CFP'], minorUnits: 0),
     'XXX' => new C('XXX', 'Sarafu isiyojulikana', '¤', plurals: '(sarafu isiyojulikana)'),
@@ -173,4 +174,5 @@ return [
     'ZMK' => new C('ZMK', 'Kwacha ya Zambia (1968–2012)'),
     'ZMW' => new C('ZMW', 'Kwacha ya Zambia', narrow: 'ZK', plurals: ['one' => 'kwacha ya Zambia', 'other' => 'kwacha za Zambia']),
     'ZWD' => new C('ZWD', 'Dola ya Zimbabwe'),
+    'ZWG' => new C('ZWG', 'Dhahabu ya Zimbabwe'),
 ];

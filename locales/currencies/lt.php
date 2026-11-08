@@ -278,6 +278,7 @@ return [
     'XBC' => new C('XBC', 'Europos valiutos / apskaitos vienetas (XBC)', plurals: ['one' => 'Europos valiutos / apskaitos vienetas (XBC)', 'other' => 'Europos valiutos / apskaitos vienetai (XBC)']),
     'XBD' => new C('XBD', 'Europos valiutos / apskaitos vienetas (XBD)', plurals: ['one' => 'Europos valiutos / apskaitos vienetas (XBD)', 'few' => 'Europos valiutos / apskaitos vienetas (XBD)', 'other' => 'Europos valiutos / apskaitos vienetai (XBD)']),
     'XCD' => new C('XCD', 'Rytų Karibų doleris', narrow: '$', plurals: ['one' => 'Rytų Karibų doleris', 'few' => 'Rytų Karibų doleriai', 'many' => 'Rytų Karibų dolerio', 'other' => 'Rytų Karibų dolerių']),
+    'XCG' => new C('XCG', 'Karibų guldenas', 'Cg.', plurals: ['one' => 'Karibų guldenas', 'few' => 'Karibų guldenai', 'many' => 'Karibų guldeno', 'other' => 'Karibų guldenų']),
     'XDR' => new C('XDR', 'SDR tarptautinis valiutos fondas'),
     'XEU' => new C('XEU', 'Europos piniginis vienetas (1993–1999)'),
     'XFO' => new C('XFO', 'Aukso frankas', plurals: ['one' => 'Aukso frankas', 'few' => 'Aukso frankai', 'many' => 'Aukso franko', 'other' => 'Aukso frankų']),
@@ -304,6 +305,7 @@ return [
     'ZRN' => new C('ZRN', 'Zairo naujasis zairas (1993–1998)', plurals: ['one' => 'Zairo naujasis zairas (1993–1998)', 'few' => 'Zairo naujieji zairai (1993–1998)', 'many' => 'Zairo naujojo zairo (1993–1998)', 'other' => 'Zairo naujųjų zairų (1993–1998)']),
     'ZRZ' => new C('ZRZ', 'Zairo zairas (1971–1993)', plurals: ['one' => 'Zairo zairas (1971–1993)', 'few' => 'Zairo zairai (1971–1993)', 'many' => 'Zairo zairo (1971–1993)', 'other' => 'Zairo zairų (1971–1993)']),
     'ZWD' => new C('ZWD', 'Zimbabvės doleris (1980–2008)', plurals: ['one' => 'Zimbabvės doleris (1980–2008)', 'few' => 'Zimbabvės doleriai (1980–2008)', 'many' => 'Zimbabvės dolerio (1980–2008)', 'other' => 'Zimbabvės dolerių (1980–2008)']),
+    'ZWG' => new C('ZWG', 'Zimbabvės auksas'),
     'ZWL' => new C('ZWL', 'Zimbabvės doleris (2009)', plurals: ['one' => 'Zimbabvės doleris (2009)', 'few' => 'Zimbabvės doleriai (2009)', 'many' => 'Zimbabvės dolerio (2009)', 'other' => 'Zimbabvės dolerių (2009)']),
     'ZWR' => new C('ZWR', 'Zimbabvės doleris (2008)', plurals: ['one' => 'Zimbabvės doleris (2008)', 'few' => 'Zimbabvės doleriai (2008)', 'many' => 'Zimbabvės dolerio (2008)', 'other' => 'Zimbabvės dolerių (2008)']),
 ];

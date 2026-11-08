@@ -38,7 +38,7 @@ return [
     'month' => new U(['one' => '{0} måned', 'other' => '{0} måneder'], '{0} md.', '{0} m'),
     'nanosecond' => new U(['one' => '{0} nanosekund', 'other' => '{0} nanosekunder'], '{0} ns', '{0}ns'),
     'ounce' => new U(['one' => '{0} unse', 'other' => '{0} unser'], ['one' => '{0} unse', 'other' => '{0} unser'], '{0}oz'),
-    'percent' => new U('{0} prosent', '{0} %', '{0} %'),
+    'percent' => new U('{0} prosent', '{0} %', '{0}%'),
     'petabyte' => new U('{0} petabyte', '{0} PB', '{0}PB'),
     'pound' => new U('{0} pund', '{0} pund', '{0} pund'),
     'second' => new U(['one' => '{0} sekund', 'other' => '{0} sekunder'], '{0} sek', '{0}s'),

@@ -1,3 +1,3 @@
 <?php
 
-return new Major\Fluent\Formatters\Number\Locale\Locale(currency: "¤\u{A0}#,##0.00");
+return new Major\Fluent\Formatters\Number\Locale\Locale(decimal: '#,##,##0.###', currency: '¤#,##,##0.00');

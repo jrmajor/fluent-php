@@ -280,6 +280,7 @@ return [
     'XBC' => new C('XBC', 'Europako kontu-unitatea (XBC)', plurals: 'Europako kontu-unitate (XBC)'),
     'XBD' => new C('XBD', 'Europako kontu-unitatea (XBD)', plurals: 'Europako kontu-unitate (XBD)'),
     'XCD' => new C('XCD', 'dolar ekikaribearra', 'EC$', '$', 'dolar ekikaribear'),
+    'XCG' => new C('XCG', 'florin karibetarra', 'Cg.'),
     'XDR' => new C('XDR', 'igorpen-eskubide berezia', plurals: 'igorpen-eskubide berezi'),
     'XEU' => new C('XEU', 'Europako dibisa-unitatea', plurals: 'Europako dibisa-unitate'),
     'XFO' => new C('XFO', 'urrezko libera frantsesa', plurals: 'urrezko libera frantses'),
@@ -306,6 +307,7 @@ return [
     'ZRN' => new C('ZRN', 'zaire berri zairetarra (1993–1998)', plurals: 'zaire berri zairetar (1993–1998)'),
     'ZRZ' => new C('ZRZ', 'zaire zairetarra (1971–1993)', plurals: 'zaire zairetar (1971–1993)'),
     'ZWD' => new C('ZWD', 'dolar zimbabwetarra (1980–2008)', plurals: 'dolar zimbabwetar (1980–2008)'),
+    'ZWG' => new C('ZWG', 'urre zimbabwetarra'),
     'ZWL' => new C('ZWL', 'dolar zimbabwetarra (2009)', plurals: 'dolar zimbabwetar (2009)'),
     'ZWR' => new C('ZWR', 'dolar zimbabwetarra (2008)', plurals: 'dolar zimbabwetar (2008)'),
 ];

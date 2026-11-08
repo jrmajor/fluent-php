@@ -159,10 +159,12 @@ return [
     'WST' => new C('WST', 'ᏌᎼᎠ ᎠᏕᎳ'),
     'XAF' => new C('XAF', 'ᎠᏰᏟ ᎬᎿᎨᏍᏛ CFA ᎠᏕᎳ', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'ᏗᎧᎸᎬ ᎨᏆᏙᏯ ᎠᏕᎳ', 'EC$', '$'),
+    'XCG' => new C('XCG', 'ᎧᏈᏇᎠᎾ', 'Cg.', plurals: 'ᎧᏈᏇᎠᎾ ᎠᏕᎳ'),
     'XOF' => new C('XOF', 'ᏭᏕᎵᎬ ᎬᎿᎨᏍᏛ CFA ᎠᏕᎳ', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', 'CFP ᎠᏕᎳ', 'CFPF', minorUnits: 0),
     'XXX' => new C('XXX', 'ᏄᏬᎵᏍᏛᎾ ᎠᏕᎳ', '¤', plurals: '(ᏄᏬᎵᏍᏛᎾ ᎠᏕᎳ)'),
     'YER' => new C('YER', 'ᏰᎺᏂ ᎠᏕᎳ'),
     'ZAR' => new C('ZAR', 'ᏧᎦᎾᏮ ᎬᎿᎨᏍᏛ ᎠᏕᎳ', narrow: 'R'),
     'ZMW' => new C('ZMW', 'ᏏᎻᏆᏇ ᎠᏕᎳ', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'ᏏᎻᏆᏇᎠᏂ', plurals: 'ᏏᎻᏆᏇᎠᏂ ᎠᏕᎳ'),
 ];

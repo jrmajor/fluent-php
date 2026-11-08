@@ -185,6 +185,7 @@ return [
     'WST' => new C('WST', 'समोआई ताला'),
     'XAF' => new C('XAF', 'केंद्रीय अफ़्रीकी CFA फ़्रैंक', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'पूर्वी कैरिबियाई डॉलर', 'EC$', '$'),
+    'XCG' => new C('XCG', 'कैरीबियन गिल्डर', 'Cg.'),
     'XEU' => new C('XEU', 'यूरोपीय मुद्रा इकाई'),
     'XOF' => new C('XOF', 'पश्चिमी अफ़्रीकी CFA फ़्रैंक', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', '[CFP] फ़्रैंक', 'CFPF', minorUnits: 0),
@@ -193,4 +194,5 @@ return [
     'ZAR' => new C('ZAR', 'दक्षिण अफ़्रीकी रैंड', narrow: 'R'),
     'ZMK' => new C('ZMK', 'ज़ाम्बियन क्वाचा (1968–2012)'),
     'ZMW' => new C('ZMW', 'ज़ाम्बियन क्वाचा', narrow: 'ZK'),
+    'ZWG' => new C('ZWG', 'ज़िंबाब्वियन गोल्ड'),
 ];

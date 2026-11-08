@@ -307,6 +307,7 @@ return [
     'ZRN' => new C('ZRN', 'Zaïrese nieuwe zaïre'),
     'ZRZ' => new C('ZRZ', 'Zaïrese zaïre'),
     'ZWD' => new C('ZWD', 'Zimbabwaanse dollar'),
+    'ZWG' => new C('ZWG', 'Zimbabwe Gold', 'ZiG'),
     'ZWL' => new C('ZWL', 'Zimbabwaanse dollar (2009)'),
     'ZWR' => new C('ZWR', 'Zimbabwaanse dollar (2008)'),
 ];

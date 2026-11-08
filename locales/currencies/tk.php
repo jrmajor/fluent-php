@@ -159,10 +159,12 @@ return [
     'WST' => new C('WST', 'Samoa talasy', plurals: 'samoa talasy'),
     'XAF' => new C('XAF', 'KFA BEAC franky', 'FCFA', minorUnits: 0),
     'XCD' => new C('XCD', 'Gündogar karib dollary', 'EC$', '$', 'gündogar karib dollary'),
+    'XCG' => new C('XCG', 'karib guldeni', 'Kg.'),
     'XOF' => new C('XOF', 'KFA BCEAO franky', "F\u{202F}CFA", minorUnits: 0),
     'XPF' => new C('XPF', 'Fransuz ýuwaş umman franky', 'CFPF', plurals: 'fransuz ýuwaş umman franky', minorUnits: 0),
     'XXX' => new C('XXX', 'Näbelli pul birligi', '¤', plurals: 'näbelli pul birligi'),
     'YER' => new C('YER', 'Ýemen rialy', plurals: 'ýemen rialy'),
     'ZAR' => new C('ZAR', 'Günorta Afrika rendi', narrow: 'R', plurals: 'günorta afrika rendi'),
     'ZMW' => new C('ZMW', 'Zambiýa kwaçasy', narrow: 'ZK', plurals: 'zambiýa kwaçasy'),
+    'ZWG' => new C('ZWG', 'Zimbabwe altyny'),
 ];

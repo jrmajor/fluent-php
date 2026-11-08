@@ -246,6 +246,7 @@ return [
     'XBA' => new C('XBA', 'Uned Cyfansawdd Ewropeaidd', plurals: 'uned cyfansawdd Ewropeaidd'),
     'XBB' => new C('XBB', 'Uned Ariannol Ewropeaidd', plurals: 'uned ariannol Ewropeaidd'),
     'XCD' => new C('XCD', 'Doler Dwyrain y Caribî', 'EC$', '$', ['two' => 'ddoler Dwyrain y Caribî', 'other' => 'doler Dwyrain y Caribî']),
+    'XCG' => new C('XCG', 'guilder Caribïaidd', 'Cg.'),
     'XEU' => new C('XEU', 'Uned Arian Cyfred Ewropeaidd', plurals: 'uned arian cyfred Ewropeaidd'),
     'XOF' => new C('XOF', 'Ffranc CFA Gorllewin Affrica', "F\u{202F}CFA", plurals: 'ffranc CFA Gorllewin Affrica', minorUnits: 0),
     'XPD' => new C('XPD', 'Paladiwm'),
@@ -262,6 +263,7 @@ return [
     'ZRN' => new C('ZRN', 'Zaire Newydd Zaire (1993–1998)', plurals: 'zaire newydd Zaire (1993 – 1998)'),
     'ZRZ' => new C('ZRZ', 'Zaire Zaire (1971–1993)', plurals: 'zaire Zaire (1971 – 1993)'),
     'ZWD' => new C('ZWD', 'Doler Zimbabwe (1980–2008)', plurals: ['one' => 'ddoler Zimbabwe (1980–2008)', 'two' => 'ddoler Zimbabwe (1980–2008)', 'other' => 'doler Zimbabwe (1980–2008)']),
+    'ZWG' => new C('ZWG', 'Zimbabwean Gold'),
     'ZWL' => new C('ZWL', 'Doler Zimbabwe (2009)', plurals: ['one' => 'ddoler Zimbabwe (2009)', 'two' => 'ddoler Zimbabwe (2009)', 'other' => 'doler Zimbabwe (2009)']),
     'ZWR' => new C('ZWR', 'Doler Zimbabwe (2008)', plurals: ['one' => 'ddoler Zimbabwe (2008)', 'two' => 'ddoler Zimbabwe (2008)', 'other' => 'doler Zimbabwe (2008)']),
 ];

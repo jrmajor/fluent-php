@@ -169,7 +169,7 @@ return [
     'SGD' => new C('SGD', 'dólar de Singapur', narrow: '$', plurals: ['one' => 'dólar de Singapur', 'other' => 'dólares de Singapur']),
     'SHP' => new C('SHP', 'libra de Santa Helena', narrow: '£', plurals: ['one' => 'libra de Santa Helena', 'other' => 'libras de Santa Helena']),
     'SLE' => new C('SLE', 'leone de Serra Leoa', plurals: ['one' => 'leone de Serra Leoa', 'other' => 'leones de Serra Leoa']),
-    'SLL' => new C('SLL', 'leone de Serra Leoa (1964—2022)', plurals: ['one' => 'leone de Serra Leoa (1964—2022)', 'other' => 'leones de Serra Leoa (1964—2022)']),
+    'SLL' => new C('SLL', 'leone de Serra Leoa (1964–2022)', plurals: ['one' => 'leone de Serra Leoa (1964–2022)', 'other' => 'leones de Serra Leoa (1964–2022)']),
     'SOS' => new C('SOS', 'xilin somalí', plurals: ['one' => 'xilin somalí', 'other' => 'xilins somalís']),
     'SRD' => new C('SRD', 'dólar surinamés', narrow: '$', plurals: ['one' => 'dólar surinamés', 'other' => 'dólares surinamés']),
     'SSP' => new C('SSP', 'libra sursudanesa', narrow: '£', plurals: ['one' => 'libra sursudanesa', 'other' => 'libras sursudanesa']),
@@ -205,6 +205,7 @@ return [
     'XAG' => new C('XAG', 'Prata'),
     'XAU' => new C('XAU', 'Ouro'),
     'XCD' => new C('XCD', 'dólar do Caribe Oriental', narrow: '$', plurals: ['one' => 'dólar do Caribe Oriental', 'other' => 'dólares do Caribe Oriental']),
+    'XCG' => new C('XCG', 'florín caribeño', 'ƒ'),
     'XOF' => new C('XOF', 'franco CFA (BCEAO)', "F\u{202F}CFA", plurals: ['one' => 'franco CFA (BCEAO)', 'other' => 'francos CFA (BCEAO)'], minorUnits: 0),
     'XPD' => new C('XPD', 'Paladio'),
     'XPF' => new C('XPF', 'franco CFP', 'CFPF', plurals: ['one' => 'franco CFP', 'other' => 'francos CFP'], minorUnits: 0),
@@ -214,4 +215,5 @@ return [
     'ZAR' => new C('ZAR', 'rand surafricano', narrow: 'R', plurals: ['one' => 'rand surafricano', 'other' => 'rands surafricanos']),
     'ZMK' => new C('ZMK', 'Kwacha zambiano (1968–2012)'),
     'ZMW' => new C('ZMW', 'kwacha zambiano', narrow: 'ZK', plurals: ['one' => 'kwacha zambiano', 'other' => 'kwachas zambianos']),
+    'ZWG' => new C('ZWG', 'ouro de Zimbabwe'),
 ];

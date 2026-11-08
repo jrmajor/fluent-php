@@ -3,9 +3,9 @@
 	"type": "module",
 	"packageManager": "pnpm@12.16.1",
 	"devDependencies": {
-		"cldr-core": "^45.0",
-		"cldr-numbers-full": "^45.0",
-		"cldr-units-full": "^45.0"
+		"cldr-core": "^48.0",
+		"cldr-numbers-full": "^48.0",
+		"cldr-units-full": "^48.0"
 	},
 	"devEngines": {
 		"packageManager": {
@@ -14,7 +14,7 @@
 		},
 		"runtime": {
 			"name": "node",
-			"version": "22.0.0",
+			"version": "26.13.0",
 			"onFail": "download"
 		}
 	}

@@ -277,6 +277,7 @@ return [
     'XBC' => new C('XBC', 'Unidade de Conta Europeia (XBC)', plurals: ['one' => 'Unidade europeia de conta (XBC)', 'other' => 'Unidades europeias de conta (XBC)']),
     'XBD' => new C('XBD', 'Unidade de Conta Europeia (XBD)', plurals: ['one' => 'Unidade europeia de conta (XBD)', 'other' => 'Unidades europeias de conta (XBD)']),
     'XCD' => new C('XCD', 'Dólar do Caribe Oriental', 'EC$', '$', ['one' => 'Dólar do Caribe Oriental', 'other' => 'Dólares do Caribe Oriental']),
+    'XCG' => new C('XCG', 'Florim do Caribe', 'Cg.', plurals: ['one' => 'Florim do Caribe', 'other' => 'Florins do Caribe']),
     'XDR' => new C('XDR', 'Direitos Especiais de Giro', plurals: 'Direitos de desenho especiais'),
     'XEU' => new C('XEU', 'Unidade de Moeda Europeia', plurals: ['one' => 'Unidade de moeda europeia', 'other' => 'Unidades de moedas europeias']),
     'XFO' => new C('XFO', 'Franco-ouro francês', plurals: ['one' => 'Franco de ouro francês', 'other' => 'Francos de ouro franceses']),
@@ -301,6 +302,7 @@ return [
     'ZRN' => new C('ZRN', 'Zaire Novo zairense (1993–1998)', plurals: ['one' => 'Novo zaire do Zaire', 'other' => 'Novos zaires do Zaire']),
     'ZRZ' => new C('ZRZ', 'Zaire zairense (1971–1993)', plurals: ['one' => 'Zaire do Zaire', 'other' => 'Zaires do Zaire']),
     'ZWD' => new C('ZWD', 'Dólar do Zimbábue (1980–2008)', plurals: ['one' => 'Dólar do Zimbábue', 'other' => 'Dólares do Zimbábue']),
+    'ZWG' => new C('ZWG', 'Ouro zimbabueano', plurals: ['one' => 'Ouro zimbabueano', 'other' => 'Ouros zimbabueanos']),
     'ZWL' => new C('ZWL', 'Dólar do Zimbábue (2009)', plurals: ['one' => 'Dólar do Zimbábue (2009)', 'other' => 'Dólares do Zimbábue (2009)']),
     'ZWR' => new C('ZWR', 'Dólar do Zimbábue (2008)', plurals: ['one' => 'Dólar do Zimbábue (2008)', 'other' => 'Dólares do Zimbábue (2008)']),
 ];

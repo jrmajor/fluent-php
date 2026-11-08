@@ -33,7 +33,7 @@ return [
     'mile-scandinavian' => new U('{0} dặm scandinavia', '{0} smi', '{0} smi'),
     'milliliter' => new U('{0} mililít', '{0} mL', '{0} mL'),
     'millimeter' => new U('{0} milimét', '{0} mm', '{0}mm'),
-    'millisecond' => new U('{0} mili giây', '{0} mili giây', '{0}miligiây'),
+    'millisecond' => new U('{0} mili giây', '{0} mili giây', '{0} mili giây'),
     'minute' => new U('{0} phút', '{0} phút', '{0} phút'),
     'month' => new U('{0} tháng', '{0} tháng', '{0} tháng'),
     'nanosecond' => new U('{0} nano giây', '{0} nano giây', '{0} nano giây'),

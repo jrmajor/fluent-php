@@ -137,7 +137,7 @@ return [
     'JOD' => new C('JOD', 'Jordanian Dinar', plurals: ['one' => 'Jordanian dinar', 'other' => 'Jordanian dinars'], minorUnits: 3),
     'JPY' => new C('JPY', 'Japanese Yen', '¥', '¥', 'Japanese yen', 0),
     'KES' => new C('KES', 'Kenyan Shilling', plurals: ['one' => 'Kenyan shilling', 'other' => 'Kenyan shillings']),
-    'KGS' => new C('KGS', 'Kyrgystani Som', narrow: '⃀', plurals: ['one' => 'Kyrgystani som', 'other' => 'Kyrgystani soms']),
+    'KGS' => new C('KGS', 'Kyrgyz Som', narrow: '⃀', plurals: ['one' => 'Kyrgyz som', 'other' => 'Kyrgyz soms']),
     'KHR' => new C('KHR', 'Cambodian Riel', narrow: '៛', plurals: ['one' => 'Cambodian riel', 'other' => 'Cambodian riels']),
     'KMF' => new C('KMF', 'Comorian Franc', narrow: 'CF', plurals: ['one' => 'Comorian franc', 'other' => 'Comorian francs'], minorUnits: 0),
     'KPW' => new C('KPW', 'North Korean Won', narrow: '₩', plurals: 'North Korean won'),
@@ -307,6 +307,7 @@ return [
     'ZRN' => new C('ZRN', 'Zairean New Zaire (1993–1998)', plurals: ['one' => 'Zairean new zaire (1993–1998)', 'other' => 'Zairean new zaires (1993–1998)']),
     'ZRZ' => new C('ZRZ', 'Zairean Zaire (1971–1993)', plurals: ['one' => 'Zairean zaire (1971–1993)', 'other' => 'Zairean zaires (1971–1993)']),
     'ZWD' => new C('ZWD', 'Zimbabwean Dollar (1980–2008)', plurals: ['one' => 'Zimbabwean dollar (1980–2008)', 'other' => 'Zimbabwean dollars (1980–2008)']),
-    'ZWL' => new C('ZWL', 'Zimbabwean Dollar (2009)', plurals: ['one' => 'Zimbabwean dollar (2009)', 'other' => 'Zimbabwean dollars (2009)']),
+    'ZWG' => new C('ZWG', 'Zimbabwean Gold', plurals: 'Zimbabwean gold'),
+    'ZWL' => new C('ZWL', 'Zimbabwean Dollar (2009–2024)', plurals: ['one' => 'Zimbabwean dollar (2009–2024)', 'other' => 'Zimbabwean dollars (2009–2024)']),
     'ZWR' => new C('ZWR', 'Zimbabwean Dollar (2008)', plurals: ['one' => 'Zimbabwean dollar (2008)', 'other' => 'Zimbabwean dollars (2008)']),
 ];
