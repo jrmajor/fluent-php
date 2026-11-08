@@ -79,7 +79,7 @@ final class ArgumentTypesTest extends TestCase
     #[TestDox('it can be a FluentNumber')]
     public function testFluentNumber(): void
     {
-        $pl = (new FluentBundle('pl'))->addFtl('foo = { $arg }');
+        $pl = new FluentBundle('pl')->addFtl('foo = { $arg }');
 
         $this->assertTranslation('0.42', 'foo', ['arg' => new FluentNumber(0.42)]);
         $this->assertTranslation('0,42', 'foo', ['arg' => new FluentNumber(0.42)], $pl);

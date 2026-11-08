@@ -61,7 +61,7 @@ final class NumberLiteralTest extends TestCase
     private static function assertValueAndPrecision(
         float $value, int $precision, string $ftl,
     ): void {
-        $ast = (new FluentParser(true))->parseEntry($ftl);
+        $ast = new FluentParser(true)->parseEntry($ftl);
 
         assert($ast instanceof Message);
         assert($ast->value !== null);

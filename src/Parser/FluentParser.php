@@ -99,7 +99,7 @@ final class FluentParser
             $entries[] = $entry;
         }
 
-        return (new FluentResource($entries))
+        return new FluentResource($entries)
             ->addSpan(0, $cursor->index());
     }
 
@@ -154,13 +154,13 @@ final class FluentParser
                 $errorIndex = $nextEntryStart;
             }
 
-            $annotation = (new Annotation(
+            $annotation = new Annotation(
                 $error->getFluentErrorCode(),
                 $error->getMessage(),
                 $error->getArguments(),
-            ))->addSpan($errorIndex, $errorIndex);
+            )->addSpan($errorIndex, $errorIndex);
 
-            return (new Junk($cursor->slice($entryStartPosition, $nextEntryStart - $entryStartPosition)))
+            return new Junk($cursor->slice($entryStartPosition, $nextEntryStart - $entryStartPosition))
                 ->addSpan($entryStartPosition, $nextEntryStart)
                 ->addAnnotation($annotation);
         }
@@ -236,7 +236,7 @@ final class FluentParser
             throw new ParserException('E0005', ['id' => $id->name]);
         }
 
-        return (new Message($id, $value, $attributes))
+        return new Message($id, $value, $attributes)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -259,7 +259,7 @@ final class FluentParser
 
         $attributes = $this->getAttributes($cursor);
 
-        return (new Term($id, $value, $attributes))
+        return new Term($id, $value, $attributes)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -273,7 +273,7 @@ final class FluentParser
             $name .= $char;
         }
 
-        return (new Identifier($name))
+        return new Identifier($name)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -312,7 +312,7 @@ final class FluentParser
         $value = $this->maybeGetPattern($cursor)
             ?? throw new ParserException('E0012');
 
-        return (new Attribute($key, $value))
+        return new Attribute($key, $value)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -377,7 +377,7 @@ final class FluentParser
             throw new ParserException('E0012');
         }
 
-        return (new Variant($key, $value, $defaultIndex))
+        return new Variant($key, $value, $defaultIndex)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -484,7 +484,7 @@ final class FluentParser
 
         $dedented = $this->dedent($elements, $commonIndentLength);
 
-        return (new Pattern($dedented))
+        return new Pattern($dedented)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -534,7 +534,7 @@ final class FluentParser
                 // Join adjacent TextElements by replacing them with their sum.
                 assert($prev->span !== null && $element->span !== null);
 
-                $sum = (new TextElement($prev->value . $element->value))
+                $sum = new TextElement($prev->value . $element->value)
                     ->addSpan($prev->span->start, $element->span->end);
 
                 $trimmed[count($trimmed) - 1] = $sum;
@@ -545,7 +545,7 @@ final class FluentParser
             if ($element instanceof Indent) {
                 // If the indent hasn't been merged into a preceding TextElement,
                 // convert it into a new TextElement.
-                $element = (new TextElement($element->value))
+                $element = new TextElement($element->value)
                     ->addSpan($element->span->start, $element->span->end);
             }
 
@@ -575,12 +575,12 @@ final class FluentParser
 
         while (null !== $char = $cursor->currentChar()) {
             if ($char === '{' || $char === '}') {
-                return (new TextElement($buffer))
+                return new TextElement($buffer)
                     ->addSpan($spanStart, $cursor->index());
             }
 
             if ($char === "\n") {
-                return (new TextElement($buffer))
+                return new TextElement($buffer)
                     ->addSpan($spanStart, $cursor->index());
             }
 
@@ -589,7 +589,7 @@ final class FluentParser
             $cursor->next();
         }
 
-        return (new TextElement($buffer))
+        return new TextElement($buffer)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -604,7 +604,7 @@ final class FluentParser
 
         $cursor->expectChar('}');
 
-        return (new Placeable($expression))
+        return new Placeable($expression)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -644,7 +644,7 @@ final class FluentParser
 
             $variants = $this->getVariants($cursor);
 
-            return (new SelectExpression($selector, $variants))
+            return new SelectExpression($selector, $variants)
                 ->addSpan($spanStart, $cursor->index());
         }
 
@@ -676,7 +676,7 @@ final class FluentParser
 
             $id = $this->getIdentifier($cursor);
 
-            return (new VariableReference($id))
+            return new VariableReference($id)
                 ->addSpan($spanStart, $cursor->index());
         }
 
@@ -699,7 +699,7 @@ final class FluentParser
                 $arguments = $this->getCallArguments($cursor);
             }
 
-            return (new TermReference($id, $attribute ?? null, $arguments ?? null))
+            return new TermReference($id, $attribute ?? null, $arguments ?? null)
                 ->addSpan($spanStart, $cursor->index());
         }
 
@@ -718,7 +718,7 @@ final class FluentParser
 
                 $arguments = $this->getCallArguments($cursor);
 
-                return (new FunctionReference($id, $arguments))
+                return new FunctionReference($id, $arguments)
                     ->addSpan($spanStart, $cursor->index());
             }
 
@@ -728,7 +728,7 @@ final class FluentParser
                 $attribute = $this->getIdentifier($cursor);
             }
 
-            return (new MessageReference($id, $attribute ?? null))
+            return new MessageReference($id, $attribute ?? null)
                 ->addSpan($spanStart, $cursor->index());
         }
 
@@ -786,7 +786,7 @@ final class FluentParser
 
         $cursor->expectChar(')');
 
-        return (new CallArguments($positional, $named))
+        return new CallArguments($positional, $named)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -812,7 +812,7 @@ final class FluentParser
 
             $value = $this->getLiteral($cursor);
 
-            return (new NamedArgument($expression->id, $value))
+            return new NamedArgument($expression->id, $value)
                 ->addSpan($spanStart, $cursor->index());
         }
 
@@ -856,7 +856,7 @@ final class FluentParser
             $value .= '.' . $this->getDigits($cursor);
         }
 
-        return (new NumberLiteral($value))
+        return new NumberLiteral($value)
             ->addSpan($spanStart, $cursor->index());
     }
 
@@ -893,7 +893,7 @@ final class FluentParser
 
         $cursor->expectChar('"');
 
-        return (new StringLiteral($value))
+        return new StringLiteral($value)
             ->addSpan($spanStart, $cursor->index());
     }
 

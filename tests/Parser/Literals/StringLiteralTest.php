@@ -50,7 +50,7 @@ final class StringLiteralTest extends TestCase
 
     private static function assertValue(string $value, string $ftl): void
     {
-        $ast = (new FluentParser(true))->parseEntry($ftl);
+        $ast = new FluentParser(true)->parseEntry($ftl);
 
         assert($ast instanceof Message);
         assert($ast->value !== null);

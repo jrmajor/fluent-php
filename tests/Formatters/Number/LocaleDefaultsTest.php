@@ -18,7 +18,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
-        $this->assertSame($expected, (new Locale())->system);
+        $this->assertSame($expected, new Locale()->system);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -29,7 +29,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
-        $this->assertSame($expected, (new Locale())->decimal);
+        $this->assertSame($expected, new Locale()->decimal);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -40,7 +40,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent);
 
-        $this->assertSame($expected, (new Locale())->percent);
+        $this->assertSame($expected, new Locale()->percent);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -51,7 +51,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 
-        $this->assertSame($expected, (new Locale())->currency);
+        $this->assertSame($expected, new Locale()->currency);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -62,7 +62,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->grouping);
 
-        $this->assertSame($expected, (new Locale())->grouping);
+        $this->assertSame($expected, new Locale()->grouping);
         $this->assertSame($expected, H\most_popular($values));
     }
 
@@ -73,7 +73,7 @@ final class LocaleDefaultsTest extends TestCase
 
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
-        $this->assertSame($expected, (new Locale())->symbols);
+        $this->assertSame($expected, new Locale()->symbols);
         $this->assertSame($expected, H\most_popular($values));
     }
 }

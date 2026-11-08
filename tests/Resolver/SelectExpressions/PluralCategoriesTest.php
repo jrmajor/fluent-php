@@ -52,7 +52,7 @@ final class PluralCategoriesTest extends TestCase
     #[TestDox('plural categories in english')]
     public function testPluralEnglish(): void
     {
-        $bundle = (new FluentBundle('en-EN', useIsolating: false))->addFtl(<<<'FTL'
+        $bundle = new FluentBundle('en-EN', useIsolating: false)->addFtl(<<<'FTL'
             msg = { $arg ->
                 [one] example
                *[other] examples
@@ -69,7 +69,7 @@ final class PluralCategoriesTest extends TestCase
     #[TestDox('plural categories in polish')]
     public function testPluralPolish(): void
     {
-        $bundle = (new FluentBundle('pl-PL', useIsolating: false))->addFtl(<<<'FTL'
+        $bundle = new FluentBundle('pl-PL', useIsolating: false)->addFtl(<<<'FTL'
             msg = { $arg ->
                 [one] przykład
                 [few] przykłady

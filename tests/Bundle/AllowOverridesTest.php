@@ -16,7 +16,7 @@ final class AllowOverridesTest extends TestCase
         $this->expectException(MessageExistsException::class);
         $this->expectExceptionMessage('Attempt to override an existing message: key.');
 
-        (new FluentBundle('en-US', allowOverrides: false))
+        new FluentBundle('en-US', allowOverrides: false)
             ->addFtl('key = Foo')
             ->addFtl('key = Bar');
     }
@@ -27,7 +27,7 @@ final class AllowOverridesTest extends TestCase
         $this->expectException(MessageExistsException::class);
         $this->expectExceptionMessage('Attempt to override an existing message: key.');
 
-        (new FluentBundle('en-US', allowOverrides: true))
+        new FluentBundle('en-US', allowOverrides: true)
             ->addFtl('key = Foo')
             ->addFtl('key = Bar', allowOverrides: false);
     }
@@ -35,7 +35,7 @@ final class AllowOverridesTest extends TestCase
     #[TestDox('it adds message when allowOverrides is true for bundle')]
     public function testMessageOk(): void
     {
-        $bundle = (new FluentBundle('en-US', allowOverrides: true))
+        $bundle = new FluentBundle('en-US', allowOverrides: true)
             ->addFtl('key = Foo')
             ->addFtl('key = Bar');
 
@@ -45,7 +45,7 @@ final class AllowOverridesTest extends TestCase
     #[TestDox('it adds message when allowOverrides arg is true')]
     public function testMessageOkArg(): void
     {
-        $bundle = (new FluentBundle('en-US', allowOverrides: false))
+        $bundle = new FluentBundle('en-US', allowOverrides: false)
             ->addFtl('key = Foo')
             ->addFtl('key = Bar', allowOverrides: true);
 
@@ -58,7 +58,7 @@ final class AllowOverridesTest extends TestCase
         $this->expectException(TermExistsException::class);
         $this->expectExceptionMessage('Attempt to override an existing term: key.');
 
-        (new FluentBundle('en-US', allowOverrides: false))
+        new FluentBundle('en-US', allowOverrides: false)
             ->addFtl('-key = Foo')
             ->addFtl('-key = Bar');
     }
@@ -69,7 +69,7 @@ final class AllowOverridesTest extends TestCase
         $this->expectException(TermExistsException::class);
         $this->expectExceptionMessage('Attempt to override an existing term: key.');
 
-        (new FluentBundle('en-US', allowOverrides: true))
+        new FluentBundle('en-US', allowOverrides: true)
             ->addFtl('-key = Foo')
             ->addFtl('-key = Bar', allowOverrides: false);
     }
@@ -77,7 +77,7 @@ final class AllowOverridesTest extends TestCase
     #[TestDox('it adds term when allowOverrides is true for bundle')]
     public function testTermOk(): void
     {
-        $bundle = (new FluentBundle('en-US', allowOverrides: true))
+        $bundle = new FluentBundle('en-US', allowOverrides: true)
             ->addFtl('foo = { -key }')
             ->addFtl('-key = Foo')
             ->addFtl('-key = Bar');
@@ -88,7 +88,7 @@ final class AllowOverridesTest extends TestCase
     #[TestDox('it adds term when allowOverrides arg is true')]
     public function testTermOkArg(): void
     {
-        $bundle = (new FluentBundle('en-US', allowOverrides: false))
+        $bundle = new FluentBundle('en-US', allowOverrides: false)
             ->addFtl('foo = { -key }')
             ->addFtl('-key = Foo')
             ->addFtl('-key = Bar', allowOverrides: true);
