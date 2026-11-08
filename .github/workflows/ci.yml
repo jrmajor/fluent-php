@@ -8,13 +8,13 @@ env:
 
 jobs:
   tests:
-    name: Tests / ${{ matrix.php }} PHP, ${{ matrix.stability }}
+    name: Tests / ${{ matrix.php }} PHP, ${{ matrix.dependencies }} deps
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: ['lowest', 'latest']
-        stability: [prefer-lowest, prefer-stable]
+        dependencies: [lowest, highest]
 
     steps:
       - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v4
         with:
-          dependency-versions: ${{ matrix.stability == 'prefer-lowest' && 'lowest' || 'highest' }}
+          dependency-versions: ${{ matrix.dependencies }}
           composer-options: jrmajor/pluralrules --with-all-dependencies
 
       - name: Setup pnpm and install dependencies
@@ -57,9 +57,9 @@ jobs:
       matrix:
         include:
           - php: lowest
-            stability: prefer-lowest
+            dependencies: lowest
           - php: latest
-            stability: prefer-stable
+            dependencies: highest
 
     steps:
       - name: Checkout code
@@ -81,7 +81,7 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v4
         with:
-          dependency-versions: ${{ matrix.stability == 'prefer-lowest' && 'lowest' || 'highest' }}
+          dependency-versions: ${{ matrix.dependencies }}
           composer-options: jrmajor/pluralrules --with-all-dependencies
 
       - name: Run PHPStan
