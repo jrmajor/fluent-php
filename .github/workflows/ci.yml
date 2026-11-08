@@ -8,17 +8,17 @@ env:
 
 jobs:
   tests:
-    name: Tests / ${{ matrix.php }} PHP, ${{ matrix.stability }}
+    name: Tests / ${{ matrix.php }} PHP, ${{ matrix.dependencies }} deps
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['lowest', 'latest']
-        stability: [prefer-lowest, prefer-stable]
+        php: [lowest, latest]
+        dependencies: [lowest, highest]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
 
@@ -28,26 +28,18 @@ jobs:
           php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: Node assertions cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .cache/node-assertions
           key: node-assertions-${{ github.sha }}
           restore-keys: node-assertions-
 
       - name: Install Composer dependencies
-        run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+          composer-options: jrmajor/pluralrules --with-all-dependencies
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/setup@v3
@@ -65,13 +57,13 @@ jobs:
       matrix:
         include:
           - php: lowest
-            stability: prefer-lowest
+            dependencies: lowest
           - php: latest
-            stability: prefer-stable
+            dependencies: highest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -79,26 +71,18 @@ jobs:
           php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: PHPStan cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .cache/phpstan
           key: phpstan-${{ github.sha }}
           restore-keys: phpstan-
 
       - name: Install Composer dependencies
-        run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+          composer-options: jrmajor/pluralrules --with-all-dependencies
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze --no-progress --no-interaction
@@ -110,7 +94,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -118,26 +102,15 @@ jobs:
           php-version: ${{ env.PHP_LOWEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: PHP-CS-Fixer cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .cache/.php-cs-fixer.cache
           key: php-cs-fixer-${{ github.sha }}
           restore-keys: php-cs-fixer-
 
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Run PHP-CS-Fixer
         run: vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction
@@ -149,7 +122,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -157,19 +130,8 @@ jobs:
           php-version: ${{ env.PHP_LATEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/setup@v3
