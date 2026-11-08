@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bad3619ec30552337608443f32399d2b",
+    "content-hash": "0a15ff25c992bb0f964d295c3c54e0ae",
     "packages": [
         {
             "name": "jrmajor/pluralrules",
@@ -95,12 +95,12 @@
             "version": "4.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/azjezz/psl.git",
+                "url": "https://github.com/php-standard-library/php-standard-library.git",
                 "reference": "15153a64c9824335ce11654522e7d88de762d39e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/azjezz/psl/zipball/15153a64c9824335ce11654522e7d88de762d39e",
+                "url": "https://api.github.com/repos/php-standard-library/php-standard-library/zipball/15153a64c9824335ce11654522e7d88de762d39e",
                 "reference": "15153a64c9824335ce11654522e7d88de762d39e",
                 "shasum": ""
             },
@@ -1733,7 +1733,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-05T10:24:31+00:00"
+            "time": "2025-12-05T10:24:31+00:00",
+            "published-time": "2025-12-05T10:24:41+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -5656,12 +5657,12 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.3 - 8.5",
+        "php": "8.4 - 8.5",
         "ext-intl": "*"
     },
     "platform-dev": {
         "ext-json": "*",
         "ext-simplexml": "*"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
