@@ -19,9 +19,9 @@ final class PercentFormatterTest extends NumberFormatterTestCase
     protected static function patternsToTest(): array
     {
         return [
+            'hi' => '#,##,##0%',
             'en' => '#,##0%',
             'es' => "#,##0\u{A0}%",
-            'hi' => '#,##,##0%',
             'tr' => '%#,##0',
             'eu' => "%\u{A0}#,##0",
         ];

@@ -18,13 +18,13 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->system);
 
         $this->assertSame([
-            ['value' => 'latn', 'count' => 158],
+            ['value' => 'arab', 'count' => 2],
             ['value' => 'arabext', 'count' => 4],
             ['value' => 'beng', 'count' => 3],
-            ['value' => 'arab', 'count' => 2],
             ['value' => 'deva', 'count' => 2],
+            ['value' => 'latn', 'count' => 158],
             ['value' => 'mymr', 'count' => 1],
-        ], H\count_values($values));
+        ], self::countValues($values));
     }
 
     #[TestDox('there are no unknown decimal patterns')]
@@ -33,9 +33,9 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->decimal);
 
         $this->assertSamePatterns([
-            ['value' => '#,##0.###', 'count' => 157],
             ['value' => '#,##,##0.###', 'count' => 13],
-        ], H\count_values($values));
+            ['value' => '#,##0.###', 'count' => 157],
+        ], self::countValues($values));
     }
 
     #[TestDox('there are no unknown percent patterns')]
@@ -44,12 +44,12 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->percent);
 
         $this->assertSamePatterns([
+            ['value' => '#,##,##0%', 'count' => 7],
             ['value' => '#,##0%', 'count' => 127],
             ['value' => "#,##0\u{A0}%", 'count' => 34],
-            ['value' => '#,##,##0%', 'count' => 7],
             ['value' => '%#,##0', 'count' => 1],
             ['value' => "%\u{A0}#,##0", 'count' => 1],
-        ], H\count_values($values));
+        ], self::countValues($values));
     }
 
     #[TestDox('there are no unknown currency patterns')]
@@ -58,22 +58,22 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->currency);
 
         $this->assertSamePatterns([
+            ['value' => '#,##,##0.00¤', 'count' => 1],
             ['value' => "#,##0.00\u{A0}¤", 'count' => 65], // todo
-            ['value' => '¤#,##0.00', 'count' => 50],
-            ['value' => "¤\u{A0}#,##0.00", 'count' => 21],
-            ['value' => '¤#,##,##0.00', 'count' => 7],
-            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 6],
-            ['value' => '¤#,##0.00;¤-#,##0.00', 'count' => 4],
             ['value' => "#,##0.00\u{A0}¤;-#,##0.00\u{A0}¤", 'count' => 3],
+            ['value' => '#,##0.00¤', 'count' => 1],
+            ['value' => '¤#,##,##0.00', 'count' => 7],
+            ['value' => '¤#,##0.00', 'count' => 50],
+            ['value' => '¤#,##0.00;¤-#,##0.00', 'count' => 4],
             ['value' => "¤\u{A0}#,##,##0.00", 'count' => 3],
+            ['value' => "¤\u{A0}#,##0.00", 'count' => 21],
             ['value' => "¤\u{A0}#,##0.00;¤-#,##0.00", 'count' => 3],
             ['value' => "¤\u{A0}#,##0.00;¤\u{A0}-#,##0.00", 'count' => 3],
-            ['value' => '#,##,##0.00¤', 'count' => 1],
-            ['value' => '#,##0.00¤', 'count' => 1],
             ['value' => "\u{200E}¤#,##0.00", 'count' => 1],
             ['value' => "\u{200F}#,##0.00\u{A0}¤", 'count' => 1],
+            ['value' => "\u{200F}#,##0.00\u{A0}¤;\u{200F}-#,##0.00\u{A0}¤", 'count' => 6],
             ['value' => "\u{200F}#,##0.00\u{A0}\u{200F}¤;\u{200F}-#,##0.00\u{A0}\u{200F}¤", 'count' => 1],
-        ], H\count_values($values));
+        ], self::countValues($values));
     }
 
     #[TestDox('there are no unknown groupings')]
@@ -84,7 +84,7 @@ final class LocaleKnownValuesTest extends TestCase
         $this->assertSame([
             ['value' => 1, 'count' => 149],
             ['value' => 2, 'count' => 21],
-        ], H\count_values($values));
+        ], self::countValues($values));
     }
 
     #[TestDox('there are no unknown symbols')]
@@ -93,21 +93,35 @@ final class LocaleKnownValuesTest extends TestCase
         $values = Vec\map(LocaleData::all(), fn (Locale $l) => $l->symbols);
 
         $this->assertSame([
-            ['value' => ['.', ',', '-', '%'], 'count' => 63],
             ['value' => [',', '.', '-', '%'], 'count' => 43],
+            ['value' => [',', '.', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 4],
+            ['value' => [',', '.', '−', '%'], 'count' => 3],
             ['value' => [',', "\u{A0}", '-', '%'], 'count' => 34],
             ['value' => [',', "\u{A0}", '−', '%'], 'count' => 7],
-            ['value' => [',', '.', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 4],
-            ['value' => ['.', '’', '-', '%'], 'count' => 4],
-            ['value' => [',', '.', '−', '%'], 'count' => 3],
             ['value' => [',', "\u{202F}", '-', '%'], 'count' => 2],
+            ['value' => ['.', ',', '-', '%'], 'count' => 63],
             ['value' => ['.', ',', "\u{200E}-", '%'], 'count' => 2],
             ['value' => ['.', ',', "\u{200E}-", "\u{200E}%\u{200E}"], 'count' => 2],
+            ['value' => ['.', '’', '-', '%'], 'count' => 4],
             ['value' => ['٫', '٬', "\u{061C}-", "٪\u{061C}"], 'count' => 2],
-            ['value' => ['٫', '٬', "\u{200E}−", '٪'], 'count' => 2],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '%'], 'count' => 1],
             ['value' => ['٫', '٬', "\u{200E}-\u{200E}", '٪'], 'count' => 1],
-        ], H\count_values($values));
+            ['value' => ['٫', '٬', "\u{200E}−", '٪'], 'count' => 2],
+        ], self::countValues($values));
+    }
+
+    /**
+     * Counts values sorted by value, so that changes in counts don't reorder them.
+     *
+     * @template T
+     *
+     * @param list<T> $values
+     *
+     * @return list<array{value: T, count: int}>
+     */
+    private static function countValues(array $values): array
+    {
+        return Vec\sort(H\count_values($values), fn ($a, $b) => $a['value'] <=> $b['value']);
     }
 
     /**

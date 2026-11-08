@@ -19,8 +19,8 @@ final class DecimalFormatterTest extends NumberFormatterTestCase
     protected static function patternsToTest(): array
     {
         return [
-            'pl' => '#,##0.###',
             'ne' => '#,##,##0.###',
+            'pl' => '#,##0.###',
         ];
     }
 
