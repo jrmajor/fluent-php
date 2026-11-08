@@ -15,12 +15,7 @@ final class SelectExpression extends Expression
 
     public function getDefaultVariant(): Variant
     {
-        foreach ($this->variants as $variant) {
-            if ($variant->default) {
-                return $variant;
-            }
-        }
-
-        throw new ShouldNotHappen();
+        return array_find($this->variants, fn (Variant $v) => $v->default)
+            ?? throw new ShouldNotHappen();
     }
 }
