@@ -28,17 +28,6 @@ jobs:
           php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: Node assertions cache
         uses: actions/cache@v4
         with:
@@ -47,7 +36,10 @@ jobs:
           restore-keys: node-assertions-
 
       - name: Install Composer dependencies
-        run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: ${{ matrix.stability == 'prefer-lowest' && 'lowest' || 'highest' }}
+          composer-options: jrmajor/pluralrules --with-all-dependencies
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/setup@v3
@@ -79,17 +71,6 @@ jobs:
           php-version: ${{ matrix.php == 'lowest' && env.PHP_LOWEST || env.PHP_LATEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: PHPStan cache
         uses: actions/cache@v4
         with:
@@ -98,7 +79,10 @@ jobs:
           restore-keys: phpstan-
 
       - name: Install Composer dependencies
-        run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: ${{ matrix.stability == 'prefer-lowest' && 'lowest' || 'highest' }}
+          composer-options: jrmajor/pluralrules --with-all-dependencies
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze --no-progress --no-interaction
@@ -118,17 +102,6 @@ jobs:
           php-version: ${{ env.PHP_LOWEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: PHP-CS-Fixer cache
         uses: actions/cache@v4
         with:
@@ -137,7 +110,7 @@ jobs:
           restore-keys: php-cs-fixer-
 
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Run PHP-CS-Fixer
         run: vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction
@@ -157,19 +130,8 @@ jobs:
           php-version: ${{ env.PHP_LATEST }}
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/setup@v3
