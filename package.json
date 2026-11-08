@@ -1,6 +1,7 @@
 {
 	"private": true,
-	"packageManager": "pnpm@10.24.0",
+	"type": "module",
+	"packageManager": "pnpm@12.16.1",
 	"devDependencies": {
 		"cldr-core": "^45.0",
 		"cldr-numbers-full": "^45.0",
@@ -9,7 +10,7 @@
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "10.24.0"
+			"version": "12.16.1"
 		},
 		"runtime": {
 			"name": "node",

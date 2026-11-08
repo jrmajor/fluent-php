@@ -50,10 +50,9 @@ jobs:
         run: composer update --with-all-dependencies --${{ matrix.stability }} jrmajor/pluralrules
 
       - name: Setup pnpm and install dependencies
-        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
+        uses: pnpm/setup@v3
         with:
           cache: true
-          run_install: true
 
       - name: Execute tests
         run: vendor/bin/phpunit
@@ -173,10 +172,9 @@ jobs:
         run: composer install
 
       - name: Setup pnpm and install dependencies
-        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
+        uses: pnpm/setup@v3
         with:
           cache: true
-          run_install: true
 
       - name: Compile rules
         run: |

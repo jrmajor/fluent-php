@@ -1,6 +1,7 @@
-# prevents pnpm from discovering package.json is tests/fluent.js
+# prevents pnpm from discovering package.json in tests/fluent.js
 packages: []
 
+minimumReleaseAge: 0
 engineStrict: true
-strictDepBuilds: true
-# strictPeerDependencies: true
+dedupePeers: true
+strictPeerDependencies: true
