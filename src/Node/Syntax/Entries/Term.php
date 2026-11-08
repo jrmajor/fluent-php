@@ -19,12 +19,6 @@ final class Term extends Entry
 
     public function getAttribute(string $name): ?Attribute
     {
-        foreach ($this->attributes as $attribute) {
-            if ($attribute->id->name === $name) {
-                return $attribute;
-            }
-        }
-
-        return null;
+        return array_find($this->attributes, fn (Attribute $a) => $a->id->name === $name);
     }
 }

@@ -15,12 +15,6 @@ final class CallArguments extends SyntaxNode
 
     public function getArgument(string $name): ?NamedArgument
     {
-        foreach ($this->named as $argument) {
-            if ($argument->name->name === $name) {
-                return $argument;
-            }
-        }
-
-        return null;
+        return array_find($this->named, fn (NamedArgument $a) => $a->name->name === $name);
     }
 }
