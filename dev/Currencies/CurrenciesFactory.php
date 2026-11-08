@@ -35,6 +35,11 @@ final class CurrenciesFactory
         $minorUnits = H\IsoData::minorUnits($code);
         $plurals = self::makePlurals($data, "{$code} in {$locale}");
 
+        // formatter falls back to the name, no need to store it twice
+        if ($plurals === ['other' => $name]) {
+            $plurals = null;
+        }
+
         /** @phpstan-ignore argument.type, argument.type, argument.type */
         return new Currency($code, $name, $symbol, $narrow, $plurals, $minorUnits);
     }
