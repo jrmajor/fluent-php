@@ -35,11 +35,15 @@ jobs:
           key: node-assertions-${{ github.sha }}
           restore-keys: node-assertions-
 
+      - name: Get runtime dependencies
+        id: runtime-deps
+        run: echo "packages=$(jq -r '.require | keys | map(select(contains("/"))) | join(" ")' composer.json)" >> $GITHUB_OUTPUT
+
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v4
         with:
           dependency-versions: ${{ matrix.dependencies }}
-          composer-options: jrmajor/pluralrules --with-all-dependencies
+          composer-options: ${{ steps.runtime-deps.outputs.packages }} --with-all-dependencies
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/setup@v3
@@ -78,11 +82,15 @@ jobs:
           key: phpstan-${{ github.sha }}
           restore-keys: phpstan-
 
+      - name: Get runtime dependencies
+        id: runtime-deps
+        run: echo "packages=$(jq -r '.require | keys | map(select(contains("/"))) | join(" ")' composer.json)" >> $GITHUB_OUTPUT
+
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v4
         with:
           dependency-versions: ${{ matrix.dependencies }}
-          composer-options: jrmajor/pluralrules --with-all-dependencies
+          composer-options: ${{ steps.runtime-deps.outputs.packages }} --with-all-dependencies
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze --no-progress --no-interaction
