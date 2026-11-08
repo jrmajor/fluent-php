@@ -76,9 +76,7 @@ abstract class NumberFormatterTestCase extends TestCase
             fn (Locale $l): string => $l->{static::patternType()},
         );
 
-        $values = H\count_values($values);
-
-        $values = Vec\map($values, fn ($v): string => $v['value']);
+        $values = Vec\sort(Vec\unique($values));
 
         $this->assertSame($values, Vec\values(static::patternsToTest()));
     }
