@@ -41,7 +41,7 @@ final class PatternResolver
     ) {
         $this->dirty = new WeakMap();
 
-        $this->variantMatcher = new VariantMatcher($this->bundle->getLocale());
+        $this->variantMatcher = new VariantMatcher($this->bundle->locale);
     }
 
     public function resolvePattern(?Pattern\Pattern $pattern): string
@@ -60,7 +60,7 @@ final class PatternResolver
 
         // Wrap interpolations with Directional Isolate Formatting characters
         // only when the pattern has more than one element.
-        $useIsolating = $this->bundle->usesIsolating() && count($pattern->elements) > 1;
+        $useIsolating = $this->bundle->useIsolating && count($pattern->elements) > 1;
 
         foreach ($pattern->elements as $element) {
             if ($element instanceof Pattern\TextElement) {
@@ -112,7 +112,7 @@ final class PatternResolver
         $parsed = $literal->parse();
 
         return new FluentNumber($parsed->value, $literal->value)
-            ->setLocale($this->bundle->getLocale())
+            ->setLocale($this->bundle->locale)
             ->setOptions(['minimumFractionDigits' => $parsed->precision]);
     }
 
@@ -138,7 +138,7 @@ final class PatternResolver
         $argument = $this->arguments[$id];
 
         if ($argument instanceof FluentNumber) {
-            return $argument->setLocale($this->bundle->getLocale());
+            return $argument->setLocale($this->bundle->locale);
         }
 
         // Return early if the argument already is an instance of Stringable.
@@ -147,7 +147,7 @@ final class PatternResolver
         }
 
         if (is_int($argument) || is_float($argument)) {
-            return new FluentNumber($argument)->setLocale($this->bundle->getLocale());
+            return new FluentNumber($argument)->setLocale($this->bundle->locale);
         }
 
         $error = "Variable \${$id} is of unsupported type %s.";
@@ -231,7 +231,7 @@ final class PatternResolver
         }
 
         if (is_int($output) || is_float($output)) {
-            return new FluentNumber($output)->setLocale($this->bundle->getLocale());
+            return new FluentNumber($output)->setLocale($this->bundle->locale);
         }
 
         $error = "Return value of {$name}() must be of type string|Stringable, %s returned.";
@@ -277,7 +277,7 @@ final class PatternResolver
 
         return match (true) {
             $value instanceof FluentNone => null,
-            $value instanceof FluentNumber => $number ? $value : $value->value(),
+            $value instanceof FluentNumber => $number ? $value : $value->value,
             default => $value,
         };
     }

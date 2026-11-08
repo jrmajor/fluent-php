@@ -26,14 +26,14 @@ final class VariantMatcher
         if (
             $key instanceof FluentNumber
             && $selector instanceof FluentNumber
-            && (float) $key->value() === (float) $selector->value()
+            && (float) $key->value === (float) $selector->value
         ) {
             return true;
         }
 
         if (
             $selector instanceof FluentNumber
-            && $key === PluralRules::select($this->locale, $selector->original())
+            && $key === PluralRules::select($this->locale, $selector->original)
         ) {
             return true;
         }

@@ -31,9 +31,9 @@ final class FluentBundle
     private array $errors = [];
 
     public function __construct(
-        private string $locale,
+        public private(set) string $locale,
         private bool $strict = false,
-        private bool $useIsolating = true,
+        public private(set) bool $useIsolating = true,
         private bool $allowOverrides = false,
     ) {
         $this->functions = [
@@ -179,22 +179,6 @@ final class FluentBundle
         $resolver = new PatternResolver($this, $arguments);
 
         return $resolver->resolvePattern($pattern);
-    }
-
-    /**
-     * @internal
-     */
-    public function getLocale(): string
-    {
-        return $this->locale;
-    }
-
-    /**
-     * @internal
-     */
-    public function usesIsolating(): bool
-    {
-        return $this->useIsolating;
     }
 
     /**

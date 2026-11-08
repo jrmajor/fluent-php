@@ -2,14 +2,15 @@
 
 namespace Major\Fluent\Exceptions;
 
+use Deprecated;
 use Exception;
 
 final class ParserException extends Exception
 {
     public function __construct(
-        private string $fluentErrorCode = 'E0001',
+        public private(set) string $fluentErrorCode = 'E0001',
         /** @var array<string, string> */
-        private array $arguments = [],
+        public private(set) array $arguments = [],
         ?string $source = null,
     ) {
         $message = match ($fluentErrorCode) {
@@ -51,6 +52,7 @@ final class ParserException extends Exception
         parent::__construct($message . '.');
     }
 
+    #[Deprecated('use $fluentErrorCode property instead')]
     public function getFluentErrorCode(): string
     {
         return $this->fluentErrorCode;
@@ -59,6 +61,7 @@ final class ParserException extends Exception
     /**
      * @return array<string, string>
      */
+    #[Deprecated('use $arguments property instead')]
     public function getArguments(): array
     {
         return $this->arguments;

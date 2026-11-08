@@ -13,10 +13,23 @@ final class FluentNumber implements Stringable
     /** @var array<string, mixed> */
     private array $options = [];
 
+    /** @internal */
+    public private(set) string $original {
+        set(?string $original) {
+            $this->original = $original ?? (
+                is_float($this->value) && $this->value - round($this->value) === 0.0
+                    ? $this->value . '.0'
+                    : (string) $this->value
+            );
+        }
+    }
+
     public function __construct(
-        private int|float $value,
-        private ?string $original = null,
-    ) { }
+        public private(set) int|float $value,
+        ?string $original = null,
+    ) {
+        $this->original = $original;
+    }
 
     /**
      * @internal
@@ -40,28 +53,6 @@ final class FluentNumber implements Stringable
         $this->options = array_merge($this->options, $options);
 
         return $this;
-    }
-
-    /**
-     * @internal
-     */
-    public function value(): int|float
-    {
-        return $this->value;
-    }
-
-    /**
-     * @internal
-     */
-    public function original(): string
-    {
-        if ($this->original !== null) {
-            return $this->original;
-        }
-
-        return is_float($this->value()) && $this->value() - round($this->value()) === 0.0
-            ? $this->value() . '.0'
-            : (string) $this->value();
     }
 
     /**

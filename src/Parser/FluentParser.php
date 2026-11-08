@@ -155,9 +155,9 @@ final class FluentParser
             }
 
             $annotation = new Annotation(
-                $error->getFluentErrorCode(),
+                $error->fluentErrorCode,
                 $error->getMessage(),
-                $error->getArguments(),
+                $error->arguments,
             )->addSpan($errorIndex, $errorIndex);
 
             return new Junk($cursor->slice($entryStartPosition, $nextEntryStart - $entryStartPosition))
