@@ -31,8 +31,10 @@ final class FluentBundle
     private array $errors = [];
 
     public function __construct(
+        /** @internal */
         public private(set) string $locale,
         private bool $strict = false,
+        /** @internal */
         public private(set) bool $useIsolating = true,
         private bool $allowOverrides = false,
     ) {

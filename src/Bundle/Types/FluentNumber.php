@@ -25,6 +25,7 @@ final class FluentNumber implements Stringable
     }
 
     public function __construct(
+        /** @internal */
         public private(set) int|float $value,
         ?string $original = null,
     ) {
