@@ -46,7 +46,7 @@ final class LocaleDataTest extends TestCase
     public function testLoadNumbersError(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported locale: invalid.');
+        $this->expectExceptionMessageIs('Unsupported locale: invalid.');
 
         LocaleData::loadNumbers('invalid');
     }
@@ -83,7 +83,7 @@ final class LocaleDataTest extends TestCase
     public function testLoadCurrenciesError(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported locale: invalid.');
+        $this->expectExceptionMessageIs('Unsupported locale: invalid.');
 
         LocaleData::loadCurrencies('invalid');
     }
@@ -112,7 +112,7 @@ final class LocaleDataTest extends TestCase
     public function testLoadUnitsError(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported locale: invalid.');
+        $this->expectExceptionMessageIs('Unsupported locale: invalid.');
 
         LocaleData::loadUnits('invalid');
     }

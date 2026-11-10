@@ -22,7 +22,7 @@ final class ErrorsTest extends TestCase
     public function testSyntaxThrow(): void
     {
         $this->expectException(ParserException::class);
-        $this->expectExceptionMessage('Expected token: "=" somewhere in "syntax error".');
+        $this->expectExceptionMessageIs('Expected token: "=" somewhere in "syntax error".');
 
         new FluentBundle('en-US', strict: true)->addFtl('syntax error');
     }
@@ -51,7 +51,7 @@ final class ErrorsTest extends TestCase
     public function testResolverThrow(): void
     {
         $this->expectException(ReferenceException::class);
-        $this->expectExceptionMessage('Unknown variable: $one.');
+        $this->expectExceptionMessageIs('Unknown variable: $one.');
 
         new FluentBundle('en-US', strict: true)
             ->addFtl('foo = { $one } and { $two }')

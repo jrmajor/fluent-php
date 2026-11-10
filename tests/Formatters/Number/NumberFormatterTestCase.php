@@ -78,7 +78,7 @@ abstract class NumberFormatterTestCase extends TestCase
 
         $values = Vec\sort(Vec\unique($values));
 
-        $this->assertSame($values, Vec\values(static::patternsToTest()));
+        $this->assertArraysHaveIdenticalValues($values, static::patternsToTest());
     }
 
     #[TestDox('correct languages are assigned to tested patterns')]

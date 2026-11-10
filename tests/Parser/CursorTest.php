@@ -387,7 +387,7 @@ final class CursorTest extends TestCase
     public function testExpectedCharThrow(): void
     {
         $this->expectException(ParserException::class);
-        $this->expectExceptionMessage('Expected token: "="');
+        $this->expectExceptionMessageIs('Expected token: "=".');
 
         $cursor = $this->cursor('a&b');
 
@@ -425,7 +425,7 @@ final class CursorTest extends TestCase
     public function testExpectedLineEndThrow(): void
     {
         $this->expectException(ParserException::class);
-        $this->expectExceptionMessage('Expected token: "␤"');
+        $this->expectExceptionMessageIs('Expected token: "␤".');
 
         $cursor = $this->cursor('a ');
 
