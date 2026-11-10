@@ -10,6 +10,12 @@ use Major\Fluent\Formatters\Number\Locale\Currency;
  */
 final class Options
 {
+    private const array Names = [
+        'style', 'useGrouping', 'minimumIntegerDigits', 'minimumFractionDigits',
+        'maximumFractionDigits', 'minimumSignificantDigits', 'maximumSignificantDigits',
+        'currency', 'currencyDisplay', 'unit', 'unitDisplay',
+    ];
+
     public function __construct(
         /** @var 'decimal'|'currency'|'percent'|'unit' */
         public string $style = 'decimal',
@@ -59,6 +65,31 @@ final class Options
 
             $this->currency = strtoupper($currency);
         }
+    }
+
+    /**
+     * Validates options without formatting a number.
+     *
+     * @param array<array-key, mixed> $options
+     */
+    public static function validate(array $options): void
+    {
+        foreach (array_keys($options) as $name) {
+            if (is_int($name)) {
+                throw new InvalidArgumentException('Options must be passed by name.');
+            }
+
+            if (! in_array($name, self::Names, true)) {
+                throw new InvalidArgumentException("Unknown option: {$name}.");
+            }
+        }
+
+        /** @phpstan-ignore argument.type */
+        $o = new self(...$options);
+
+        // currency data only affects default fraction digits, which are always valid
+        /** @phpstan-ignore argument.type */
+        $o->fillWithDefaults($o->style === 'currency' ? new Currency($o->currency) : null);
     }
 
     /**
