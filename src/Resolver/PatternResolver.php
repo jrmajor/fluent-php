@@ -73,12 +73,44 @@ final class PatternResolver
 
             $result .= $useIsolating ? self::FSI : '';
 
-            $result .= $this->resolvePlaceable($element);
+            $result .= $this->formatPlaceable($element);
 
             $result .= $useIsolating ? self::PDI : '';
         }
 
         return $result;
+    }
+
+    /**
+     * Values like `FluentNumber` are formatted only when converted to string,
+     * so formatting errors are reported here.
+     */
+    private function formatPlaceable(Pattern\Placeable $element): string
+    {
+        $value = $this->resolvePlaceable($element);
+
+        try {
+            return (string) $value;
+        } catch (Throwable $e) {
+            $expression = $this->describe($element->expression);
+
+            return (string) $this->error(new Err\FormattingException($expression, $e), $expression);
+        }
+    }
+
+    /**
+     * Describes an expression the same way as error placeholders do.
+     */
+    private function describe(Expr\Expression|Pattern\Placeable $e): string
+    {
+        return match (true) {
+            $e instanceof Pattern\Placeable => $this->describe($e->expression),
+            $e instanceof Expr\VariableReference => "\${$e->id->name}",
+            $e instanceof Expr\FunctionReference => "{$e->id->name}()",
+            $e instanceof Expr\MessageReference => $e->id->name . ($e->attribute ? ".{$e->attribute->name}" : ''),
+            $e instanceof Expr\TermReference => "-{$e->id->name}" . ($e->attribute ? ".{$e->attribute->name}" : ''),
+            default => '???',
+        };
     }
 
     private function resolvePlaceable(Pattern\Placeable $element): string|Stringable

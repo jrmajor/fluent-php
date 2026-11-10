@@ -70,8 +70,7 @@ final class FluentNumber implements Stringable
     public function __toString(): string
     {
         return new NumberFormatter($this->locale)->format(
-            /** @phpstan-ignore argument.type */
-            $this->value, new Options(...$this->options),
+            $this->value, Options::fromArray($this->options),
         );
     }
 }
