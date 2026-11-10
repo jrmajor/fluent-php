@@ -20,7 +20,7 @@ shared-photos =
 ```
 
 ```php
-$bundle->message('stream.shared-photos', [
+$bundle->message('shared-photos', [
     'userName' => 'jrmajor',
     'photoCount' => 2,
     'userGender' => 'male',
@@ -56,7 +56,7 @@ $bundle->addResource($resource);
 // or
 $bundle->addFtl('hello-user = Hello, { $userName }!');
 
-$bundle->message('hello-user', userName: 'World'); // Hello, World!
+$bundle->message('hello-user', ['userName' => 'World']); // Hello, World!
 ```
 
 `FluentBundle` is single-language store of translation resources. Its constructor accepts following arguments:
@@ -83,10 +83,10 @@ If bundle is in strict mode, `$ftl` parsing will be also done in strict mode.
 #### Formatting messages
 
 ```php
-message(string $_message, mixed ...$arguments): ?string
+message(string $message, array $arguments = []): ?string
 ```
 
-`message()` method accepts an id of a message as a first parameter and message arguments as named parameters. It returns `null` for missing messages.
+`message()` method accepts an id of a message as a first parameter and message arguments as an associative array. It returns `null` for missing messages.
 
 ```ftl
 welcome = Welcome
@@ -105,11 +105,9 @@ For attributes, you may use “dot” notation:
 $bundle->message('welcome.guest'); // Welcome, Guest
 ```
 
-Message arguments may be passed as named arguments or as an associative array:
+Message arguments are passed as an associative array:
 
 ```php
-$bundle->message('welcome.user', userName: 'John'); // Welcome, John
-// equivalent to
 $bundle->message('welcome.user', ['userName' => 'John']); // Welcome, John
 ```
 
