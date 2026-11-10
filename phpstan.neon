@@ -5,10 +5,6 @@ parameters:
         - src
         - tests
     ignoreErrors:
-        - '#^Parameter \#1 \$file of function Psl\\File\\read expects non-empty-string, string given\.$#'
-        -
-            message: '#^Generator expects value type .*$#'
-            path: tests/Formatters/Number
         -
             message: '#^Method .* has parameter \$data with no value type specified in iterable type array\.$#'
             path: dev/**

@@ -26,14 +26,20 @@ final class Options
         /** @var 'long'|'short'|'narrow' */
         public string $unitDisplay = 'short',
     ) {
+        // validates untyped options passed by `FluentNumber`
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (! in_array($style, ['decimal', 'currency', 'percent', 'unit'], true)) {
             throw new InvalidArgumentException('Allowed styles are decimal, currency, percent and unit.');
         }
 
+        // validates untyped options passed by `FluentNumber`
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (! in_array($currencyDisplay, ['symbol', 'narrowSymbol', 'code', 'name'], true)) {
             throw new InvalidArgumentException('Allowed values of currencyDisplay are symbol, narrowSymbol, code and name.');
         }
 
+        // validates untyped options passed by `FluentNumber`
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (! in_array($unitDisplay, ['long', 'short', 'narrow'], true)) {
             throw new InvalidArgumentException('Allowed values of unitDisplay are long, short and narrow.');
         }

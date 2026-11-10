@@ -12,7 +12,6 @@ final class FunctionsTest extends TestCase
     {
         parent::setUp();
 
-        /** @phpstan-ignore offsetAccess.nonOffsetAccessible */
         $this->bundle->addFunction('IDENTITY', fn (...$args) => $args[0]);
 
         $this->bundle->addFtl(<<<'FTL'
