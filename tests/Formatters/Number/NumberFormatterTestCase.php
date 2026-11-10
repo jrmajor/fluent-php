@@ -111,9 +111,18 @@ abstract class NumberFormatterTestCase extends TestCase
             'minimumSignificantDigits' => Type\optional(Type\int()),
             'maximumSignificantDigits' => Type\optional(Type\int()),
             'currency' => Type\optional(Type\string()),
-            'currencyDisplay' => Type\optional(Type\string()),
+            'currencyDisplay' => Type\optional(Type\union(
+                Type\literal_scalar('symbol'),
+                Type\literal_scalar('narrowSymbol'),
+                Type\literal_scalar('code'),
+                Type\literal_scalar('name'),
+            )),
             'unit' => Type\optional(Type\string()),
-            'unitDisplay' => Type\optional(Type\string()),
+            'unitDisplay' => Type\optional(Type\union(
+                Type\literal_scalar('long'),
+                Type\literal_scalar('short'),
+                Type\literal_scalar('narrow'),
+            )),
         ])->coerce($options);
 
         $jsonOptions = Json\encode($options);

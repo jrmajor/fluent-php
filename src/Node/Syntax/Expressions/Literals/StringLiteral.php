@@ -23,8 +23,7 @@ final class StringLiteral extends Literal
                     return '"';
                 }
 
-                /** @phpstan-ignore offsetAccess.notFound */
-                $codepoint = intval($match[1] ?: $match[2], 16);
+                $codepoint = intval($match[1] ?? $match[2], 16);
 
                 if ($codepoint <= 0xD7FF || $codepoint >= 0xE000) {
                     // It's an Unicode scalar value.
@@ -37,6 +36,7 @@ final class StringLiteral extends Literal
                 return '�';
             },
             $this->value,
+            flags: PREG_UNMATCHED_AS_NULL,
         );
 
         return new StringLiteralValue(
