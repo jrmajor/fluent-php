@@ -9,6 +9,7 @@ use Psl\Filesystem;
 use Psl\Iter;
 use Psl\Json;
 use Psl\Str;
+use Psl\Type;
 use Psl\Vec;
 
 final class CldrData
@@ -23,9 +24,7 @@ final class CldrData
         $locales = Filesystem\read_directory(self::path($package, 'main'));
         $locales = Vec\map($locales, fn ($l) => Filesystem\get_filename($l));
 
-        $locales = array_filter($locales, fn (string $l) => Iter\contains($modern, $l));
-
-        return Vec\sort($locales);
+        return Vec\sort(Vec\intersect($locales, $modern));
     }
 
     /**
@@ -95,10 +94,10 @@ final class CldrData
     private static function getModernLocales(): array
     {
         $path = self::path('core', 'coverageLevels.json');
-        $data = Json\decode(File\read($path));
 
-        /** @var array<string, string> $levels */
-        $levels = $data['effectiveCoverageLevels'];
+        $levels = Json\typed(File\read($path), Type\shape([
+            'effectiveCoverageLevels' => Type\dict(Type\string(), Type\string()),
+        ], true))['effectiveCoverageLevels'];
 
         return Vec\keys(Dict\filter($levels, fn ($level) => $level === 'modern'));
     }
