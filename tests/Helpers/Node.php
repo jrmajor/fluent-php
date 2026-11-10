@@ -47,9 +47,9 @@ final class Node
 
     public function freshOutput(string $command): mixed
     {
-        $nodeArgs = ['-e', "console.log(JSON.stringify({$command}))"];
+        $args = ['exec', 'node', '-e', "console.log(JSON.stringify({$command}))"];
 
-        return Json\decode(Shell\execute('pnpm exec node', $nodeArgs));
+        return Json\decode(Shell\execute('pnpm', $args));
     }
 
     private function loadCache(): void
