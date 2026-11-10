@@ -4,9 +4,12 @@ namespace Major\Fluent\Tests\Bundle;
 
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Exceptions\ParserException;
+use Major\Fluent\Exceptions\Resolver\FormattingException;
 use Major\Fluent\Exceptions\Resolver\ReferenceException;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
+use RuntimeException;
+use Stringable;
 
 final class ErrorsTest extends TestCase
 {
@@ -55,6 +58,37 @@ final class ErrorsTest extends TestCase
 
         new FluentBundle('en-US', strict: true)
             ->addFtl('foo = { $one } and { $two }')
+            ->message('foo');
+    }
+
+    #[TestDox('formatting errors are reported')]
+    public function testFormattingIgnore(): void
+    {
+        $bundle = new FluentBundle('en-US', useIsolating: false)
+            ->addFtl('foo = { $one } and { NUMBER(1, foo: "bar") }');
+
+        $failing = new class implements Stringable {
+            public function __toString(): string
+            {
+                throw new RuntimeException('Oops.');
+            }
+        };
+
+        $this->assertSame('{$one} and {NUMBER()}', $bundle->message('foo', ['one' => $failing]));
+
+        $this->assertCount(2, $errors = $bundle->popErrors());
+        $this->assertExceptionMatches(FormattingException::class, 'Failed to format $one: Oops.', $errors[0]);
+        $this->assertExceptionMatches(FormattingException::class, 'Failed to format NUMBER(): Unknown option: foo.', $errors[1]);
+    }
+
+    #[TestDox('formatting errors are thrown in strict mode')]
+    public function testFormattingThrow(): void
+    {
+        $this->expectException(FormattingException::class);
+        $this->expectExceptionMessageIs('Failed to format NUMBER(): Unknown option: foo.');
+
+        new FluentBundle('en-US', strict: true)
+            ->addFtl('foo = { NUMBER(1, foo: "bar") }')
             ->message('foo');
     }
 }

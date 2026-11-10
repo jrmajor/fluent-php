@@ -4,8 +4,7 @@ namespace Major\Fluent\Tests\Resolver\Functions;
 
 use Major\Fluent\Bundle\FluentBundle;
 use Major\Fluent\Bundle\Types\FluentNumber;
-use Major\Fluent\Exceptions\Resolver\FunctionException;
-use Major\Fluent\Formatters\InvalidArgumentException;
+use Major\Fluent\Exceptions\Resolver\FormattingException;
 use Major\Fluent\Tests\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
 
@@ -46,33 +45,39 @@ class NumberFunctionTest extends TestCase
             unknown = { NUMBER($arg, foo: "bar") }
             style = { NUMBER($arg, style: "oops") }
             digits = { NUMBER($arg, minimumFractionDigits: 3, maximumFractionDigits: 2) }
+            unit = { NUMBER($arg, style: "unit", unit: "parsec") }
             positional = { NUMBER($arg, 2) }
             FTL);
 
         $this->assertTranslationErrors('{NUMBER()}', [
-            [FunctionException::class, 'NUMBER() function error: Unknown option: foo.'],
+            [FormattingException::class, 'Failed to format NUMBER(): Unknown option: foo.'],
         ], 'unknown', ['arg' => 1], $bundle);
 
         $this->assertTranslationErrors('{NUMBER()}', [
-            [FunctionException::class, 'NUMBER() function error: Allowed styles are decimal, currency, percent and unit.'],
+            [FormattingException::class, 'Failed to format NUMBER(): Allowed styles are decimal, currency, percent and unit.'],
         ], 'style', ['arg' => 1], $bundle);
 
         $this->assertTranslationErrors('{NUMBER()}', [
-            [FunctionException::class, 'NUMBER() function error: minimumFractionDigits must not be grater than maximumFractionDigits.'],
+            [FormattingException::class, 'Failed to format NUMBER(): minimumFractionDigits must not be grater than maximumFractionDigits.'],
         ], 'digits', ['arg' => 1], $bundle);
 
         $this->assertTranslationErrors('{NUMBER()}', [
-            [FunctionException::class, 'NUMBER() function error: Options must be passed by name.'],
+            [FormattingException::class, 'Failed to format NUMBER(): Unsupported unit: parsec.'],
+        ], 'unit', ['arg' => 1], $bundle);
+
+        $this->assertTranslationErrors('{NUMBER()}', [
+            [FormattingException::class, 'Failed to format NUMBER(): Options must be passed by name.'],
         ], 'positional', ['arg' => 1], $bundle);
     }
 
-    #[TestDox('it validates options of FluentNumber')]
+    #[TestDox('it reports invalid options of FluentNumber')]
     public function testFluentNumberOptions(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unknown option: foo.');
+        $bundle = new FluentBundle('en-US')->addFtl('foo = Value: { $arg }');
 
-        new FluentNumber(1)->setOptions(['foo' => 'bar']);
+        $this->assertTranslationErrors("Value: \u{2068}{\$arg}\u{2069}", [
+            [FormattingException::class, 'Failed to format $arg: Unknown option: foo.'],
+        ], 'foo', ['arg' => new FluentNumber(1)->setOptions(['foo' => 'bar'])], $bundle);
     }
 
     #[TestDox('it accepts arguments')]

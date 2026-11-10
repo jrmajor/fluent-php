@@ -37,12 +37,7 @@ final class FluentNumber implements Stringable
      */
     public function setOptions(array $options): self
     {
-        $options = array_merge($this->options, $options);
-
-        // validates options early, so that invalid ones are reported where they were set
-        Options::validate($options);
-
-        $this->options = $options;
+        $this->options = array_merge($this->options, $options);
 
         return $this;
     }
@@ -75,8 +70,7 @@ final class FluentNumber implements Stringable
     public function __toString(): string
     {
         return new NumberFormatter($this->locale)->format(
-            /** @phpstan-ignore argument.type */
-            $this->value, new Options(...$this->options),
+            $this->value, Options::fromArray($this->options),
         );
     }
 }

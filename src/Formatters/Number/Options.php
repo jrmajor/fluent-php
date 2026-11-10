@@ -68,11 +68,9 @@ final class Options
     }
 
     /**
-     * Validates options without formatting a number.
-     *
      * @param array<array-key, mixed> $options
      */
-    public static function validate(array $options): void
+    public static function fromArray(array $options): self
     {
         foreach (array_keys($options) as $name) {
             if (is_int($name)) {
@@ -85,11 +83,7 @@ final class Options
         }
 
         /** @phpstan-ignore argument.type */
-        $o = new self(...$options);
-
-        // currency data only affects default fraction digits, which are always valid
-        /** @phpstan-ignore argument.type */
-        $o->fillWithDefaults($o->style === 'currency' ? new Currency($o->currency) : null);
+        return new self(...$options);
     }
 
     /**
