@@ -11,10 +11,8 @@ new Provider()->register();
 
 $application = new Application('fluent-php locale data compiler');
 
-$application->addCommands([
-    new Dev\Currencies\CompileCurrenciesCommand(),
-    new Dev\Locales\CompileLocalesCommand(),
-    new Dev\Units\CompileUnitsCommand(),
-]);
+$commands = new Dev\CompileCommands();
+
+$application->addCommands([$commands->currencies(...), $commands->numbers(...), $commands->units(...)]);
 
 $application->run();
