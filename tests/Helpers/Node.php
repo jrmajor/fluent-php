@@ -60,8 +60,7 @@ final class Node
             File\write($this->path, '{}');
         }
 
-        /** @phpstan-ignore assign.propertyType */
-        $this->cache = Json\decode(File\read($this->path));
+        $this->cache = Json\typed(File\read($this->path), Type\dict(Type\string(), Type\mixed()));
     }
 
     private function saveCache(): void
