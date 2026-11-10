@@ -21,7 +21,7 @@ final class ErrorsTest extends TestCase
     public function testStrictMode(): void
     {
         $this->expectException(ParserException::class);
-        $this->expectExceptionMessage('Expected token: "=" somewhere in "syntax error"');
+        $this->expectExceptionMessageIs('Expected token: "=" somewhere in "syntax error".');
 
         new FluentParser(true)->parse('syntax error');
     }

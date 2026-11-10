@@ -14,7 +14,7 @@ final class AllowOverridesTest extends TestCase
     public function testMessageThrows(): void
     {
         $this->expectException(MessageExistsException::class);
-        $this->expectExceptionMessage('Attempt to override an existing message: key.');
+        $this->expectExceptionMessageIs('Attempt to override an existing message: key.');
 
         new FluentBundle('en-US', allowOverrides: false)
             ->addFtl('key = Foo')
@@ -25,7 +25,7 @@ final class AllowOverridesTest extends TestCase
     public function testMessageThrowsArg(): void
     {
         $this->expectException(MessageExistsException::class);
-        $this->expectExceptionMessage('Attempt to override an existing message: key.');
+        $this->expectExceptionMessageIs('Attempt to override an existing message: key.');
 
         new FluentBundle('en-US', allowOverrides: true)
             ->addFtl('key = Foo')
@@ -56,7 +56,7 @@ final class AllowOverridesTest extends TestCase
     public function testTermThrows(): void
     {
         $this->expectException(TermExistsException::class);
-        $this->expectExceptionMessage('Attempt to override an existing term: key.');
+        $this->expectExceptionMessageIs('Attempt to override an existing term: key.');
 
         new FluentBundle('en-US', allowOverrides: false)
             ->addFtl('-key = Foo')
@@ -67,7 +67,7 @@ final class AllowOverridesTest extends TestCase
     public function testTermThrowsArg(): void
     {
         $this->expectException(TermExistsException::class);
-        $this->expectExceptionMessage('Attempt to override an existing term: key.');
+        $this->expectExceptionMessageIs('Attempt to override an existing term: key.');
 
         new FluentBundle('en-US', allowOverrides: true)
             ->addFtl('-key = Foo')
