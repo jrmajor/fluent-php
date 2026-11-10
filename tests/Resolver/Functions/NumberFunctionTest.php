@@ -22,6 +22,7 @@ class NumberFunctionTest extends TestCase
             option = { NUMBER($arg, minimumFractionDigits: 1) }
             percent = { NUMBER($arg, style: "percent") }
             zeroes = { NUMBER(1.00) }
+            twice = { NUMBER($arg, minimumFractionDigits: 2) } { $arg }
             FTL;
 
         $this->us = new FluentBundle('en-US', useIsolating: false)->addFtl($ftl);
@@ -59,5 +60,15 @@ class NumberFunctionTest extends TestCase
         $this->assertTranslation('12345.0', 'option', [
             'arg' => new FluentNumber(12345)->setOptions(['useGrouping' => false]),
         ], $this->us);
+    }
+
+    #[TestDox('it does not modify passed FluentNumber')]
+    public function testDoesNotModifyArgument(): void
+    {
+        $arg = new FluentNumber(0.5);
+
+        $this->assertTranslation('0.50 0.5', 'twice', ['arg' => $arg], $this->us);
+        $this->assertTranslation('50%', 'percent', ['arg' => $arg], $this->us);
+        $this->assertTranslation('0.5', 'num', ['arg' => $arg], $this->us);
     }
 }

@@ -225,9 +225,8 @@ final class FluentBundle
         int|float|FluentNumber $number,
         int|string|bool ...$options,
     ): FluentNumber {
-        if (! $number instanceof FluentNumber) {
-            $number = new FluentNumber($number);
-        }
+        // clone, so that options do not leak to other usages of the same argument
+        $number = $number instanceof FluentNumber ? clone $number : new FluentNumber($number);
 
         /** @phpstan-ignore argument.type */
         return $number->setLocale($this->locale)->setOptions($options);
